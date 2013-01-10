@@ -12,7 +12,9 @@ CONFIG += staticlib
 
 SOURCES +=
 
-HEADERS += Code/
+HEADERS += Code/ \
+    Code/include/UnitTest11/CopiedPtr.hpp \
+    Code/include/UnitTest11.hpp
 
 win32 {
     win32-g++:LIBS += -L"$$_PRO_FILE_PWD_/libs/"
