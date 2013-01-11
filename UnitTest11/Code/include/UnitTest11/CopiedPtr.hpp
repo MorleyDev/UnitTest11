@@ -27,7 +27,7 @@ namespace ut11
         typedef T& reference;
 
         typedef const T const_type;
-        typedef const T* const_pointer;
+        typedef T const* const_pointer;
         typedef const T& const_reference;
 
         typedef std::function<void (pointer)> destructor;
@@ -112,8 +112,11 @@ namespace ut11
             return *this;
         }
 
+        inline pointer operator->() { return m_pointer; }
+        inline const_pointer operator->() const { return m_pointer; }
+
         inline pointer get() { return m_pointer; }
-        inline pointer get() const { return m_pointer; }
+        inline const_pointer get() const { return m_pointer; }
 
         inline reference operator*() { return *m_pointer; }
         inline const_reference operator*() const { return *m_pointer; }

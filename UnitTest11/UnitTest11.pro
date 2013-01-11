@@ -10,11 +10,16 @@ TARGET = UnitTest11
 TEMPLATE = lib
 CONFIG += staticlib
 
-SOURCES +=
+SOURCES += \
+    Code/src/Assert/Fail.cpp
 
-HEADERS += Code/ \
+HEADERS += \
+    Code/include/UnitTest11.hpp \
+    Code/include/UnitTest11/TestFailedException.hpp \
     Code/include/UnitTest11/CopiedPtr.hpp \
-    Code/include/UnitTest11.hpp
+    Code/include/UnitTest11/Assert/Fail.hpp
+
+INCLUDEPATH +=  Code/include/
 
 win32 {
     win32-g++:LIBS += -L"$$_PRO_FILE_PWD_/libs/"

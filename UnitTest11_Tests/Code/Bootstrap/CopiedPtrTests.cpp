@@ -1,4 +1,5 @@
 #include <UnitTest11/CopiedPtr.hpp>
+
 #include <UnitTest++/UnitTest++.h>
 
 #include <list>
@@ -17,6 +18,7 @@ TEST(CopiedPtrTest)
 
     CHECK_EQUAL(copiedPtr.get(), data);
     CHECK_EQUAL(*copiedPtr, *data);
+    CHECK_EQUAL(copiedPtr.operator->(), data);
 
     CHECK(copyConstrutorPtr.get() != data);
     CHECK_EQUAL(*copyConstrutorPtr, *data);
