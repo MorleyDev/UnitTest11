@@ -1,0 +1,12 @@
+INPUT(
+./release/main.o
+./release/CopiedPtrTests.o
+./release/AssertFailTests.o
+./release/AssertThatTests.o
+./release/IsEqualToTests.o
+./release/IsOperandTests.o
+./release/WillThrowTests.o
+./release/MockReturnHandlerTests.o
+./release/MockArgumentHandlerTests.o
+./release/MockTests.o
+);

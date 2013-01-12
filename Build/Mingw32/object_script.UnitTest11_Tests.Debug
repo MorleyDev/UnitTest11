@@ -1,0 +1,12 @@
+INPUT(
+./debug/main.o
+./debug/CopiedPtrTests.o
+./debug/AssertFailTests.o
+./debug/AssertThatTests.o
+./debug/IsEqualToTests.o
+./debug/IsOperandTests.o
+./debug/WillThrowTests.o
+./debug/MockReturnHandlerTests.o
+./debug/MockArgumentHandlerTests.o
+./debug/MockTests.o
+);

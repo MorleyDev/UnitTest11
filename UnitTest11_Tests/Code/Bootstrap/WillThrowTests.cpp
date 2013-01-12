@@ -17,7 +17,7 @@ TEST(WillThrowFailsWithUnknownExceptionTest)
     stream << "Expected " << typeid(int).name() << " to be thrown, but an unknown exception was thrown instead";
 
     std::string expectedErrorMessage = stream.str();
-    CHECK_EQUAL(expectedErrorMessage, thrower.GetErrorMessage(function));
+    CHECK_EQUAL(expectedErrorMessage, thrower.getErrorMessage(function));
 }
 
 TEST(WillThrowFailsWithStdExceptionTest)
@@ -30,7 +30,7 @@ TEST(WillThrowFailsWithStdExceptionTest)
     stream << "Expected " << typeid(int).name() << " to be thrown, but std::exception was thrown instead (what: " << std::bad_exception().what() << ")";
 
     std::string expectedErrorMessage = stream.str();
-    CHECK_EQUAL(expectedErrorMessage, thrower.GetErrorMessage(function));
+    CHECK_EQUAL(expectedErrorMessage, thrower.getErrorMessage(function));
 }
 
 
@@ -44,7 +44,7 @@ TEST(WillThrowFailsNoExceptionTest)
     stream << "Expected " << typeid(int).name() << " to be thrown, but no exception was thrown";
 
     std::string expectedErrorMessage = stream.str();
-    CHECK_EQUAL(expectedErrorMessage, thrower.GetErrorMessage(function));
+    CHECK_EQUAL(expectedErrorMessage, thrower.getErrorMessage(function));
 }
 
 TEST(WillThrowIsOperand)

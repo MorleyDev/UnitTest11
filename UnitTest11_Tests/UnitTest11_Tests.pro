@@ -13,7 +13,10 @@ SOURCES += \
     Code/Bootstrap/AssertThatTests.cpp \
     Code/Bootstrap/IsEqualToTests.cpp \
     Code/Bootstrap/IsOperandTests.cpp \
-    Code/Bootstrap/WillThrowTests.cpp
+    Code/Bootstrap/WillThrowTests.cpp \
+    Code/Bootstrap/MockReturnHandlerTests.cpp \
+    Code/Bootstrap/MockArgumentHandlerTests.cpp \
+    Code/Bootstrap/MockTests.cpp
 
 debug:LIBS += -L$$OUT_PWD/debug
 release:LIBS += -L$$OUT_PWD/release

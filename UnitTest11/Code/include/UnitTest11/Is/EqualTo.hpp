@@ -20,12 +20,12 @@ namespace ut11
         public:
             inline EqualTo(const U& expected) : m_expected(expected) { }
 
-            template<typename T> bool operator()(const T& actual)
+            template<typename T> bool operator()(const T& actual) const
             {
                 return Utility::AreEqual(m_expected, actual);
             }
 
-            template<typename T> std::string GetErrorMessage(const T& actual)
+            template<typename T> std::string getErrorMessage(const T& actual) const
             {
                 std::stringstream errorMessage;
                 errorMessage << "Expected " << Utility::ToString(m_expected) << " but was " << Utility::ToString(actual);

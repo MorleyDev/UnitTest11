@@ -23,7 +23,11 @@ HEADERS += \
     Code/include/UnitTest11/Utility/ToString.hpp \
     Code/include/UnitTest11/Utility/AreEqual.hpp \
     Code/include/UnitTest11/Is/EqualTo.hpp \
-    Code/include/UnitTest11/Will/Throw.hpp
+    Code/include/UnitTest11/Will/Throw.hpp \
+    Code/include/UnitTest11/Utility/DefaultValue.hpp \
+    Code/include/UnitTest11/Utility/MockArgumentHandler.hpp \
+    Code/include/UnitTest11/Utility/MockReturnHandler.hpp \
+    Code/include/UnitTest11/Mock.hpp
 
 INCLUDEPATH +=  Code/include/
 

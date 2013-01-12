@@ -15,7 +15,7 @@ TEST(IsEqualToFailsTest)
 TEST(IsEqualToErrorMessageTest)
 {
     std::string expectedError = "Expected 10 but was 5";
-    CHECK_EQUAL(expectedError, ut11::Is::EqualTo(10).GetErrorMessage(5));
+    CHECK_EQUAL(expectedError, ut11::Is::EqualTo(10).getErrorMessage(5));
 }
 
 TEST(OperandsEqualToIsOperand)

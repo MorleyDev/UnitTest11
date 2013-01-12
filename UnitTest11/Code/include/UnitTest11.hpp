@@ -5,6 +5,10 @@
 
 #include "UnitTest11/Is/EqualTo.hpp"
 
+#include "UnitTest11/Will/Throw.hpp"
+
+#include "UnitTest11/Mock.hpp"
+
 #include "UnitTest11/Assert/That.hpp"
 #include "UnitTest11/Assert/Fail.hpp"
 

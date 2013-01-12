@@ -20,9 +20,9 @@ namespace ut11
             {
             }
 
-            inline std::string GetErrorMessage(std::function<void (void)>) const { return m_errorMessage; }
+            inline std::string getErrorMessage(std::function<void (void)>) const { return m_errorMessage; }
 
-            inline bool operator()(std::function<void (void)> function)
+            inline bool operator()(std::function<void (void)> function) const
             {
                 try
                 {
@@ -49,7 +49,7 @@ namespace ut11
 
         private:
             std::string m_exceptionName;
-            std::string m_errorMessage;
+            mutable std::string m_errorMessage;
         };
     }
 
