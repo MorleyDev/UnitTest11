@@ -19,7 +19,11 @@ HEADERS += \
     Code/include/UnitTest11/CopiedPtr.hpp \
     Code/include/UnitTest11/Assert/Fail.hpp \
     Code/include/UnitTest11/Utility/BaseOperand.hpp \
-    Code/include/UnitTest11/Assert/That.hpp
+    Code/include/UnitTest11/Assert/That.hpp \
+    Code/include/UnitTest11/Utility/ToString.hpp \
+    Code/include/UnitTest11/Utility/AreEqual.hpp \
+    Code/include/UnitTest11/Is/EqualTo.hpp \
+    Code/include/UnitTest11/Will/Throw.hpp
 
 INCLUDEPATH +=  Code/include/
 

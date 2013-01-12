@@ -1,9 +1,7 @@
 #include <UnitTest11/CopiedPtr.hpp>
-
 #include <UnitTest++/UnitTest++.h>
-
-#include <list>
 #include <algorithm>
+#include <list>
 
 TEST(CopiedPtrTest)
 {

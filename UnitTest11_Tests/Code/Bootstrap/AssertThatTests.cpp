@@ -1,9 +1,7 @@
 #include <UnitTest11/Assert/That.hpp>
 #include <UnitTest11/TestFailedException.hpp>
 #include <UnitTest11/Utility/BaseOperand.hpp>
-
 #include <UnitTest++/UnitTest++.h>
-
 #include <string>
 
 template<bool Succeeds, typename U>

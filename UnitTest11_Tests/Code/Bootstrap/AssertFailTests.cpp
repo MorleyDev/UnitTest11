@@ -1,8 +1,6 @@
 #include <UnitTest11/Assert/Fail.hpp>
 #include <UnitTest11/TestFailedException.hpp>
-
 #include <UnitTest++/UnitTest++.h>
-
 #include <string>
 
 TEST(AssertFailTest)
