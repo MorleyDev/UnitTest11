@@ -9,7 +9,8 @@ INCLUDEPATH += ../UnitTest11/Code/include/
 SOURCES += \
     Code/main.cpp \
     Code/Bootstrap/CopiedPtrTests.cpp \
-    Code/Bootstrap/AssertFailTests.cpp
+    Code/Bootstrap/AssertFailTests.cpp \
+    Code/Bootstrap/AssertThatTests.cpp
 
 debug:LIBS += -L$$OUT_PWD/debug
 release:LIBS += -L$$OUT_PWD/release

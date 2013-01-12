@@ -73,7 +73,7 @@ namespace ut11
         }
 
         inline CopiedPtr(const CopiedPtr& orig)
-            : m_pointer(orig.m_copy(orig.get())),
+            : m_pointer(orig.m_copy(orig.m_pointer)),
               m_copy(orig.m_copy),
               m_destructor(orig.m_destructor)
         {
@@ -94,7 +94,7 @@ namespace ut11
 
         inline CopiedPtr& operator=(const CopiedPtr& orig)
         {
-            m_pointer = orig.m_copy(orig.get());
+            m_pointer = orig.m_copy(orig.m_pointer);
             m_destructor = orig.m_destructor;
             m_copy = orig.m_copy;
 

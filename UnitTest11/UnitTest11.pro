@@ -17,7 +17,9 @@ HEADERS += \
     Code/include/UnitTest11.hpp \
     Code/include/UnitTest11/TestFailedException.hpp \
     Code/include/UnitTest11/CopiedPtr.hpp \
-    Code/include/UnitTest11/Assert/Fail.hpp
+    Code/include/UnitTest11/Assert/Fail.hpp \
+    Code/include/UnitTest11/Utility/BaseOperand.hpp \
+    Code/include/UnitTest11/Assert/That.hpp
 
 INCLUDEPATH +=  Code/include/
 
