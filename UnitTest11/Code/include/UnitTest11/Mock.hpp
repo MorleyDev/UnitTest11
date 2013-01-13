@@ -15,8 +15,16 @@ namespace ut11
     public:
         inline R operator()(ARGS... args)
         {
+            if ( m_callbackHandler )
+                m_callbackHandler(args...);
+
             m_argumentHandler.AddCall(args...);
             return m_returnHandler(args...);
+        }
+
+        inline void setCallback(std::function<void (const ARGS&...)> callback)
+        {
+            m_callbackHandler = callback;
         }
 
         template<typename V> inline void setReturn(V value) { m_returnHandler.setReturn(value); }
@@ -39,6 +47,7 @@ namespace ut11
             return "Expected function call was not found";
         }
 
+        std::function<void (const ARGS&...)> m_callbackHandler;
         Utility::MockArgumentHandler<ARGS...> m_argumentHandler;
         Utility::MockReturnHandler<R, ARGS...> m_returnHandler;
     };

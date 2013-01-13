@@ -9,9 +9,13 @@ TEST(MockCallTest)
 {
     ut11::Mock<int (char)> mock;
 
+    bool bWasCallbackCalled = false;
+    mock.setCallback([&](char c) { bWasCallbackCalled = true; CHECK_EQUAL(c, 'A'); });
     mock.setReturn(5);
 
     CHECK_EQUAL(5, mock('A'));
+    CHECK(bWasCallbackCalled);
+
     mock.Verify(__LINE__, __FILE__, 'A');
     mock.VerifyTimes(__LINE__, __FILE__, 1, 'A');
 }
