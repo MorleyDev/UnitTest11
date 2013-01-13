@@ -14,7 +14,7 @@ namespace ut11
     {
         template<typename Exception> struct WillThrow : public Utility::BaseOperand
         {
-            WillThrow(std::string exceptionName = typeid(Exception).name())
+            inline WillThrow(std::string exceptionName = typeid(Exception).name())
                 : m_exceptionName(exceptionName),
                   m_errorMessage("Expected " + exceptionName + " to be thrown, but no exception was thrown")
             {
@@ -55,7 +55,7 @@ namespace ut11
 
     namespace Will
     {
-        template<typename Exception> Operands::WillThrow<Exception> Throw()
+        template<typename Exception> inline Operands::WillThrow<Exception> Throw()
         {
             return Operands::WillThrow<Exception>();
         }

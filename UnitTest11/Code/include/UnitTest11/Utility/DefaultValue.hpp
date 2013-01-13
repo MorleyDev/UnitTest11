@@ -5,7 +5,7 @@ namespace ut11
 {
     namespace Utility
     {
-        template<typename T> struct DefaultValue { T operator()() const { return T(); } };
+        template<typename T> struct DefaultValue { inline T operator()() const { return T(); } };
     }
 }
 

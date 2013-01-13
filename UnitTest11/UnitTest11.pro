@@ -10,8 +10,7 @@ TARGET = UnitTest11
 TEMPLATE = lib
 CONFIG += staticlib
 
-SOURCES += \
-    Code/src/Assert/Fail.cpp
+SOURCES +=
 
 HEADERS += \
     Code/include/UnitTest11.hpp \

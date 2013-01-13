@@ -18,7 +18,4 @@ SOURCES += \
     Code/Bootstrap/MockArgumentHandlerTests.cpp \
     Code/Bootstrap/MockTests.cpp
 
-debug:LIBS += -L$$OUT_PWD/debug
-release:LIBS += -L$$OUT_PWD/release
-
-LIBS += -lUnitTest++ -lUnitTest11
+LIBS += -lUnitTest++

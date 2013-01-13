@@ -11,28 +11,28 @@ namespace ut11
         template<typename T, typename... ARGS> class MockReturnHandler
         {
         public:
-            MockReturnHandler()
+            inline MockReturnHandler()
                 : m_returnCallback(),
                   m_returnValue(DefaultValue<T>()())
             {
             }
 
-            ~MockReturnHandler()
+            inline ~MockReturnHandler()
             {
             }
 
-            void setReturn(std::function<T (const ARGS&...)> callback)
+            inline void setReturn(std::function<T (const ARGS&...)> callback)
             {
                 m_returnCallback = callback;
             }
 
-            void setReturn(T value)
+            inline void setReturn(T value)
             {
                 m_returnCallback = std::function<T (const ARGS&...)>();
                 m_returnValue = value;
             }
 
-            T operator()(const ARGS&... args)
+            inline T operator()(const ARGS&... args)
             {
                 return m_returnCallback
                         ? m_returnCallback(args...)

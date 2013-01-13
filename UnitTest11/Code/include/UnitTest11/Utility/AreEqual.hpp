@@ -13,7 +13,7 @@ namespace ut11
             }
         };
 
-        template<typename A, typename B> bool AreEqual(const A& a, const B& b)
+        template<typename A, typename B> inline bool AreEqual(const A& a, const B& b)
         {
             return Comparison<A,B>()(a,b);
         }

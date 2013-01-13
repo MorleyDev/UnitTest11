@@ -17,7 +17,7 @@ namespace ut11
                 return stream.str();
             }
         };
-        template<typename V> std::string ToString(const V& value) { return ParseToString<V>()(value); }
+        template<typename V> inline std::string ToString(const V& value) { return ParseToString<V>()(value); }
     }
 }
 
