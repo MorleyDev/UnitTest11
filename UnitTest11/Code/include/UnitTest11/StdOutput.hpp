@@ -15,7 +15,7 @@ namespace ut11
         virtual void BeginFixture(std::string name) { std::cout << "Fixture: " << name << std::endl;  }
         virtual void EndFixture(std::string) { }
 
-        virtual void BeginGiven(std::string given) { std::cout << "    [Given: " << given << std::endl; }
+        virtual void BeginGiven(std::string given) { std::cout << "    Given: " << given << std::endl; }
         virtual void EndGiven(std::string) { }
 
         virtual void BeginWhen(std::string when) { std::cout << "        When: " << when << std::endl; }
@@ -27,9 +27,9 @@ namespace ut11
         virtual void BeginFinally(std::string finally) { std::cout << "    Finally: " << finally << std::endl; }
         virtual void EndFinally(std::string) { }
 
-        virtual void OnError(std::size_t line, std::string file, std::string message) { std::cout << "    Failed] [" << line << ":" << file << "] " << message << std::endl; }
-        virtual void OnError(const std::exception& exception) { std::cout << "    Failed] std::exception was thrown [what(): " << exception.what() << "]" << std::endl; }
-        virtual void OnUnknownError() { std::cout << "    Failed] Unknown Error" << std::endl; }
+        virtual void OnError(std::size_t line, std::string file, std::string message) { std::cout << "    Failed: [" << line << ":" << file << "] " << message << std::endl; }
+        virtual void OnError(const std::exception& exception) { std::cout << "    Failed: std::exception was thrown [what(): " << exception.what() << "]" << std::endl; }
+        virtual void OnUnknownError() { std::cout << "    Failed: Unknown Error" << std::endl; }
     };
 }
 
