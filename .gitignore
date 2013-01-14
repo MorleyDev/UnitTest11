@@ -15,3 +15,6 @@
 
 # Compiled Executable files
 *.exe
+
+#Directories
+Build/*
