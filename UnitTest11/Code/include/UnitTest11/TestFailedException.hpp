@@ -8,6 +8,14 @@ namespace ut11
     class TestFailedException
     {
     public:
+        inline TestFailedException()
+            : m_line(0),
+              m_file(),
+              m_message()
+        {
+
+        }
+
         inline TestFailedException(std::size_t line, std::string file, std::string message)
             : m_line(line),
               m_file(file),

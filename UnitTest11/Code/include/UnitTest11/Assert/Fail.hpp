@@ -8,10 +8,7 @@ namespace ut11
 {
     namespace Assert
     {
-        inline void Fail(std::size_t line, std::string file, std::string message)
-        {
-            throw ut11::TestFailedException(line, file, message);
-        }
+        extern void Fail(std::size_t line, std::string file, std::string message);
     }
 }
 

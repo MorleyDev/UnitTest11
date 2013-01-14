@@ -10,12 +10,16 @@ TARGET = UnitTest11
 TEMPLATE = lib
 CONFIG += staticlib
 
-SOURCES +=
+SOURCES += \
+    Code/src/Assert/Fail.cpp \
+    Code/src/Utility/TestStage.cpp \
+    Code/src/TestFixture.cpp \
+    Code/src/TestFixtureRunner.cpp \
+    Code/src/Global.cpp
 
 HEADERS += \
     Code/include/UnitTest11.hpp \
     Code/include/UnitTest11/TestFailedException.hpp \
-    Code/include/UnitTest11/CopiedPtr.hpp \
     Code/include/UnitTest11/Assert/Fail.hpp \
     Code/include/UnitTest11/Utility/BaseOperand.hpp \
     Code/include/UnitTest11/Assert/That.hpp \
@@ -26,7 +30,16 @@ HEADERS += \
     Code/include/UnitTest11/Utility/DefaultValue.hpp \
     Code/include/UnitTest11/Utility/MockArgumentHandler.hpp \
     Code/include/UnitTest11/Utility/MockReturnHandler.hpp \
-    Code/include/UnitTest11/Mock.hpp
+    Code/include/UnitTest11/Mock.hpp \
+    Code/include/UnitTest11/IOutput.hpp \
+    Code/include/UnitTest11/Utility/TestStage.hpp \
+    Code/include/UnitTest11/Utility/TestStageBuilder.hpp \
+    Code/include/UnitTest11/Will/Pass.hpp \
+    Code/include/UnitTest11/TestFixture.hpp \
+    Code/include/UnitTest11/TestFixtureRunner.hpp \
+    Code/include/UnitTest11/Global.hpp \
+    Code/include/UnitTest11/StdOutput.hpp \
+    Code/include/UnitTest11/Macros.hpp
 
 INCLUDEPATH +=  Code/include/
 

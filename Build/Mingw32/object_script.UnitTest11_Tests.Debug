@@ -1,7 +1,5 @@
 INPUT(
 ./debug/main.o
-./debug/CopiedPtrTests.o
-./debug/AssertFailTests.o
 ./debug/AssertThatTests.o
 ./debug/IsEqualToTests.o
 ./debug/IsOperandTests.o
@@ -9,4 +7,10 @@ INPUT(
 ./debug/MockReturnHandlerTests.o
 ./debug/MockArgumentHandlerTests.o
 ./debug/MockTests.o
+./debug/TestStageTests.o
+./debug/TestStageBuilderTests.o
+./debug/WillPassTests.o
+./debug/TestFixtureTests.o
+./debug/TestFixtureRunnerTests.o
+./debug/AssertFailTests.o
 );

@@ -24,7 +24,7 @@ public:
         return Succeeds;
     }
 
-    template<typename T> inline std::string GetErrorMessage(const T& actual) const
+    template<typename T> inline std::string getErrorMessage(const T& actual) const
     {
         CHECK_EQUAL(m_expectedValue, actual);
         return m_expectedErrorMessage;

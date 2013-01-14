@@ -1,7 +1,5 @@
 INPUT(
 ./release/main.o
-./release/CopiedPtrTests.o
-./release/AssertFailTests.o
 ./release/AssertThatTests.o
 ./release/IsEqualToTests.o
 ./release/IsOperandTests.o
@@ -9,4 +7,10 @@ INPUT(
 ./release/MockReturnHandlerTests.o
 ./release/MockArgumentHandlerTests.o
 ./release/MockTests.o
+./release/TestStageTests.o
+./release/TestStageBuilderTests.o
+./release/WillPassTests.o
+./release/TestFixtureTests.o
+./release/TestFixtureRunnerTests.o
+./release/AssertFailTests.o
 );

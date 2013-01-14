@@ -29,6 +29,12 @@ namespace ut11
 
         template<typename V> inline void setReturn(V value) { m_returnHandler.setReturn(value); }
 
+        inline void VerifyAny(std::size_t line, std::string file) const
+        {
+            if ( m_argumentHandler.TotalCount() == 0 )
+                Assert::Fail(line, file, getVerifyFailMessage());
+        }
+
         template<typename... Expectations> inline void Verify(std::size_t line, std::string file, const Expectations&... expectations) const
         {
             if ( m_argumentHandler.CountCalls(expectations...) == 0 )

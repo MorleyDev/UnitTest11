@@ -16,6 +16,7 @@ TEST(MockCallTest)
     CHECK_EQUAL(5, mock('A'));
     CHECK(bWasCallbackCalled);
 
+    mock.VerifyAny(__LINE__, __FILE__);
     mock.Verify(__LINE__, __FILE__, 'A');
     mock.VerifyTimes(__LINE__, __FILE__, 1, 'A');
 }
@@ -61,6 +62,22 @@ TEST(MockCallFailsTimesTest)
     try
     {
         mock.VerifyTimes(__LINE__, __FILE__, 2, 'A');
+    }
+    catch(const ut11::TestFailedException& ex)
+    {
+        return;
+    }
+
+    CHECK(false);
+}
+
+TEST(MockCallFailsAnyTest)
+{
+    ut11::Mock<int (char)> mock;
+
+    try
+    {
+        mock.VerifyAny(__LINE__, __FILE__);
     }
     catch(const ut11::TestFailedException& ex)
     {
