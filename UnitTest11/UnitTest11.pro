@@ -9,6 +9,7 @@ QT       -= core gui
 TARGET = UnitTest11
 TEMPLATE = lib
 CONFIG += staticlib
+debug:CONFIG -= release
 
 SOURCES += \
     Code/src/Assert/Fail.cpp \
