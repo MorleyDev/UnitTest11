@@ -4,6 +4,7 @@
 #include "UnitTest11/TestFailedException.hpp"
 
 #include "UnitTest11/Is/EqualTo.hpp"
+#include "UnitTest11/Is/True.hpp"
 
 #include "UnitTest11/Will/Throw.hpp"
 #include "UnitTest11/Will/Pass.hpp"

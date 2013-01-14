@@ -1,7 +1,6 @@
 INPUT(
 ./debug/main.o
 ./debug/AssertThatTests.o
-./debug/IsEqualToTests.o
 ./debug/IsOperandTests.o
 ./debug/WillThrowTests.o
 ./debug/MockReturnHandlerTests.o
@@ -13,4 +12,7 @@ INPUT(
 ./debug/TestFixtureTests.o
 ./debug/TestFixtureRunnerTests.o
 ./debug/AssertFailTests.o
+./debug/IsEqualToTests.o
+./debug/IsTrueTests.o
+./debug/IsFalseTests.o
 );

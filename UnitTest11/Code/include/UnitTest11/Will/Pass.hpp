@@ -26,7 +26,7 @@ namespace ut11
             }
 
             template<typename T>
-            inline std::string getErrorMessage(const T& value) const { return "predicate did not return true"; }
+            inline std::string getErrorMessage(const T&) const { return "Expected predicate to return true"; }
         };
     }
 
@@ -35,6 +35,14 @@ namespace ut11
         template<typename CALLBACK> Operands::WillPass<CALLBACK> Pass(CALLBACK predicate)
         {
             return Operands::WillPass<CALLBACK>(predicate);
+        }
+
+        namespace Not
+        {
+            template<typename CALLBACK> Utility::NotOperand< Operands::WillPass<CALLBACK> > Pass(CALLBACK predicate)
+            {
+                return Utility::NotOperand< Operands::WillPass<CALLBACK> >(predicate);
+            }
         }
     }
 }

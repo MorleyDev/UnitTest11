@@ -15,7 +15,9 @@ SOURCES += \
     Code/src/Utility/TestStage.cpp \
     Code/src/TestFixture.cpp \
     Code/src/TestFixtureRunner.cpp \
-    Code/src/Global.cpp
+    Code/src/Global.cpp \
+    Code/src/Is/True.cpp \
+    Code/src/Is/False.cpp
 
 HEADERS += \
     Code/include/UnitTest11.hpp \
@@ -39,7 +41,9 @@ HEADERS += \
     Code/include/UnitTest11/TestFixtureRunner.hpp \
     Code/include/UnitTest11/Global.hpp \
     Code/include/UnitTest11/StdOutput.hpp \
-    Code/include/UnitTest11/Macros.hpp
+    Code/include/UnitTest11/Macros.hpp \
+    Code/include/UnitTest11/Is/True.hpp \
+    Code/include/UnitTest11/Is/False.hpp
 
 INCLUDEPATH +=  Code/include/
 

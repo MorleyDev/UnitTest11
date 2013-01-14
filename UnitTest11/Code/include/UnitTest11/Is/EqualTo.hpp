@@ -36,9 +36,11 @@ namespace ut11
 
     namespace Is
     {
-        template<typename U> inline Operands::EqualTo<U> EqualTo(const U& expected)
+        template<typename U> inline Operands::EqualTo<U> EqualTo(const U& expected) { return Operands::EqualTo<U>(expected); }
+
+        namespace Not
         {
-            return Operands::EqualTo<U>(expected);
+            template<typename U> inline Utility::NotOperand< Operands::EqualTo<U> > EqualTo(const U& expected) { return Utility::NotOperand< Operands::EqualTo<U> >(expected); }
         }
     }
 }

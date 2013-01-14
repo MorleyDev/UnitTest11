@@ -1,7 +1,6 @@
 INPUT(
 ./release/main.o
 ./release/AssertThatTests.o
-./release/IsEqualToTests.o
 ./release/IsOperandTests.o
 ./release/WillThrowTests.o
 ./release/MockReturnHandlerTests.o
@@ -13,4 +12,7 @@ INPUT(
 ./release/TestFixtureTests.o
 ./release/TestFixtureRunnerTests.o
 ./release/AssertFailTests.o
+./release/IsEqualToTests.o
+./release/IsTrueTests.o
+./release/IsFalseTests.o
 );
