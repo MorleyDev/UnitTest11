@@ -8,12 +8,10 @@ INCLUDEPATH += ../UnitTest11/Code/include/
 
 SOURCES += \
     Code/main.cpp \
-    Code/Bootstrap/WillThrowTests.cpp \
     Code/Bootstrap/MockReturnHandlerTests.cpp \
     Code/Bootstrap/MockTests.cpp \
     Code/Bootstrap/TestStageTests.cpp \
     Code/Bootstrap/TestStageBuilderTests.cpp \
-    Code/Bootstrap/WillPassTests.cpp \
     Code/Bootstrap/TestFixtureTests.cpp \
     Code/Bootstrap/TestFixtureRunnerTests.cpp \
     Code/Unit/AssertFailTests.cpp \
@@ -22,7 +20,9 @@ SOURCES += \
     Code/Unit/IsFalseTests.cpp \
     Code/Unit/IsTrueTests.cpp \
     Code/Unit/IsOperandTests.cpp \
-    Code/Unit/MockArgumentHandlerTests.cpp
+    Code/Unit/MockArgumentHandlerTests.cpp \
+    Code/Unit/WillPassTests.cpp \
+    Code/Unit/WillThrowTests.cpp
 
 debug:LIBS += -L$$OUT_PWD/debug
 release:LIBS += -L$$OUT_PWD/release
