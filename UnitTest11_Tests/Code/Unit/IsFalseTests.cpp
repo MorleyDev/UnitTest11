@@ -20,6 +20,14 @@ public:
         Then("Is::Not::False(false) is not true", []() {
             AssertThat(ut11::Is::Not::False(false), ut11::Is::Not::True);
         });
+
+        Then("Is::False returns an Operand", []() {
+            AssertThat( ut11::Utility::IsOperand<decltype(ut11::Is::False)>::value, ut11::Is::True );
+        });
+
+        Then("Is::Not::False returns an Operand", []() {
+            AssertThat( ut11::Utility::IsOperand<decltype(ut11::Is::Not::False)>::value, ut11::Is::True );
+        });
     }
 };
 DeclareFixture(IsFalseTests);

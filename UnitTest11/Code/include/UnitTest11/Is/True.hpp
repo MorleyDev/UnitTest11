@@ -11,7 +11,7 @@ namespace ut11
 {
     namespace Operands
     {
-        struct TrueOperand
+        struct TrueOperand : public Utility::BaseOperand
         {
             template<typename T> bool operator()(const T& value) const { return static_cast<bool>(value); }
 
