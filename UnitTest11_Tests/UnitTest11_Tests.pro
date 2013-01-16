@@ -22,7 +22,9 @@ SOURCES += \
     Code/Unit/IsOperandTests.cpp \
     Code/Unit/MockArgumentHandlerTests.cpp \
     Code/Unit/WillPassTests.cpp \
-    Code/Unit/WillThrowTests.cpp
+    Code/Unit/WillThrowTests.cpp \
+    Code/Unit/IsAnyTests.cpp \
+    Code/Unit/IsZeroTests.cpp
 
 debug:LIBS += -L$$OUT_PWD/debug
 release:LIBS += -L$$OUT_PWD/release

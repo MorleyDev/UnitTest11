@@ -2,9 +2,12 @@
 #include <UnitTest11/Utility/DefaultValue.hpp>
 #include <UnitTest++/UnitTest++.h>
 
+namespace ut11 { namespace Utility { template<> struct DefaultValue<int> { inline int operator()() const { return 8; } }; } }
+
 TEST(DefaultValueReturnsDefaultTest)
 {
-    int expectedValue = ut11::Utility::DefaultValue<int>()();
+    ut11::Utility::DefaultValue<int> functor;
+    int expectedValue = functor.operator ()();
     char expectedArgument = 'A';
 
     ut11::Utility::MockReturnHandler<int, char> returner;
