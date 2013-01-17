@@ -10,8 +10,6 @@ SOURCES += \
     Code/main.cpp \
     Code/Bootstrap/MockReturnHandlerTests.cpp \
     Code/Bootstrap/MockTests.cpp \
-    Code/Bootstrap/TestStageTests.cpp \
-    Code/Bootstrap/TestStageBuilderTests.cpp \
     Code/Bootstrap/TestFixtureTests.cpp \
     Code/Bootstrap/TestFixtureRunnerTests.cpp \
     Code/Unit/AssertFailTests.cpp \
@@ -24,7 +22,9 @@ SOURCES += \
     Code/Unit/WillPassTests.cpp \
     Code/Unit/WillThrowTests.cpp \
     Code/Unit/IsAnyTests.cpp \
-    Code/Unit/IsZeroTests.cpp
+    Code/Unit/IsZeroTests.cpp \
+    Code/Unit/TestStageTests.cpp \
+    Code/Unit/TestStageBuilderTests.cpp
 
 debug:LIBS += -L$$OUT_PWD/debug
 release:LIBS += -L$$OUT_PWD/release

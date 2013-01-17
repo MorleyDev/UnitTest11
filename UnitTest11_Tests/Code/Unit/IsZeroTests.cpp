@@ -24,7 +24,15 @@ public:
         Then("Is::Zero is Operand", []() {
             AssertThat(ut11::Utility::IsOperand< decltype(ut11::Is::Zero) >::value, ut11::Is::True);
         });
+    }
+};
+DeclareFixture(IsZeroTests);
 
+class IsNotZeroTests : public ut11::TestFixture
+{
+public:
+    virtual void Run()
+    {
         Then("Is::Not::Zero(0) is Not::True", []() {
             AssertThat(ut11::Is::Not::Zero(0), ut11::Is::Not::True);
         });
@@ -47,4 +55,4 @@ public:
 
     }
 };
-DeclareFixture(IsZeroTests);
+DeclareFixture(IsNotZeroTests);
