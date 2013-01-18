@@ -1,7 +1,5 @@
+#include <UnitTest11.hpp>
 #include <UnitTest11/TestFixtureRunner.hpp>
-
-#include <UnitTest11/Mock.hpp>
-#include <UnitTest++/UnitTest++.h>
 
 class FakeOutput : public ut11::IOutput
 {
@@ -46,21 +44,40 @@ public:
 
 };
 
-TEST(TestFixtureRunnerTests)
+class TestFixtureRunnerTests : public ut11::TestFixture
 {
-    ut11::TestFixtureRunner runner;
+private:
+    ut11::TestFixtureRunner m_runner;
+    FakeOutput m_output;
 
-    ut11::TestFixture* fixture = new ut11::TestFixture("fixture");
-    fixture->Then("then", [](){});
-    fixture->Then("then", [](){});
-    fixture->Then("then", [](){});
-    fixture->Then("then", [](){});
-    fixture->Then("then", [](){ throw int(5); });
+    int m_expectedResult;
+    int m_result;
 
-    runner.addFixture(std::unique_ptr<ut11::ITestFixture>(fixture));
+public:
+    virtual void Run()
+    {
+        Given("a TestFixtureRunner with added Fixture with failing tests", [&]() {
+            m_runner = ut11::TestFixtureRunner();
 
-    FakeOutput output;
+            m_expectedResult = 2;
 
-    auto result = runner.Run(output);
-    CHECK_EQUAL(1, result);
-}
+            ut11::TestFixture* fixture = new ut11::TestFixture("fixture");
+            fixture->Then("then", [](){});
+            fixture->Then("then", [](){});
+            fixture->Then("then", [](){});
+            fixture->Then("then", [](){ throw int(5); });
+            fixture->Then("then", [](){ throw int(5); });
+            m_runner.addFixture(std::unique_ptr<ut11::ITestFixture>(fixture));
+
+        });
+
+        When("running the TestFixtureRunner", [&]() {
+            m_result = m_runner.Run(m_output);
+        });
+
+        Then("the number of failing tests is returned", [&]() {
+            AssertThat(m_result, ut11::Is::EqualTo(m_expectedResult));
+        });
+    }
+};
+DeclareFixture(TestFixtureRunnerTests);
