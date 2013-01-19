@@ -9,6 +9,7 @@
 #include "UnitTest11/Is/True.hpp"
 #include "UnitTest11/Is/False.hpp"
 #include "UnitTest11/Is/Zero.hpp"
+#include "UnitTest11/Is/NaN.hpp"
 
 #include "UnitTest11/Will/Throw.hpp"
 #include "UnitTest11/Will/Pass.hpp"

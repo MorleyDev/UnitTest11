@@ -24,9 +24,10 @@ SOURCES += \
     Code/Unit/MockReturnHandlerTests.cpp \
     Code/Unit/TestFixtureRunnerTests.cpp \
     Code/Unit/MockTests.cpp \
-    Code/Unit/TestFixtureTests.cpp
+    Code/Unit/TestFixtureTests.cpp \
+    Code/Unit/IsNaNTests.cpp
 
 debug:LIBS += -L$$OUT_PWD/debug
 release:LIBS += -L$$OUT_PWD/release
 
-LIBS += -lUnitTest11 -lUnitTest++
+LIBS += -lUnitTest11

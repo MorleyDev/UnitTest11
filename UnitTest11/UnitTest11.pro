@@ -19,7 +19,8 @@ SOURCES += \
     Code/src/Global.cpp \
     Code/src/Is/True.cpp \
     Code/src/Is/False.cpp \
-    Code/src/Is/Zero.cpp
+    Code/src/Is/Zero.cpp \
+    Code/src/Is/NaN.cpp
 
 HEADERS += \
     Code/include/UnitTest11.hpp \
@@ -47,7 +48,8 @@ HEADERS += \
     Code/include/UnitTest11/Is/True.hpp \
     Code/include/UnitTest11/Is/False.hpp \
     Code/include/UnitTest11/Is/Any.hpp \
-    Code/include/UnitTest11/Is/Zero.hpp
+    Code/include/UnitTest11/Is/Zero.hpp \
+    Code/include/UnitTest11/Is/NaN.hpp
 
 INCLUDEPATH +=  Code/include/
 
