@@ -25,7 +25,8 @@ SOURCES += \
     Code/Unit/TestFixtureRunnerTests.cpp \
     Code/Unit/MockTests.cpp \
     Code/Unit/TestFixtureTests.cpp \
-    Code/Unit/IsNaNTests.cpp
+    Code/Unit/IsNaNTests.cpp \
+    Code/Unit/IsInfinityTests.cpp
 
 debug:LIBS += -L$$OUT_PWD/debug
 release:LIBS += -L$$OUT_PWD/release
