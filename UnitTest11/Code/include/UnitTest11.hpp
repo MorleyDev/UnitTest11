@@ -11,6 +11,7 @@
 #include "UnitTest11/Is/Zero.hpp"
 #include "UnitTest11/Is/NaN.hpp"
 #include "UnitTest11/Is/Infinity.hpp"
+#include "UnitTest11/Is/Null.hpp"
 
 #include "UnitTest11/Will/Throw.hpp"
 #include "UnitTest11/Will/Pass.hpp"

@@ -21,7 +21,8 @@ SOURCES += \
     Code/src/Is/False.cpp \
     Code/src/Is/Zero.cpp \
     Code/src/Is/NaN.cpp \
-    Code/src/Is/Infinity.cpp
+    Code/src/Is/Infinity.cpp \
+    Code/src/Is/Null.cpp
 
 HEADERS += \
     Code/include/UnitTest11.hpp \
@@ -51,7 +52,8 @@ HEADERS += \
     Code/include/UnitTest11/Is/Any.hpp \
     Code/include/UnitTest11/Is/Zero.hpp \
     Code/include/UnitTest11/Is/NaN.hpp \
-    Code/include/UnitTest11/Is/Infinity.hpp
+    Code/include/UnitTest11/Is/Infinity.hpp \
+    Code/include/UnitTest11/Is/Null.hpp
 
 INCLUDEPATH +=  Code/include/
 
