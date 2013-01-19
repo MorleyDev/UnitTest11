@@ -8,7 +8,6 @@ INCLUDEPATH += ../UnitTest11/Code/include/
 
 SOURCES += \
     Code/main.cpp \
-    Code/Bootstrap/TestFixtureTests.cpp \
     Code/Unit/AssertFailTests.cpp \
     Code/Unit/IsEqualToTests.cpp \
     Code/Unit/AssertThatTests.cpp \
@@ -24,7 +23,8 @@ SOURCES += \
     Code/Unit/TestStageBuilderTests.cpp \
     Code/Unit/MockReturnHandlerTests.cpp \
     Code/Unit/TestFixtureRunnerTests.cpp \
-    Code/Unit/MockTests.cpp
+    Code/Unit/MockTests.cpp \
+    Code/Unit/TestFixtureTests.cpp
 
 debug:LIBS += -L$$OUT_PWD/debug
 release:LIBS += -L$$OUT_PWD/release
