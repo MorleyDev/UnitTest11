@@ -2,7 +2,9 @@
 
 namespace ut11
 {
-    ITestFixture::~ITestFixture() { }
+    ITestFixture::~ITestFixture()
+    {
+    }
 
     TestFixture::TestFixture()
         : m_name(),
@@ -26,10 +28,25 @@ namespace ut11
     {
     }
 
-    void TestFixture::Given(std::string description, std::function<void(void)> logic) { m_stageBuilder->pushGiven(Utility::TestStep(description, logic)); }
-    void TestFixture::When(std::string description, std::function<void(void)> logic) { m_stageBuilder->pushWhen(Utility::TestStep(description, logic)); }
-    void TestFixture::Then(std::string description, std::function<void(void)> logic) { m_stageBuilder->pushThen(Utility::TestStep(description, logic)); }
-    void TestFixture::Finally(std::string description, std::function<void(void)> logic) { m_stageBuilder->pushFinally(Utility::TestStep(description, logic)); }
+    void TestFixture::Given(std::string description, std::function<void(void)> logic)
+    {
+        m_stageBuilder->pushGiven(Utility::TestStep(description, logic));
+    }
+
+    void TestFixture::When(std::string description, std::function<void(void)> logic)
+    {
+        m_stageBuilder->pushWhen(Utility::TestStep(description, logic));
+    }
+
+    void TestFixture::Then(std::string description, std::function<void(void)> logic)
+    {
+        m_stageBuilder->pushThen(Utility::TestStep(description, logic));
+    }
+
+    void TestFixture::Finally(std::string description, std::function<void(void)> logic)
+    {
+        m_stageBuilder->pushFinally(Utility::TestStep(description, logic));
+    }
 
     TestFixtureResults TestFixture::Run(IOutput& output)
     {
@@ -49,5 +66,7 @@ namespace ut11
         return counter;
     }
 
-    void TestFixture::Run() { }
+    void TestFixture::Run()
+    {
+    }
 }
