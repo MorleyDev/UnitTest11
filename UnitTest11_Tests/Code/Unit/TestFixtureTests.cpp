@@ -167,8 +167,8 @@ public:
 
             FakeOutput mockOutput;
             auto results = fixture.Run(mockOutput);
-            AssertThat(results.ran, ut11::Is::EqualTo(std::size_t(1)));
-            AssertThat(results.succeeded, ut11::Is::EqualTo(std::size_t(0)));
+            AssertThat(results.ran, ut11::Is::EqualTo(1u));
+            AssertThat(results.succeeded, ut11::Is::EqualTo(0u));
 
             mockOutput.mockBeginFixture.Verify(__LINE__, __FILE__, fixtureName);
             mockOutput.mockEndFixture.Verify(__LINE__, __FILE__, fixtureName);
