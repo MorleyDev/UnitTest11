@@ -53,7 +53,10 @@ HEADERS += \
     Code/include/UnitTest11/Is/Zero.hpp \
     Code/include/UnitTest11/Is/NaN.hpp \
     Code/include/UnitTest11/Is/Infinity.hpp \
-    Code/include/UnitTest11/Is/Null.hpp
+    Code/include/UnitTest11/Is/Null.hpp \
+    Code/include/UnitTest11/Is/Between.hpp \
+    Code/include/UnitTest11/Is/GreaterThan.hpp \
+    Code/include/UnitTest11/Is/LessThan.hpp
 
 INCLUDEPATH +=  Code/include/
 

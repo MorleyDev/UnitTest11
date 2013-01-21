@@ -27,7 +27,10 @@ SOURCES += \
     Code/Unit/TestFixtureTests.cpp \
     Code/Unit/IsNaNTests.cpp \
     Code/Unit/IsInfinityTests.cpp \
-    Code/Unit/IsNullTests.cpp
+    Code/Unit/IsNullTests.cpp \
+    Code/Unit/IsBetweenTests.cpp \
+    Code/Unit/IsGreaterThanTests.cpp \
+    Code/Unit/IsLessThanTests.cpp
 
 debug:LIBS += -L$$OUT_PWD/debug
 release:LIBS += -L$$OUT_PWD/release

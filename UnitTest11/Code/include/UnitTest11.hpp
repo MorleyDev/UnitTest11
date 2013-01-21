@@ -12,6 +12,9 @@
 #include "UnitTest11/Is/NaN.hpp"
 #include "UnitTest11/Is/Infinity.hpp"
 #include "UnitTest11/Is/Null.hpp"
+#include "UnitTest11/Is/Between.hpp"
+#include "UnitTest11/Is/GreaterThan.hpp"
+#include "UnitTest11/Is/LessThan.hpp"
 
 #include "UnitTest11/Will/Throw.hpp"
 #include "UnitTest11/Will/Pass.hpp"
