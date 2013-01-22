@@ -4,12 +4,20 @@
 
 namespace
 {
-    ut11::TestFixtureRunner g_runner;
+    std::unique_ptr<ut11::TestFixtureRunner> g_runner;
+}
+
+inline void InitialiseRunner()
+{
+    if ( !g_runner )
+        g_runner = std::move(std::unique_ptr<ut11::TestFixtureRunner>(new ut11::TestFixtureRunner()));
 }
 
 void ut11::PushFixture(std::unique_ptr<ITestFixture> fixture)
 {
-    g_runner.addFixture(std::move(fixture));
+    InitialiseRunner();
+
+    g_runner->addFixture(std::move(fixture));
 }
 
 int ut11::Run()
@@ -20,5 +28,7 @@ int ut11::Run()
 
 int ut11::Run(IOutput& output)
 {
-    return g_runner.Run(output);
+    InitialiseRunner();
+
+    return g_runner->Run(output);
 }
