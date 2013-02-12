@@ -51,6 +51,12 @@ public:
 
             AssertThat(ut11::Utility::IsOperand< decltype(ut11::Is::Any<Class>()) >::value, ut11::Is::True);
         });
+
+        Then("Is::Any<Class> has an error message", []() {
+
+            DifferentClass value;
+            AssertThat(ut11::Is::Any<Class>().getErrorMessage(value), ut11::Is::Not::EqualTo(""));
+        });
     }
 };
 DeclareFixture(IsAnyTests);
@@ -99,6 +105,12 @@ public:
         Then("Is::Not::Any<Class>() is operand", []() {
 
             AssertThat(ut11::Utility::IsOperand< decltype(ut11::Is::Not::Any<Class>()) >::value, ut11::Is::True);
+        });
+
+        Then("Is::Not::Any<Class> has an error message", []() {
+
+            Derived value;
+            AssertThat(ut11::Is::Not::Any<Class>().getErrorMessage(value), ut11::Is::Not::EqualTo(""));
         });
     }
 };

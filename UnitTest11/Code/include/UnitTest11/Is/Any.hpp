@@ -3,6 +3,7 @@
 
 #include "../Utility/BaseOperand.hpp"
 #include <type_traits>
+#include <typeinfo>
 
 namespace ut11
 {
@@ -19,6 +20,13 @@ namespace ut11
             template<typename U> bool operator()(const U&) const
             {
                 return std::is_base_of<T,U>::value || std::is_convertible<U,T>::value;
+            }
+
+            template<typename U> inline std::string getErrorMessage(const U&) const
+            {
+                std::stringstream errorMessage;
+                errorMessage << "Expected any of class " << (typeid(T).name()) << " or derived but was " << (typeid(U).name());
+                return errorMessage.str();
             }
         };
     }

@@ -17,6 +17,10 @@ public:
         Then("Is::NaN is Operand", []() {
             AssertThat(ut11::Utility::IsOperand< decltype(ut11::Is::NaN) >::value, ut11::Is::True);
         });
+
+        Then("Is::NaN has an error message", []() {
+            AssertThat(ut11::Is::NaN.getErrorMessage(5), ut11::Is::Not::EqualTo(""));
+        });
     }
 };
 DeclareFixture(IsNaNTests);
@@ -36,6 +40,10 @@ public:
 
         Then("Is::Not::NaN is Operand", []() {
             AssertThat(ut11::Utility::IsOperand< decltype(ut11::Is::Not::NaN) >::value, ut11::Is::True);
+        });
+
+        Then("Is::Not::NaN has an error message", []() {
+            AssertThat(ut11::Is::Not::NaN.getErrorMessage(0), ut11::Is::Not::EqualTo(""));
         });
 
     }

@@ -15,6 +15,13 @@ namespace ut11
             IsGreaterThan(const U& low) : low(low) { }
 
             template<typename T> inline bool operator()(const T& value) const { return value > low; }
+
+            template<typename Q> inline std::string getErrorMessage(const Q& actual) const
+            {
+                std::stringstream errorMessage;
+                errorMessage << "Expected greater than " << ut11::Utility::ToString(low) << " but was " << ut11::Utility::ToString(actual);
+                return errorMessage.str();
+            }
         };
     }
 

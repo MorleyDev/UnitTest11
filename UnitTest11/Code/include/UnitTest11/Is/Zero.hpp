@@ -13,6 +13,13 @@ namespace ut11
             {
                 return value == U(0);
             }
+
+            template<typename U> inline std::string getErrorMessage(const U& actual) const
+            {
+                std::stringstream errorMessage;
+                errorMessage << "Expected zero but was " << ut11::Utility::ToString(actual);
+                return errorMessage.str();
+            }
         };
     }
 

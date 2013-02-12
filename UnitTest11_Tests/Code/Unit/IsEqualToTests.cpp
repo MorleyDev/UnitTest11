@@ -16,6 +16,10 @@ public:
         Then("Is::EqualTo is an operand", []() {
             AssertThat(ut11::Utility::IsOperand< decltype(ut11::Is::EqualTo(7)) >::value, ut11::Is::True);
         });
+
+        Then("Is::EqualTo has an error message", []() {
+            AssertThat(ut11::Is::EqualTo(false).getErrorMessage(true), ut11::Is::Not::EqualTo(""));
+        });
     }
 };
 DeclareFixture(IsEqualToTests);
@@ -35,6 +39,10 @@ public:
 
         Then("Is::Not::EqualTo is an operand", []() {
             AssertThat(ut11::Utility::IsOperand< decltype(ut11::Is::Not::EqualTo(7)) >::value, ut11::Is::True);
+        });
+
+        Then("Is::Not::EqualTo has an error message", []() {
+            AssertThat(ut11::Is::Not::EqualTo(true).getErrorMessage(true), ut11::Is::Not::EqualTo(""));
         });
     }
 };

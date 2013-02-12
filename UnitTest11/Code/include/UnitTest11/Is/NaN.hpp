@@ -13,6 +13,13 @@ namespace ut11
             {
                 return value != value;
             }
+
+            template<typename U> inline std::string getErrorMessage(const U& actual) const
+            {
+                std::stringstream errorMessage;
+                errorMessage << "Expected NaN but was " << ut11::Utility::ToString(actual);
+                return errorMessage.str();
+            }
         };
     }
 

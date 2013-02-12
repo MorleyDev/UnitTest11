@@ -2,6 +2,7 @@
 #define UNITTEST11_IS_BETWEEN_HPP
 
 #include "../Utility/BaseOperand.hpp"
+#include "../Utility/ToString.hpp"
 
 namespace ut11
 {
@@ -16,6 +17,13 @@ namespace ut11
             IsBetween(const U& low, const V& high) : low(low), high(high) { }
 
             template<typename T> inline bool operator()(const T& value) const { return low < value && value <= high; }
+
+            template<typename Q> inline std::string getErrorMessage(const Q& actual) const
+            {
+                std::stringstream errorMessage;
+                errorMessage << "Expected between " << ut11::Utility::ToString(low) << " and " << ut11::Utility::ToString(high) << " but was " << ut11::Utility::ToString(actual);
+                return errorMessage.str();
+            }
         };
     }
 

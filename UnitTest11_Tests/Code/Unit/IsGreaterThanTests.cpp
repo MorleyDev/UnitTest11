@@ -24,6 +24,10 @@ public:
         {
             AssertThat(ut11::Utility::IsOperand< decltype(ut11::Is::GreaterThan(5)) >::value, ut11::Is::True);
         });
+
+        Then("Is::GreaterThan has an error message", []() {
+            AssertThat(ut11::Is::GreaterThan(5).getErrorMessage(3), ut11::Is::Not::EqualTo(""));
+        });
     }
 };
 DeclareFixture(IsGreaterThanTests);
@@ -51,6 +55,10 @@ public:
         Then("Is::Not::GreaterThan is an operand", []()
         {
             AssertThat(ut11::Utility::IsOperand< decltype(ut11::Is::Not::GreaterThan(5)) >::value, ut11::Is::True);
+        });
+
+        Then("Is::Not::GreaterThan has an error message", []() {
+            AssertThat(ut11::Is::Not::GreaterThan(5).getErrorMessage(5), ut11::Is::Not::EqualTo(""));
         });
     }
 };

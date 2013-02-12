@@ -14,6 +14,13 @@ namespace ut11
             {
                 return  std::isinf(value);
             }
+
+            template<typename U> inline std::string getErrorMessage(const U& actual) const
+            {
+                std::stringstream errorMessage;
+                errorMessage << "Expected infinity but was " << ut11::Utility::ToString(actual);
+                return errorMessage.str();
+            }
         };
 
         struct IsPositiveInfinity : public Utility::BaseOperand
@@ -22,6 +29,13 @@ namespace ut11
             {
                 return  std::isinf(value) && value >= 0;
             }
+
+            template<typename U> inline std::string getErrorMessage(const U& actual) const
+            {
+                std::stringstream errorMessage;
+                errorMessage << "Expected positive infinity but was " << ut11::Utility::ToString(actual);
+                return errorMessage.str();
+            }
         };
 
         struct IsNegativeInfinity : public Utility::BaseOperand
@@ -29,6 +43,13 @@ namespace ut11
             template<typename U> bool operator()(const U& value) const
             {
                 return  std::isinf(value) && value <= 0;
+            }
+
+            template<typename U> inline std::string getErrorMessage(const U& actual) const
+            {
+                std::stringstream errorMessage;
+                errorMessage << "Expected negative infinity but was " << ut11::Utility::ToString(actual);
+                return errorMessage.str();
             }
         };
     }

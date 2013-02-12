@@ -53,6 +53,11 @@ public:
         Then("Is::Null is Operand", []() {
             AssertThat(ut11::Utility::IsOperand< decltype(ut11::Is::Null) >::value, ut11::Is::True);
         });
+
+        Then("Is::Null has an error message", []() {
+            std::unique_ptr<int> ptr(new int(5));
+            AssertThat(ut11::Is::Null.getErrorMessage(ptr.get()), ut11::Is::Not::EqualTo(""));
+        });
     }
 };
 DeclareFixture(IsNullTests);
@@ -109,6 +114,10 @@ public:
 
         Then("Is::Not::Null is Operand", []() {
             AssertThat(ut11::Utility::IsOperand< decltype(ut11::Is::Not::Null) >::value, ut11::Is::True);
+        });
+
+        Then("Is::Not::Null has an error message", []() {
+            AssertThat(ut11::Is::Not::Null.getErrorMessage(static_cast<void*>(nullptr)), ut11::Is::Not::EqualTo(""));
         });
 
     }

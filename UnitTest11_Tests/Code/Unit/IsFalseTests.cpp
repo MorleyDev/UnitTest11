@@ -13,6 +13,10 @@ public:
             AssertThat(ut11::Is::False(true), ut11::Is::Not::True);
         });
 
+        Then("Is::False has an error message", []() {
+            AssertThat(ut11::Is::False.getErrorMessage(true), ut11::Is::Not::EqualTo(""));
+        });
+
         Then("Is::Not::False(true) is true", []() {
             AssertThat(ut11::Is::Not::False(true), ut11::Is::True);
         });
@@ -27,6 +31,10 @@ public:
 
         Then("Is::Not::False returns an Operand", []() {
             AssertThat( ut11::Utility::IsOperand<decltype(ut11::Is::Not::False)>::value, ut11::Is::True );
+        });
+
+        Then("Is::Not::False has an error message", []() {
+            AssertThat(ut11::Is::Not::False.getErrorMessage(false), ut11::Is::Not::EqualTo(""));
         });
     }
 };

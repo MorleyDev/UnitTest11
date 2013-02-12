@@ -24,6 +24,10 @@ public:
         Then("Is::Zero is Operand", []() {
             AssertThat(ut11::Utility::IsOperand< decltype(ut11::Is::Zero) >::value, ut11::Is::True);
         });
+
+        Then("Is::Zero has an error message", []() {
+            AssertThat(ut11::Is::Zero.getErrorMessage(1), ut11::Is::Not::EqualTo(""));
+        });
     }
 };
 DeclareFixture(IsZeroTests);
@@ -51,6 +55,10 @@ public:
 
         Then("Is::Not::Zero is Operand", []() {
             AssertThat(ut11::Utility::IsOperand< decltype(ut11::Is::Not::Zero) >::value, ut11::Is::True);
+        });
+
+        Then("Is::Not::Zero has an error message", []() {
+            AssertThat(ut11::Is::Not::Zero.getErrorMessage(1), ut11::Is::Not::EqualTo(""));
         });
 
     }
