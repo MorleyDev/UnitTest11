@@ -2,6 +2,7 @@
 #define UNITTEST11_IS_GREATERTHAN_HPP
 
 #include "../Utility/BaseOperand.hpp"
+#include <sstream>
 
 namespace ut11
 {

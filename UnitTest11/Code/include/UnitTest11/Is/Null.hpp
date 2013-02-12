@@ -2,7 +2,9 @@
 #define UNITTEST11_IS_NULL_HPP
 
 #include "../Utility/BaseOperand.hpp"
+#include "../Utility/ToString.hpp"
 #include <memory>
+#include <sstream>
 
 namespace ut11
 {

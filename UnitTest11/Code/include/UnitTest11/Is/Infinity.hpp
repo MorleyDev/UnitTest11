@@ -2,7 +2,9 @@
 #define UNITTEST11_IS_INFINITY_HPP
 
 #include "../Utility/BaseOperand.hpp"
+#include "../Utility/ToString.hpp"
 #include <cmath>
+#include <sstream>
 
 namespace ut11
 {

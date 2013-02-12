@@ -4,6 +4,7 @@
 #include "../Utility/BaseOperand.hpp"
 #include <type_traits>
 #include <typeinfo>
+#include <sstream>
 
 namespace ut11
 {
