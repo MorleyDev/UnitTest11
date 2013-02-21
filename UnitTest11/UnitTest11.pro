@@ -11,6 +11,8 @@ TEMPLATE = lib
 CONFIG += staticlib
 debug:CONFIG -= release
 
+QMAKE_CXXFLAGS += -std=c++11
+
 SOURCES += \
     Code/src/Assert/Fail.cpp \
     Code/src/Utility/TestStage.cpp \

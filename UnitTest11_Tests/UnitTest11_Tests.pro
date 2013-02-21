@@ -4,6 +4,8 @@ CONFIG -= app_bundle
 CONFIG -= qt
 debug:CONFIG -= release
 
+QMAKE_CXXFLAGS += -std=c++11
+
 INCLUDEPATH += ../UnitTest11/Code/include/
 
 SOURCES += \
