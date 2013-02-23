@@ -22,7 +22,7 @@ namespace ut11
             template<typename... ARGS> NotOperand(const ARGS&... o) : m_original(o...) { }
 
             template<typename... ARGS> bool operator()(const ARGS&... args) const { return !m_original(args...); }
-            template<typename... ARGS> std::string getErrorMessage(const ARGS&... args) const { return "Not " + m_original.getErrorMessage(args...); }
+            template<typename... ARGS> std::string GetErrorMessage(const ARGS&... args) const { return "Not " + m_original.GetErrorMessage(args...); }
         };
     }
 }

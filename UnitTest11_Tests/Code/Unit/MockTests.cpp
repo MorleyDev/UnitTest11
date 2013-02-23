@@ -51,7 +51,7 @@ public:
 
             m_expectedParameter = 'A';
 
-            m_mock.setCallback([&](char c)
+            m_mock.SetCallback([&](char c)
             {
                 m_actualParameter = c;
             });
@@ -67,7 +67,7 @@ public:
 
             m_expectedReturn = 5;
 
-            m_mock.setReturn(m_expectedReturn);
+            m_mock.SetReturn(m_expectedReturn);
 
             m_actualReturn = m_mock('P');
         });

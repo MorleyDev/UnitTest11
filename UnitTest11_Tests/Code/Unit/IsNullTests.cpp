@@ -56,7 +56,7 @@ public:
 
         Then("Is::Null has an error message", []() {
             std::unique_ptr<int> ptr(new int(5));
-            AssertThat(ut11::Is::Null.getErrorMessage(ptr.get()), ut11::Is::Not::EqualTo(""));
+            AssertThat(ut11::Is::Null.GetErrorMessage(ptr.get()), ut11::Is::Not::EqualTo(""));
         });
     }
 };
@@ -117,7 +117,7 @@ public:
         });
 
         Then("Is::Not::Null has an error message", []() {
-            AssertThat(ut11::Is::Not::Null.getErrorMessage(static_cast<void*>(nullptr)), ut11::Is::Not::EqualTo(""));
+            AssertThat(ut11::Is::Not::Null.GetErrorMessage(static_cast<void*>(nullptr)), ut11::Is::Not::EqualTo(""));
         });
 
     }

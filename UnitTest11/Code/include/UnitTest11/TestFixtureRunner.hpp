@@ -11,7 +11,7 @@ namespace ut11
     class TestFixtureRunner
     {
     public:
-        void addFixture(std::unique_ptr<ITestFixture> fixture);
+        void AddFixture(std::unique_ptr<ITestFixture> fixture);
         int Run(IOutput& output);
 
     private:

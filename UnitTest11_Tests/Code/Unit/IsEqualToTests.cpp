@@ -18,7 +18,7 @@ public:
         });
 
         Then("Is::EqualTo has an error message", []() {
-            AssertThat(ut11::Is::EqualTo(false).getErrorMessage(true), ut11::Is::Not::EqualTo(""));
+            AssertThat(ut11::Is::EqualTo(false).GetErrorMessage(true), ut11::Is::Not::EqualTo(""));
         });
     }
 };
@@ -42,7 +42,7 @@ public:
         });
 
         Then("Is::Not::EqualTo has an error message", []() {
-            AssertThat(ut11::Is::Not::EqualTo(true).getErrorMessage(true), ut11::Is::Not::EqualTo(""));
+            AssertThat(ut11::Is::Not::EqualTo(true).GetErrorMessage(true), ut11::Is::Not::EqualTo(""));
         });
     }
 };

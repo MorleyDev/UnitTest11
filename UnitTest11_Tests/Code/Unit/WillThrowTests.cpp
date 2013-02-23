@@ -24,7 +24,7 @@ public:
             auto willThrow = ut11::Will::Throw<int>();
 
             m_result = willThrow([](){ throw "std::bad_exception()"; });
-            m_errorMessage = willThrow.getErrorMessage([](){ });
+            m_errorMessage = willThrow.GetErrorMessage([](){ });
         });
 
         Then("the result is as expected", [&]() {
@@ -45,7 +45,7 @@ public:
             auto willThrow = ut11::Will::Throw<int>();
 
             m_result = willThrow([](){ throw std::bad_exception(); });
-            m_errorMessage = willThrow.getErrorMessage([](){ });
+            m_errorMessage = willThrow.GetErrorMessage([](){ });
         });
 
         Then("the result is as expected", [&]() {
@@ -66,7 +66,7 @@ public:
             auto willThrow = ut11::Will::Throw<int>();
 
             m_result = willThrow([](){ });
-            m_errorMessage = willThrow.getErrorMessage([](){ });
+            m_errorMessage = willThrow.GetErrorMessage([](){ });
         });
 
         Then("the result is as expected", [&]() {

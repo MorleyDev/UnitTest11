@@ -1,7 +1,8 @@
 #ifndef UNITTEST11_UTILITY_TESTSTAGE_HPP
 #define UNITTEST11_UTILITY_TESTSTAGE_HPP
 
-#include "../IOutput.hpp"
+#include "ITestStage.hpp"
+#include "TestStep.hpp"
 #include "../TestFailedException.hpp"
 
 #include <string>
@@ -11,28 +12,6 @@ namespace ut11
 {
     namespace Utility
     {
-        struct TestStep
-        {
-            TestStep() : description(), logic() { }
-            TestStep(std::string d, std::function<void(void)> l) : description(d), logic(l) { }
-            TestStep(const TestStep& step) : description(step.description), logic(step.logic) { }
-            TestStep& operator=(const TestStep& step) { description = step.description; logic = step.logic; return *this; }
-            TestStep(TestStep&& step) : description(std::move(step.description)), logic(std::move(step.logic)) { }
-            TestStep& operator=(TestStep&& step) { description = std::move(step.description); logic = std::move(step.logic); return *this; }
-            ~TestStep() { }
-
-            std::string description;
-            std::function<void(void)> logic;
-        };
-
-        class ITestStage
-        {
-        public:
-            virtual ~ITestStage();
-
-            virtual bool Run(IOutput& output) = 0;
-        };
-
         class TestStage : public ITestStage
         {
         public:
@@ -40,7 +19,7 @@ namespace ut11
 
             TestStage();
             TestStage(TestStep given, TestStep when, TestStep then, TestStep finally);
-            TestStage(const TestStage& stage);
+            TestStage(const TestStage& Stage);
 
             virtual ~TestStage();
 

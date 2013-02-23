@@ -26,7 +26,7 @@ public:
         });
 
         Then("Is::LessThan has an error message", []() {
-            AssertThat(ut11::Is::LessThan(2).getErrorMessage(4), ut11::Is::Not::EqualTo(""));
+            AssertThat(ut11::Is::LessThan(2).GetErrorMessage(4), ut11::Is::Not::EqualTo(""));
         });
     }
 };
@@ -58,7 +58,7 @@ public:
         });
 
         Then("Is::Not::LessThan has an error message", []() {
-            AssertThat(ut11::Is::Not::LessThan(5).getErrorMessage(4), ut11::Is::Not::EqualTo(""));
+            AssertThat(ut11::Is::Not::LessThan(5).GetErrorMessage(4), ut11::Is::Not::EqualTo(""));
         });
     }
 };

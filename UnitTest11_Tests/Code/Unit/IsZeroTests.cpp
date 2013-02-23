@@ -26,7 +26,7 @@ public:
         });
 
         Then("Is::Zero has an error message", []() {
-            AssertThat(ut11::Is::Zero.getErrorMessage(1), ut11::Is::Not::EqualTo(""));
+            AssertThat(ut11::Is::Zero.GetErrorMessage(1), ut11::Is::Not::EqualTo(""));
         });
     }
 };
@@ -58,7 +58,7 @@ public:
         });
 
         Then("Is::Not::Zero has an error message", []() {
-            AssertThat(ut11::Is::Not::Zero.getErrorMessage(1), ut11::Is::Not::EqualTo(""));
+            AssertThat(ut11::Is::Not::Zero.GetErrorMessage(1), ut11::Is::Not::EqualTo(""));
         });
 
     }

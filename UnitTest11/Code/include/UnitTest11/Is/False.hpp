@@ -15,7 +15,7 @@ namespace ut11
         {
             template<typename T> bool operator()(const T& value) const { return !static_cast<bool>(value); }
 
-            template<typename T> inline std::string getErrorMessage(const T& actual) const
+            template<typename T> inline std::string GetErrorMessage(const T& actual) const
             {
                 std::stringstream errorMessage;
                 errorMessage << "Expected false but was " << Utility::ToString(actual);

@@ -21,12 +21,12 @@ namespace ut11
             {
             }
 
-            inline void setReturn(std::function<T (const ARGS&...)> callback)
+            inline void SetReturn(std::function<T (const ARGS&...)> callback)
             {
                 m_returnCallback = callback;
             }
 
-            inline void setReturn(T value)
+            inline void SetReturn(T value)
             {
                 m_returnCallback = std::function<T (const ARGS&...)>();
                 m_returnValue = value;
@@ -50,8 +50,8 @@ namespace ut11
             MockReturnHandler() : m_returnCallback() { }
             ~MockReturnHandler() { }
 
-            void setReturn(std::function<void (const ARGS&...)> callback) { m_returnCallback = callback; }
-            void setReturn() { m_returnCallback = std::function<void (const ARGS&...)>(); }
+            void SetReturn(std::function<void (const ARGS&...)> callback) { m_returnCallback = callback; }
+            void SetReturn() { m_returnCallback = std::function<void (const ARGS&...)>(); }
             void operator()(const ARGS&... args) { if ( m_returnCallback ) m_returnCallback(args...); }
 
         private:

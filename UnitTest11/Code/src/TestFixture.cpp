@@ -8,19 +8,19 @@ namespace ut11
 
     TestFixture::TestFixture()
         : m_name(),
-          m_stageBuilder(new ut11::Utility::TestStageBuilder)
+          m_StageBuilder(new ut11::Utility::TestStageBuilder)
     {
     }
 
     TestFixture::TestFixture(std::string name)
         : m_name(name),
-          m_stageBuilder(new ut11::Utility::TestStageBuilder)
+          m_StageBuilder(new ut11::Utility::TestStageBuilder)
     {
     }
 
     TestFixture::TestFixture(std::string name, std::unique_ptr<ut11::Utility::ITestStageBuilder> builder)
         : m_name(name),
-          m_stageBuilder(std::move(builder))
+          m_StageBuilder(std::move(builder))
     {
     }
 
@@ -30,22 +30,22 @@ namespace ut11
 
     void TestFixture::Given(std::string description, std::function<void(void)> logic)
     {
-        m_stageBuilder->pushGiven(Utility::TestStep(description, logic));
+        m_StageBuilder->PushGiven(Utility::TestStep(description, logic));
     }
 
     void TestFixture::When(std::string description, std::function<void(void)> logic)
     {
-        m_stageBuilder->pushWhen(Utility::TestStep(description, logic));
+        m_StageBuilder->PushWhen(Utility::TestStep(description, logic));
     }
 
     void TestFixture::Then(std::string description, std::function<void(void)> logic)
     {
-        m_stageBuilder->pushThen(Utility::TestStep(description, logic));
+        m_StageBuilder->PushThen(Utility::TestStep(description, logic));
     }
 
     void TestFixture::Finally(std::string description, std::function<void(void)> logic)
     {
-        m_stageBuilder->pushFinally(Utility::TestStep(description, logic));
+        m_StageBuilder->PushFinally(Utility::TestStep(description, logic));
     }
 
     TestFixtureResults TestFixture::Run(IOutput& output)
@@ -54,12 +54,12 @@ namespace ut11
         Run();
 
         TestFixtureResults counter;
-        auto stages = m_stageBuilder->stage();
-        for(auto stage : stages)
+        auto Stages = m_StageBuilder->Stage();
+        for(auto Stage : Stages)
         {
             ++counter.ran;
 
-            if ( stage->Run(output) )
+            if ( Stage->Run(output) )
                 ++counter.succeeded;
         }
         output.EndFixture(m_name);

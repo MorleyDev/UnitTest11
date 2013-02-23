@@ -21,7 +21,7 @@ public:
         return Succeeds;
     }
 
-    template<typename T> inline std::string getErrorMessage(const T& actual) const
+    template<typename T> inline std::string GetErrorMessage(const T& actual) const
     {
         AssertThat(actual, ut11::Is::EqualTo(m_expectedValue));
         return m_expectedErrorMessage;
@@ -65,17 +65,17 @@ public:
 
         Then("the expected test failed exception was thrown with the expected line", [&]()
         {
-            AssertThat(caughtException.getLine(), ut11::Is::EqualTo(line));
+            AssertThat(caughtException.GetLine(), ut11::Is::EqualTo(line));
         });
 
         Then("the expected test failed exception was thrown with the expected file", [&]()
         {
-            AssertThat(caughtException.getFile(), ut11::Is::EqualTo(file));
+            AssertThat(caughtException.GetFile(), ut11::Is::EqualTo(file));
         });
 
         Then("the expected test failed exception was thrown with the expected message", [&]()
         {
-            AssertThat(caughtException.getMessage(), ut11::Is::EqualTo(message));
+            AssertThat(caughtException.GetMessage(), ut11::Is::EqualTo(message));
         });
 
         Given("a line, file, message and expected value", [&]()
@@ -117,17 +117,17 @@ public:
 
         Then("the expected test failed exception was thrown with the expected line", [&]()
         {
-            AssertThat(caughtException.getLine(), ut11::Is::EqualTo(line));
+            AssertThat(caughtException.GetLine(), ut11::Is::EqualTo(line));
         });
 
         Then("the expected test failed exception was thrown with the expected file", [&]()
         {
-            AssertThat(caughtException.getFile(), ut11::Is::EqualTo(file));
+            AssertThat(caughtException.GetFile(), ut11::Is::EqualTo(file));
         });
 
         Then("the expected test failed exception was thrown with the expected message", [&]()
         {
-            AssertThat(caughtException.getMessage(), ut11::Is::EqualTo(message));
+            AssertThat(caughtException.GetMessage(), ut11::Is::EqualTo(message));
         });
 
         Given("a line, file, message and expected value", [&]()

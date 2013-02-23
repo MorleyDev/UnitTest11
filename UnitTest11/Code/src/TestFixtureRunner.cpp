@@ -1,6 +1,6 @@
 #include <UnitTest11/TestFixtureRunner.hpp>
 
-void ut11::TestFixtureRunner::addFixture(std::unique_ptr<ITestFixture> fixture)
+void ut11::TestFixtureRunner::AddFixture(std::unique_ptr<ITestFixture> fixture)
 {
     m_fixtures.push_back(std::move(fixture));
 }

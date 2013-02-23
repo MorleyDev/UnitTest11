@@ -17,7 +17,7 @@ void ut11::PushFixture(std::unique_ptr<ITestFixture> fixture)
 {
     InitialiseRunner();
 
-    g_runner->addFixture(std::move(fixture));
+    g_runner->AddFixture(std::move(fixture));
 }
 
 int ut11::Run()

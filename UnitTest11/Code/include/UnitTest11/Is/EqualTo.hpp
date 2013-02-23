@@ -25,7 +25,7 @@ namespace ut11
                 return Utility::AreEqual(m_expected, actual);
             }
 
-            template<typename T> inline std::string getErrorMessage(const T& actual) const
+            template<typename T> inline std::string GetErrorMessage(const T& actual) const
             {
                 std::stringstream errorMessage;
                 errorMessage << "Expected " << Utility::ToString(m_expected) << " but was " << Utility::ToString(actual);

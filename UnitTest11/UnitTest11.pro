@@ -24,7 +24,10 @@ SOURCES += \
     Code/src/Is/Zero.cpp \
     Code/src/Is/NaN.cpp \
     Code/src/Is/Infinity.cpp \
-    Code/src/Is/Null.cpp
+    Code/src/Is/Null.cpp \
+    Code/src/Utility/TestStageBuilder.cpp \
+    Code/src/Utility/ITestStage.cpp \
+    Code/src/Utility/ITestStageBuilder.cpp
 
 HEADERS += \
     Code/include/UnitTest11.hpp \
@@ -58,7 +61,10 @@ HEADERS += \
     Code/include/UnitTest11/Is/Null.hpp \
     Code/include/UnitTest11/Is/Between.hpp \
     Code/include/UnitTest11/Is/GreaterThan.hpp \
-    Code/include/UnitTest11/Is/LessThan.hpp
+    Code/include/UnitTest11/Is/LessThan.hpp \
+    Code/include/UnitTest11/Utility/ITestStage.hpp \
+    Code/include/UnitTest11/Utility/TestStep.hpp \
+    Code/include/UnitTest11/Utility/ITestStageBuilder.hpp
 
 INCLUDEPATH +=  Code/include/
 

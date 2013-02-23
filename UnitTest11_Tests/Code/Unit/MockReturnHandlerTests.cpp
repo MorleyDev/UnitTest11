@@ -35,7 +35,7 @@ public:
         When("setting the value to be returned and calling the MockReturnHandler", [&]() {
 
             m_expectedReturnValue = 32;
-            m_returner.setReturn(m_expectedReturnValue);
+            m_returner.SetReturn(m_expectedReturnValue);
 
             m_returnedValue = m_returner.operator ()('A');
 
@@ -52,7 +52,7 @@ public:
             m_expectedReturnValue = 32;
             m_expectedArgument = 'Z';
 
-            m_returner.setReturn([&](char actual)
+            m_returner.SetReturn([&](char actual)
             {
                 m_actualArgument = actual;
                 return m_expectedReturnValue;
@@ -78,8 +78,8 @@ public:
             m_expectedReturnValue = 32;
             m_expectedArgument = 'Z';
 
-            m_returner.setReturn('A');
-            m_returner.setReturn([&](char actual)
+            m_returner.SetReturn('A');
+            m_returner.SetReturn([&](char actual)
             {
                 m_actualArgument = actual;
                 return m_expectedReturnValue;
@@ -104,8 +104,8 @@ public:
 
             m_expectedReturnValue = 32;
 
-            m_returner.setReturn([&](char) { return 21; });
-            m_returner.setReturn(m_expectedReturnValue);
+            m_returner.SetReturn([&](char) { return 21; });
+            m_returner.SetReturn(m_expectedReturnValue);
 
             m_returnedValue = m_returner.operator ()(m_expectedArgument);
 

@@ -23,7 +23,7 @@ public:
         });
 
         Then("Is::Infinity has an error message", []() {
-            AssertThat(ut11::Is::Infinity.getErrorMessage(0.0f), ut11::Is::Not::EqualTo(""));
+            AssertThat(ut11::Is::Infinity.GetErrorMessage(0.0f), ut11::Is::Not::EqualTo(""));
         });
     }
 };
@@ -47,7 +47,7 @@ public:
         });
 
         Then("Is::Not::Infinity has an error message", []() {
-            AssertThat(ut11::Is::Not::Infinity.getErrorMessage(0.0f), ut11::Is::Not::EqualTo(""));
+            AssertThat(ut11::Is::Not::Infinity.GetErrorMessage(0.0f), ut11::Is::Not::EqualTo(""));
         });
 
     }
@@ -75,7 +75,7 @@ public:
         });
 
         Then("Is::PositiveInfinity has an error message", []() {
-            AssertThat(ut11::Is::PositiveInfinity.getErrorMessage(0.0f), ut11::Is::Not::EqualTo(""));
+            AssertThat(ut11::Is::PositiveInfinity.GetErrorMessage(0.0f), ut11::Is::Not::EqualTo(""));
         });
     }
 };
@@ -102,7 +102,7 @@ public:
         });
 
         Then("Is::Not::PositiveInfinity has an error message", []() {
-            AssertThat(ut11::Is::Not::PositiveInfinity.getErrorMessage(0.0f), ut11::Is::Not::EqualTo(""));
+            AssertThat(ut11::Is::Not::PositiveInfinity.GetErrorMessage(0.0f), ut11::Is::Not::EqualTo(""));
         });
     }
 };
@@ -130,7 +130,7 @@ public:
         });
 
         Then("Is::NegativeInfinity has an error message", []() {
-            AssertThat(ut11::Is::NegativeInfinity.getErrorMessage(0.0f), ut11::Is::Not::EqualTo(""));
+            AssertThat(ut11::Is::NegativeInfinity.GetErrorMessage(0.0f), ut11::Is::Not::EqualTo(""));
         });
     }
 };
@@ -157,7 +157,7 @@ public:
         });
 
         Then("Is::Not::NegativeInfinity has an error message", []() {
-            AssertThat(ut11::Is::Not::NegativeInfinity.getErrorMessage(0.0f), ut11::Is::Not::EqualTo(""));
+            AssertThat(ut11::Is::Not::NegativeInfinity.GetErrorMessage(0.0f), ut11::Is::Not::EqualTo(""));
         });
     }
 };

@@ -17,7 +17,7 @@ namespace ut11
         DeclareFixtureObj(std::string name, ARGS&&... args)
         {
             std::unique_ptr<T> fixture( new T(std::forward<ARGS>(args)...) );
-            fixture->setName(name);
+            fixture->SetName(name);
             PushFixture(std::move(fixture));
         }
     };

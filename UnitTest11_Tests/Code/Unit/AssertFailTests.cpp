@@ -29,9 +29,9 @@ public:
 
         Then("the expected exception is thrown", [&]()
         {
-            AssertThat(line, ut11::Is::EqualTo(m_exception.getLine()));
-            AssertThat(file, ut11::Is::EqualTo(m_exception.getFile()));
-            AssertThat(message, ut11::Is::EqualTo(m_exception.getMessage()));
+            AssertThat(line, ut11::Is::EqualTo(m_exception.GetLine()));
+            AssertThat(file, ut11::Is::EqualTo(m_exception.GetFile()));
+            AssertThat(message, ut11::Is::EqualTo(m_exception.GetMessage()));
         });
     }
 };

@@ -14,7 +14,7 @@ namespace ut11
         {
             if ( operand(expected) )
                 return;
-            Fail(line, file, operand.getErrorMessage(expected));
+            Fail(line, file, operand.GetErrorMessage(expected));
         }
 
         template<typename Expected, typename Operand>

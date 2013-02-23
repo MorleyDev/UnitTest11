@@ -55,7 +55,7 @@ public:
         Then("Is::Any<Class> has an error message", []() {
 
             DifferentClass value;
-            AssertThat(ut11::Is::Any<Class>().getErrorMessage(value), ut11::Is::Not::EqualTo(""));
+            AssertThat(ut11::Is::Any<Class>().GetErrorMessage(value), ut11::Is::Not::EqualTo(""));
         });
     }
 };
@@ -110,7 +110,7 @@ public:
         Then("Is::Not::Any<Class> has an error message", []() {
 
             Derived value;
-            AssertThat(ut11::Is::Not::Any<Class>().getErrorMessage(value), ut11::Is::Not::EqualTo(""));
+            AssertThat(ut11::Is::Not::Any<Class>().GetErrorMessage(value), ut11::Is::Not::EqualTo(""));
         });
     }
 };

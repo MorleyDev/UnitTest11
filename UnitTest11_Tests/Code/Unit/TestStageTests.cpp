@@ -61,7 +61,7 @@ private:
     ut11::Utility::TestStep thenStep;
     ut11::Utility::TestStep finallyStep;
 
-    ut11::Utility::TestStage stage;
+    ut11::Utility::TestStage Stage;
 
     FakeOutput output;
     ut11::TestFailedException testException;
@@ -72,7 +72,7 @@ private:
 public:
     virtual void Run()
     {
-        Given("a stage composed of a given, when, then and finally steps with descriptions", [&]() {
+        Given("a Stage composed of a given, when, then and finally steps with descriptions", [&]() {
 
             givenDescription = "given_description";
             whenDescription = "when_description";
@@ -89,15 +89,15 @@ public:
             thenStep = { thenDescription, [&]() { mockThen(); } };
             finallyStep = { finallyDescription, [&]() { mockFinally(); } };
 
-            stage = ut11::Utility::TestStage(givenStep, whenStep, thenStep, finallyStep);
+            Stage = ut11::Utility::TestStage(givenStep, whenStep, thenStep, finallyStep);
 
             output = FakeOutput();
             result = false;
         });
 
-        When("running a stage with an output", [&]() {
+        When("running a Stage with an output", [&]() {
 
-            result = stage.Run(output);
+            result = Stage.Run(output);
         });
 
         Then("the result is true", [&]() {
@@ -132,12 +132,12 @@ public:
             output.mockEndFinally.Verify(__LINE__, __FILE__, finallyDescription);
         });
 
-        When("running a stage with an output that throws a Test Exception", [&]() {
+        When("running a Stage with an output that throws a Test Exception", [&]() {
 
             testException = ut11::TestFailedException(__LINE__, __FILE__, "dsdsa");
-            mockThen.setCallback([&]() { throw testException; });
+            mockThen.SetCallback([&]() { throw testException; });
 
-            result = stage.Run(output);
+            result = Stage.Run(output);
         });
 
         Then("the result is false", [&]() {
@@ -145,15 +145,15 @@ public:
         });
 
         Then("Output.OnError was called as expected", [&]() {
-            output.mockOnError.Verify(__LINE__, __FILE__, testException.getLine(), testException.getFile(), testException.getMessage());
+            output.mockOnError.Verify(__LINE__, __FILE__, testException.GetLine(), testException.GetFile(), testException.GetMessage());
         });
 
 
-        When("running a stage with an output that throws a std::exception", [&]() {
+        When("running a Stage with an output that throws a std::exception", [&]() {
 
-            mockThen.setCallback([&]() { throw stdException; });
+            mockThen.SetCallback([&]() { throw stdException; });
 
-            result = stage.Run(output);
+            result = Stage.Run(output);
         });
 
         Then("the result is false", [&]() {
@@ -164,11 +164,11 @@ public:
             output.mockOnError1.Verify(__LINE__, __FILE__, ut11::Is::Any<std::exception>());
         });
 
-        When("running a stage with an output that throws an unknown exception", [&]() {
+        When("running a Stage with an output that throws an unknown exception", [&]() {
 
-            mockThen.setCallback([&]() { throw "unknown exception"; });
+            mockThen.SetCallback([&]() { throw "unknown exception"; });
 
-            result = stage.Run(output);
+            result = Stage.Run(output);
         });
 
         Then("the result is false", [&]() {
@@ -179,11 +179,11 @@ public:
             output.mockOnUnknownError.Verify(__LINE__, __FILE__);
         });
 
-        When("calling run with all stages as invalid functions", [&]() {
+        When("calling run with all Stages as invalid functions", [&]() {
 
             ut11::Utility::TestStep invalid;
-            stage = ut11::Utility::TestStage(invalid,invalid,invalid,invalid);
-            result = stage.Run(output);
+            Stage = ut11::Utility::TestStage(invalid,invalid,invalid,invalid);
+            result = Stage.Run(output);
         });
 
         Then("the result is true", [&]() {

@@ -23,7 +23,7 @@ namespace ut11
                 return std::is_base_of<T,U>::value || std::is_convertible<U,T>::value;
             }
 
-            template<typename U> inline std::string getErrorMessage(const U&) const
+            template<typename U> inline std::string GetErrorMessage(const U&) const
             {
                 std::stringstream errorMessage;
                 errorMessage << "Expected any of class " << (typeid(T).name()) << " or derived but was " << (typeid(U).name());

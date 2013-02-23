@@ -1,9 +1,5 @@
 #include <UnitTest11/Utility/TestStage.hpp>
 
-ut11::Utility::ITestStage::~ITestStage()
-{
-}
-
 ut11::Utility::TestStage::TestStage()
     : m_given(),
       m_when(),
@@ -20,11 +16,11 @@ ut11::Utility::TestStage::TestStage(TestStep given, TestStep when, TestStep then
 {
 }
 
-ut11::Utility::TestStage::TestStage(const TestStage& stage)
-    : m_given(stage.m_given),
-      m_when(stage.m_when),
-      m_then(stage.m_then),
-      m_finally(stage.m_finally)
+ut11::Utility::TestStage::TestStage(const TestStage& Stage)
+    : m_given(Stage.m_given),
+      m_when(Stage.m_when),
+      m_then(Stage.m_then),
+      m_finally(Stage.m_finally)
 {
 }
 
@@ -45,7 +41,7 @@ bool ut11::Utility::TestStage::Run(IOutput& output)
     }
     catch(const ut11::TestFailedException& ex)
     {
-        output.OnError(ex.getLine(), ex.getFile(), ex.getMessage());
+        output.OnError(ex.GetLine(), ex.GetFile(), ex.GetMessage());
         return false;
     }
     catch(const std::exception& ex)

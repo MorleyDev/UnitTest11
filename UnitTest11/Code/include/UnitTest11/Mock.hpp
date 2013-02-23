@@ -22,33 +22,33 @@ namespace ut11
             return m_returnHandler(args...);
         }
 
-        inline void setCallback(std::function<void (const ARGS&...)> callback)
+        inline void SetCallback(std::function<void (const ARGS&...)> callback)
         {
             m_callbackHandler = callback;
         }
 
-        template<typename V> inline void setReturn(V value) { m_returnHandler.setReturn(value); }
+        template<typename V> inline void SetReturn(V value) { m_returnHandler.SetReturn(value); }
 
         inline void VerifyAny(std::size_t line, std::string file) const
         {
             if ( m_argumentHandler.TotalCount() == 0 )
-                Assert::Fail(line, file, getVerifyFailMessage());
+                Assert::Fail(line, file, GetVerifyFailMessage());
         }
 
         template<typename... Expectations> inline void Verify(std::size_t line, std::string file, const Expectations&... expectations) const
         {
             if ( m_argumentHandler.CountCalls(expectations...) == 0 )
-                Assert::Fail(line, file, getVerifyFailMessage());
+                Assert::Fail(line, file, GetVerifyFailMessage());
         }
 
         template<typename... Expectations> inline void VerifyTimes(std::size_t line, std::string file, std::size_t count, const Expectations&... expectations) const
         {
             if ( m_argumentHandler.CountCalls(expectations...) != count )
-                Assert::Fail(line, file, getVerifyFailMessage());
+                Assert::Fail(line, file, GetVerifyFailMessage());
         }
 
     private:
-        inline std::string getVerifyFailMessage() const
+        inline std::string GetVerifyFailMessage() const
         {
             return "Expected function call was not found";
         }

@@ -26,7 +26,7 @@ public:
         });
 
         Then("Is::Between has an error message", []() {
-            AssertThat(ut11::Is::Between(5, 10).getErrorMessage(12), ut11::Is::Not::EqualTo(""));
+            AssertThat(ut11::Is::Between(5, 10).GetErrorMessage(12), ut11::Is::Not::EqualTo(""));
         });
     }
 };
@@ -58,7 +58,7 @@ public:
         });
 
         Then("Is::Not::Between has an error message", []() {
-            AssertThat(ut11::Is::Not::Between(5, 10).getErrorMessage(3), ut11::Is::Not::EqualTo(""));
+            AssertThat(ut11::Is::Not::Between(5, 10).GetErrorMessage(3), ut11::Is::Not::EqualTo(""));
         });
     }
 };

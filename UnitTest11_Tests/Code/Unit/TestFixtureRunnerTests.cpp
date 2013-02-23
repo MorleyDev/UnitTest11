@@ -67,7 +67,7 @@ public:
             fixture->Then("then", [](){});
             fixture->Then("then", [](){ throw int(5); });
             fixture->Then("then", [](){ throw int(5); });
-            m_runner.addFixture(std::unique_ptr<ut11::ITestFixture>(fixture));
+            m_runner.AddFixture(std::unique_ptr<ut11::ITestFixture>(fixture));
 
         });
 

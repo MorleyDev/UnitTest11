@@ -33,7 +33,7 @@ namespace ut11
     class TestFixture : public ITestFixture
     {
     public:
-        void setName(std::string name) { m_name = name; }
+        void SetName(std::string name) { m_name = name; }
 
         TestFixture();
         TestFixture(std::string name);
@@ -51,7 +51,7 @@ namespace ut11
 
     private:
         std::string m_name;
-        std::unique_ptr<ut11::Utility::ITestStageBuilder> m_stageBuilder;
+        std::unique_ptr<ut11::Utility::ITestStageBuilder> m_StageBuilder;
     };
 }
 

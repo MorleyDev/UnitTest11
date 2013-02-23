@@ -17,7 +17,7 @@ namespace ut11
                 return  std::isinf(value);
             }
 
-            template<typename U> inline std::string getErrorMessage(const U& actual) const
+            template<typename U> inline std::string GetErrorMessage(const U& actual) const
             {
                 std::stringstream errorMessage;
                 errorMessage << "Expected infinity but was " << ut11::Utility::ToString(actual);
@@ -32,7 +32,7 @@ namespace ut11
                 return  std::isinf(value) && value >= 0;
             }
 
-            template<typename U> inline std::string getErrorMessage(const U& actual) const
+            template<typename U> inline std::string GetErrorMessage(const U& actual) const
             {
                 std::stringstream errorMessage;
                 errorMessage << "Expected positive infinity but was " << ut11::Utility::ToString(actual);
@@ -47,7 +47,7 @@ namespace ut11
                 return  std::isinf(value) && value <= 0;
             }
 
-            template<typename U> inline std::string getErrorMessage(const U& actual) const
+            template<typename U> inline std::string GetErrorMessage(const U& actual) const
             {
                 std::stringstream errorMessage;
                 errorMessage << "Expected negative infinity but was " << ut11::Utility::ToString(actual);

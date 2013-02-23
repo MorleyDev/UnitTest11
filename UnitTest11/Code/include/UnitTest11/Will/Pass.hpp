@@ -26,7 +26,7 @@ namespace ut11
             }
 
             template<typename T>
-            inline std::string getErrorMessage(const T&) const { return "Expected predicate to return true"; }
+            inline std::string GetErrorMessage(const T&) const { return "Expected predicate to return true"; }
         };
     }
 

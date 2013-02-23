@@ -22,7 +22,7 @@ namespace ut11
                 return value == U(nullptr);
             }
 
-            template<typename U> inline std::string getErrorMessage(const U& actual) const
+            template<typename U> inline std::string GetErrorMessage(const U& actual) const
             {
                 std::stringstream errorMessage;
                 errorMessage << "Expected null but was " << ut11::Utility::ToString(actual);

@@ -14,7 +14,7 @@ public:
         });
 
         Then("Is::False has an error message", []() {
-            AssertThat(ut11::Is::False.getErrorMessage(true), ut11::Is::Not::EqualTo(""));
+            AssertThat(ut11::Is::False.GetErrorMessage(true), ut11::Is::Not::EqualTo(""));
         });
 
         Then("Is::Not::False(true) is true", []() {
@@ -34,7 +34,7 @@ public:
         });
 
         Then("Is::Not::False has an error message", []() {
-            AssertThat(ut11::Is::Not::False.getErrorMessage(false), ut11::Is::Not::EqualTo(""));
+            AssertThat(ut11::Is::Not::False.GetErrorMessage(false), ut11::Is::Not::EqualTo(""));
         });
     }
 };

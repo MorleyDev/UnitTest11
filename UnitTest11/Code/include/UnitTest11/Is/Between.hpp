@@ -19,7 +19,7 @@ namespace ut11
 
             template<typename T> inline bool operator()(const T& value) const { return low < value && value <= high; }
 
-            template<typename Q> inline std::string getErrorMessage(const Q& actual) const
+            template<typename Q> inline std::string GetErrorMessage(const Q& actual) const
             {
                 std::stringstream errorMessage;
                 errorMessage << "Expected between " << ut11::Utility::ToString(low) << " and " << ut11::Utility::ToString(high) << " but was " << ut11::Utility::ToString(actual);
