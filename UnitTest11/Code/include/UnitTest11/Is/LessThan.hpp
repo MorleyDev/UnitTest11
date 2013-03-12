@@ -13,7 +13,7 @@ namespace ut11
         {
             const U& high;
 
-            IsLessThan(const U& high) : high(high) { }
+            explicit IsLessThan(const U& high) : high(high) { }
 
             template<typename T> inline bool operator()(const T& value) const { return value < high; }
 

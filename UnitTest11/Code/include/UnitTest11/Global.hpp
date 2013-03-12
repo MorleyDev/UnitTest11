@@ -14,7 +14,7 @@ namespace ut11
     struct DeclareFixtureObj
     {
         template<typename... ARGS>
-        DeclareFixtureObj(std::string name, ARGS&&... args)
+        explicit DeclareFixtureObj(std::string name, ARGS&&... args)
         {
             std::unique_ptr<T> fixture( new T(std::forward<ARGS>(args)...) );
             fixture->SetName(name);

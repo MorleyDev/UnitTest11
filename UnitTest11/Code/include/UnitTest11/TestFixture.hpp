@@ -36,7 +36,7 @@ namespace ut11
         void SetName(std::string name) { m_name = name; }
 
         TestFixture();
-        TestFixture(std::string name);
+        explicit TestFixture(std::string name);
 
         TestFixture(std::string name, std::unique_ptr<ut11::Utility::ITestStageBuilder> builder);
 

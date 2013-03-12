@@ -15,7 +15,7 @@ namespace ut11
             CALLBACK m_predicate;
 
         public:
-            WillPass(CALLBACK predicate)
+            explicit WillPass(CALLBACK predicate)
                 : m_predicate(predicate)
             {
             }

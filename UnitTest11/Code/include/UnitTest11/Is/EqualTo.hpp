@@ -18,7 +18,7 @@ namespace ut11
             const U& m_expected;
 
         public:
-            inline EqualTo(const U& expected) : m_expected(expected) { }
+            inline explicit EqualTo(const U& expected) : m_expected(expected) { }
 
             template<typename T> inline bool operator()(const T& actual) const
             {
