@@ -12,7 +12,7 @@ make
 IF NOT %ERRORLEVEL% EQU 0 EXIT %ERRORLEVEL%
 
 pushd release
-UnitTest11_Tests.exe
+%1_Tests.exe
 IF NOT %ERRORLEVEL% EQU 0 EXIT %ERRORLEVEL%
 popd
 
