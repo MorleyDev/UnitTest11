@@ -1,4 +1,4 @@
-call clean.bat
+@echo off
 
 call build_library.bat %1%
 IF NOT %ERRORLEVEL% EQU 0 EXIT %ERRORLEVEL%
