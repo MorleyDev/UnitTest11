@@ -32,6 +32,7 @@ namespace ut11
 
     namespace Will
     {
+    	/*! \brief Operand will return true if the passed predicate returns true when called with the Actual value, otherwise returns false */
         template<typename CALLBACK> Operands::WillPass<CALLBACK> Pass(CALLBACK predicate)
         {
             return Operands::WillPass<CALLBACK>(predicate);
@@ -39,6 +40,7 @@ namespace ut11
 
         namespace Not
         {
+        	/*! \brief Operand will return true if the passed predicate returns false when called with the Actual value, otherwise returns false */
             template<typename CALLBACK> Utility::NotOperand< Operands::WillPass<CALLBACK> > Pass(CALLBACK predicate)
             {
                 return Utility::NotOperand< Operands::WillPass<CALLBACK> >(predicate);

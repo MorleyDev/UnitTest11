@@ -14,6 +14,18 @@ public:
             AssertThat(ut11::Is::NaN(0.0f / 0.0f), ut11::Is::True);
         });
 
+        Then("Is::NaN(struct) is True", []() {
+
+        	struct NotANumber { const char* v; } notNumber;
+
+            AssertThat(ut11::Is::NaN(notNumber), ut11::Is::True);
+        });
+
+        Then("Is::NaN(int) is False", []() {
+
+            AssertThat(ut11::Is::NaN(5), ut11::Is::False);
+        });
+
         Then("Is::NaN is Operand", []() {
             AssertThat(ut11::Utility::IsOperand< decltype(ut11::Is::NaN) >::value, ut11::Is::True);
         });
@@ -40,6 +52,18 @@ public:
 
         Then("Is::Not::NaN is Operand", []() {
             AssertThat(ut11::Utility::IsOperand< decltype(ut11::Is::Not::NaN) >::value, ut11::Is::True);
+        });
+
+        Then("Is::Not::NaN(struct) is Not::True", []() {
+
+        	struct NotANumber { const char* v; } notNumber;
+
+            AssertThat(ut11::Is::Not::NaN(notNumber), ut11::Is::Not::True);
+        });
+
+        Then("Is::Not::NaN(int) is Not::False", []() {
+
+            AssertThat(ut11::Is::Not::NaN(5), ut11::Is::Not::False);
         });
 
         Then("Is::Not::NaN has an error message", []() {

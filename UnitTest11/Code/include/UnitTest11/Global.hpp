@@ -6,9 +6,19 @@
 
 namespace ut11
 {
+	/*! \brief Runs all test fixtures with the default std::cout output
+	 *
+	 * \return The number of fixtures that failed
+	 */
+	int Run();
+
+	/*! \brief Runs all test fixtures using the passed output to report tests being ran, success and failures.
+	 *
+	 * \return The number of fixtures that failed
+	 */
+	int Run(IOutput&);
+
     void PushFixture(std::unique_ptr<ITestFixture>);
-    int Run();
-    int Run(IOutput&);
 
     template<typename T>
     struct DeclareFixtureObj

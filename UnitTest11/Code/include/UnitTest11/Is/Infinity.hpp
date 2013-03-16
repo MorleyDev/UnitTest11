@@ -58,14 +58,24 @@ namespace ut11
 
     namespace Is
     {
+		/*! \brief Operand returns true if Actual is Positive or Negative Infinity, otherwise false */
         extern Operands::IsInfinity Infinity;
+
+		/*! \brief Operand returns true if Actual is Positive Infinity, otherwise false */
         extern Operands::IsPositiveInfinity PositiveInfinity;
+
+		/*! \brief Operand returns true if Actual is Negative Infinity, otherwise false */
         extern Operands::IsNegativeInfinity NegativeInfinity;
 
         namespace Not
         {
+    		/*! \brief Operand returns false if Actual is Positive or Negative Infinity, otherwise true */
             extern Utility::NotOperand<Operands::IsInfinity> Infinity;
+
+    		/*! \brief Operand returns false if Actual is Positive Infinity, otherwise true */
             extern Utility::NotOperand<Operands::IsPositiveInfinity> PositiveInfinity;
+
+    		/*! \brief Operand returns false if Actual is Negative Infinity, otherwise true */
             extern Utility::NotOperand<Operands::IsNegativeInfinity> NegativeInfinity;
         }
     }
