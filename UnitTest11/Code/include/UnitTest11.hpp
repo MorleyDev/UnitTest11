@@ -16,6 +16,8 @@
 #include "UnitTest11/Is/GreaterThan.hpp"
 #include "UnitTest11/Is/LessThan.hpp"
 
+#include "UnitTest11/Is/String/Containing.hpp"
+
 #include "UnitTest11/Will/Throw.hpp"
 #include "UnitTest11/Will/Pass.hpp"
 

@@ -62,6 +62,7 @@ HEADERS += \
     Code/include/UnitTest11/Is/Between.hpp \
     Code/include/UnitTest11/Is/GreaterThan.hpp \
     Code/include/UnitTest11/Is/LessThan.hpp \
+    Code/include/UnitTest11/Is/String/Containing.hpp \
     Code/include/UnitTest11/Utility/ITestStage.hpp \
     Code/include/UnitTest11/Utility/TestStep.hpp \
     Code/include/UnitTest11/Utility/ITestStageBuilder.hpp

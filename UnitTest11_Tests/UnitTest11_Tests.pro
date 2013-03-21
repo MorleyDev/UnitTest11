@@ -32,7 +32,8 @@ SOURCES += \
     Code/Unit/IsNullTests.cpp \
     Code/Unit/IsBetweenTests.cpp \
     Code/Unit/IsGreaterThanTests.cpp \
-    Code/Unit/IsLessThanTests.cpp
+    Code/Unit/IsLessThanTests.cpp \
+    Code/Unit/IsStringContainingTests.cpp
 
 debug:LIBS += -L$$OUT_PWD/debug
 release:LIBS += -L$$OUT_PWD/release
