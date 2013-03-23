@@ -7,15 +7,19 @@ class AssertFailTests : public ut11::TestFixture
 private:
     ut11::TestFailedException m_exception;
 
-    std::size_t line = 132;
-    std::string file = "some file";
-    std::string message = "some message";
+    std::size_t line;
+    std::string file;
+    std::string message;
 
 public:
     virtual void Run()
     {
         When("calling Assert Fail", [&]()
         {
+			line = 132;
+			file = "some file";
+			message = "some message";
+
             try
             {
                 ut11::Assert::Fail(line, file, message);

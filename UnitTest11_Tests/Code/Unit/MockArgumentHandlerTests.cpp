@@ -4,13 +4,16 @@ class MockArgumentHandlerTest : public ut11::TestFixture
 {
 private:
     ut11::Utility::MockArgumentHandler<int> m_argumentHandler;
-    int m_expectedCalls[2] = { 5, 7 };
+    int m_expectedCalls[2];
 
 public:
     virtual void Run()
     {
         Given("a MockArgumentHandler with added calls", [&]()
         {
+			m_expectedCalls[0] = 5;
+			m_expectedCalls[1] = 7;
+
             m_argumentHandler = ut11::Utility::MockArgumentHandler<int>();
             m_argumentHandler.AddCall(m_expectedCalls[0]);
             m_argumentHandler.AddCall(m_expectedCalls[0]);

@@ -5,6 +5,7 @@
 #include "../Utility/ToString.hpp"
 #include <cmath>
 #include <sstream>
+#include <limits>
 
 namespace ut11
 {
@@ -14,7 +15,7 @@ namespace ut11
         {
             template<typename U> bool operator()(const U& value) const
             {
-                return  std::isinf(value);
+                return  std::numeric_limits<U>::has_infinity && (std::numeric_limits<U>::infinity() == value || -std::numeric_limits<U>::infinity() == value);
             }
 
             template<typename U> inline std::string GetErrorMessage(const U& actual) const
@@ -29,7 +30,7 @@ namespace ut11
         {
             template<typename U> bool operator()(const U& value) const
             {
-                return  std::isinf(value) && value >= 0;
+				return IsInfinity().operator()<U>(value) && value >= 0;
             }
 
             template<typename U> inline std::string GetErrorMessage(const U& actual) const
@@ -44,7 +45,7 @@ namespace ut11
         {
             template<typename U> bool operator()(const U& value) const
             {
-                return  std::isinf(value) && value <= 0;
+				return IsInfinity().operator()<U>(value) && value <= 0;
             }
 
             template<typename U> inline std::string GetErrorMessage(const U& actual) const

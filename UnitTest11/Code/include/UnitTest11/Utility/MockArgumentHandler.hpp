@@ -30,6 +30,8 @@ namespace ut11
 
             inline void AddCall(ARGS... args)
             {
+				using namespace std; // fix for VS2012 November CPT
+
                 m_arguments.push_back( std::make_tuple( std::forward<ARGS>(args)... ) );
             }
 
@@ -42,7 +44,7 @@ namespace ut11
                 std::tuple<Expectations...> expectationTuple(expectations...);
                 for(const std::tuple<ARGS...>& actual : m_arguments)
                 {
-                    if ( MatchTuples(actual, expectationTuple) )
+                    if ( MatchTuples<0, sizeof...(ARGS)>(actual, expectationTuple) )
                         ++counter;
                 }
                 return counter;
@@ -51,14 +53,14 @@ namespace ut11
             inline std::size_t TotalCount() const { return m_arguments.size(); }
 
         protected:
-            template<int I = 0, typename... Expectations>
-            inline typename std::enable_if< I < sizeof...(ARGS), bool >::type MatchTuples(const std::tuple<ARGS...>& arguments, const std::tuple<Expectations...>& expectations) const
+            template<int I, int Limit, typename Arguments, typename Expectations>
+            inline typename std::enable_if< (I < Limit), bool >::type MatchTuples(const Arguments& arguments, const Expectations& expectations) const
             {
-                return CompareWithOperandOrEquality(std::get<I>(arguments), std::get<I>(expectations)) && MatchTuples<I+1>(arguments, expectations);
+                return CompareWithOperandOrEquality(std::get<I>(arguments), std::get<I>(expectations)) && MatchTuples<I+1, Limit>(arguments, expectations);
             }
 
-            template<int I = 0, typename... Expectations>
-            inline typename std::enable_if< I == sizeof...(ARGS), bool >::type MatchTuples(const std::tuple<ARGS...>&, const std::tuple<Expectations...>&) const
+            template<int I, int Limit, typename Arguments, typename Expectations>
+            inline typename std::enable_if< (I >= Limit), bool >::type MatchTuples(const Arguments&, const Expectations&) const
             {
                 return true;
             }

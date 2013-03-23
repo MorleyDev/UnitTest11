@@ -1,6 +1,11 @@
 #include <UnitTest11.hpp>
 #include <cmath>
 
+#ifndef NAN
+	static const uint32_t __nan[2] = {0xffffffff, 0x7fffffff};
+    #define NAN (*(const float *) __nan)
+#endif
+
 class IsNaNTests : public ut11::TestFixture
 {
 public:
@@ -11,7 +16,7 @@ public:
         });
 
         Then("Is::NaN(NaN) is True", []() {
-            AssertThat(ut11::Is::NaN(0.0f / 0.0f), ut11::Is::True);
+            AssertThat(ut11::Is::NaN(NAN), ut11::Is::True);
         });
 
         Then("Is::NaN(struct) is True", []() {
@@ -47,7 +52,7 @@ public:
         });
 
         Then("Is::Not::NaN(NaN) is Not::True", []() {
-            AssertThat(ut11::Is::Not::NaN(0.0f / 0.0f), ut11::Is::Not::True);
+            AssertThat(ut11::Is::Not::NaN(NAN), ut11::Is::Not::True);
         });
 
         Then("Is::Not::NaN is Operand", []() {

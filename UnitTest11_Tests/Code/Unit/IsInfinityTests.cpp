@@ -1,4 +1,5 @@
 #include <UnitTest11.hpp>
+#include <numeric>
 #include <cmath>
 
 class IsInfinityTests : public ut11::TestFixture
@@ -11,7 +12,8 @@ public:
         });
 
         Then("Is::Infinity(Infinity) is True", []() {
-            AssertThat(ut11::Is::Infinity(1.0f / 0.0f), ut11::Is::True);
+			AssertThat(ut11::Is::Infinity(std::numeric_limits<float>::infinity()), ut11::Is::True);
+			AssertThat(ut11::Is::Infinity(-std::numeric_limits<float>::infinity()), ut11::Is::True);
         });
 
         Then("Is::Infinity is Operand", []() {
@@ -39,7 +41,8 @@ public:
         });
 
         Then("Is::Not::Infinity(Infinity) is Not::True", []() {
-            AssertThat(ut11::Is::Not::Infinity(1.0f / 0.0f), ut11::Is::Not::True);
+            AssertThat(ut11::Is::Not::Infinity(std::numeric_limits<float>::infinity()), ut11::Is::Not::True);
+            AssertThat(ut11::Is::Not::Infinity(-std::numeric_limits<float>::infinity()), ut11::Is::Not::True);
         });
 
         Then("Is::Not::Infinity is Operand", []() {
@@ -63,11 +66,11 @@ public:
         });
 
         Then("Is::PositiveInfinity(+Infinity) is True", []() {
-            AssertThat(ut11::Is::PositiveInfinity(1.0f / 0.0f), ut11::Is::True);
+            AssertThat(ut11::Is::PositiveInfinity(std::numeric_limits<float>::infinity()), ut11::Is::True);
         });
 
         Then("Is::PositiveInfinity(-Infinity) is False", []() {
-            AssertThat(ut11::Is::PositiveInfinity(-1.0f / 0.0f), ut11::Is::False);
+            AssertThat(ut11::Is::PositiveInfinity(-std::numeric_limits<float>::infinity()), ut11::Is::False);
         });
 
         Then("Is::PositiveInfinity is Operand", []() {
@@ -90,11 +93,11 @@ public:
         });
 
         Then("Is::Not::PositiveInfinity(+Infinity) is Not::", []() {
-            AssertThat(ut11::Is::Not::PositiveInfinity(1.0f / 0.0f), ut11::Is::Not::True);
+            AssertThat(ut11::Is::Not::PositiveInfinity(std::numeric_limits<float>::infinity()), ut11::Is::Not::True);
         });
 
         Then("Is::Not::PositiveInfinity(-Infinity) is Not::False", []() {
-            AssertThat(ut11::Is::Not::PositiveInfinity(-1.0f / 0.0f), ut11::Is::Not::False);
+            AssertThat(ut11::Is::Not::PositiveInfinity(-std::numeric_limits<float>::infinity()), ut11::Is::Not::False);
         });
 
         Then("Is::Not::PositiveInfinity is Operand", []() {
@@ -118,11 +121,11 @@ public:
         });
 
         Then("Is::NegativeInfinity(-Infinity) is True", []() {
-            AssertThat(ut11::Is::NegativeInfinity(-1.0f / 0.0f), ut11::Is::True);
+            AssertThat(ut11::Is::NegativeInfinity(-std::numeric_limits<float>::infinity()), ut11::Is::True);
         });
 
         Then("Is::NegativeInfinity(+Infinity) is False", []() {
-            AssertThat(ut11::Is::NegativeInfinity(1.0f / 0.0f), ut11::Is::False);
+            AssertThat(ut11::Is::NegativeInfinity(std::numeric_limits<float>::infinity()), ut11::Is::False);
         });
 
         Then("Is::NegativeInfinity is Operand", []() {
@@ -145,11 +148,11 @@ public:
         });
 
         Then("Is::Not::NegativeInfinity(-Infinity) is Not::True", []() {
-            AssertThat(ut11::Is::Not::NegativeInfinity(-1.0f / 0.0f), ut11::Is::Not::True);
+            AssertThat(ut11::Is::Not::NegativeInfinity(-std::numeric_limits<float>::infinity()), ut11::Is::Not::True);
         });
 
         Then("Is::Not::NegativeInfinity(+Infinity) is Not::False", []() {
-            AssertThat(ut11::Is::Not::NegativeInfinity(1.0f / 0.0f), ut11::Is::Not::False);
+            AssertThat(ut11::Is::Not::NegativeInfinity(std::numeric_limits<float>::infinity()), ut11::Is::Not::False);
         });
 
         Then("Is::Not::NegativeInfinity is Operand", []() {

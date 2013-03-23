@@ -84,10 +84,10 @@ public:
             mockThen = ut11::Mock<void (void)>();
             mockFinally = ut11::Mock<void (void)>();
 
-            givenStep = { givenDescription, [&]() { mockGiven(); } };
-            whenStep = { whenDescription, [&]() { mockWhen(); } };
-            thenStep = { thenDescription, [&]() { mockThen(); } };
-            finallyStep = { finallyDescription, [&]() { mockFinally(); } };
+            givenStep = ut11::Utility::TestStep( givenDescription, [&]() { mockGiven(); } );
+            whenStep = ut11::Utility::TestStep( whenDescription, [&]() { mockWhen(); } );
+            thenStep = ut11::Utility::TestStep( thenDescription, [&]() { mockThen(); } );
+            finallyStep =ut11::Utility::TestStep( finallyDescription, [&]() { mockFinally(); } );
 
             Stage = ut11::Utility::TestStage(givenStep, whenStep, thenStep, finallyStep);
 
@@ -104,28 +104,28 @@ public:
             AssertThat(result, ut11::Is::True);
         });
 
-        Then("the given occured as expected", [&]() {
+        Then("the given occurred as expected", [&]() {
 
             output.mockBeginGiven.Verify(__LINE__, __FILE__, givenDescription);
             mockGiven.Verify(__LINE__, __FILE__);
             output.mockEndGiven.Verify(__LINE__, __FILE__, givenDescription);
         });
 
-        Then("the when occured as expected", [&]() {
+        Then("the when occurred as expected", [&]() {
 
             output.mockBeginWhen.Verify(__LINE__, __FILE__, whenDescription);
             mockWhen.Verify(__LINE__, __FILE__);
             output.mockEndWhen.Verify(__LINE__, __FILE__, whenDescription);
         });
 
-        Then("the then occured as expected", [&]() {
+        Then("the then occurred as expected", [&]() {
 
             output.mockBeginThen.Verify(__LINE__, __FILE__, thenDescription);
             mockThen.Verify(__LINE__, __FILE__);
             output.mockEndThen.Verify(__LINE__, __FILE__, thenDescription);
         });
 
-        Then("the finally occured as expected", [&]() {
+        Then("the finally occurred as expected", [&]() {
 
             output.mockBeginFinally.Verify(__LINE__, __FILE__, finallyDescription);
             mockFinally.Verify(__LINE__, __FILE__);

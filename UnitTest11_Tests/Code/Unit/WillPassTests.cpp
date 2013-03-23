@@ -4,13 +4,15 @@
 class WillPassTests : public ut11::TestFixture
 {
 private:
-    int m_expected = 10;
+    int m_expected;
     int m_actual;
     bool m_result;
 
 public:
     virtual void Run()
     {
+		m_expected = 10;
+
         Then("Will::Pass returns an Operand", []() {
             AssertThat(ut11::Utility::IsOperand< decltype(ut11::Will::Pass(std::function<bool(int)>())) >::value, ut11::Is::True);
         });
