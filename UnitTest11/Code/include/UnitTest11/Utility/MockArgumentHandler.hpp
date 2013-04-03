@@ -30,8 +30,6 @@ namespace ut11
 
             inline void AddCall(ARGS... args)
             {
-				using namespace std; // fix for VS2012 November CPT
-
                 m_arguments.push_back( std::make_tuple( std::forward<ARGS>(args)... ) );
             }
 
