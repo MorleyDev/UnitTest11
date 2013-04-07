@@ -14,7 +14,7 @@ namespace ut11
 			{
 			}
 
-            bool operator()(const std::string& actual) const
+        	inline bool operator()(const std::string& actual) const
             {
                 return actual.find(m_expected) != std::string::npos;
             }
