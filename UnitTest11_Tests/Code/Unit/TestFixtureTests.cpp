@@ -1,77 +1,63 @@
 #include <UnitTest11.hpp>
+#include <vector>
 
-class FakeTestStageBuilder : public ut11::Utility::ITestStageBuilder
+namespace
 {
-public:
-    virtual ~FakeTestStageBuilder() { }
+	class FakeTestStageBuilder : public ut11::Utility::ITestStageBuilder
+	{
+	public:
+		virtual ~FakeTestStageBuilder() { }
 
-    ut11::Mock<void (ut11::Utility::TestStep)> mockGiven;
-    ut11::Mock<void (ut11::Utility::TestStep)> mockWhen;
-    ut11::Mock<void (ut11::Utility::TestStep)> mockThen;
-    ut11::Mock<void (ut11::Utility::TestStep)> mockFinally;
-    ut11::Mock<std::vector< std::shared_ptr<ut11::Utility::ITestStage> > (void)> mockStage;
+		MockAction(PushGiven, ut11::Utility::TestStep)
+		MockAction(PushWhen, ut11::Utility::TestStep)
+		MockAction(PushThen, ut11::Utility::TestStep)
+		MockAction(PushFinally, ut11::Utility::TestStep)
+		MockFunction(std::vector< std::shared_ptr<ut11::Utility::ITestStage> >, Stage)
 
-    virtual void PushGiven(ut11::Utility::TestStep given) { mockGiven(given); }
-    virtual void PushWhen(ut11::Utility::TestStep when) { mockWhen(when); }
-    virtual void PushThen(ut11::Utility::TestStep then) { mockThen(then); }
-    virtual void PushFinally(ut11::Utility::TestStep finally) { mockFinally(finally); }
-    virtual std::vector< std::shared_ptr<ut11::Utility::ITestStage> > Stage() { return mockStage(); }
-};
+	};
 
-class FakeOutput : public ut11::IOutput
-{
-public:
-    ~FakeOutput() { }
+	class FakeOutput : public ut11::IOutput
+	{
+	public:
+		virtual ~FakeOutput() { }
 
-    ut11::Mock<void(std::string)> mockBeginFixture, mockEndFixture;
+		MockAction(Begin)
+		MockAction(Finish, std::size_t, std::size_t)
 
-    ut11::Mock<void(std::string)> mockBeginGiven, mockEndGiven;
-    ut11::Mock<void(std::string)> mockBeginWhen, mockEndWhen;
-    ut11::Mock<void(std::string)> mockBeginThen, mockEndThen;
-    ut11::Mock<void(std::string)> mockBeginFinally,  mockEndFinally;
+		MockAction(BeginFixture, std::string)
+		MockAction(EndFixture, std::string)
 
-    ut11::Mock<void (std::size_t, std::string, std::string)> mockOnError;
-    ut11::Mock<void (std::exception)> mockOnError1;
-    ut11::Mock<void (void)> mockOnUnknownError;
+		MockAction(BeginGiven, std::string)
+		MockAction(EndGiven, std::string)
 
-    ut11::Mock<void (void)> mockBegin;
-    ut11::Mock<void (std::size_t,std::size_t)> mockEnd;
+		MockAction(BeginWhen, std::string)
+		MockAction(EndWhen, std::string)
 
-    virtual void Begin() { mockBegin(); }
-    virtual void Finish(std::size_t ran, std::size_t succeeded) { mockEnd(ran, succeeded); }
+		MockAction(BeginThen, std::string)
+		MockAction(EndThen, std::string)
 
-    virtual void BeginFixture(std::string name) { mockBeginFixture(name); }
-    virtual void EndFixture(std::string name) { mockEndFixture(name); }
+		MockAction(BeginFinally, std::string)
+		MockAction(EndFinally, std::string)
 
-    virtual void BeginGiven(std::string str) { mockBeginGiven(str); }
-    virtual void EndGiven(std::string str) { mockEndGiven(str); }
+		MockAction(OnError, std::size_t, std::string, std::string)
+		MockAction(OnUnknownError)
 
-    virtual void BeginWhen(std::string str) { mockBeginWhen(str); }
-    virtual void EndWhen(std::string str) { mockEndWhen(str); }
+		ut11::Mock<void (std::exception)> mockOnError1;
+		virtual void OnError(const std::exception& ex) { mockOnError1(ex); }
+	};
 
-    virtual void BeginThen(std::string str) { mockBeginThen(str); }
-    virtual void EndThen(std::string str) { mockEndThen(str); }
+	template<bool V>
+	class FakeTestStage : public ut11::Utility::ITestStage
+	{
+	public:
+		virtual ~FakeTestStage() { }
 
-    virtual void BeginFinally(std::string str) { mockBeginFinally(str); }
-    virtual void EndFinally(std::string str) { mockEndFinally(str); }
-
-    virtual void OnError(std::size_t line, std::string file, std::string message) { mockOnError(line, file, message); }
-    virtual void OnError(const std::exception& ex) { mockOnError1(ex); }
-    virtual void OnUnknownError() { mockOnUnknownError(); }
-
-};
-
-template<bool V>
-class FakeTestStage : public ut11::Utility::ITestStage
-{
-public:
-    virtual ~FakeTestStage() { }
-
-    virtual bool Run(ut11::IOutput&)
-    {
-        return V;
-    }
-};
+		virtual bool Run(ut11::IOutput&)
+		{
+			return V;
+		}
+	};
+}
 
 class TestFixtureTest : public ut11::TestFixture
 {
@@ -88,7 +74,7 @@ public:
             ut11::TestFixture fixture("name", std::move(StageBuilder));
             fixture.Given(m_description, [](){});
 
-            builder->mockGiven.Verify(__LINE__, __FILE__, ut11::Will::Pass([&](ut11::Utility::TestStep step) { return ( step.description == m_description ); }));
+            builder->mockPushGiven.Verify(__LINE__, __FILE__, ut11::Will::Pass([&](ut11::Utility::TestStep step) { return ( step.description == m_description ); }));
         });
 
         Then("when calling the When on a fixture, the expected call is made", [&]() {
@@ -101,7 +87,7 @@ public:
             ut11::TestFixture fixture("name", std::move(StageBuilder));
             fixture.When(m_description, [](){});
 
-            builder->mockWhen.Verify(__LINE__, __FILE__, ut11::Will::Pass([&](ut11::Utility::TestStep step) { return ( step.description == m_description ); }));
+            builder->mockPushWhen.Verify(__LINE__, __FILE__, ut11::Will::Pass([&](ut11::Utility::TestStep step) { return ( step.description == m_description ); }));
         });
 
         Then("when calling the Then on a fixture, the expected call is made", [&]() {
@@ -114,7 +100,7 @@ public:
             ut11::TestFixture fixture("name", std::move(StageBuilder));
             fixture.Then(m_description, [](){});
 
-            builder->mockThen.Verify(__LINE__, __FILE__, ut11::Will::Pass([&](ut11::Utility::TestStep step) { return ( step.description == m_description ); }));
+            builder->mockPushThen.Verify(__LINE__, __FILE__, ut11::Will::Pass([&](ut11::Utility::TestStep step) { return ( step.description == m_description ); }));
         });
 
         Then("when calling the Finally on a fixture, the expected call is made", [&]() {
@@ -127,7 +113,7 @@ public:
             ut11::TestFixture fixture("name", std::move(StageBuilder));
             fixture.Finally(m_description, [](){});
 
-            builder->mockFinally.Verify(__LINE__, __FILE__, ut11::Will::Pass([&](ut11::Utility::TestStep step) { return ( step.description == m_description ); }));
+            builder->mockPushFinally.Verify(__LINE__, __FILE__, ut11::Will::Pass([&](ut11::Utility::TestStep step) { return ( step.description == m_description ); }));
         });
 
         Then("when running a TestFixture", [&]() {

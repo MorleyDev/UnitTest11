@@ -1,48 +1,38 @@
 #include <UnitTest11.hpp>
 #include <UnitTest11/TestFixtureRunner.hpp>
 
-class FakeOutput : public ut11::IOutput
+namespace
 {
-public:
-    ~FakeOutput() { }
+	class FakeOutput : public ut11::IOutput
+	{
+	public:
+		virtual ~FakeOutput() { }
 
-    ut11::Mock<void(std::string)> mockBeginFixture, mockEndFixture;
+		MockAction(Begin)
+		MockAction(Finish, std::size_t, std::size_t)
 
-    ut11::Mock<void(std::string)> mockBeginGiven, mockEndGiven;
-    ut11::Mock<void(std::string)> mockBeginWhen, mockEndWhen;
-    ut11::Mock<void(std::string)> mockBeginThen, mockEndThen;
-    ut11::Mock<void(std::string)> mockBeginFinally,  mockEndFinally;
+		MockAction(BeginFixture, std::string)
+		MockAction(EndFixture, std::string)
 
-    ut11::Mock<void (std::size_t, std::string, std::string)> mockOnError;
-    ut11::Mock<void (std::exception)> mockOnError1;
-    ut11::Mock<void (void)> mockOnUnknownError;
+		MockAction(BeginGiven, std::string)
+		MockAction(EndGiven, std::string)
 
-    ut11::Mock<void (void)> mockBegin;
-    ut11::Mock<void (std::size_t,std::size_t)> mockEnd;
+		MockAction(BeginWhen, std::string)
+		MockAction(EndWhen, std::string)
 
-    virtual void Begin() { mockBegin(); }
-    virtual void Finish(std::size_t ran, std::size_t succeeded) { mockEnd(ran, succeeded); }
+		MockAction(BeginThen, std::string)
+		MockAction(EndThen, std::string)
 
-    virtual void BeginFixture(std::string name) { mockBeginFixture(name); }
-    virtual void EndFixture(std::string name) { mockEndFixture(name); }
+		MockAction(BeginFinally, std::string)
+		MockAction(EndFinally, std::string)
 
-    virtual void BeginGiven(std::string str) { mockBeginGiven(str); }
-    virtual void EndGiven(std::string str) { mockEndGiven(str); }
+		MockAction(OnError, std::size_t, std::string, std::string)
+		MockAction(OnUnknownError)
 
-    virtual void BeginWhen(std::string str) { mockBeginWhen(str); }
-    virtual void EndWhen(std::string str) { mockEndWhen(str); }
-
-    virtual void BeginThen(std::string str) { mockBeginThen(str); }
-    virtual void EndThen(std::string str) { mockEndThen(str); }
-
-    virtual void BeginFinally(std::string str) { mockBeginFinally(str); }
-    virtual void EndFinally(std::string str) { mockEndFinally(str); }
-
-    virtual void OnError(std::size_t line, std::string file, std::string message) { mockOnError(line, file, message); }
-    virtual void OnError(const std::exception& ex) { mockOnError1(ex); }
-    virtual void OnUnknownError() { mockOnUnknownError(); }
-
-};
+		ut11::Mock<void (std::exception)> mockOnError1;
+		virtual void OnError(const std::exception& ex) { mockOnError1(ex); }
+	};
+}
 
 class TestFixtureRunnerTests : public ut11::TestFixture
 {

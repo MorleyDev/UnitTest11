@@ -26,6 +26,22 @@ namespace ut11
         template<typename... ARGS> class MockArgumentHandler
         {
         public:
+        	MockArgumentHandler()
+        		: m_arguments()
+        	{
+        	}
+
+        	MockArgumentHandler(const MockArgumentHandler& orig)
+        		: m_arguments(orig.m_arguments)
+        	{
+        	}
+
+        	MockArgumentHandler& operator=(const MockArgumentHandler& orig)
+        	{
+        		m_arguments = orig.m_arguments;
+        		return *this;
+        	}
+
             virtual ~MockArgumentHandler() { }
 
             inline void AddCall(ARGS... args)

@@ -1,47 +1,37 @@
 #include <UnitTest11.hpp>
 
-class FakeOutput : public ut11::IOutput
+namespace
 {
-public:
-    ~FakeOutput() { }
+	class FakeOutput : public ut11::IOutput
+	{
+	public:
+		virtual ~FakeOutput() { }
 
-    ut11::Mock<void(std::string)> mockBeginFixture, mockEndFixture;
+		MockAction(Begin)
+		MockAction(Finish, std::size_t, std::size_t)
 
-    ut11::Mock<void(std::string)> mockBeginGiven, mockEndGiven;
-    ut11::Mock<void(std::string)> mockBeginWhen, mockEndWhen;
-    ut11::Mock<void(std::string)> mockBeginThen, mockEndThen;
-    ut11::Mock<void(std::string)> mockBeginFinally,  mockEndFinally;
+		MockAction(BeginFixture, std::string)
+		MockAction(EndFixture, std::string)
 
-    ut11::Mock<void (std::size_t, std::string, std::string)> mockOnError;
-    ut11::Mock<void (std::exception)> mockOnError1;
-    ut11::Mock<void (void)> mockOnUnknownError;
+		MockAction(BeginGiven, std::string)
+		MockAction(EndGiven, std::string)
 
-    ut11::Mock<void (void)> mockBegin;
-    ut11::Mock<void (std::size_t,std::size_t)> mockEnd;
+		MockAction(BeginWhen, std::string)
+		MockAction(EndWhen, std::string)
 
-    virtual void Begin() { mockBegin(); }
-    virtual void Finish(std::size_t ran, std::size_t succeeded) { mockEnd(ran, succeeded); }
+		MockAction(BeginThen, std::string)
+		MockAction(EndThen, std::string)
 
-    virtual void BeginFixture(std::string name) { mockBeginFixture(name); }
-    virtual void EndFixture(std::string name) { mockEndFixture(name); }
+		MockAction(BeginFinally, std::string)
+		MockAction(EndFinally, std::string)
 
-    virtual void BeginGiven(std::string str) { mockBeginGiven(str); }
-    virtual void EndGiven(std::string str) { mockEndGiven(str); }
+		MockAction(OnError, std::size_t, std::string, std::string)
+		MockAction(OnUnknownError)
 
-    virtual void BeginWhen(std::string str) { mockBeginWhen(str); }
-    virtual void EndWhen(std::string str) { mockEndWhen(str); }
-
-    virtual void BeginThen(std::string str) { mockBeginThen(str); }
-    virtual void EndThen(std::string str) { mockEndThen(str); }
-
-    virtual void BeginFinally(std::string str) { mockBeginFinally(str); }
-    virtual void EndFinally(std::string str) { mockEndFinally(str); }
-
-    virtual void OnError(std::size_t line, std::string file, std::string message) { mockOnError(line, file, message); }
-    virtual void OnError(const std::exception& ex) { mockOnError1(ex); }
-    virtual void OnUnknownError() { mockOnUnknownError(); }
-
-};
+		ut11::Mock<void (std::exception)> mockOnError1;
+		virtual void OnError(const std::exception& ex) { mockOnError1(ex); }
+	};
+}
 
 class TestStageTests : public ut11::TestFixture
 {
@@ -63,7 +53,7 @@ private:
 
     ut11::Utility::TestStage Stage;
 
-    FakeOutput output;
+    std::unique_ptr<FakeOutput> output;
     ut11::TestFailedException testException;
     std::bad_alloc stdException;
 
@@ -91,13 +81,13 @@ public:
 
             Stage = ut11::Utility::TestStage(givenStep, whenStep, thenStep, finallyStep);
 
-            output = FakeOutput();
+            output = std::unique_ptr<FakeOutput>(new FakeOutput());
             result = false;
         });
 
         When("running a Stage with an output", [&]() {
 
-            result = Stage.Run(output);
+            result = Stage.Run(*output);
         });
 
         Then("the result is true", [&]() {
@@ -106,30 +96,30 @@ public:
 
         Then("the given occurred as expected", [&]() {
 
-            output.mockBeginGiven.Verify(__LINE__, __FILE__, givenDescription);
+            output->mockBeginGiven.Verify(__LINE__, __FILE__, givenDescription);
             mockGiven.Verify(__LINE__, __FILE__);
-            output.mockEndGiven.Verify(__LINE__, __FILE__, givenDescription);
+            output->mockEndGiven.Verify(__LINE__, __FILE__, givenDescription);
         });
 
         Then("the when occurred as expected", [&]() {
 
-            output.mockBeginWhen.Verify(__LINE__, __FILE__, whenDescription);
+            output->mockBeginWhen.Verify(__LINE__, __FILE__, whenDescription);
             mockWhen.Verify(__LINE__, __FILE__);
-            output.mockEndWhen.Verify(__LINE__, __FILE__, whenDescription);
+            output->mockEndWhen.Verify(__LINE__, __FILE__, whenDescription);
         });
 
         Then("the then occurred as expected", [&]() {
 
-            output.mockBeginThen.Verify(__LINE__, __FILE__, thenDescription);
+            output->mockBeginThen.Verify(__LINE__, __FILE__, thenDescription);
             mockThen.Verify(__LINE__, __FILE__);
-            output.mockEndThen.Verify(__LINE__, __FILE__, thenDescription);
+            output->mockEndThen.Verify(__LINE__, __FILE__, thenDescription);
         });
 
         Then("the finally occurred as expected", [&]() {
 
-            output.mockBeginFinally.Verify(__LINE__, __FILE__, finallyDescription);
+            output->mockBeginFinally.Verify(__LINE__, __FILE__, finallyDescription);
             mockFinally.Verify(__LINE__, __FILE__);
-            output.mockEndFinally.Verify(__LINE__, __FILE__, finallyDescription);
+            output->mockEndFinally.Verify(__LINE__, __FILE__, finallyDescription);
         });
 
         When("running a Stage with an output that throws a Test Exception", [&]() {
@@ -137,7 +127,7 @@ public:
             testException = ut11::TestFailedException(__LINE__, __FILE__, "dsdsa");
             mockThen.SetCallback([&]() { throw testException; });
 
-            result = Stage.Run(output);
+            result = Stage.Run(*output);
         });
 
         Then("the result is false", [&]() {
@@ -145,7 +135,7 @@ public:
         });
 
         Then("Output.OnError was called as expected", [&]() {
-            output.mockOnError.Verify(__LINE__, __FILE__, testException.GetLine(), testException.GetFile(), testException.GetMessage());
+            output->mockOnError.Verify(__LINE__, __FILE__, testException.GetLine(), testException.GetFile(), testException.GetMessage());
         });
 
 
@@ -153,7 +143,7 @@ public:
 
             mockThen.SetCallback([&]() { throw stdException; });
 
-            result = Stage.Run(output);
+            result = Stage.Run(*output);
         });
 
         Then("the result is false", [&]() {
@@ -161,14 +151,14 @@ public:
         });
 
         Then("Output.OnError was called as expected", [&]() {
-            output.mockOnError1.Verify(__LINE__, __FILE__, ut11::Is::Any<std::exception>());
+            output->mockOnError1.Verify(__LINE__, __FILE__, ut11::Is::Any<std::exception>());
         });
 
         When("running a Stage with an output that throws an unknown exception", [&]() {
 
             mockThen.SetCallback([&]() { throw "unknown exception"; });
 
-            result = Stage.Run(output);
+            result = Stage.Run(*output);
         });
 
         Then("the result is false", [&]() {
@@ -176,14 +166,14 @@ public:
         });
 
         Then("Output.OnError was called as expected", [&]() {
-            output.mockOnUnknownError.Verify(__LINE__, __FILE__);
+            output->mockOnUnknownError.Verify(__LINE__, __FILE__);
         });
 
         When("calling run with all Stages as invalid functions", [&]() {
 
             ut11::Utility::TestStep invalid;
             Stage = ut11::Utility::TestStage(invalid,invalid,invalid,invalid);
-            result = Stage.Run(output);
+            result = Stage.Run(*output);
         });
 
         Then("the result is true", [&]() {

@@ -13,9 +13,24 @@ namespace ut11
         public:
             inline MockReturnHandler()
                 : m_isReturnCallbackMode(false),
-				 m_returnCallback(),
+				  m_returnCallback(),
                   m_returnValue(DefaultValue<T>()())
             {
+            }
+
+            MockReturnHandler(const MockReturnHandler& orig)
+            	: m_isReturnCallbackMode(orig.m_isReturnCallbackMode),
+            	  m_returnCallback(orig.m_returnCallback),
+            	  m_returnValue(orig.m_returnValue)
+            {
+            }
+
+            MockReturnHandler& operator=(const MockReturnHandler& orig)
+            {
+            	m_isReturnCallbackMode = orig.m_isReturnCallbackMode;
+            	m_returnCallback = orig.m_returnCallback;
+            	m_returnValue = orig.m_returnValue;
+            	return *this;
             }
 
             inline ~MockReturnHandler()
@@ -52,6 +67,17 @@ namespace ut11
         public:
             MockReturnHandler() : m_returnCallback() { }
             ~MockReturnHandler() { }
+
+            MockReturnHandler(const MockReturnHandler& orig)
+            	: m_returnCallback(orig.m_returnCallback)
+            {
+            }
+
+            MockReturnHandler& operator=(const MockReturnHandler& orig)
+            {
+            	m_returnCallback = orig.m_returnCallback;
+            	return *this;
+            }
 
             void SetReturn(std::function<void (const ARGS&...)> callback) { m_returnCallback = callback; }
             void SetReturn() { m_returnCallback = std::function<void (const ARGS&...)>(); }

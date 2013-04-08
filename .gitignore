@@ -18,3 +18,8 @@
 
 #Directories
 Build/*
+
+.cproject
+.project
+.externalToolBuilders
+

@@ -13,6 +13,32 @@ namespace ut11
     template<typename R, typename... ARGS> class Mock<R (ARGS...)>
     {
     public:
+    	Mock()
+    		: m_callbackHandler(),
+    		  m_argumentHandler(),
+    		  m_returnHandler()
+		{
+		}
+
+    	Mock(const Mock& orig)
+    		: m_callbackHandler(orig.m_callbackHandler),
+    		  m_argumentHandler(orig.m_argumentHandler),
+    		  m_returnHandler(orig.m_returnHandler)
+    	{
+    	}
+
+    	Mock& operator=(const Mock& orig)
+    	{
+    		m_callbackHandler = orig.m_callbackHandler;
+    		m_argumentHandler = orig.m_argumentHandler;
+    		m_returnHandler = orig.m_returnHandler;
+    		return *this;
+    	}
+
+    	~Mock()
+    	{
+    	}
+
         inline R operator()(ARGS... args)
         {
             if ( m_callbackHandler )
