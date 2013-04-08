@@ -32,19 +32,19 @@ public:
         });
 
         Then("the Mock verifies with the expected parameters as expected", [&]() {
-            m_mock.VerifyAny(__LINE__, __FILE__);
-            m_mock.Verify(__LINE__, __FILE__, m_expectedParameter);
-            m_mock.VerifyTimes(__LINE__, __FILE__, 1, m_expectedParameter);
+        	MockVerifyAny(m_mock);
+            MockVerify(m_mock, m_expectedParameter);
+            MockVerifyTimes(m_mock, 1, m_expectedParameter);
         });
 
         Then("the Mock verifies fails as expected when with the wrong parameters", [&]() {
 
-            AssertThat([&]() { m_mock.Verify(__LINE__, __FILE__, '\n'); }, ut11::Will::Throw<ut11::TestFailedException>());
+            AssertThat([&]() { MockVerify(m_mock, '\n'); }, ut11::Will::Throw<ut11::TestFailedException>());
         });
 
         Then("the Mock verifies fails as expected when with the wrong VerifyTimes", [&]() {
 
-            AssertThat([&]() { m_mock.VerifyTimes(__LINE__, __FILE__, 2, m_expectedParameter); }, ut11::Will::Throw<ut11::TestFailedException>());
+            AssertThat([&]() { MockVerifyTimes(m_mock, 2, m_expectedParameter); }, ut11::Will::Throw<ut11::TestFailedException>());
         });
 
         When("setting a callback calling the Mock", [&]() {
@@ -96,13 +96,13 @@ public:
         });
 
         Then("the mock verifies as expected", [&]() {
-            m_mock.VerifyAny(__LINE__, __FILE__);
-            m_mock.Verify(__LINE__, __FILE__);
-            m_mock.VerifyTimes(__LINE__, __FILE__, 1);
+            MockVerifyAny(m_mock);
+            MockVerify(m_mock);
+            MockVerifyTimes(m_mock, 1);
         });
 
         Then("verifying the wrong number of times causes a failure", [&]() {
-            AssertThat([&]() { m_mock.VerifyTimes(__LINE__, __FILE__, 2); }, ut11::Will::Throw<ut11::TestFailedException>());
+            AssertThat([&]() { MockVerifyTimes(m_mock, 2); }, ut11::Will::Throw<ut11::TestFailedException>());
         });
     }
 };

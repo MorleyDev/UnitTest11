@@ -96,30 +96,30 @@ public:
 
         Then("the given occurred as expected", [&]() {
 
-            output->mockBeginGiven.Verify(__LINE__, __FILE__, givenDescription);
-            mockGiven.Verify(__LINE__, __FILE__);
-            output->mockEndGiven.Verify(__LINE__, __FILE__, givenDescription);
+        	MockVerify(output->mockBeginGiven, givenDescription);
+        	MockVerify(mockGiven);
+            MockVerify(output->mockEndGiven, givenDescription);
         });
 
         Then("the when occurred as expected", [&]() {
 
-            output->mockBeginWhen.Verify(__LINE__, __FILE__, whenDescription);
-            mockWhen.Verify(__LINE__, __FILE__);
-            output->mockEndWhen.Verify(__LINE__, __FILE__, whenDescription);
+        	MockVerify(output->mockBeginWhen, whenDescription);
+        	MockVerify(mockWhen);
+            MockVerify(output->mockEndWhen, whenDescription);
         });
 
         Then("the then occurred as expected", [&]() {
 
-            output->mockBeginThen.Verify(__LINE__, __FILE__, thenDescription);
-            mockThen.Verify(__LINE__, __FILE__);
-            output->mockEndThen.Verify(__LINE__, __FILE__, thenDescription);
+        	MockVerify(output->mockBeginThen, thenDescription);
+        	MockVerify(mockThen);
+            MockVerify(output->mockEndThen, thenDescription);
         });
 
         Then("the finally occurred as expected", [&]() {
 
-            output->mockBeginFinally.Verify(__LINE__, __FILE__, finallyDescription);
-            mockFinally.Verify(__LINE__, __FILE__);
-            output->mockEndFinally.Verify(__LINE__, __FILE__, finallyDescription);
+        	MockVerify(output->mockBeginFinally, finallyDescription);
+        	MockVerify(mockFinally);
+            MockVerify(output->mockEndFinally, finallyDescription);
         });
 
         When("running a Stage with an output that throws a Test Exception", [&]() {
@@ -135,7 +135,7 @@ public:
         });
 
         Then("Output.OnError was called as expected", [&]() {
-            output->mockOnError.Verify(__LINE__, __FILE__, testException.GetLine(), testException.GetFile(), testException.GetMessage());
+        	MockVerify(output->mockOnError, testException.GetLine(), testException.GetFile(), testException.GetMessage());
         });
 
 
@@ -151,7 +151,7 @@ public:
         });
 
         Then("Output.OnError was called as expected", [&]() {
-            output->mockOnError1.Verify(__LINE__, __FILE__, ut11::Is::Any<std::exception>());
+        	MockVerify(output->mockOnError1, ut11::Is::Any<std::exception>());
         });
 
         When("running a Stage with an output that throws an unknown exception", [&]() {
@@ -166,7 +166,7 @@ public:
         });
 
         Then("Output.OnError was called as expected", [&]() {
-            output->mockOnUnknownError.Verify(__LINE__, __FILE__);
+        	MockVerify(output->mockOnUnknownError);
         });
 
         When("calling run with all Stages as invalid functions", [&]() {

@@ -74,7 +74,7 @@ public:
             ut11::TestFixture fixture("name", std::move(StageBuilder));
             fixture.Given(m_description, [](){});
 
-            builder->mockPushGiven.Verify(__LINE__, __FILE__, ut11::Will::Pass([&](ut11::Utility::TestStep step) { return ( step.description == m_description ); }));
+            MockVerify(builder->mockPushGiven, ut11::Will::Pass([&](ut11::Utility::TestStep step) { return ( step.description == m_description ); }));
         });
 
         Then("when calling the When on a fixture, the expected call is made", [&]() {
@@ -87,7 +87,7 @@ public:
             ut11::TestFixture fixture("name", std::move(StageBuilder));
             fixture.When(m_description, [](){});
 
-            builder->mockPushWhen.Verify(__LINE__, __FILE__, ut11::Will::Pass([&](ut11::Utility::TestStep step) { return ( step.description == m_description ); }));
+            MockVerify(builder->mockPushWhen, ut11::Will::Pass([&](ut11::Utility::TestStep step) { return ( step.description == m_description ); }));
         });
 
         Then("when calling the Then on a fixture, the expected call is made", [&]() {
@@ -100,7 +100,7 @@ public:
             ut11::TestFixture fixture("name", std::move(StageBuilder));
             fixture.Then(m_description, [](){});
 
-            builder->mockPushThen.Verify(__LINE__, __FILE__, ut11::Will::Pass([&](ut11::Utility::TestStep step) { return ( step.description == m_description ); }));
+            MockVerify(builder->mockPushThen, ut11::Will::Pass([&](ut11::Utility::TestStep step) { return ( step.description == m_description ); }));
         });
 
         Then("when calling the Finally on a fixture, the expected call is made", [&]() {
@@ -113,7 +113,7 @@ public:
             ut11::TestFixture fixture("name", std::move(StageBuilder));
             fixture.Finally(m_description, [](){});
 
-            builder->mockPushFinally.Verify(__LINE__, __FILE__, ut11::Will::Pass([&](ut11::Utility::TestStep step) { return ( step.description == m_description ); }));
+            MockVerify(builder->mockPushFinally, ut11::Will::Pass([&](ut11::Utility::TestStep step) { return ( step.description == m_description ); }));
         });
 
         Then("when running a TestFixture", [&]() {
@@ -134,8 +134,8 @@ public:
             AssertThat(results.ran, ut11::Is::EqualTo(std::size_t(1)));
             AssertThat(results.succeeded, ut11::Is::EqualTo(std::size_t(1)));
 
-            mockOutput.mockBeginFixture.Verify(__LINE__, __FILE__, fixtureName);
-            mockOutput.mockEndFixture.Verify(__LINE__, __FILE__, fixtureName);
+            MockVerify(mockOutput.mockBeginFixture, fixtureName);
+            MockVerify(mockOutput.mockEndFixture, fixtureName);
         });
 
         Then("when running a TestFixture with a failure", [&]() {
@@ -156,8 +156,8 @@ public:
             AssertThat(results.ran, ut11::Is::EqualTo(1u));
             AssertThat(results.succeeded, ut11::Is::EqualTo(0u));
 
-            mockOutput.mockBeginFixture.Verify(__LINE__, __FILE__, fixtureName);
-            mockOutput.mockEndFixture.Verify(__LINE__, __FILE__, fixtureName);
+            MockVerify(mockOutput.mockBeginFixture, fixtureName);
+            MockVerify(mockOutput.mockEndFixture, fixtureName);
         });
     }
 };
