@@ -97,7 +97,7 @@
 /*! \brief A mock action with no return values (Name, Arguments...) */
 #define MockAction(args...) UT11_MOCK_ACTION_N(UT11_VA_NARGS(args), args)
 
-/*! \brief A mock function with a return value (Name, Return, Arguments...) */
+/*! \brief A mock function with a return value (Return, Name, Arguments...) */
 #define MockFunction(args...) UT11_MOCK_FUNCTION_N(UT11_VA_NARGS(args), args)
 
 /*! \brief Verify a mock function was called with the passed predicates (mock, arguments) */
@@ -112,7 +112,7 @@
 /*! \brief A mock const action with no return values (Name, Arguments...) */
 #define MockActionConst(args...) UT11_MOCK_ACTION_CONST_N(UT11_VA_NARGS(args), args)
 
-/*! \brief A mock const function with a return value (Name, Return, Arguments...) */
+/*! \brief A mock const function with a return value (Return, Name, Arguments...) */
 #define MockFunctionConst(args...) UT11_MOCK_FUNCTION_CONST_N(UT11_VA_NARGS(args), args)
 
 #endif // UNITTEST11_MACROS_HPP
