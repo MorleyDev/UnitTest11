@@ -22,7 +22,7 @@ namespace ut11
 			constexpr static bool value = std::is_base_of<std::true_type, HasBeginFunction<T> >::value && std::is_base_of<std::true_type, HasEndFunction<T> >::value;
 		};
 
-        template<typename V> struct ParseToString
+        template<typename V> struct ParseNonIterableToString
         {
             inline std::string operator()(const V& value) const
             {
@@ -45,7 +45,18 @@ namespace ut11
             }
         };
 
-        template<> struct ParseIterableToString<std::string>
+        template<typename V> struct ParseToString
+        {
+        	inline std::string operator()(const V& value) const
+        	{
+            	return typename IfElseTypes< IsIterable<V>::value,
+            								 ParseIterableToString<V>,
+            								 ParseNonIterableToString<V>
+            							   >::type()(value);
+        	}
+        };
+
+        template<> struct ParseToString<std::string>
         {
             inline std::string operator()(const std::string& value) const
             {
@@ -55,10 +66,7 @@ namespace ut11
 
         template<typename V> inline std::string ToString(const V& value)
         {
-        	return typename IfElseTypes< IsIterable<V>::value,
-        								 ParseIterableToString<V>,
-        								 ParseToString<V>
-        							   >::type()(value);
+        	return ParseToString<V>()(value);
         }
     }
 }
