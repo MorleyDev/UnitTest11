@@ -51,6 +51,40 @@ namespace ut11
             std::string m_exceptionName;
             mutable std::string m_errorMessage;
         };
+
+        template<> struct WillThrow<std::exception> : public Utility::BaseOperand
+        {
+            inline explicit WillThrow()
+                : m_exceptionName("std::exception"),
+                  m_errorMessage("Expected std::exception to be thrown, but no exception was thrown")
+            {
+            }
+
+            inline std::string GetErrorMessage(std::function<void (void)>) const { return m_errorMessage; }
+
+            inline bool operator()(std::function<void (void)> function) const
+            {
+                try
+                {
+                    function();
+                }
+                catch(const std::exception&)
+                {
+                    return true;
+                }
+                catch(...)
+                {
+                    std::stringstream stream;
+                    stream << "Expected " << m_exceptionName << " to be thrown, but an unknown exception was thrown instead";
+                    m_errorMessage = stream.str();
+                }
+                return false;
+            }
+
+        private:
+            std::string m_exceptionName;
+            mutable std::string m_errorMessage;
+        };
     }
 
     namespace Will
