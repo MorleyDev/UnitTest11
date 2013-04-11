@@ -12,6 +12,7 @@ CONFIG += staticlib
 debug:CONFIG -= release
 
 QMAKE_CXXFLAGS += -std=c++11
+QMAKE_CXXFLAGS -= -fno-exceptions
 
 SOURCES += \
     Code/src/Assert/Fail.cpp \
@@ -68,10 +69,6 @@ HEADERS += \
     Code/include/UnitTest11/Utility/ITestStageBuilder.hpp
 
 INCLUDEPATH +=  Code/include/
-
-win32 {
-    win32-g++:LIBS += -L"$$_PRO_FILE_PWD_/libs/"
-}
 
 unix:!symbian {
     maemo5 {
