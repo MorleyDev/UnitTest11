@@ -7,8 +7,8 @@ pushd ../
 		mkdir include
 	popd
 	
-	cp Build/GCC/*.a $2/lib/ -f -r
-	cp Build/GCC/*.so $2/bin/ -f -r
+	#cp Build/bin/* $2/bin/ -f -r
+	cp Build/lib/* $2/lib/ -f -r
 	cp $1/Code/include/* $2/include/ -f -r
 popd
 

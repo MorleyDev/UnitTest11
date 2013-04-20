@@ -1,20 +1,8 @@
 #!/bin/bash
 
-./build_library.sh $1
-rc=$?
-if [[ $rc != 0 ]] ; then
-	exit $rc
-fi
-
-./build_tests.sh $1
-rc=$?
-if [[ $rc != 0 ]] ; then
-	exit $rc
-fi
+pushd ../Build
+	cmake ../ -G"Unix Makefiles" -DCMAKE_MAKE_PROGRAM=make -DCMAKE_BUILD_TYPE=Release
+	make
+popd
 
 ./run_tests.sh $1
-rc=$?
-if [[ $rc != 0 ]] ; then
-	exit $rc
-fi
-
