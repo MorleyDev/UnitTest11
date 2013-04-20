@@ -2,5 +2,5 @@
 
 pushd Scripts
 	call clean.bat
-	call build.bat UnitTest11
+	call build.bat PROJNAME
 popd

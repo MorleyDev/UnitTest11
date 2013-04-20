@@ -2,5 +2,5 @@
 
 pushd Scripts
 	./clean.sh
-	./build.sh UnitTest11
+	./build.sh PROJNAME
 popd
