@@ -69,14 +69,22 @@ namespace ut11
 
         template<typename... Expectations> inline void VerifyTimes(std::size_t line, std::string file, std::size_t count, const Expectations&... expectations) const
         {
-            if ( m_argumentHandler.CountCalls(expectations...) != count )
-                Assert::Fail(line, file, GetVerifyFailMessage());
+        	auto actual = m_argumentHandler.CountCalls(expectations...);
+            if ( actual != count )
+                Assert::Fail(line, file, GetVerifyFailTimesMessage(count, actual));
         }
 
     private:
         inline std::string GetVerifyFailMessage() const
         {
             return "Expected function call was not found";
+        }
+
+        inline std::string GetVerifyFailTimesMessage(std::size_t expected, std::size_t actual) const
+        {
+        	std::stringstream output;
+        	output << "Expected function to be called " << expected << " times was actually called " << actual << " times";
+        	return output.str();
         }
 
         std::function<void (const ARGS&...)> m_callbackHandler;
