@@ -14,6 +14,7 @@ namespace ut11
         virtual void BeginFixture(std::string name)
         {
         	std::cout << "Fixture: " << name << std::endl;
+			
         	m_given = "";
         	m_when = "";
         }
@@ -24,6 +25,8 @@ namespace ut11
         		return;
 
         	m_given = given;
+        	m_when = "";
+			
         	std::cout << "    Given: " << given << std::endl;
         }
 
@@ -33,6 +36,7 @@ namespace ut11
         		return;
 
         	m_when = when;
+			
         	std::cout << "        When: " << when << std::endl;
         }
 
