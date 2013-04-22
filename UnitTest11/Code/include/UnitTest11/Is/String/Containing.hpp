@@ -25,7 +25,7 @@ namespace ut11
             inline std::string GetErrorMessage(const std::string& actual) const
             {
                 std::stringstream errorMessage;
-                errorMessage << "Expected string containing " << actual << " but was " << m_expected;
+                errorMessage << "Expected string containing " << m_expected << " but was " << actual;
                 return errorMessage.str();
             }
         };

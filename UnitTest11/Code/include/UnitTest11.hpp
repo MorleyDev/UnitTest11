@@ -18,6 +18,7 @@
 
 #include "UnitTest11/Is/String/Containing.hpp"
 #include "UnitTest11/Is/String/BeginningWith.hpp"
+#include "UnitTest11/Is/String/EndingWith.hpp"
 
 #include "UnitTest11/Will/Throw.hpp"
 #include "UnitTest11/Will/Pass.hpp"

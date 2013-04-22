@@ -24,6 +24,10 @@ public:
 			AssertThat(ut11::Is::String::BeginningWith("Hell")("AvsdaHelloasdagf"), ut11::Is::False);
 		});
 
+		Then("string smaller than the desired string is false", [&]() {
+			AssertThat(ut11::Is::String::BeginningWith("Hell")("He"), ut11::Is::False);
+		});
+
         Then("Is::String::BeginningWith is an operand", []() {
             AssertThat(ut11::Utility::IsOperand< decltype(ut11::Is::String::BeginningWith("world")) >::value, ut11::Is::True);
         });
