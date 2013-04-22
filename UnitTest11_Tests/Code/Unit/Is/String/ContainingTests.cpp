@@ -6,18 +6,18 @@ public:
 	virtual void Run()
 	{
 		Then("string containing desired string is true", [&]() {
-			AssertThat(ut11::Is::String::Containing("Hell")("Hello"), ut11::Is::True);
+			AssertThat(ut11::Is::String::Containing("Hell")("AvsdaHelloasdagf"), ut11::Is::True);
 		});
 
 		Then("string not containing desired string is false", [&]() {
-			AssertThat(ut11::Is::String::Containing("World")("Hello"), ut11::Is::False);
+			AssertThat(ut11::Is::String::Containing("World")("AvsdaHelloasdagf"), ut11::Is::False);
 		});
 
         Then("Is::String::Containing is an operand", []() {
             AssertThat(ut11::Utility::IsOperand< decltype(ut11::Is::String::Containing("world")) >::value, ut11::Is::True);
         });
 
-        Then("Is::EqualTo has an error message", []() {
+        Then("Is::String::Containing has an error message", []() {
             AssertThat(ut11::Is::String::Containing("world").GetErrorMessage("piano"), ut11::Is::Not::EqualTo(""));
         });
 	}
@@ -31,7 +31,7 @@ public:
 	virtual void Run()
 	{
 		Then("string not containing desired string is true", [&]() {
-			AssertThat(ut11::Is::Not::String::Containing("Wor")("Hello"), ut11::Is::True);
+			AssertThat(ut11::Is::Not::String::Containing("Wor")("AvsdaHelloasdagf"), ut11::Is::True);
 		});
 
 		Then("string containing desired string is false", [&]() {
@@ -42,7 +42,7 @@ public:
             AssertThat(ut11::Utility::IsOperand< decltype(ut11::Is::Not::String::Containing("world")) >::value, ut11::Is::True);
         });
 
-        Then("Is::Not::EqualTo has an error message", []() {
+        Then("Is::Not::String::Containing has an error message", []() {
             AssertThat(ut11::Is::Not::String::Containing("world").GetErrorMessage("world"), ut11::Is::Not::EqualTo(""));
         });
 	}

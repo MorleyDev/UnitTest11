@@ -1,6 +1,9 @@
 #ifndef UNITTEST11_IS_STRING_CONTAINING_HPP
 #define UNITTEST11_IS_STRING_CONTAINING_HPP
 
+#include <string>
+#include <sstream>
+
 namespace ut11
 {
 	namespace Operands
