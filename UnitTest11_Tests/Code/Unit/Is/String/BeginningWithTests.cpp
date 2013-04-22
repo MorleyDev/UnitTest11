@@ -16,6 +16,10 @@ public:
 			AssertThat(ut11::Is::String::BeginningWith("Hell")("HelloAvsdaasdagf"), ut11::Is::True);
 		});
 
+		Then("AssertThat using BeginningWith works as expected", [&]() {
+			AssertThat("Pianos and Pies", ut11::Is::String::BeginningWith("Pianos"));
+		});
+
 		Then("string not BeginningWith desired string is false", [&]() {
 			AssertThat(ut11::Is::String::BeginningWith("Hell")("AvsdaHelloasdagf"), ut11::Is::False);
 		});
@@ -43,6 +47,10 @@ public:
 
 		Then("string BeginningWith desired string is false", [&]() {
 			AssertThat(ut11::Is::Not::String::BeginningWith("Wor")("World"), ut11::Is::False);
+		});
+
+		Then("AssertThat using Not BeginningWith works as expected", [&]() {
+			AssertThat("Pianos and Pies", ut11::Is::Not::String::BeginningWith("Pies"));
 		});
 
         Then("Is::Not::String::BeginningWith is an operand", []() {
