@@ -40,11 +40,8 @@ namespace ut11
 			{
 				return Operands::IsStringBeginningWith(expected);
 			}
-		}
 
-		namespace Not
-		{
-			namespace String
+			namespace Not
 			{
 				/*! \brief Operand returns false if string begins with expected string, otherwise returns true */
 				inline Utility::NotOperand<Operands::IsStringBeginningWith> BeginningWith(std::string expected)

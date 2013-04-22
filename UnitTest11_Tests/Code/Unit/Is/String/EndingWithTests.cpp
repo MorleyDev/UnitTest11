@@ -50,23 +50,23 @@ public:
 	virtual void Run()
 	{
 		Then("string not EndingWith desired string is true", [&]() {
-			AssertThat(ut11::Is::Not::String::EndingWith("Wor")("AvsdaWoroasdagf"), ut11::Is::True);
+			AssertThat(ut11::Is::String::Not::EndingWith("Wor")("AvsdaWoroasdagf"), ut11::Is::True);
 		});
 
 		Then("string EndingWith desired string is false", [&]() {
-			AssertThat(ut11::Is::Not::String::EndingWith("Wor")("ldWor"), ut11::Is::False);
+			AssertThat(ut11::Is::String::Not::EndingWith("Wor")("ldWor"), ut11::Is::False);
 		});
 
 		Then("AssertThat using Not EndingWith works as expected", [&]() {
-			AssertThat("Pianos and Pies", ut11::Is::Not::String::EndingWith("Piano"));
+			AssertThat("Pianos and Pies", ut11::Is::String::Not::EndingWith("Piano"));
 		});
 
         Then("Is::Not::String::EndingWith is an operand", []() {
-            AssertThat(ut11::Utility::IsOperand< decltype(ut11::Is::Not::String::EndingWith("world")) >::value, ut11::Is::True);
+            AssertThat(ut11::Utility::IsOperand< decltype(ut11::Is::String::Not::EndingWith("world")) >::value, ut11::Is::True);
         });
 
         Then("Is::Not::String::EndingWith has an error message", []() {
-            AssertThat(ut11::Is::Not::String::EndingWith("world").GetErrorMessage("world"), ut11::Is::Not::EqualTo(""));
+            AssertThat(ut11::Is::String::Not::EndingWith("world").GetErrorMessage("world"), ut11::Is::Not::EqualTo(""));
         });
 	}
 };

@@ -46,23 +46,23 @@ public:
 	virtual void Run()
 	{
 		Then("string not BeginningWith desired string is true", [&]() {
-			AssertThat(ut11::Is::Not::String::BeginningWith("Wor")("AvsdaWoroasdagf"), ut11::Is::True);
+			AssertThat(ut11::Is::String::Not::BeginningWith("Wor")("AvsdaWoroasdagf"), ut11::Is::True);
 		});
 
 		Then("string BeginningWith desired string is false", [&]() {
-			AssertThat(ut11::Is::Not::String::BeginningWith("Wor")("World"), ut11::Is::False);
+			AssertThat(ut11::Is::String::Not::BeginningWith("Wor")("World"), ut11::Is::False);
 		});
 
 		Then("AssertThat using Not BeginningWith works as expected", [&]() {
-			AssertThat("Pianos and Pies", ut11::Is::Not::String::BeginningWith("Pies"));
+			AssertThat("Pianos and Pies", ut11::Is::String::Not::BeginningWith("Pies"));
 		});
 
         Then("Is::Not::String::BeginningWith is an operand", []() {
-            AssertThat(ut11::Utility::IsOperand< decltype(ut11::Is::Not::String::BeginningWith("world")) >::value, ut11::Is::True);
+            AssertThat(ut11::Utility::IsOperand< decltype(ut11::Is::String::Not::BeginningWith("world")) >::value, ut11::Is::True);
         });
 
         Then("Is::Not::String::BeginningWith has an error message", []() {
-            AssertThat(ut11::Is::Not::String::BeginningWith("world").GetErrorMessage("world"), ut11::Is::Not::EqualTo(""));
+            AssertThat(ut11::Is::String::Not::BeginningWith("world").GetErrorMessage("world"), ut11::Is::Not::EqualTo(""));
         });
 	}
 };

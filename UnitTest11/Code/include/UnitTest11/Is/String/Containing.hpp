@@ -40,11 +40,8 @@ namespace ut11
 			{
 				return Operands::IsStringContaining(expected);
 			}
-		}
 
-		namespace Not
-		{
-			namespace String
+			namespace Not
 			{
 				/*! \brief Operand returns false if string contains expected string, otherwise returns true */
 				inline Utility::NotOperand<Operands::IsStringContaining> Containing(std::string expected)
@@ -53,6 +50,7 @@ namespace ut11
 				}
 			}
 		}
+
 	}
 }
 

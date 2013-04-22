@@ -47,11 +47,8 @@ namespace ut11
 			{
 				return Operands::IsStringEndingWith(expected);
 			}
-		}
 
-		namespace Not
-		{
-			namespace String
+			namespace Not
 			{
 				/*! \brief Operand returns false if string ends with expected string, otherwise returns true */
 				inline Utility::NotOperand<Operands::IsStringEndingWith> EndingWith(std::string expected)
