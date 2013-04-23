@@ -20,10 +20,6 @@ public:
             AssertThat(ut11::Utility::IsOperand< decltype(ut11::Is::Infinity) >::value, ut11::Is::True);
         });
 
-        Then("Is::Infinity is Operand", []() {
-            AssertThat(ut11::Utility::IsOperand< decltype(ut11::Is::Infinity) >::value, ut11::Is::True);
-        });
-
         Then("Is::Infinity has an error message", []() {
             AssertThat(ut11::Is::Infinity.GetErrorMessage(0.0f), ut11::Is::Not::EqualTo(""));
         });

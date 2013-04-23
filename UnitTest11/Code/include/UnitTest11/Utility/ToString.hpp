@@ -1,6 +1,9 @@
 #ifndef UNITTEST11_UTILITY_TOSTRING_HPP
 #define UNITTEST11_UTILITY_TOSTRING_HPP
 
+#include "Meta/IfElseTypes.hpp"
+#include "Meta/HasBeginAndEndFunctions.hpp"
+
 #include <string>
 #include <sstream>
 
@@ -8,20 +11,6 @@ namespace ut11
 {
     namespace Utility
     {
-		template<typename> struct VoidType { typedef void type; };
-		template<typename T, typename Sfinae = void> struct HasBeginFunction : std::false_type {};
-		template<typename T> struct HasBeginFunction<T, typename VoidType< decltype( std::declval<const T&>().begin() ) >::type> : std::true_type {};
-		template<typename T, typename Sfinae = void> struct HasEndFunction : std::false_type {};
-		template<typename T> struct HasEndFunction<T, typename VoidType< decltype( std::declval<const T&>().end() ) >::type> : std::true_type {};
-
-		template<bool First, typename A, typename B> struct IfElseTypes { typedef A type; };
-		template<typename A, typename B> struct IfElseTypes<false,A,B> { typedef B type; };
-
-		template<typename T> struct IsIterable
-		{
-			constexpr static bool value = std::is_base_of<std::true_type, HasBeginFunction<T> >::value && std::is_base_of<std::true_type, HasEndFunction<T> >::value;
-		};
-
         template<typename V> struct ParseNonIterableToString
         {
             inline std::string operator()(const V& value) const
@@ -49,10 +38,7 @@ namespace ut11
         {
         	inline std::string operator()(const V& value) const
         	{
-            	return typename IfElseTypes< IsIterable<V>::value,
-            								 ParseIterableToString<V>,
-            								 ParseNonIterableToString<V>
-            							   >::type()(value);
+            	return typename Meta::IfElseTypes< Meta::HasBeginAndEndFunctions<V>::value, ParseIterableToString<V>, ParseNonIterableToString<V> >::type()(value);
         	}
         };
 
