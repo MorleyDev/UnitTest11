@@ -66,9 +66,9 @@ namespace ut11
 				return false;
 			}
 
-			template<typename U> static std::list< typename std::result_of<decltype(&U::begin)()>::type > CreateIteratorListFromInput(const U& input)
+			template<typename U> static std::list< decltype(std::declval<const U&>().begin()) > CreateIteratorListFromInput(const U& input)
 			{
-				std::list< typename std::result_of<decltype(&U::begin)()> > iterators;
+				std::list< decltype(std::declval<const U&>().begin()) > iterators;
 				for(auto i = input.begin(); i != input.end(); ++i)
 					iterators.push_back(i);
 				return iterators;

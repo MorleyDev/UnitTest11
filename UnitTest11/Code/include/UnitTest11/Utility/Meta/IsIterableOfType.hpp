@@ -19,7 +19,7 @@ namespace ut11
 		{
 			template<typename Iterable, typename Type, bool IsIterable = HasBeginAndEndFunctions<Iterable>::value > struct IsIterableOfType
 			{
-				typedef typename std::iterator_traits< typename std::result_of<decltype(&Iterable::begin)()>::type >::value_type Iterator;
+				typedef typename std::iterator_traits< decltype(std::declval<const Iterable&>().begin()) >::value_type Iterator;
 				constexpr static bool value = std::is_same<Type, Iterator>::value || std::is_base_of<Type, Iterator>::value;
 			};
 
