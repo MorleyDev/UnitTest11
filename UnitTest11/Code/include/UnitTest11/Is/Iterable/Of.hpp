@@ -39,6 +39,7 @@ namespace ut11
 	{
 		namespace Iterable
 		{
+			/*! \brief Passes if the actual is an iterable (has begin and end functions) whose items are of type T, or descended from type T */
 			template<typename T> inline Operands::IsIteratorOf<T> Of()
 			{
 				return Operands::IsIteratorOf<T>();
@@ -46,6 +47,7 @@ namespace ut11
 
 			namespace Not
 			{
+				/*! \brief Passes if the actual is not an iterable (has begin and end functions) whose items are of type T, or descended from type T */
 				template<typename T> inline Utility::NotOperand< Operands::IsIteratorOf<T> > Of()
 				{
 					return Utility::NotOperand<Operands::IsIteratorOf<T>>();

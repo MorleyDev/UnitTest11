@@ -66,9 +66,9 @@ namespace ut11
 				return false;
 			}
 
-			template<typename U> static std::list< decltype(std::declval<const U&>().begin()) > CreateIteratorListFromInput(const U& input)
+			template<typename U> static std::list< typename std::result_of<decltype(&U::begin)()>::type > CreateIteratorListFromInput(const U& input)
 			{
-				std::list< decltype(std::declval<const U&>().begin()) > iterators;
+				std::list< typename std::result_of<decltype(&U::begin)()> > iterators;
 				for(auto i = input.begin(); i != input.end(); ++i)
 					iterators.push_back(i);
 				return iterators;
@@ -81,6 +81,7 @@ namespace ut11
 	{
 		namespace Iterable
 		{
+			/*! \brief Takes an expected and actual iterable (has ::begin and ::end functions) and returns true if the contents of those iterables are the same, ignoring order */
 			template<typename T> Operands::IsIterableEquivalentTo<T> EquivalentTo(const T& expected)
 			{
 				return Operands::IsIterableEquivalentTo<T>(expected);
@@ -88,6 +89,7 @@ namespace ut11
 
 			namespace Not
 			{
+				/*! \brief Takes an expected and actual iterable (has ::begin and ::end functions) and returns true if the contents of those iterables are not the same, ignoring order */
 				template<typename T> Utility::NotOperand< Operands::IsIterableEquivalentTo<T> > EquivalentTo(const T& expected)
 				{
 					return Utility::NotOperand< Operands::IsIterableEquivalentTo<T> >(expected);
