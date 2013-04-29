@@ -77,6 +77,7 @@ namespace ut11
 		{
 			namespace Containing
 			{
+				/*! \brief Passes if the given iterable does contains the given subset of items */
 				template<typename T> inline Operands::IsIterableContainingSubset<T> Subset(const T& expected)
 				{
 					return Operands::IsIterableContainingSubset<T>(expected);
@@ -87,6 +88,7 @@ namespace ut11
 			{
 				namespace Containing
 				{
+					/*! \brief Passes if the given iterable does not contain the given subset of items */
 					template<typename T> inline Utility::NotOperand< Operands::IsIterableContainingSubset<T> > Subset(const T& expected)
 					{
 						return Utility::NotOperand< Operands::IsIterableContainingSubset<T> >(expected);

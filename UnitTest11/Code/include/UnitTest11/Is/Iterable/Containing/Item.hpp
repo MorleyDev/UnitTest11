@@ -47,6 +47,7 @@ namespace ut11
 		{
 			namespace Containing
 			{
+				/*! \brief Passes if the given iterable contains at least one of the given item */
 				template<typename T> inline Operands::IsIterableContainingItem<T> Item(const T& expected)
 				{
 					return Operands::IsIterableContainingItem<T>(expected);
@@ -57,6 +58,7 @@ namespace ut11
 			{
 				namespace Containing
 				{
+					/*! \brief Passes if the given iterable does not contain at least one of the given item */
 					template<typename T> inline Utility::NotOperand< Operands::IsIterableContainingItem<T> > Item(const T& expected)
 					{
 						return Utility::NotOperand< Operands::IsIterableContainingItem<T> >(expected);
