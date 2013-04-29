@@ -22,6 +22,8 @@
 
 #include "UnitTest11/Is/Iterable/Of.hpp"
 #include "UnitTest11/Is/Iterable/EquivalentTo.hpp"
+#include "UnitTest11/Is/Iterable/Containing/Item.hpp"
+#include "UnitTest11/Is/Iterable/Containing/Subset.hpp"
 
 #include "UnitTest11/Will/Throw.hpp"
 #include "UnitTest11/Will/Pass.hpp"

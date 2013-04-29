@@ -73,7 +73,6 @@ namespace ut11
 					iterators.push_back(i);
 				return iterators;
 			}
-
 		};
 	}
 

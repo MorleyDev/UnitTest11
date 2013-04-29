@@ -24,7 +24,7 @@ namespace ut11
 
             template<typename T> inline bool operator()(const T& actual) const
             {
-            	for(auto i : actual)
+            	for(const auto& i : actual)
             		return false;
                 return true;
             }
