@@ -40,10 +40,12 @@ namespace ut11
 
 	namespace Is
 	{
+		/*! \brief Passes if the given iterable is empty */
 		extern Operands::IsEmpty Empty;
 
 		namespace Not
 		{
+			/*! \brief Passes if the given iterable is not empty */
 			extern Utility::NotOperand<Operands::IsEmpty> Empty;
 		}
 	}
