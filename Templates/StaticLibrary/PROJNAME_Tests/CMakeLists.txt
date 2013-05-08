@@ -1,6 +1,5 @@
-include_directories (../PROJNAME/Code/include $ENV{GCC_PLS}/include) 
-
-link_directories (${CMAKE_ARCHIVE_OUTPUT_DIRECTORY} $ENV{GCC_PLS}/lib)
+include_directories (${CMAKE_SOURCE_DIR}/PROJNAME/Code/include) 
+link_directories (${CMAKE_ARCHIVE_OUTPUT_DIRECTORY})
 
 FILE(GLOB_RECURSE PROJNAMETests_SRC *.cpp)
 add_executable(PROJNAME_Tests ${PROJNAMETests_SRC})
