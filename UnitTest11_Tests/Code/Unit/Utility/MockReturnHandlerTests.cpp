@@ -2,7 +2,7 @@
 
 namespace ut11 { namespace Utility { template<> struct DefaultValue<int> { inline int operator()() const { return 8; } }; } }
 
-class MockReturnHandlerTest : public ut11::TestFixture
+class MockReturnHandlerTest : public ut11::TestFixtureImpl
 {
 private:
     ut11::Utility::MockReturnHandler<int, char> m_returner;

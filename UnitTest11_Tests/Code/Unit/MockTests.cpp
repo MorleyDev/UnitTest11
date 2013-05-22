@@ -1,6 +1,6 @@
 #include <UnitTest11.hpp>
 
-class MockTest : public ut11::TestFixture
+class MockTest : public ut11::TestFixtureImpl
 {
 private:
     ut11::Mock<int (char)> m_mock;
@@ -79,7 +79,7 @@ public:
 };
 DeclareFixture(MockTest);
 
-class MockVoidTest : public ut11::TestFixture
+class MockVoidTest : public ut11::TestFixtureImpl
 {
 private:
     ut11::Mock<void (void)> m_mock;

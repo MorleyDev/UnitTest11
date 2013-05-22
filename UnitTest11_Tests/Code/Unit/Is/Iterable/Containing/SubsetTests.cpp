@@ -7,7 +7,7 @@
 
 #include <UnitTest11.hpp>
 
-class IsIterableContainingSubsetTests : public ut11::TestFixture
+class IsIterableContainingSubsetTests : public ut11::TestFixtureImpl
 {
 public:
 	virtual void Run()
@@ -39,7 +39,7 @@ public:
 };
 DeclareFixture(IsIterableContainingSubsetTests);
 
-class IsIterableNotContainingSubsetTests : public ut11::TestFixture
+class IsIterableNotContainingSubsetTests : public ut11::TestFixtureImpl
 {
 public:
 	virtual void Run()

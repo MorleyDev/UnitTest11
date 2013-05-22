@@ -7,7 +7,7 @@
 
 #include <UnitTest11.hpp>
 
-class IsIterableContainingItemTests : public ut11::TestFixture
+class IsIterableContainingItemTests : public ut11::TestFixtureImpl
 {
 public:
 	virtual void Run()
@@ -31,7 +31,7 @@ public:
 };
 DeclareFixture(IsIterableContainingItemTests);
 
-class IsIterableNotContainingItemTests : public ut11::TestFixture
+class IsIterableNotContainingItemTests : public ut11::TestFixtureImpl
 {
 public:
 	virtual void Run()

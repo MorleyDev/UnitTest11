@@ -5,4 +5,4 @@ pushd ..\Build
 	make
 popd
 
-call run_tests.bat %1
+call run_tests.bat UnitTest11

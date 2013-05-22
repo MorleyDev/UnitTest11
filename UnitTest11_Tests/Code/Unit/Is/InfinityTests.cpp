@@ -2,7 +2,7 @@
 #include <numeric>
 #include <cmath>
 
-class IsInfinityTests : public ut11::TestFixture
+class IsInfinityTests : public ut11::TestFixtureImpl
 {
 public:
     virtual void Run()
@@ -27,7 +27,7 @@ public:
 };
 DeclareFixture(IsInfinityTests);
 
-class IsNotInfinityTests : public ut11::TestFixture
+class IsNotInfinityTests : public ut11::TestFixtureImpl
 {
 public:
     virtual void Run()
@@ -53,7 +53,7 @@ public:
 };
 DeclareFixture(IsNotInfinityTests);
 
-class IsPositiveInfinityTests : public ut11::TestFixture
+class IsPositiveInfinityTests : public ut11::TestFixtureImpl
 {
 public:
     virtual void Run() {
@@ -80,7 +80,7 @@ public:
 };
 DeclareFixture(IsPositiveInfinityTests);
 
-class IsNotPositiveInfinityTests : public ut11::TestFixture
+class IsNotPositiveInfinityTests : public ut11::TestFixtureImpl
 {
 public:
     virtual void Run() {
@@ -108,7 +108,7 @@ public:
 DeclareFixture(IsNotPositiveInfinityTests);
 
 
-class IsNegativeInfinityTests : public ut11::TestFixture
+class IsNegativeInfinityTests : public ut11::TestFixtureImpl
 {
 public:
     virtual void Run() {
@@ -135,7 +135,7 @@ public:
 };
 DeclareFixture(IsNegativeInfinityTests);
 
-class IsNotNegativeInfinityTests : public ut11::TestFixture
+class IsNotNegativeInfinityTests : public ut11::TestFixtureImpl
 {
 public:
     virtual void Run() {

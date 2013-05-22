@@ -3,7 +3,7 @@
 
 namespace
 {
-	class FakeTestStageBuilder : public ut11::Utility::ITestStageBuilder
+	class FakeTestStageBuilder : public ut11::Utility::TestStageBuilder
 	{
 	public:
 		virtual ~FakeTestStageBuilder() { }
@@ -12,11 +12,11 @@ namespace
 		MockAction(PushWhen, ut11::Utility::TestStep)
 		MockAction(PushThen, ut11::Utility::TestStep)
 		MockAction(PushFinally, ut11::Utility::TestStep)
-		MockFunction(std::vector< std::shared_ptr<ut11::Utility::ITestStage> >, Stage)
+		MockFunction(std::vector< std::shared_ptr<ut11::Utility::TestStage> >, Stage)
 
 	};
 
-	class FakeOutput : public ut11::IOutput
+	class FakeOutput : public ut11::Output
 	{
 	public:
 		virtual ~FakeOutput() { }
@@ -47,19 +47,19 @@ namespace
 	};
 
 	template<bool V>
-	class FakeTestStage : public ut11::Utility::ITestStage
+	class FakeTestStage : public ut11::Utility::TestStage
 	{
 	public:
 		virtual ~FakeTestStage() { }
 
-		virtual bool Run(ut11::IOutput&)
+		virtual bool Run(ut11::Output&)
 		{
 			return V;
 		}
 	};
 }
 
-class TestFixtureTest : public ut11::TestFixture
+class TestFixtureTest : public ut11::TestFixtureImpl
 {
 public:
     virtual void Run()
@@ -71,7 +71,7 @@ public:
             FakeTestStageBuilder* builder = new FakeTestStageBuilder;
             std::unique_ptr<FakeTestStageBuilder> StageBuilder(builder);
 
-            ut11::TestFixture fixture("name", std::move(StageBuilder));
+            ut11::TestFixtureImpl fixture("name", std::move(StageBuilder));
             fixture.Given(m_description, [](){});
 
             MockVerify(builder->mockPushGiven, ut11::Will::Pass([&](ut11::Utility::TestStep step) { return ( step.description == m_description ); }));
@@ -84,7 +84,7 @@ public:
             FakeTestStageBuilder* builder = new FakeTestStageBuilder;
             std::unique_ptr<FakeTestStageBuilder> StageBuilder(builder);
 
-            ut11::TestFixture fixture("name", std::move(StageBuilder));
+            ut11::TestFixtureImpl fixture("name", std::move(StageBuilder));
             fixture.When(m_description, [](){});
 
             MockVerify(builder->mockPushWhen, ut11::Will::Pass([&](ut11::Utility::TestStep step) { return ( step.description == m_description ); }));
@@ -97,7 +97,7 @@ public:
             FakeTestStageBuilder* builder = new FakeTestStageBuilder;
             std::unique_ptr<FakeTestStageBuilder> StageBuilder(builder);
 
-            ut11::TestFixture fixture("name", std::move(StageBuilder));
+            ut11::TestFixtureImpl fixture("name", std::move(StageBuilder));
             fixture.Then(m_description, [](){});
 
             MockVerify(builder->mockPushThen, ut11::Will::Pass([&](ut11::Utility::TestStep step) { return ( step.description == m_description ); }));
@@ -110,7 +110,7 @@ public:
             FakeTestStageBuilder* builder = new FakeTestStageBuilder;
             std::unique_ptr<FakeTestStageBuilder> StageBuilder(builder);
 
-            ut11::TestFixture fixture("name", std::move(StageBuilder));
+            ut11::TestFixtureImpl fixture("name", std::move(StageBuilder));
             fixture.Finally(m_description, [](){});
 
             MockVerify(builder->mockPushFinally, ut11::Will::Pass([&](ut11::Utility::TestStep step) { return ( step.description == m_description ); }));
@@ -121,13 +121,13 @@ public:
             FakeTestStageBuilder* builder = new FakeTestStageBuilder;
             std::unique_ptr<FakeTestStageBuilder> StageBuilder(builder);
 
-            std::vector< std::shared_ptr<ut11::Utility::ITestStage> > Stages;
+            std::vector< std::shared_ptr<ut11::Utility::TestStage> > Stages;
             std::shared_ptr< FakeTestStage<true> > mockTestStage(new FakeTestStage<true> );
             Stages.push_back(mockTestStage);
             builder->mockStage.SetReturn(Stages);
 
             std::string fixtureName = "fixtureName";
-            ut11::TestFixture fixture(fixtureName, std::move(StageBuilder));
+            ut11::TestFixtureImpl fixture(fixtureName, std::move(StageBuilder));
 
             FakeOutput mockOutput;
             auto results = fixture.Run(mockOutput);
@@ -143,13 +143,13 @@ public:
             FakeTestStageBuilder* builder = new FakeTestStageBuilder;
             std::unique_ptr<FakeTestStageBuilder> StageBuilder(builder);
 
-            std::vector< std::shared_ptr<ut11::Utility::ITestStage> > Stages;
+            std::vector< std::shared_ptr<ut11::Utility::TestStage> > Stages;
             std::shared_ptr< FakeTestStage<false> > mockTestStage(new FakeTestStage<false> );
             Stages.push_back(mockTestStage);
             builder->mockStage.SetReturn(Stages);
 
             std::string fixtureName = "fixtureName";
-            ut11::TestFixture fixture(fixtureName, std::move(StageBuilder));
+            ut11::TestFixtureImpl fixture(fixtureName, std::move(StageBuilder));
 
             FakeOutput mockOutput;
             auto results = fixture.Run(mockOutput);

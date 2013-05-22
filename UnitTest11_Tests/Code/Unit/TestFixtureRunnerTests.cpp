@@ -3,7 +3,7 @@
 
 namespace
 {
-	class FakeOutput : public ut11::IOutput
+	class FakeOutput : public ut11::Output
 	{
 	public:
 		virtual ~FakeOutput() { }
@@ -34,7 +34,7 @@ namespace
 	};
 }
 
-class TestFixtureRunnerTests : public ut11::TestFixture
+class TestFixtureRunnerTests : public ut11::TestFixtureImpl
 {
 private:
     ut11::TestFixtureRunner m_runner;
@@ -51,13 +51,13 @@ public:
 
             m_expectedResult = 2;
 
-            ut11::TestFixture* fixture = new ut11::TestFixture("fixture");
+            ut11::TestFixtureImpl* fixture = new ut11::TestFixtureImpl("fixture");
             fixture->Then("then", [](){});
             fixture->Then("then", [](){});
             fixture->Then("then", [](){});
             fixture->Then("then", [](){ throw int(5); });
             fixture->Then("then", [](){ throw int(5); });
-            m_runner.AddFixture(std::unique_ptr<ut11::ITestFixture>(fixture));
+            m_runner.AddFixture(std::unique_ptr<ut11::TestFixture>(fixture));
 
         });
 

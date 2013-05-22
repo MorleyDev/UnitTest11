@@ -1,82 +1,34 @@
 #ifndef UNITTEST11_STDOUTPUT_HPP
 #define UNITTEST11_STDOUTPUT_HPP
 
-#include "IOutput.hpp"
-#include <iostream>
+#include "Output.hpp"
 
 namespace ut11
 {
-    class StdOutput : public IOutput
+    class StdOutput : public Output
     {
     public:
-        virtual void Begin() { }
+    	virtual ~StdOutput();
 
-        virtual void BeginFixture(std::string name)
-        {
-        	std::cout << "Fixture: " << name << std::endl;
-			
-        	m_given = "";
-        	m_when = "";
-        }
+    	virtual void Begin();
+        virtual void Finish(std::size_t ran, std::size_t succeeded);
 
-        virtual void BeginGiven(std::string given)
-        {
-        	if ( m_given == given )
-        		return;
+        virtual void BeginFixture(std::string name);
+        virtual void BeginGiven(std::string given);
+        virtual void BeginWhen(std::string when);
+        virtual void BeginThen(std::string then);
+        virtual void BeginFinally(std::string finally);
 
-        	m_given = given;
-        	m_when = "";
-			
-        	std::cout << "    Given: " << given << std::endl;
-        }
+        virtual void EndFixture(std::string);
+        virtual void EndGiven(std::string);
+        virtual void EndWhen(std::string);
+        virtual void EndThen(std::string);
+        virtual void EndFinally(std::string);
 
-        virtual void BeginWhen(std::string when)
-        {
-        	if ( m_when == when )
-        		return;
+        virtual void OnError(std::size_t line, std::string file, std::string message);
+        virtual void OnError(const std::exception& exception);
 
-        	m_when = when;
-			
-        	std::cout << "        When: " << when << std::endl;
-        }
-
-        virtual void BeginThen(std::string then)
-        {
-        	std::cout << "            Then: " << then << std::endl;
-        }
-
-        virtual void BeginFinally(std::string finally)
-        {
-        	std::cout << "    Finally: " << finally << std::endl;
-        	m_given = "";
-        	m_when = "";
-        }
-
-        virtual void EndFixture(std::string) { }
-        virtual void EndGiven(std::string) { }
-        virtual void EndWhen(std::string) { }
-        virtual void EndThen(std::string) { }
-        virtual void EndFinally(std::string) { }
-
-        virtual void Finish(std::size_t ran, std::size_t succeeded)
-        {
-        	std::cout << "Finished!\nRan: " << ran << "\nSucceeded: " << succeeded << std::endl;
-        }
-
-        virtual void OnError(std::size_t line, std::string file, std::string message)
-        {
-        	std::cout << "    Failed: [" << line << ":" << file << "] " << message << std::endl;
-        }
-
-        virtual void OnError(const std::exception& exception)
-        {
-        	std::cout << "    Failed: std::exception was thrown [what(): " << exception.what() << "]" << std::endl;
-        }
-
-        virtual void OnUnknownError()
-        {
-        	std::cout << "    Failed: Unknown Error" << std::endl;
-        }
+        virtual void OnUnknownError();
 
     private:
         std::string m_given, m_when;

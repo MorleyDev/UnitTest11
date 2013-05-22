@@ -1,15 +1,15 @@
-#ifndef UNITTEST11_IOUTPUT_HPP
-#define UNITTEST11_IOUTPUT_HPP
+#ifndef UNITTEST11_OUTPUT_HPP
+#define UNITTEST11_OUTPUT_HPP
 
 #include <string>
 #include <exception>
 
 namespace ut11
 {
-    class IOutput
+    class Output
     {
     public:
-        virtual ~IOutput() { }
+        virtual ~Output();
 
         virtual void Begin() = 0;
         virtual void Finish(std::size_t ran, std::size_t succeeded) = 0;
@@ -35,4 +35,4 @@ namespace ut11
     };
 }
 
-#endif // UNITTEST11_IOUTPUT_HPP
+#endif // UNITTEST11_OUTPUT_HPP

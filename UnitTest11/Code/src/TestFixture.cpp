@@ -2,53 +2,53 @@
 
 namespace ut11
 {
-    ITestFixture::~ITestFixture()
+    TestFixture::~TestFixture()
     {
     }
 
-    TestFixture::TestFixture()
+    TestFixtureImpl::TestFixtureImpl()
         : m_name(),
-          m_StageBuilder(new ut11::Utility::TestStageBuilder)
+          m_StageBuilder(new ut11::Utility::TestStageBuilderImpl)
     {
     }
 
-    TestFixture::TestFixture(std::string name)
+    TestFixtureImpl::TestFixtureImpl(std::string name)
         : m_name(name),
-          m_StageBuilder(new ut11::Utility::TestStageBuilder)
+          m_StageBuilder(new ut11::Utility::TestStageBuilderImpl)
     {
     }
 
-    TestFixture::TestFixture(std::string name, std::unique_ptr<ut11::Utility::ITestStageBuilder> builder)
+    TestFixtureImpl::TestFixtureImpl(std::string name, std::unique_ptr<ut11::Utility::TestStageBuilder> builder)
         : m_name(name),
           m_StageBuilder(std::move(builder))
     {
     }
 
-    TestFixture::~TestFixture()
+    TestFixtureImpl::~TestFixtureImpl()
     {
     }
 
-    void TestFixture::Given(std::string description, std::function<void(void)> logic)
+    void TestFixtureImpl::Given(std::string description, std::function<void(void)> logic)
     {
         m_StageBuilder->PushGiven(Utility::TestStep(description, logic));
     }
 
-    void TestFixture::When(std::string description, std::function<void(void)> logic)
+    void TestFixtureImpl::When(std::string description, std::function<void(void)> logic)
     {
         m_StageBuilder->PushWhen(Utility::TestStep(description, logic));
     }
 
-    void TestFixture::Then(std::string description, std::function<void(void)> logic)
+    void TestFixtureImpl::Then(std::string description, std::function<void(void)> logic)
     {
         m_StageBuilder->PushThen(Utility::TestStep(description, logic));
     }
 
-    void TestFixture::Finally(std::string description, std::function<void(void)> logic)
+    void TestFixtureImpl::Finally(std::string description, std::function<void(void)> logic)
     {
         m_StageBuilder->PushFinally(Utility::TestStep(description, logic));
     }
 
-    TestFixtureResults TestFixture::Run(IOutput& output)
+    TestFixtureResults TestFixtureImpl::Run(Output& output)
     {
         output.BeginFixture(m_name);
         Run();
@@ -66,7 +66,7 @@ namespace ut11
         return counter;
     }
 
-    void TestFixture::Run()
+    void TestFixtureImpl::Run()
     {
     }
 }

@@ -2,7 +2,7 @@
 #define UNITTEST11_GLOBAL_HPP
 
 #include "TestFixture.hpp"
-#include "IOutput.hpp"
+#include "Output.hpp"
 
 namespace ut11
 {
@@ -16,9 +16,9 @@ namespace ut11
 	 *
 	 * \return The number of fixtures that failed
 	 */
-	int Run(IOutput&);
+	int Run(Output&);
 
-    void PushFixture(std::shared_ptr<ITestFixture>);
+    void PushFixture(std::shared_ptr<TestFixture>);
 
     template<typename T>
     struct DeclareFixtureObj

@@ -19,7 +19,9 @@
 #Directories
 Build/*
 
+#Eclipse
 .cproject
 .project
 .externalToolBuilders
+.settings
 

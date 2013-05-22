@@ -1,6 +1,6 @@
 #include <UnitTest11.hpp>
 
-class IsStringContainingSubstringTests : public ut11::TestFixture
+class IsStringContainingSubstringTests : public ut11::TestFixtureImpl
 {
 public:
 	virtual void Run()
@@ -25,7 +25,7 @@ public:
 DeclareFixture(IsStringContainingSubstringTests);
 
 
-class IsNotStringContainingSubstringTests : public ut11::TestFixture
+class IsNotStringContainingSubstringTests : public ut11::TestFixtureImpl
 {
 public:
 	virtual void Run()
@@ -49,7 +49,7 @@ public:
 };
 DeclareFixture(IsNotStringContainingSubstringTests);
 
-class IsStringContainingCharacterTests : public ut11::TestFixture
+class IsStringContainingCharacterTests : public ut11::TestFixtureImpl
 {
 public:
 	virtual void Run()
@@ -74,7 +74,7 @@ public:
 DeclareFixture(IsStringContainingCharacterTests);
 
 
-class IsNotStringContainingCharacterTests : public ut11::TestFixture
+class IsNotStringContainingCharacterTests : public ut11::TestFixtureImpl
 {
 public:
 	virtual void Run()

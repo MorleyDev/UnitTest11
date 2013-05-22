@@ -13,7 +13,7 @@ namespace
 	struct ChildClass : public BaseClass { };
 }
 
-class IsIterableOfTests : public ut11::TestFixture
+class IsIterableOfTests : public ut11::TestFixtureImpl
 {
 public:
 	virtual void Run()
@@ -47,7 +47,7 @@ public:
 };
 DeclareFixture(IsIterableOfTests);
 
-class IsIterableNotOfTests : public ut11::TestFixture
+class IsIterableNotOfTests : public ut11::TestFixtureImpl
 {
 public:
 	virtual void Run()

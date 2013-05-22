@@ -7,7 +7,7 @@
 
 #include <UnitTest11.hpp>
 
-class IsEmptyTests : public ut11::TestFixture
+class IsEmptyTests : public ut11::TestFixtureImpl
 {
 public:
 	virtual void Run()
@@ -39,7 +39,7 @@ public:
 };
 DeclareFixture(IsEmptyTests);
 
-class IsNotEmptyTests : public ut11::TestFixture
+class IsNotEmptyTests : public ut11::TestFixtureImpl
 {
 public:
 	virtual void Run()

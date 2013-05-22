@@ -1,6 +1,6 @@
 #include <UnitTest11.hpp>
 
-class IsTrueTests : public ut11::TestFixture
+class IsTrueTests : public ut11::TestFixtureImpl
 {
 public:
     virtual void Run()

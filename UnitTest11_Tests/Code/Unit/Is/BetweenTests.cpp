@@ -1,6 +1,6 @@
 #include <UnitTest11.hpp>
 
-class IsBetweenTests : public ut11::TestFixture
+class IsBetweenTests : public ut11::TestFixtureImpl
 {
 public:
     virtual void Run()
@@ -32,7 +32,7 @@ public:
 };
 DeclareFixture(IsBetweenTests);
 
-class IsNotBetweenTests : public ut11::TestFixture
+class IsNotBetweenTests : public ut11::TestFixtureImpl
 {
 public:
     virtual void Run()

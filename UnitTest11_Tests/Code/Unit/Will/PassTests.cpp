@@ -1,7 +1,7 @@
 #include <UnitTest11.hpp>
 #include <functional>
 
-class WillPassTests : public ut11::TestFixture
+class WillPassTests : public ut11::TestFixtureImpl
 {
 private:
     int m_expected;

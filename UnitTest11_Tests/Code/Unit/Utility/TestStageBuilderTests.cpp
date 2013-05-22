@@ -1,12 +1,12 @@
 #include <UnitTest11.hpp>
 
-class TestStageBuilderTests : public ut11::TestFixture
+class TestStageBuilderTests : public ut11::TestFixtureImpl
 {
 private:
     std::vector<ut11::Utility::TestStep> m_steps;
-    ut11::Utility::TestStageBuilder m_builder;
+    ut11::Utility::TestStageBuilderImpl m_builder;
 
-    std::vector< std::shared_ptr<ut11::Utility::TestStage> > m_Stages;
+    std::vector< std::shared_ptr<ut11::Utility::TestStageImpl> > m_Stages;
 
 public:
     virtual void Run()
@@ -25,9 +25,9 @@ public:
 			m_steps.push_back(ut11::Utility::TestStep("9", [](){}));
 			m_steps.push_back(ut11::Utility::TestStep("10", [](){}));
 
-            m_builder = ut11::Utility::TestStageBuilder();
+            m_builder = ut11::Utility::TestStageBuilderImpl();
 
-            m_Stages = std::vector< std::shared_ptr<ut11::Utility::TestStage> >();
+            m_Stages = std::vector< std::shared_ptr<ut11::Utility::TestStageImpl> >();
         });
 
         When("Stages are pushed to a builder and it is Stages", [&]() {
@@ -47,7 +47,7 @@ public:
             auto iStages = m_builder.Stage();
 
             for(std::size_t i = 0; i < iStages.size(); ++i)
-                m_Stages.push_back(std::static_pointer_cast<ut11::Utility::TestStage>(iStages[i]));
+                m_Stages.push_back(std::static_pointer_cast<ut11::Utility::TestStageImpl>(iStages[i]));
 
         });
 

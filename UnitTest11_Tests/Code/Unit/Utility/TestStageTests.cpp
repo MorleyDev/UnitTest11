@@ -2,7 +2,7 @@
 
 namespace
 {
-	class FakeOutput : public ut11::IOutput
+	class FakeOutput : public ut11::Output
 	{
 	public:
 		virtual ~FakeOutput() { }
@@ -33,7 +33,7 @@ namespace
 	};
 }
 
-class TestStageTests : public ut11::TestFixture
+class TestStageTests : public ut11::TestFixtureImpl
 {
 private:
     std::string givenDescription;
@@ -51,7 +51,7 @@ private:
     ut11::Utility::TestStep thenStep;
     ut11::Utility::TestStep finallyStep;
 
-    ut11::Utility::TestStage Stage;
+    ut11::Utility::TestStageImpl Stage;
 
     std::unique_ptr<FakeOutput> output;
     ut11::TestFailedException testException;
@@ -79,7 +79,7 @@ public:
             thenStep = ut11::Utility::TestStep( thenDescription, [&]() { mockThen(); } );
             finallyStep =ut11::Utility::TestStep( finallyDescription, [&]() { mockFinally(); } );
 
-            Stage = ut11::Utility::TestStage(givenStep, whenStep, thenStep, finallyStep);
+            Stage = ut11::Utility::TestStageImpl(givenStep, whenStep, thenStep, finallyStep);
 
             output = std::unique_ptr<FakeOutput>(new FakeOutput());
             result = false;
@@ -172,7 +172,7 @@ public:
         When("calling run with all Stages as invalid functions", [&]() {
 
             ut11::Utility::TestStep invalid;
-            Stage = ut11::Utility::TestStage(invalid,invalid,invalid,invalid);
+            Stage = ut11::Utility::TestStageImpl(invalid,invalid,invalid,invalid);
             result = Stage.Run(*output);
         });
 

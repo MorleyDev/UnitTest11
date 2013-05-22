@@ -1,7 +1,7 @@
 #ifndef UNITTEST11_TESTFIXTURERUNNER_HPP
 #define UNITTEST11_TESTFIXTURERUNNER_HPP
 
-#include "IOutput.hpp"
+#include "Output.hpp"
 #include "TestFixture.hpp"
 #include <list>
 #include <memory>
@@ -11,11 +11,11 @@ namespace ut11
     class TestFixtureRunner
     {
     public:
-        void AddFixture(std::shared_ptr<ITestFixture> fixture);
-        int Run(IOutput& output);
+        void AddFixture(std::shared_ptr<TestFixture> fixture);
+        int Run(Output& output);
 
     private:
-        std::list< std::shared_ptr<ITestFixture> > m_fixtures;
+        std::list< std::shared_ptr<TestFixture> > m_fixtures;
     };
 }
 

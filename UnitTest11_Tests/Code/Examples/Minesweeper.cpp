@@ -77,7 +77,7 @@ namespace minesweeper
 
 #include <UnitTest11.hpp>
 
-class MinefieldGeneratorTests : public ut11::TestFixture
+class MinefieldGeneratorTests : public ut11::TestFixtureImpl
 {
 private:
 	std::string m_expectedGrid;
