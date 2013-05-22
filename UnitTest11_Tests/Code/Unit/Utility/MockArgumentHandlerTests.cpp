@@ -1,6 +1,6 @@
 #include <UnitTest11.hpp>
 
-class MockArgumentHandlerTest : public ut11::TestFixtureImpl
+class MockArgumentHandlerTest : public ut11::TestFixture
 {
 private:
     ut11::Utility::MockArgumentHandler<int> m_argumentHandler;

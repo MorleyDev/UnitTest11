@@ -2,7 +2,7 @@
 
 struct Operand : public ut11::Utility::BaseOperand { };
 
-class IsOperandTests : public ut11::TestFixtureImpl
+class IsOperandTests : public ut11::TestFixture
 {
 public:
     virtual void Run()

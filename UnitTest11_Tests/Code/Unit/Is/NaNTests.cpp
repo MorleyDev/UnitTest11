@@ -6,7 +6,7 @@
     #define NAN (*(const float *) __nan)
 #endif
 
-class IsNaNTests : public ut11::TestFixtureImpl
+class IsNaNTests : public ut11::TestFixture
 {
 public:
     virtual void Run()
@@ -42,7 +42,7 @@ public:
 };
 DeclareFixture(IsNaNTests);
 
-class IsNotNaNTests : public ut11::TestFixtureImpl
+class IsNotNaNTests : public ut11::TestFixture
 {
 public:
     virtual void Run()

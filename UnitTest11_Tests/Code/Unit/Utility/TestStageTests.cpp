@@ -33,7 +33,7 @@ namespace
 	};
 }
 
-class TestStageTests : public ut11::TestFixtureImpl
+class TestStageTests : public ut11::TestFixture
 {
 private:
     std::string givenDescription;

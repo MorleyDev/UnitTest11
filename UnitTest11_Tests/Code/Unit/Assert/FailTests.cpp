@@ -2,7 +2,7 @@
 
 #include <string>
 
-class AssertFailTests : public ut11::TestFixtureImpl
+class AssertFailTests : public ut11::TestFixture
 {
 private:
     ut11::TestFailedException m_exception;

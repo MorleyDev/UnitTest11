@@ -7,7 +7,7 @@
 
 #include <UnitTest11.hpp>
 
-class IsStringEndingWithTests : public ut11::TestFixtureImpl
+class IsStringEndingWithTests : public ut11::TestFixture
 {
 public:
 	virtual void Run()
@@ -44,7 +44,7 @@ public:
 DeclareFixture(IsStringEndingWithTests);
 
 
-class IsNotStringEndingWithTests : public ut11::TestFixtureImpl
+class IsNotStringEndingWithTests : public ut11::TestFixture
 {
 public:
 	virtual void Run()

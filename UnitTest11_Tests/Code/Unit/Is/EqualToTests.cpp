@@ -1,6 +1,6 @@
 #include <UnitTest11.hpp>
 
-class IsEqualToTests : public ut11::TestFixtureImpl
+class IsEqualToTests : public ut11::TestFixture
 {
 public:
     virtual void Run()
@@ -24,7 +24,7 @@ public:
 };
 DeclareFixture(IsEqualToTests);
 
-class IsNotEqualToTests : public ut11::TestFixtureImpl
+class IsNotEqualToTests : public ut11::TestFixture
 {
 public:
     virtual void Run()

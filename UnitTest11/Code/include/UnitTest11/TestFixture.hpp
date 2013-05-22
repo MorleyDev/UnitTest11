@@ -17,10 +17,10 @@ namespace ut11
         std::size_t succeeded;
     };
 
-    class TestFixture
+    class TestFixtureAbstract
     {
     public:
-        virtual ~TestFixture();
+        virtual ~TestFixtureAbstract();
 
         virtual void Given(std::string, std::function<void(void)>) = 0;
         virtual void When(std::string, std::function<void(void)>) = 0;
@@ -30,17 +30,17 @@ namespace ut11
         virtual TestFixtureResults Run(Output&) = 0;
     };
 
-    class TestFixtureImpl : public TestFixture
+    class TestFixture : public TestFixtureAbstract
     {
     public:
         void SetName(std::string name) { m_name = name; }
 
-        TestFixtureImpl();
-        explicit TestFixtureImpl(std::string name);
+        TestFixture();
+        explicit TestFixture(std::string name);
 
-        TestFixtureImpl(std::string name, std::unique_ptr<ut11::Utility::TestStageBuilder> builder);
+        TestFixture(std::string name, std::unique_ptr<ut11::Utility::TestStageBuilder> builder);
 
-        virtual ~TestFixtureImpl();
+        virtual ~TestFixture();
         virtual void Given(std::string description, std::function<void(void)> logic);
         virtual void When(std::string description, std::function<void(void)> logic);
         virtual void Then(std::string description, std::function<void(void)> logic);

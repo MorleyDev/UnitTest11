@@ -1,6 +1,6 @@
 #include <UnitTest11.hpp>
 
-class TestStageBuilderTests : public ut11::TestFixtureImpl
+class TestStageBuilderTests : public ut11::TestFixture
 {
 private:
     std::vector<ut11::Utility::TestStep> m_steps;

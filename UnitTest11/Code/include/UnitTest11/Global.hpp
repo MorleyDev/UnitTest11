@@ -18,7 +18,7 @@ namespace ut11
 	 */
 	int Run(Output&);
 
-    void PushFixture(std::shared_ptr<TestFixture>);
+    void PushFixture(std::shared_ptr<TestFixtureAbstract>);
 
     template<typename T>
     struct DeclareFixtureObj

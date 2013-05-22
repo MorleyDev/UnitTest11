@@ -34,7 +34,7 @@ namespace
 	};
 }
 
-class TestFixtureRunnerTests : public ut11::TestFixtureImpl
+class TestFixtureRunnerTests : public ut11::TestFixture
 {
 private:
     ut11::TestFixtureRunner m_runner;
@@ -51,13 +51,13 @@ public:
 
             m_expectedResult = 2;
 
-            ut11::TestFixtureImpl* fixture = new ut11::TestFixtureImpl("fixture");
+            ut11::TestFixture* fixture = new ut11::TestFixture("fixture");
             fixture->Then("then", [](){});
             fixture->Then("then", [](){});
             fixture->Then("then", [](){});
             fixture->Then("then", [](){ throw int(5); });
             fixture->Then("then", [](){ throw int(5); });
-            m_runner.AddFixture(std::unique_ptr<ut11::TestFixture>(fixture));
+            m_runner.AddFixture(std::unique_ptr<ut11::TestFixtureAbstract>(fixture));
 
         });
 

@@ -11,11 +11,11 @@ namespace ut11
     class TestFixtureRunner
     {
     public:
-        void AddFixture(std::shared_ptr<TestFixture> fixture);
+        void AddFixture(std::shared_ptr<TestFixtureAbstract> fixture);
         int Run(Output& output);
 
     private:
-        std::list< std::shared_ptr<TestFixture> > m_fixtures;
+        std::list< std::shared_ptr<TestFixtureAbstract> > m_fixtures;
     };
 }
 

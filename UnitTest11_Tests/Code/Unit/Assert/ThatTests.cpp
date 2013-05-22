@@ -28,7 +28,7 @@ public:
     }
 };
 
-class AssertThatTests : public ut11::TestFixtureImpl
+class AssertThatTests : public ut11::TestFixture
 {
 private:
     std::size_t line;

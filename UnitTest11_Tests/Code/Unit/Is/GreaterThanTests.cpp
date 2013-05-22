@@ -1,6 +1,6 @@
 #include <UnitTest11.hpp>
 
-class IsGreaterThanTests : public ut11::TestFixtureImpl
+class IsGreaterThanTests : public ut11::TestFixture
 {
 public:
     virtual void Run()
@@ -32,7 +32,7 @@ public:
 };
 DeclareFixture(IsGreaterThanTests);
 
-class IsNotGreaterThanTests : public ut11::TestFixtureImpl
+class IsNotGreaterThanTests : public ut11::TestFixture
 {
 public:
     virtual void Run()

@@ -6,7 +6,7 @@ class DifferentClass { };
 class Base { };
 class Derived : public Base { };
 
-class IsAnyTests : public ut11::TestFixtureImpl
+class IsAnyTests : public ut11::TestFixture
 {
 public:
     virtual void Run()
@@ -61,7 +61,7 @@ public:
 };
 DeclareFixture(IsAnyTests);
 
-class IsNotAnyTests : public ut11::TestFixtureImpl
+class IsNotAnyTests : public ut11::TestFixture
 {
 public:
     virtual void Run()

@@ -1,6 +1,6 @@
 #include <UnitTest11.hpp>
 
-class WillThrowTests : public ut11::TestFixtureImpl
+class WillThrowTests : public ut11::TestFixture
 {
 private:
     bool m_result;

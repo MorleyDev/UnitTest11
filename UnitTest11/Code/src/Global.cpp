@@ -13,7 +13,7 @@ inline void InitialiseRunner()
 		g_runner = std::move(std::unique_ptr<ut11::TestFixtureRunner>(new ut11::TestFixtureRunner()));
 }
 
-void ut11::PushFixture(std::shared_ptr<TestFixture> fixture)
+void ut11::PushFixture(std::shared_ptr<TestFixtureAbstract> fixture)
 {
 	InitialiseRunner();
 
