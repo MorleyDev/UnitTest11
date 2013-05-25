@@ -27,6 +27,8 @@ namespace ut11
         virtual void Then(std::string, std::function<void(void)>) = 0;
         virtual void Finally(std::string, std::function<void(void)>) = 0;
 
+        virtual std::string GetName() = 0;
+
         virtual TestFixtureResults Run(Output&) = 0;
     };
 
@@ -34,6 +36,7 @@ namespace ut11
     {
     public:
         void SetName(std::string name) { m_name = name; }
+        virtual std::string GetName() { return m_name; }
 
         TestFixture();
         explicit TestFixture(std::string name);

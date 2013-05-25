@@ -3,7 +3,7 @@
 
 #include "Output.hpp"
 #include "TestFixture.hpp"
-#include <list>
+#include <map>
 #include <memory>
 
 namespace ut11
@@ -15,7 +15,7 @@ namespace ut11
         int Run(Output& output);
 
     private:
-        std::list< std::shared_ptr<TestFixtureAbstract> > m_fixtures;
+        std::map< std::string, std::shared_ptr<TestFixtureAbstract> > m_fixtures;
     };
 }
 

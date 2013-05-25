@@ -1,6 +1,22 @@
 #include <UnitTest11.hpp>
 #include <UnitTest11/TestFixtureRunner.hpp>
 
+namespace ut11
+{
+	namespace Utility
+	{
+		template<> struct ParseToString<ut11::Output*>
+		{
+			inline std::string operator()(ut11::Output* value) const
+			{
+				std::stringstream stream;
+				stream << value;
+				return stream.str();
+			}
+		};
+	}
+}
+
 namespace
 {
 	class FakeOutput : public ut11::Output
@@ -32,6 +48,33 @@ namespace
 		ut11::Mock<void (std::exception)> mockOnError1;
 		virtual void OnError(const std::exception& ex) { mockOnError1(ex); }
 	};
+
+	class FakeTestFixture : public ut11::TestFixtureAbstract
+	{
+	private:
+		ut11::TestFixtureResults m_runResults;
+
+	public:
+		ut11::Output* RunOutputUsed;
+
+		FakeTestFixture(ut11::TestFixtureResults runResults)
+			: m_runResults(runResults), RunOutputUsed(nullptr)
+		{
+		}
+
+        MockAction(Given, std::string, std::function<void(void)>);
+        MockAction(When, std::string, std::function<void(void)>);
+        MockAction(Then, std::string, std::function<void(void)>);
+        MockAction(Finally, std::string, std::function<void(void)>);
+
+        MockFunction(std::string, GetName);
+
+        virtual ut11::TestFixtureResults Run(ut11::Output& output)
+        {
+        	RunOutputUsed = &output;
+        	return m_runResults;
+        }
+	};
 }
 
 class TestFixtureRunnerTests : public ut11::TestFixture
@@ -49,25 +92,57 @@ public:
         Given("a TestFixtureRunner with added Fixture with failing tests", [&]() {
             m_runner = ut11::TestFixtureRunner();
 
+            ut11::TestFixtureResults fixtureResults;
+            fixtureResults.ran = 5;
+            fixtureResults.succeeded = 3;
             m_expectedResult = 2;
 
-            ut11::TestFixture* fixture = new ut11::TestFixture("fixture");
-            fixture->Then("then", [](){});
-            fixture->Then("then", [](){});
-            fixture->Then("then", [](){});
-            fixture->Then("then", [](){ throw int(5); });
-            fixture->Then("then", [](){ throw int(5); });
+            FakeTestFixture* fixture = new FakeTestFixture(fixtureResults);
+            fixture->mockGetName.SetReturn("name");
+
             m_runner.AddFixture(std::unique_ptr<ut11::TestFixtureAbstract>(fixture));
 
         });
-
         When("running the TestFixtureRunner", [&]() {
             m_result = m_runner.Run(m_output);
         });
-
         Then("the number of failing tests is returned", [&]() {
             AssertThat(m_result, ut11::Is::EqualTo(m_expectedResult));
         });
     }
 };
 DeclareFixture(TestFixtureRunnerTests);
+
+class TestFixtureRunnerMultipleFixturesTests : public ut11::TestFixture
+{
+private:
+	ut11::TestFixtureRunner m_runner;
+    FakeOutput m_output;
+    FakeTestFixture* m_fixtureOne;
+    FakeTestFixture* m_fixtureTwo;
+
+public:
+	virtual void Run()
+	{
+		Given("a TestFixtureRunner where two fixtures with the same names are added", [&]() {
+			m_runner = ut11::TestFixtureRunner();
+			m_output = FakeOutput();
+
+			m_fixtureOne = new FakeTestFixture(ut11::TestFixtureResults());
+			m_fixtureTwo = new FakeTestFixture(ut11::TestFixtureResults());
+
+			m_fixtureOne->mockGetName.SetReturn("name");
+			m_fixtureTwo->mockGetName.SetReturn("name");
+
+			m_runner.AddFixture(std::unique_ptr<ut11::TestFixtureAbstract>(m_fixtureOne));
+			m_runner.AddFixture(std::unique_ptr<ut11::TestFixtureAbstract>(m_fixtureTwo));
+		});
+		When("Running the test fixture runner", [&]() {
+			m_runner.Run(m_output);
+		});
+		Then("only the first test fixture is ran", [&]() {
+			AssertThat(m_fixtureOne->RunOutputUsed, ut11::Is::Not::Null);
+			AssertThat(m_fixtureTwo->RunOutputUsed, ut11::Is::Null);
+		});
+	}
+};

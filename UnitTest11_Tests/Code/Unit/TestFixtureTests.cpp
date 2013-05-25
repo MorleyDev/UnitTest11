@@ -63,6 +63,15 @@ class TestFixtureTest : public ut11::TestFixture
 public:
     virtual void Run()
     {
+    	Then("a fixture constructed with a name has that name", [&]() {
+
+            std::unique_ptr<FakeTestStageBuilder> StageBuilder(new FakeTestStageBuilder);
+			std::string name("name");
+			ut11::TestFixture fixture(name, std::move(StageBuilder));
+
+			AssertThat(fixture.GetName(), ut11::Is::EqualTo(name));
+    	});
+
         Then("when calling the Given on a fixture, the expected call is made", [&]() {
 
             std::string m_description = "description";

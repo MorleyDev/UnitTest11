@@ -1,4 +1,4 @@
-#include <UnitTest11.hpp>
+ #include <UnitTest11.hpp>
 
 class WillThrowTests : public ut11::TestFixture
 {
@@ -84,3 +84,4 @@ public:
     }
 };
 DeclareFixture(WillThrowTests);
+

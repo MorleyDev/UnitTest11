@@ -1,8 +1,9 @@
 #include <UnitTest11/TestFixtureRunner.hpp>
+#include <iostream>
 
 void ut11::TestFixtureRunner::AddFixture(std::shared_ptr<TestFixtureAbstract> fixture)
 {
-    m_fixtures.push_back(std::move(fixture));
+    m_fixtures.insert(std::make_pair(fixture->GetName(), std::move(fixture)));
 }
 
 int ut11::TestFixtureRunner::Run(Output& output)
@@ -10,13 +11,11 @@ int ut11::TestFixtureRunner::Run(Output& output)
     output.Begin();
 
     TestFixtureResults results;
-
-    while(!m_fixtures.empty())
+    for(auto fixtureKeyValue : m_fixtures)
     {
-        std::shared_ptr<TestFixtureAbstract> fixture = std::move(m_fixtures.front());
-        m_fixtures.pop_front();
+    	auto fixture = fixtureKeyValue.second;
+        auto result = fixture->Run(output);
 
-        TestFixtureResults result = fixture->Run(output);
         results.ran += result.ran;
         results.succeeded += result.succeeded;
     }
