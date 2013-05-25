@@ -13,7 +13,6 @@ namespace
 		MockAction(PushThen, ut11::Utility::TestStep)
 		MockAction(PushFinally, ut11::Utility::TestStep)
 		MockFunction(std::vector< std::shared_ptr<ut11::Utility::TestStage> >, Stage)
-
 	};
 
 	class FakeOutput : public ut11::Output

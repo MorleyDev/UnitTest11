@@ -5,16 +5,17 @@
 #include "Assert/That.hpp"
 #include "Mock.hpp"
 
-/*! \brief Declare a Test Fixture, adding it to the runner
- *
- * Adds a text fixture of type T to the runner. Can not add the same fixture multiple times (compilation error).
- */
-#define DeclareFixture(Fixture) namespace { ut11::DeclareFixtureObj<Fixture> ut11Fixture_##Fixture(#Fixture); }
-
-/*! \brief Assert that for the given Actual, the Expectation is true */
-#define AssertThat(Actual, Expectation) ut11::Assert::That(__LINE__, __FILE__, Actual, Expectation)
-
 // There is probably some way to auto-generate these via recursive macros.
+#define UT11_DECLARE_FIXTURE_1(Fixture) namespace { ut11::DeclareFixtureObj<Fixture> ut11Fixture_##Fixture(#Fixture); }
+#define UT11_DECLARE_FIXTURE_2(Fixture, Arguments...) namespace { ut11::DeclareFixtureObj<Fixture> ut11Fixture_##Fixture(#Fixture, Arguments); }
+#define UT11_DECLARE_FIXTURE_3(Fixture, Arguments...) namespace { ut11::DeclareFixtureObj<Fixture> ut11Fixture_##Fixture(#Fixture, Arguments); }
+#define UT11_DECLARE_FIXTURE_4(Fixture, Arguments...) namespace { ut11::DeclareFixtureObj<Fixture> ut11Fixture_##Fixture(#Fixture, Arguments); }
+#define UT11_DECLARE_FIXTURE_5(Fixture, Arguments...) namespace { ut11::DeclareFixtureObj<Fixture> ut11Fixture_##Fixture(#Fixture, Arguments); }
+#define UT11_DECLARE_FIXTURE_6(Fixture, Arguments...) namespace { ut11::DeclareFixtureObj<Fixture> ut11Fixture_##Fixture(#Fixture, Arguments); }
+#define UT11_DECLARE_FIXTURE_7(Fixture, Arguments...) namespace { ut11::DeclareFixtureObj<Fixture> ut11Fixture_##Fixture(#Fixture, Arguments); }
+#define UT11_DECLARE_FIXTURE_8(Fixture, Arguments...) namespace { ut11::DeclareFixtureObj<Fixture> ut11Fixture_##Fixture(#Fixture, Arguments); }
+#define UT11_DECLARE_FIXTURE_9(Fixture, Arguments...) namespace { ut11::DeclareFixtureObj<Fixture> ut11Fixture_##Fixture(#Fixture, Arguments); }
+
 #define UT11_MOCK_ACTION_1(Name) mutable ut11::Mock<void (void)> mock##Name; virtual void Name() { mock##Name(); }
 #define UT11_MOCK_ACTION_2(Name, Arg1) mutable ut11::Mock<void (Arg1)> mock##Name; virtual void Name(Arg1 a1) { mock##Name(a1); }
 #define UT11_MOCK_ACTION_3(Name, Arg1, Arg2) mutable ut11::Mock<void (Arg1, Arg2)> mock##Name; virtual void Name(Arg1 a1, Arg2 a2) { mock##Name(a1, a2); }
@@ -83,6 +84,8 @@
 
 #define UT11_MACRO_CONCAT(func, suffix) func##suffix
 
+#define UT11_DECLARE_FIXTURE_N(N, args...) UT11_MACRO_CONCAT(UT11_DECLARE_FIXTURE_, N)(args)
+
 #define UT11_MOCK_ACTION_N(N, args...) UT11_MACRO_CONCAT(UT11_MOCK_ACTION_, N)(args)
 #define UT11_MOCK_FUNCTION_N(N, args...) UT11_MACRO_CONCAT(UT11_MOCK_FUNCTION_, N)(args)
 #define UT11_MOCK_VERIFY_N(N, args...) UT11_MACRO_CONCAT(UT11_MOCK_VERIFY_, N)(args)
@@ -114,5 +117,16 @@
 
 /*! \brief A mock const function with a return value (Return, Name, Arguments...) */
 #define MockFunctionConst(args...) UT11_MOCK_FUNCTION_CONST_N(UT11_VA_NARGS(args), args)
+
+/*! \brief Declare a Test Fixture, adding it to the runner
+ *
+ * Adds a test fixture of type T to the runner.
+ * Passes any arguments given on the right of the fixture name to that fixture's constructor.
+ * Can not add the same fixture multiple times (compilation error).
+ */
+#define DeclareFixture(args...) UT11_DECLARE_FIXTURE_N(UT11_VA_NARGS(args), args)
+
+/*! \brief Assert that for the given Actual, the Expectation is true */
+#define AssertThat(Actual, Expectation) ut11::Assert::That(__LINE__, __FILE__, Actual, Expectation)
 
 #endif // UNITTEST11_MACROS_HPP
