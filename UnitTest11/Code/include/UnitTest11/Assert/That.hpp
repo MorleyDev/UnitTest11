@@ -10,7 +10,7 @@ namespace ut11
     namespace Assert
     {
         template<typename Expected, typename Operand>
-        inline void That(std::size_t line, std::string file, const Expected& expected, const Operand& operand)
+        inline void That(std::size_t line, std::string file, Expected expected, Operand operand)
         {
             if ( operand(expected) )
                 return;
