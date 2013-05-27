@@ -12,11 +12,6 @@ namespace ut11
         {
             TestStep() : description(), logic() { }
             TestStep(std::string d, std::function<void(void)> l) : description(d), logic(l) { }
-            TestStep(const TestStep& step) : description(step.description), logic(step.logic) { }
-            TestStep& operator=(const TestStep& step) { description = step.description; logic = step.logic; return *this; }
-            TestStep(TestStep&& step) : description(std::move(step.description)), logic(std::move(step.logic)) { }
-            TestStep& operator=(TestStep&& step) { description = std::move(step.description); logic = std::move(step.logic); return *this; }
-            ~TestStep() { }
 
             std::string description;
             std::function<void(void)> logic;

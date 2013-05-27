@@ -26,30 +26,12 @@ namespace ut11
         template<typename... ARGS> class MockArgumentHandler
         {
         public:
-        	MockArgumentHandler()
-        		: m_arguments()
-        	{
-        	}
-
-        	MockArgumentHandler(const MockArgumentHandler& orig)
-        		: m_arguments(orig.m_arguments)
-        	{
-        	}
-
-        	MockArgumentHandler& operator=(const MockArgumentHandler& orig)
-        	{
-        		m_arguments = orig.m_arguments;
-        		return *this;
-        	}
-
-            virtual ~MockArgumentHandler() { }
-
-            inline void AddCall(ARGS... args)
+            void AddCall(ARGS... args)
             {
                 m_arguments.push_back( std::make_tuple( std::forward<ARGS>(args)... ) );
             }
 
-            template<typename... Expectations> inline std::size_t CountCalls(Expectations... expectations) const
+            template<typename... Expectations> std::size_t CountCalls(Expectations... expectations) const
             {
                 static_assert(sizeof...(Expectations) == sizeof...(ARGS), "Expectations and Arguments must match");
 
@@ -64,17 +46,17 @@ namespace ut11
                 return counter;
             }
 
-            inline std::size_t TotalCount() const { return m_arguments.size(); }
+            std::size_t TotalCount() const { return m_arguments.size(); }
 
         protected:
             template<int I, int Limit, typename Arguments, typename Expectations>
-            inline typename std::enable_if< (I < Limit), bool >::type MatchTuples(const Arguments& arguments, const Expectations& expectations) const
+            typename std::enable_if< (I < Limit), bool >::type MatchTuples(const Arguments& arguments, const Expectations& expectations) const
             {
                 return CompareWithOperandOrEquality(std::get<I>(arguments), std::get<I>(expectations)) && MatchTuples<I+1, Limit>(arguments, expectations);
             }
 
             template<int I, int Limit, typename Arguments, typename Expectations>
-            inline typename std::enable_if< (I >= Limit), bool >::type MatchTuples(const Arguments&, const Expectations&) const
+            typename std::enable_if< (I >= Limit), bool >::type MatchTuples(const Arguments&, const Expectations&) const
             {
                 return true;
             }

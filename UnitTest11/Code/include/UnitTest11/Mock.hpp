@@ -20,26 +20,11 @@ namespace ut11
 		{
 		}
 
-    	Mock(const Mock& orig)
-    		: m_callbackHandler(orig.m_callbackHandler),
-    		  m_argumentHandler(orig.m_argumentHandler),
-    		  m_returnHandler(orig.m_returnHandler)
-    	{
-    	}
-
-    	Mock& operator=(const Mock& orig)
-    	{
-    		m_callbackHandler = orig.m_callbackHandler;
-    		m_argumentHandler = orig.m_argumentHandler;
-    		m_returnHandler = orig.m_returnHandler;
-    		return *this;
-    	}
-
     	~Mock()
     	{
     	}
 
-        inline R operator()(ARGS... args)
+        R operator()(ARGS... args)
         {
             if ( m_callbackHandler )
                 m_callbackHandler(args...);
@@ -48,26 +33,26 @@ namespace ut11
             return m_returnHandler(args...);
         }
 
-        inline void SetCallback(std::function<void (const ARGS&...)> callback)
+        void SetCallback(std::function<void (const ARGS&...)> callback)
         {
             m_callbackHandler = callback;
         }
 
-        template<typename V> inline void SetReturn(V value) { m_returnHandler.SetReturn(value); }
+        template<typename V> void SetReturn(V value) { m_returnHandler.SetReturn(value); }
 
-        inline void VerifyAny(std::size_t line, std::string file) const
+        void VerifyAny(std::size_t line, std::string file) const
         {
             if ( m_argumentHandler.TotalCount() == 0 )
                 Assert::Fail(line, file, GetVerifyFailMessage());
         }
 
-        template<typename... Expectations> inline void Verify(std::size_t line, std::string file, const Expectations&... expectations) const
+        template<typename... Expectations> void Verify(std::size_t line, std::string file, const Expectations&... expectations) const
         {
             if ( m_argumentHandler.CountCalls(expectations...) == 0 )
                 Assert::Fail(line, file, GetVerifyFailMessage());
         }
 
-        template<typename... Expectations> inline void VerifyTimes(std::size_t line, std::string file, std::size_t count, const Expectations&... expectations) const
+        template<typename... Expectations> void VerifyTimes(std::size_t line, std::string file, std::size_t count, const Expectations&... expectations) const
         {
         	auto actual = m_argumentHandler.CountCalls(expectations...);
             if ( actual != count )
@@ -75,12 +60,12 @@ namespace ut11
         }
 
     private:
-        inline std::string GetVerifyFailMessage() const
+        std::string GetVerifyFailMessage() const
         {
             return "Expected function call was not found";
         }
 
-        inline std::string GetVerifyFailTimesMessage(std::size_t expected, std::size_t actual) const
+        std::string GetVerifyFailTimesMessage(std::size_t expected, std::size_t actual) const
         {
         	std::stringstream output;
         	output << "Expected function to be called " << expected << " times was actually called " << actual << " times";

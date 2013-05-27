@@ -19,8 +19,6 @@ namespace ut11
 
             TestStageImpl();
             TestStageImpl(TestStep given, TestStep when, TestStep then, TestStep finally);
-            TestStageImpl(const TestStageImpl& Stage);
-
             virtual ~TestStageImpl();
 
             virtual bool Run(Output& output);

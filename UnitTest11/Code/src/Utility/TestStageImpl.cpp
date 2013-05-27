@@ -16,14 +16,6 @@ ut11::Utility::TestStageImpl::TestStageImpl(TestStep given, TestStep when, TestS
 {
 }
 
-ut11::Utility::TestStageImpl::TestStageImpl(const TestStageImpl& Stage)
-    : m_given(Stage.m_given),
-      m_when(Stage.m_when),
-      m_then(Stage.m_then),
-      m_finally(Stage.m_finally)
-{
-}
-
 ut11::Utility::TestStageImpl::~TestStageImpl()
 {
 }

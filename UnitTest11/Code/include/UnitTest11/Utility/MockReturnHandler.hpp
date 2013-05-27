@@ -11,45 +11,26 @@ namespace ut11
         template<typename T, typename... ARGS> class MockReturnHandler
         {
         public:
-            inline MockReturnHandler()
+            MockReturnHandler()
                 : m_isReturnCallbackMode(false),
 				  m_returnCallback(),
                   m_returnValue(DefaultValue<T>()())
             {
             }
 
-            MockReturnHandler(const MockReturnHandler& orig)
-            	: m_isReturnCallbackMode(orig.m_isReturnCallbackMode),
-            	  m_returnCallback(orig.m_returnCallback),
-            	  m_returnValue(orig.m_returnValue)
-            {
-            }
-
-            MockReturnHandler& operator=(const MockReturnHandler& orig)
-            {
-            	m_isReturnCallbackMode = orig.m_isReturnCallbackMode;
-            	m_returnCallback = orig.m_returnCallback;
-            	m_returnValue = orig.m_returnValue;
-            	return *this;
-            }
-
-            inline ~MockReturnHandler()
-            {
-            }
-
-            inline void SetReturn(std::function<T (const ARGS&...)> callback)
+            void SetReturn(std::function<T (const ARGS&...)> callback)
             {
 				m_isReturnCallbackMode = true;
                 m_returnCallback = callback;
             }
 
-            inline void SetReturn(T value)
+            void SetReturn(T value)
             {
 				m_isReturnCallbackMode = false;
                 m_returnValue = value;
             }
 
-            inline T operator()(const ARGS&... args)
+            T operator()(const ARGS&... args)
             {
                 return m_isReturnCallbackMode
                         ? m_returnCallback(args...)
@@ -66,18 +47,6 @@ namespace ut11
         {
         public:
             MockReturnHandler() : m_returnCallback() { }
-            ~MockReturnHandler() { }
-
-            MockReturnHandler(const MockReturnHandler& orig)
-            	: m_returnCallback(orig.m_returnCallback)
-            {
-            }
-
-            MockReturnHandler& operator=(const MockReturnHandler& orig)
-            {
-            	m_returnCallback = orig.m_returnCallback;
-            	return *this;
-            }
 
             void SetReturn(std::function<void (const ARGS&...)> callback) { m_returnCallback = callback; }
             void SetReturn() { m_returnCallback = std::function<void (const ARGS&...)>(); }
