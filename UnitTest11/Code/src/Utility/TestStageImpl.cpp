@@ -31,29 +31,48 @@ ut11::Utility::TestStageImpl::~TestStageImpl()
 
 bool ut11::Utility::TestStageImpl::Run(Output& output)
 {
-    try
-    {
-        Given(output);
-        When(output);
-        Then(output);
-        Finally(output);
-        return true;
-    }
-    catch(const ut11::TestFailedException& ex)
-    {
-        output.OnError(ex.GetLine(), ex.GetFile(), ex.GetMessage());
-        return false;
-    }
-    catch(const std::exception& ex)
-    {
-        output.OnError(ex);
-        return false;
-    }
-    catch(...)
-    {
-        output.OnUnknownError();
-        return false;
-    }
+	auto runInsideTryCatch = [&](std::function<void(void)> func) -> bool {
+
+	    try
+	    {
+	    	func();
+	    }
+	    catch(const ut11::TestFailedException& ex)
+	    {
+	        output.OnError(ex.GetLine(), ex.GetFile(), ex.GetMessage());
+	        return false;
+	    }
+	    catch(const std::exception& ex)
+	    {
+	        output.OnError(ex);
+	        return false;
+	    }
+	    catch(...)
+	    {
+	        output.OnUnknownError();
+	        return false;
+	    }
+	    return true;
+	};
+
+	auto theFinallyFunction = [&]() -> void {
+		Finally(output);
+	};
+	auto theGivenWhenThenFinallyFunctions = [&]() -> void
+	{
+		Given(output);
+    	When(output);
+    	Then(output);
+    	theFinallyFunction();
+	};
+
+	if (!runInsideTryCatch(theGivenWhenThenFinallyFunctions))
+	{
+		runInsideTryCatch(theFinallyFunction);
+		return false;
+	}
+	return true;
+
 }
 
 void ut11::Utility::TestStageImpl::Given(Output& output)

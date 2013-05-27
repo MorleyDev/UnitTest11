@@ -89,32 +89,27 @@ public:
 
             result = Stage.Run(*output);
         });
-
         Then("the result is true", [&]() {
             AssertThat(result, ut11::Is::True);
         });
-
         Then("the given occurred as expected", [&]() {
 
         	MockVerify(output->mockBeginGiven, givenDescription);
         	MockVerify(mockGiven);
             MockVerify(output->mockEndGiven, givenDescription);
         });
-
         Then("the when occurred as expected", [&]() {
 
         	MockVerify(output->mockBeginWhen, whenDescription);
         	MockVerify(mockWhen);
             MockVerify(output->mockEndWhen, whenDescription);
         });
-
         Then("the then occurred as expected", [&]() {
 
         	MockVerify(output->mockBeginThen, thenDescription);
         	MockVerify(mockThen);
             MockVerify(output->mockEndThen, thenDescription);
         });
-
         Then("the finally occurred as expected", [&]() {
 
         	MockVerify(output->mockBeginFinally, finallyDescription);
@@ -122,50 +117,104 @@ public:
             MockVerify(output->mockEndFinally, finallyDescription);
         });
 
-        When("running a Stage with an output that throws a Test Exception", [&]() {
+        When("running a Stage that throws a Test Exception", [&]() {
 
             testException = ut11::TestFailedException(__LINE__, __FILE__, "dsdsa");
             mockThen.SetCallback([&]() { throw testException; });
 
             result = Stage.Run(*output);
         });
+        Then("the finally occurred as expected", [&]() {
 
+        	MockVerify(output->mockBeginFinally, finallyDescription);
+        	MockVerify(mockFinally);
+            MockVerify(output->mockEndFinally, finallyDescription);
+        });
         Then("the result is false", [&]() {
             AssertThat(result, ut11::Is::False);
         });
-
         Then("Output.OnError was called as expected", [&]() {
         	MockVerify(output->mockOnError, testException.GetLine(), testException.GetFile(), testException.GetMessage());
         });
 
-
-        When("running a Stage with an output that throws a std::exception", [&]() {
+        When("running a Stage that throws a std::exception", [&]() {
 
             mockThen.SetCallback([&]() { throw stdException; });
 
             result = Stage.Run(*output);
         });
+        Then("the finally occurred as expected", [&]() {
 
+        	MockVerify(output->mockBeginFinally, finallyDescription);
+        	MockVerify(mockFinally);
+            MockVerify(output->mockEndFinally, finallyDescription);
+        });
         Then("the result is false", [&]() {
             AssertThat(result, ut11::Is::False);
         });
-
         Then("Output.OnError was called as expected", [&]() {
         	MockVerify(output->mockOnError1, ut11::Is::Any<std::exception>());
         });
 
-        When("running a Stage with an output that throws an unknown exception", [&]() {
+        When("running a Stage that throws an unknown exception", [&]() {
 
             mockThen.SetCallback([&]() { throw "unknown exception"; });
 
             result = Stage.Run(*output);
         });
+        Then("the finally occurred as expected", [&]() {
 
+        	MockVerify(output->mockBeginFinally, finallyDescription);
+        	MockVerify(mockFinally);
+            MockVerify(output->mockEndFinally, finallyDescription);
+        });
         Then("the result is false", [&]() {
             AssertThat(result, ut11::Is::False);
         });
-
         Then("Output.OnError was called as expected", [&]() {
+        	MockVerify(output->mockOnUnknownError);
+        });
+
+        When("running a Stage that where the then and finally both fail and the finally fails with a test exception", [&]() {
+
+            testException = ut11::TestFailedException(__LINE__, __FILE__, "dsdsa");
+            mockThen.SetCallback([&]() { throw "unknown exception"; });
+            mockFinally.SetCallback([&]() { throw testException; });
+
+            result = Stage.Run(*output);
+        });
+        Then("the result is false", [&]() {
+            AssertThat(result, ut11::Is::False);
+        });
+        Then("Output.OnError was called as expected", [&]() {
+        	MockVerify(output->mockOnError, testException.GetLine(), testException.GetFile(), testException.GetMessage());
+        });
+
+        When("running a Stage that where the then and finally both fail and the finally fails with standard exception", [&]() {
+
+            mockThen.SetCallback([&]() { throw "unknown exception"; });
+            mockFinally.SetCallback([&]() { throw stdException; });
+
+            result = Stage.Run(*output);
+        });
+        Then("the result is false", [&]() {
+            AssertThat(result, ut11::Is::False);
+        });
+        Then("Output.OnError was called as expected", [&]() {
+        	MockVerify(output->mockOnError1, ut11::Is::Any<std::exception>());
+        });
+
+        When("running a Stage that where the then and finally both fail and the finally fails with unknown exceptions", [&]() {
+
+            mockThen.SetCallback([&]() { throw stdException; });
+            mockFinally.SetCallback([&]() { throw "unknown exception"; });
+
+            result = Stage.Run(*output);
+        });
+        Then("the result is false", [&]() {
+            AssertThat(result, ut11::Is::False);
+        });
+        Then("Output.OnError was called twice as expected", [&]() {
         	MockVerify(output->mockOnUnknownError);
         });
 
@@ -175,7 +224,6 @@ public:
             Stage = ut11::Utility::TestStageImpl(invalid,invalid,invalid,invalid);
             result = Stage.Run(*output);
         });
-
         Then("the result is true", [&]() {
             AssertThat(result, ut11::Is::True);
         });

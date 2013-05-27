@@ -49,10 +49,18 @@ namespace
 	class FakeTestStage : public ut11::Utility::TestStage
 	{
 	public:
+		FakeTestStage()
+			: WasTestStageRun(false)
+		{
+		}
+
 		virtual ~FakeTestStage() { }
+
+		bool WasTestStageRun;
 
 		virtual bool Run(ut11::Output&)
 		{
+			WasTestStageRun = true;
 			return V;
 		}
 	};
@@ -124,7 +132,7 @@ public:
             MockVerify(builder->mockPushFinally, ut11::Will::Pass([&](ut11::Utility::TestStep step) { return ( step.description == m_description ); }));
         });
 
-        Then("when running a TestFixture", [&]() {
+        Then("when running a TestFixture the stages are ran", [&]() {
 
             FakeTestStageBuilder* builder = new FakeTestStageBuilder;
             std::unique_ptr<FakeTestStageBuilder> StageBuilder(builder);
@@ -139,6 +147,8 @@ public:
 
             FakeOutput mockOutput;
             auto results = fixture.Run(mockOutput);
+
+            AssertThat(mockTestStage->WasTestStageRun, ut11::Is::True);
             AssertThat(results.ran, ut11::Is::EqualTo(std::size_t(1)));
             AssertThat(results.succeeded, ut11::Is::EqualTo(std::size_t(1)));
 
@@ -161,6 +171,8 @@ public:
 
             FakeOutput mockOutput;
             auto results = fixture.Run(mockOutput);
+
+            AssertThat(mockTestStage->WasTestStageRun, ut11::Is::True);
             AssertThat(results.ran, ut11::Is::EqualTo(1u));
             AssertThat(results.succeeded, ut11::Is::EqualTo(0u));
 
