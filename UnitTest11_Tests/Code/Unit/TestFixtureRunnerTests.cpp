@@ -92,16 +92,23 @@ public:
         Given("a TestFixtureRunner with added Fixture with failing tests", [&]() {
             m_runner = ut11::TestFixtureRunner();
 
+            m_expectedResult = 2;
+
             ut11::TestFixtureResults fixtureResults;
             fixtureResults.ran = 5;
             fixtureResults.succeeded = 3;
-            m_expectedResult = 2;
 
-            FakeTestFixture* fixture = new FakeTestFixture(fixtureResults);
-            fixture->mockGetName.SetReturn(std::string("name"));
+            FakeTestFixture* fixtureOne = new FakeTestFixture(fixtureResults);
+            fixtureOne->mockGetName.SetReturn(std::string("nameOne"));
 
-            m_runner.AddFixture(std::unique_ptr<ut11::TestFixtureAbstract>(fixture));
+            fixtureResults.ran = 4;
+            fixtureResults.succeeded = 4;
 
+            FakeTestFixture* fixtureTwo = new FakeTestFixture(fixtureResults);
+            fixtureTwo->mockGetName.SetReturn(std::string("nameTwo"));
+
+            m_runner.AddFixture(std::unique_ptr<ut11::TestFixtureAbstract>(fixtureOne));
+            m_runner.AddFixture(std::unique_ptr<ut11::TestFixtureAbstract>(fixtureTwo));
         });
         When("running the TestFixtureRunner", [&]() {
             m_result = m_runner.Run(m_output);
