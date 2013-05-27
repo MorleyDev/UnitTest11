@@ -98,7 +98,7 @@ public:
             m_expectedResult = 2;
 
             FakeTestFixture* fixture = new FakeTestFixture(fixtureResults);
-            fixture->mockGetName.SetReturn("name");
+            fixture->mockGetName.SetReturn(std::string("name"));
 
             m_runner.AddFixture(std::unique_ptr<ut11::TestFixtureAbstract>(fixture));
 
@@ -140,8 +140,10 @@ public:
 		When("Running the test fixture runner", [&]() {
 			m_runner.Run(m_output);
 		});
-		Then("only the first test fixture is ran", [&]() {
+		Then("the first test fixture is ran", [&]() {
 			AssertThat(m_fixtureOne->RunOutputUsed, ut11::Is::Not::Null);
+		});
+		Then("the second test fixture is not ran", [&](){
 			AssertThat(m_fixtureTwo->RunOutputUsed, ut11::Is::Null);
 		});
 	}
