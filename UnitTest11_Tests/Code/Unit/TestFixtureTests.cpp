@@ -45,140 +45,197 @@ namespace
 		virtual void OnError(const std::exception& ex) { mockOnError1(ex); }
 	};
 
-	template<bool V>
 	class FakeTestStage : public ut11::Utility::TestStage
 	{
+	private:
+		bool m_result;
+
 	public:
-		FakeTestStage()
-			: WasTestStageRun(false)
+		bool WasTestStageRun;
+
+		FakeTestStage(bool result)
+			: m_result(result), WasTestStageRun(false)
 		{
 		}
 
 		virtual ~FakeTestStage() { }
 
-		bool WasTestStageRun;
 
 		virtual bool Run(ut11::Output&)
 		{
 			WasTestStageRun = true;
-			return V;
+			return m_result;
 		}
 	};
 }
 
-class TestFixtureTest : public ut11::TestFixture
+class TestFixtureConstructionTests : public ut11::TestFixture
 {
+private:
+	std::unique_ptr<ut11::TestFixture> m_fixture;
+	std::string m_name;
+
+public:
+	virtual void Run()
+	{
+		Given("a fixture constructed with a name", [&]() {
+
+            std::unique_ptr<FakeTestStageBuilder> StageBuilder(new FakeTestStageBuilder);
+			m_name = std::string("name");
+
+			m_fixture = std::move(std::unique_ptr<ut11::TestFixture>(new ut11::TestFixture(m_name, std::move(StageBuilder))));
+		});
+		Then("the name is as expected", [&]() {
+
+			AssertThat(m_fixture->GetName(), ut11::Is::EqualTo(m_name));
+		});
+
+		When("setting the name", [&]() {
+			m_name = "other_name";
+			m_fixture->SetName(m_name);
+		});
+		Then("the name is as expected", [&]() {
+
+			AssertThat(m_fixture->GetName(), ut11::Is::EqualTo(m_name));
+		});
+	}
+};
+DeclareFixture(TestFixtureConstructionTests);
+
+class TestFixtureGivenWhenThenTest : public ut11::TestFixture
+{
+private:
+	std::unique_ptr<ut11::TestFixture> m_fixture;
+	FakeTestStageBuilder* m_mockBuilder;
+	std::string m_expectedDescription;
+
 public:
     virtual void Run()
     {
-    	Then("a fixture constructed with a name has that name", [&]() {
+    	Given("a Test Fixture", [&]() {
 
-            std::unique_ptr<FakeTestStageBuilder> StageBuilder(new FakeTestStageBuilder);
-			std::string name("name");
-			ut11::TestFixture fixture(name, std::move(StageBuilder));
-
-			AssertThat(fixture.GetName(), ut11::Is::EqualTo(name));
+    		m_mockBuilder = new FakeTestStageBuilder;
+            m_fixture = std::move(std::unique_ptr<ut11::TestFixture>(new ut11::TestFixture("name", std::unique_ptr<FakeTestStageBuilder>(m_mockBuilder))));
     	});
 
-        Then("when calling the Given on a fixture, the expected call is made", [&]() {
+    	When("calling the Given", [&]() {
 
-            std::string m_description = "description";
+            m_expectedDescription = "description";
 
-            FakeTestStageBuilder* builder = new FakeTestStageBuilder;
-            std::unique_ptr<FakeTestStageBuilder> StageBuilder(builder);
+            m_fixture->Given(m_expectedDescription, [](){ });
+    	});
+        Then("the expected call is made", [&]() {
 
-            ut11::TestFixture fixture("name", std::move(StageBuilder));
-            fixture.Given(m_description, [](){});
-
-            MockVerify(builder->mockPushGiven, ut11::Will::Pass([&](ut11::Utility::TestStep step) { return ( step.description == m_description ); }));
+            MockVerify(m_mockBuilder->mockPushGiven, ut11::Will::Pass([&](ut11::Utility::TestStep step) { return ( step.description == m_expectedDescription ); }));
         });
 
-        Then("when calling the When on a fixture, the expected call is made", [&]() {
+    	When("calling the When", [&]() {
 
-            std::string m_description = "description";
+            m_expectedDescription = "description";
 
-            FakeTestStageBuilder* builder = new FakeTestStageBuilder;
-            std::unique_ptr<FakeTestStageBuilder> StageBuilder(builder);
+            m_fixture->When(m_expectedDescription, [](){ });
+    	});
+        Then("the expected call is made", [&]() {
 
-            ut11::TestFixture fixture("name", std::move(StageBuilder));
-            fixture.When(m_description, [](){});
-
-            MockVerify(builder->mockPushWhen, ut11::Will::Pass([&](ut11::Utility::TestStep step) { return ( step.description == m_description ); }));
+            MockVerify(m_mockBuilder->mockPushWhen, ut11::Will::Pass([&](ut11::Utility::TestStep step) { return ( step.description == m_expectedDescription ); }));
         });
 
-        Then("when calling the Then on a fixture, the expected call is made", [&]() {
+    	When("calling the Then", [&]() {
 
-            std::string m_description = "description";
+            m_expectedDescription = "description";
 
-            FakeTestStageBuilder* builder = new FakeTestStageBuilder;
-            std::unique_ptr<FakeTestStageBuilder> StageBuilder(builder);
+            m_fixture->Then(m_expectedDescription, [](){ });
+    	});
+        Then("the expected call is made", [&]() {
 
-            ut11::TestFixture fixture("name", std::move(StageBuilder));
-            fixture.Then(m_description, [](){});
-
-            MockVerify(builder->mockPushThen, ut11::Will::Pass([&](ut11::Utility::TestStep step) { return ( step.description == m_description ); }));
+            MockVerify(m_mockBuilder->mockPushThen, ut11::Will::Pass([&](ut11::Utility::TestStep step) { return ( step.description == m_expectedDescription ); }));
         });
 
-        Then("when calling the Finally on a fixture, the expected call is made", [&]() {
+    	When("calling the Finally", [&]() {
 
-            std::string m_description = "description";
+            m_expectedDescription = "description";
 
-            FakeTestStageBuilder* builder = new FakeTestStageBuilder;
-            std::unique_ptr<FakeTestStageBuilder> StageBuilder(builder);
+            m_fixture->Finally(m_expectedDescription, [](){ });
+    	});
+        Then("the expected call is made", [&]() {
 
-            ut11::TestFixture fixture("name", std::move(StageBuilder));
-            fixture.Finally(m_description, [](){});
-
-            MockVerify(builder->mockPushFinally, ut11::Will::Pass([&](ut11::Utility::TestStep step) { return ( step.description == m_description ); }));
-        });
-
-        Then("when running a TestFixture the stages are ran", [&]() {
-
-            FakeTestStageBuilder* builder = new FakeTestStageBuilder;
-            std::unique_ptr<FakeTestStageBuilder> StageBuilder(builder);
-
-            std::vector< std::shared_ptr<ut11::Utility::TestStage> > Stages;
-            std::shared_ptr< FakeTestStage<true> > mockTestStage(new FakeTestStage<true> );
-            Stages.push_back(mockTestStage);
-            builder->mockStage.SetReturn(Stages);
-
-            std::string fixtureName = "fixtureName";
-            ut11::TestFixture fixture(fixtureName, std::move(StageBuilder));
-
-            FakeOutput mockOutput;
-            auto results = fixture.Run(mockOutput);
-
-            AssertThat(mockTestStage->WasTestStageRun, ut11::Is::True);
-            AssertThat(results.ran, ut11::Is::EqualTo(std::size_t(1)));
-            AssertThat(results.succeeded, ut11::Is::EqualTo(std::size_t(1)));
-
-            MockVerify(mockOutput.mockBeginFixture, fixtureName);
-            MockVerify(mockOutput.mockEndFixture, fixtureName);
-        });
-
-        Then("when running a TestFixture with a failure", [&]() {
-
-            FakeTestStageBuilder* builder = new FakeTestStageBuilder;
-            std::unique_ptr<FakeTestStageBuilder> StageBuilder(builder);
-
-            std::vector< std::shared_ptr<ut11::Utility::TestStage> > Stages;
-            std::shared_ptr< FakeTestStage<false> > mockTestStage(new FakeTestStage<false> );
-            Stages.push_back(mockTestStage);
-            builder->mockStage.SetReturn(Stages);
-
-            std::string fixtureName = "fixtureName";
-            ut11::TestFixture fixture(fixtureName, std::move(StageBuilder));
-
-            FakeOutput mockOutput;
-            auto results = fixture.Run(mockOutput);
-
-            AssertThat(mockTestStage->WasTestStageRun, ut11::Is::True);
-            AssertThat(results.ran, ut11::Is::EqualTo(1u));
-            AssertThat(results.succeeded, ut11::Is::EqualTo(0u));
-
-            MockVerify(mockOutput.mockBeginFixture, fixtureName);
-            MockVerify(mockOutput.mockEndFixture, fixtureName);
+            MockVerify(m_mockBuilder->mockPushFinally, ut11::Will::Pass([&](ut11::Utility::TestStep step) { return ( step.description == m_expectedDescription ); }));
         });
     }
 };
-DeclareFixture(TestFixtureTest);
+DeclareFixture(TestFixtureGivenWhenThenTest);
+
+class TestFixtureRunTests : public ut11::TestFixture
+{
+private:
+	std::unique_ptr<ut11::TestFixture> m_fixture;
+	std::string m_fixtureName;
+
+	FakeTestStageBuilder* m_mockBuilder;
+    FakeOutput m_mockOutput;
+    std::shared_ptr< FakeTestStage > m_mockTestStage;
+
+	ut11::TestFixtureResults m_fixtureResults;
+
+public:
+	virtual void Run()
+	{
+    	Given("a Test Fixture", [&]() {
+
+    		m_fixtureName = "name";
+
+    		m_mockBuilder = new FakeTestStageBuilder;
+            m_fixture = std::move(std::unique_ptr<ut11::TestFixture>(new ut11::TestFixture(m_fixtureName, std::unique_ptr<FakeTestStageBuilder>(m_mockBuilder))));
+    	});
+
+    	When("running the test fixture with successful stages", [&]() {
+
+            std::vector< std::shared_ptr<ut11::Utility::TestStage> > Stages;
+            Stages.push_back(std::make_shared<FakeTestStage>(true));
+            Stages.push_back(std::make_shared<FakeTestStage>(true));
+            Stages.push_back(m_mockTestStage = std::make_shared<FakeTestStage>(true));
+            Stages.push_back(std::make_shared<FakeTestStage>(true));
+            m_mockBuilder->mockStage.SetReturn(Stages);
+
+            m_mockOutput = FakeOutput();
+            m_fixtureResults = m_fixture->Run(m_mockOutput);
+    	});
+        Then("the output is told the fixture has begun", [&]() {
+            MockVerify(m_mockOutput.mockBeginFixture, m_fixtureName);
+        });
+    	Then("the test stage was ran", [&]() {
+            AssertThat(m_mockTestStage->WasTestStageRun, ut11::Is::True);
+    	});
+    	Then("the expected number of tests are ran", [&]() {
+            AssertThat(m_fixtureResults.ran, ut11::Is::EqualTo(4u));
+    	});
+    	Then("the expected number of tests succeed", [&]() {
+            AssertThat(m_fixtureResults.succeeded, ut11::Is::EqualTo(4u));
+    	});
+        Then("the output is told the fixture has ended", [&]() {
+            MockVerify(m_mockOutput.mockEndFixture, m_fixtureName);
+        });
+
+    	When("running the test fixture with a failing stage", [&]() {
+
+            std::vector< std::shared_ptr<ut11::Utility::TestStage> > Stages;
+            Stages.push_back(std::make_shared<FakeTestStage>(true));
+            Stages.push_back(std::make_shared<FakeTestStage>(true));
+            Stages.push_back(m_mockTestStage = std::make_shared<FakeTestStage>(false));
+            Stages.push_back(std::make_shared<FakeTestStage>(true));
+            Stages.push_back(std::make_shared<FakeTestStage>(false));
+            m_mockBuilder->mockStage.SetReturn(Stages);
+
+            m_mockOutput = FakeOutput();
+            m_fixtureResults = m_fixture->Run(m_mockOutput);
+    	});
+    	Then("the expected number of tests are ran", [&]() {
+            AssertThat(m_fixtureResults.ran, ut11::Is::EqualTo(5u));
+    	});
+    	Then("the expected number of tests succeed", [&]() {
+            AssertThat(m_fixtureResults.succeeded, ut11::Is::EqualTo(3u));
+    	});
+	}
+};
+DeclareFixture(TestFixtureRunTests);
+

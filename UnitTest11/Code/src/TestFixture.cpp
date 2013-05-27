@@ -52,12 +52,12 @@ ut11::TestFixtureResults ut11::TestFixture::Run(Output& output)
     Run();
 
     ut11::TestFixtureResults counter;
-    auto Stages = m_StageBuilder->Stage();
-    for(auto Stage : Stages)
+    auto stages = m_StageBuilder->Stage();
+    for(auto stage : stages)
     {
         ++counter.ran;
 
-        if ( Stage->Run(output) )
+        if ( stage->Run(output) )
             ++counter.succeeded;
     }
     output.EndFixture(m_name);
