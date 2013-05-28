@@ -8,11 +8,9 @@ public:
         Then("Is::Zero(0) is True", []() {
             AssertThat(ut11::Is::Zero(0), ut11::Is::True);
         });
-
         Then("Is::Zero(0.0f) is True", []() {
             AssertThat(ut11::Is::Zero(0.0f), ut11::Is::True);
         });
-
         Then("Is::Zero(1) is False", []() {
             AssertThat(ut11::Is::Zero(1), ut11::Is::False);
         });
@@ -20,11 +18,9 @@ public:
         Then("Is::Zero(-1) is False", []() {
             AssertThat(ut11::Is::Zero(-1), ut11::Is::False);
         });
-
         Then("Is::Zero is Operand", []() {
             AssertThat(ut11::Utility::IsOperand< decltype(ut11::Is::Zero) >::value, ut11::Is::True);
         });
-
         Then("Is::Zero has an error message", []() {
             AssertThat(ut11::Is::Zero.GetErrorMessage(1), ut11::Is::Not::EqualTo(""));
         });

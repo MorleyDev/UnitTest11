@@ -30,6 +30,9 @@ namespace
 		MockAction(BeginFixture, std::string)
 		MockAction(EndFixture, std::string)
 
+		MockAction(BeginTest)
+		MockAction(EndTest)
+
 		MockAction(BeginGiven, std::string)
 		MockAction(EndGiven, std::string)
 

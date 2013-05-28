@@ -21,55 +21,89 @@ void ut11::StdOutput::BeginFixture(std::string name)
 	std::cout << "Fixture: " << name << std::endl;
 	m_given = "";
 	m_when = "";
+	m_finally = "";
+}
+
+void ut11::StdOutput::EndFixture(std::string)
+{
+	if ( m_finally != "" )
+		std::cout << "    Finally: " << m_finally << std::endl;
+}
+
+
+void ut11::StdOutput::BeginTest()
+{
+	m_testStartTime = std::chrono::system_clock::now();
+	m_testRunTime = std::chrono::system_clock::duration(0);
+}
+
+void ut11::StdOutput::EndTest()
+{
+	std::cout << " [" << std::chrono::duration_cast<std::chrono::duration<float>>(m_testRunTime).count() << "s]" << std::endl;
 }
 
 void ut11::StdOutput::BeginGiven(std::string given)
 {
+	m_testStartTime = std::chrono::system_clock::now();
+
 	if (m_given == given)
 		return;
+
+	if ( m_finally != "" )
+		std::cout << "    Finally: " << m_finally << std::endl;
 
 	m_given = given;
 	m_when = "";
 	std::cout << "    Given: " << given << std::endl;
+
+	m_testStartTime = std::chrono::system_clock::now();
+}
+
+void ut11::StdOutput::EndGiven(std::string)
+{
+	m_testRunTime +=  std::chrono::system_clock::now() - m_testStartTime;
 }
 
 void ut11::StdOutput::BeginWhen(std::string when)
 {
+	m_testStartTime = std::chrono::system_clock::now();
+
 	if (m_when == when)
 		return;
 
 	m_when = when;
 	std::cout << "        When: " << when << std::endl;
-}
 
-void ut11::StdOutput::BeginThen(std::string then)
-{
-	std::cout << "            Then: " << then << std::endl;
-}
-
-void ut11::StdOutput::BeginFinally(std::string finally)
-{
-	std::cout << "    Finally: " << finally << std::endl;
-	m_given = "";
-	m_when = "";
-}
-
-void ut11::StdOutput::EndFixture(std::string) {
-}
-
-void ut11::StdOutput::EndGiven(std::string) {
+	m_testStartTime = std::chrono::system_clock::now();
 }
 
 void ut11::StdOutput::EndWhen(std::string)
 {
+	m_testRunTime +=  std::chrono::system_clock::now() - m_testStartTime;
+}
+
+void ut11::StdOutput::BeginThen(std::string then)
+{
+	std::cout << "            Then: " << then;
+
+	m_testStartTime = std::chrono::system_clock::now();
 }
 
 void ut11::StdOutput::EndThen(std::string)
 {
+	m_testRunTime +=  std::chrono::system_clock::now() - m_testStartTime;
+}
+
+void ut11::StdOutput::BeginFinally(std::string finally)
+{
+	m_finally = finally;
+
+	m_testStartTime = std::chrono::system_clock::now();
 }
 
 void ut11::StdOutput::EndFinally(std::string)
 {
+	m_testRunTime +=  std::chrono::system_clock::now() - m_testStartTime;
 }
 
 void ut11::StdOutput::Finish(std::size_t ran, std::size_t succeeded)

@@ -48,10 +48,14 @@ bool ut11::Utility::TestStageImpl::Run(Output& output)
 	};
 
 	auto theFinallyFunction = [&]() -> void {
+		output.EndTest();
+
 		Finally(output);
 	};
 	auto theGivenWhenThenFinallyFunctions = [&]() -> void
 	{
+		output.BeginTest();
+
 		Given(output);
     	When(output);
     	Then(output);
@@ -61,6 +65,7 @@ bool ut11::Utility::TestStageImpl::Run(Output& output)
 	if (!runInsideTryCatch(theGivenWhenThenFinallyFunctions))
 	{
 		runInsideTryCatch(theFinallyFunction);
+
 		return false;
 	}
 	return true;

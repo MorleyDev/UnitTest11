@@ -13,6 +13,9 @@ namespace
 		MockAction(BeginFixture, std::string)
 		MockAction(EndFixture, std::string)
 
+		MockAction(BeginTest)
+		MockAction(EndTest)
+
 		MockAction(BeginGiven, std::string)
 		MockAction(EndGiven, std::string)
 
@@ -92,6 +95,9 @@ public:
         Then("the result is true", [&]() {
             AssertThat(result, ut11::Is::True);
         });
+        Then("the begin test occurred as expected", [&]() {
+        	MockVerify(output->mockBeginTest);
+        });
         Then("the given occurred as expected", [&]() {
 
         	MockVerify(output->mockBeginGiven, givenDescription);
@@ -115,6 +121,9 @@ public:
         	MockVerify(output->mockBeginFinally, finallyDescription);
         	MockVerify(mockFinally);
             MockVerify(output->mockEndFinally, finallyDescription);
+        });
+        Then("the end test occurred as expected", [&]() {
+        	MockVerify(output->mockEndTest);
         });
 
         When("running a Stage that throws a Test Exception", [&]() {

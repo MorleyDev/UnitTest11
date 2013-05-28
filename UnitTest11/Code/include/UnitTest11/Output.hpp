@@ -17,6 +17,9 @@ namespace ut11
         virtual void BeginFixture(std::string) = 0;
         virtual void EndFixture(std::string) = 0;
 
+        virtual void BeginTest() = 0;
+        virtual void EndTest() = 0;
+
         virtual void BeginGiven(std::string) = 0;
         virtual void EndGiven(std::string) = 0;
 
