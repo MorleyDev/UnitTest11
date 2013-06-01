@@ -6,15 +6,15 @@
 #include "Mock.hpp"
 
 // There is probably some way to auto-generate these via recursive macros.
-#define UT11_DECLARE_FIXTURE_1(Fixture) namespace { ut11::DeclareFixtureObj<Fixture> ut11Fixture_##Fixture(#Fixture); }
-#define UT11_DECLARE_FIXTURE_2(Fixture, Arguments...) namespace { ut11::DeclareFixtureObj<Fixture> ut11Fixture_##Fixture(#Fixture, Arguments); }
-#define UT11_DECLARE_FIXTURE_3(Fixture, Arguments...) namespace { ut11::DeclareFixtureObj<Fixture> ut11Fixture_##Fixture(#Fixture, Arguments); }
-#define UT11_DECLARE_FIXTURE_4(Fixture, Arguments...) namespace { ut11::DeclareFixtureObj<Fixture> ut11Fixture_##Fixture(#Fixture, Arguments); }
-#define UT11_DECLARE_FIXTURE_5(Fixture, Arguments...) namespace { ut11::DeclareFixtureObj<Fixture> ut11Fixture_##Fixture(#Fixture, Arguments); }
-#define UT11_DECLARE_FIXTURE_6(Fixture, Arguments...) namespace { ut11::DeclareFixtureObj<Fixture> ut11Fixture_##Fixture(#Fixture, Arguments); }
-#define UT11_DECLARE_FIXTURE_7(Fixture, Arguments...) namespace { ut11::DeclareFixtureObj<Fixture> ut11Fixture_##Fixture(#Fixture, Arguments); }
-#define UT11_DECLARE_FIXTURE_8(Fixture, Arguments...) namespace { ut11::DeclareFixtureObj<Fixture> ut11Fixture_##Fixture(#Fixture, Arguments); }
-#define UT11_DECLARE_FIXTURE_9(Fixture, Arguments...) namespace { ut11::DeclareFixtureObj<Fixture> ut11Fixture_##Fixture(#Fixture, Arguments); }
+#define UT11_DECLARE_FIXTURE_2(line, Fixture) namespace { ut11::DeclareFixtureObj<Fixture> ut11Fixture##line (#Fixture); }
+#define UT11_DECLARE_FIXTURE_3(line, Fixture, Arguments...) namespace { ut11::DeclareFixtureObj<Fixture> ut11Fixture##line (#Fixture, Arguments); }
+#define UT11_DECLARE_FIXTURE_4(line, Fixture, Arguments...) namespace { ut11::DeclareFixtureObj<Fixture> ut11Fixture##line (#Fixture, Arguments); }
+#define UT11_DECLARE_FIXTURE_5(line, Fixture, Arguments...) namespace { ut11::DeclareFixtureObj<Fixture> ut11Fixture##line (#Fixture, Arguments); }
+#define UT11_DECLARE_FIXTURE_6(line, Fixture, Arguments...) namespace { ut11::DeclareFixtureObj<Fixture> ut11Fixture##line (#Fixture, Arguments); }
+#define UT11_DECLARE_FIXTURE_7(line, Fixture, Arguments...) namespace { ut11::DeclareFixtureObj<Fixture> ut11Fixture##line (#Fixture, Arguments); }
+#define UT11_DECLARE_FIXTURE_8(line, Fixture, Arguments...) namespace { ut11::DeclareFixtureObj<Fixture> ut11Fixture##line (#Fixture, Arguments); }
+#define UT11_DECLARE_FIXTURE_9(line, Fixture, Arguments...) namespace { ut11::DeclareFixtureObj<Fixture> ut11Fixture##line (#Fixture, Arguments); }
+#define UT11_DECLARE_FIXTURE_10(line, Fixture, Arguments...) namespace { ut11::DeclareFixtureObj<Fixture> ut11Fixture##line (#Fixture, Arguments); }
 
 #define UT11_MOCK_ACTION_1(Name) mutable ut11::Mock<void (void)> mock##Name; virtual void Name() { mock##Name(); }
 #define UT11_MOCK_ACTION_2(Name, Arg1) mutable ut11::Mock<void (Arg1)> mock##Name; virtual void Name(Arg1 a1) { mock##Name(a1); }
@@ -124,7 +124,7 @@
  * Passes any arguments given on the right of the fixture name to that fixture's constructor.
  * Can not add the same fixture multiple times (compilation error).
  */
-#define DeclareFixture(args...) UT11_DECLARE_FIXTURE_N(UT11_VA_NARGS(args), args)
+#define DeclareFixture(args...) UT11_DECLARE_FIXTURE_N(UT11_VA_NARGS(__LINE__, args), __LINE__, args)
 
 /*! \brief Assert that for the given Actual, the Expectation is true */
 #define AssertThat(Actual, Expectation) ut11::Assert::That(__LINE__, __FILE__, Actual, Expectation)
