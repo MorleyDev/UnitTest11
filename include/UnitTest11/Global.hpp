@@ -34,8 +34,7 @@ namespace ut11
     	 {
     	 }
 
-        template<typename... ARGS>
-        int operator()(ARGS&&... args)
+        template<typename... ARGS> int operator()(ARGS&&... args)
         {
             std::unique_ptr<T> fixture( new T(std::forward<ARGS>(args)...) );
             fixture->SetName(m_name + "(" + GetString(args...));

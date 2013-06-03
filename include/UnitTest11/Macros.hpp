@@ -11,15 +11,15 @@
 #define UT11_MACRO_CONCAT(func, suffix) func##suffix
 
 // There is probably some way to auto-generate these via recursive macros.
-#define UT11_DECLARE_FIXTURE_2(line, Arguments...)  static auto ut11Fixture##line = ut11::DeclareFixtureObj<Arguments>(#Arguments)
-#define UT11_DECLARE_FIXTURE_3(line, Arguments...)  static auto ut11Fixture##line = ut11::DeclareFixtureObj<Arguments>(#Arguments)
-#define UT11_DECLARE_FIXTURE_4(line, Arguments...)  static auto ut11Fixture##line = ut11::DeclareFixtureObj<Arguments(#Arguments)
-#define UT11_DECLARE_FIXTURE_5(line, Arguments...)  static auto ut11Fixture##line = ut11::DeclareFixtureObj<Arguments>(#Arguments)
-#define UT11_DECLARE_FIXTURE_6(line, Arguments...)  static auto ut11Fixture##line = ut11::DeclareFixtureObj<Arguments>(#Arguments)
-#define UT11_DECLARE_FIXTURE_7(line, Arguments...)  static auto ut11Fixture##line = ut11::DeclareFixtureObj<Arguments>(#Arguments)
-#define UT11_DECLARE_FIXTURE_8(line, Arguments...)  static auto ut11Fixture##line = ut11::DeclareFixtureObj<Arguments>(#Arguments)
-#define UT11_DECLARE_FIXTURE_9(line, Arguments...)  static auto ut11Fixture##line = ut11::DeclareFixtureObj<Arguments>(#Arguments)
-#define UT11_DECLARE_FIXTURE_10(line, Arguments...) static auto ut11Fixture##line = ut11::DeclareFixtureObj<Arguments>(#Arguments)
+#define UT11_DECLARE_FIXTURE_2(line, Arguments...)  static const int ut11Fixture##line = ut11::DeclareFixtureObj<Arguments>(#Arguments)
+#define UT11_DECLARE_FIXTURE_3(line, Arguments...)  static const int ut11Fixture##line = ut11::DeclareFixtureObj<Arguments>(#Arguments)
+#define UT11_DECLARE_FIXTURE_4(line, Arguments...)  static const int ut11Fixture##line = ut11::DeclareFixtureObj<Arguments(#Arguments)
+#define UT11_DECLARE_FIXTURE_5(line, Arguments...)  static const int ut11Fixture##line = ut11::DeclareFixtureObj<Arguments>(#Arguments)
+#define UT11_DECLARE_FIXTURE_6(line, Arguments...)  static const int ut11Fixture##line = ut11::DeclareFixtureObj<Arguments>(#Arguments)
+#define UT11_DECLARE_FIXTURE_7(line, Arguments...)  static const int ut11Fixture##line = ut11::DeclareFixtureObj<Arguments>(#Arguments)
+#define UT11_DECLARE_FIXTURE_8(line, Arguments...)  static const int ut11Fixture##line = ut11::DeclareFixtureObj<Arguments>(#Arguments)
+#define UT11_DECLARE_FIXTURE_9(line, Arguments...)  static const int ut11Fixture##line = ut11::DeclareFixtureObj<Arguments>(#Arguments)
+#define UT11_DECLARE_FIXTURE_10(line, Arguments...) static const int ut11Fixture##line = ut11::DeclareFixtureObj<Arguments>(#Arguments)
 
 #define UT11_MOCK_ACTION_1(Name) mutable ut11::Mock<void (void)> mock##Name; virtual void Name() { mock##Name(); }
 #define UT11_MOCK_ACTION_2(Name, Arg1) mutable ut11::Mock<void (Arg1)> mock##Name; virtual void Name(Arg1 a1) { mock##Name(a1); }
