@@ -40,7 +40,7 @@ public:
         });
     }
 };
-DeclareFixture(IsNaNTests);
+DeclareFixture(IsNaNTests)();
 
 class IsNotNaNTests : public ut11::TestFixture
 {
@@ -77,4 +77,4 @@ public:
 
     }
 };
-DeclareFixture(IsNotNaNTests);
+DeclareFixture(IsNotNaNTests)();

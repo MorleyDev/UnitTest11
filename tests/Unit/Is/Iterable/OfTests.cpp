@@ -45,7 +45,7 @@ public:
 
 	}
 };
-DeclareFixture(IsIterableOfTests);
+DeclareFixture(IsIterableOfTests)();
 
 class IsIterableNotOfTests : public ut11::TestFixture
 {
@@ -77,5 +77,5 @@ public:
         });
 	}
 };
-DeclareFixture(IsIterableNotOfTests);
+DeclareFixture(IsIterableNotOfTests)();
 

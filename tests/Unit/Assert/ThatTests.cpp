@@ -147,4 +147,4 @@ public:
 
     }
 };
-DeclareFixture(AssertThatTests);
+DeclareFixture(AssertThatTests)();

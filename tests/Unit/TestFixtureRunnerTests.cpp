@@ -121,7 +121,7 @@ public:
         });
     }
 };
-DeclareFixture(TestFixtureRunnerTests);
+DeclareFixture(TestFixtureRunnerTests)();
 
 class TestFixtureRunnerMultipleFixturesWithSameNameTests : public ut11::TestFixture
 {
@@ -158,4 +158,4 @@ public:
 		});
 	}
 };
-DeclareFixture(TestFixtureRunnerMultipleFixturesWithSameNameTests);
+DeclareFixture(TestFixtureRunnerMultipleFixturesWithSameNameTests)();

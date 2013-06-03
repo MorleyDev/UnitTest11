@@ -38,4 +38,4 @@ public:
         });
     }
 };
-DeclareFixture(IsTrueTests);
+DeclareFixture(IsTrueTests)();

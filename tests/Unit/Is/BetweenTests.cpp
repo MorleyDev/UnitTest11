@@ -30,7 +30,7 @@ public:
         });
     }
 };
-DeclareFixture(IsBetweenTests);
+DeclareFixture(IsBetweenTests)();
 
 class IsNotBetweenTests : public ut11::TestFixture
 {
@@ -62,4 +62,4 @@ public:
         });
     }
 };
-DeclareFixture(IsNotBetweenTests);
+DeclareFixture(IsNotBetweenTests)();

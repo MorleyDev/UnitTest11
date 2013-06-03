@@ -41,7 +41,7 @@ public:
         });
 	}
 };
-DeclareFixture(IsIterableEquivalentToTests);
+DeclareFixture(IsIterableEquivalentToTests)();
 
 class IsIterableNotEquivalentToTests : public ut11::TestFixture
 {
@@ -78,4 +78,4 @@ public:
         });
 	}
 };
-DeclareFixture(IsIterableNotEquivalentToTests);
+DeclareFixture(IsIterableNotEquivalentToTests)();

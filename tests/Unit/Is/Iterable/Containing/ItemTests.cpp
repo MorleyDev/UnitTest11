@@ -29,7 +29,7 @@ public:
         });
 	}
 };
-DeclareFixture(IsIterableContainingItemTests);
+DeclareFixture(IsIterableContainingItemTests)();
 
 class IsIterableNotContainingItemTests : public ut11::TestFixture
 {
@@ -53,4 +53,4 @@ public:
         });
 	}
 };
-DeclareFixture(IsIterableNotContainingItemTests);
+DeclareFixture(IsIterableNotContainingItemTests)();

@@ -103,7 +103,7 @@ public:
 		});
 	}
 };
-DeclareFixture(TestFixtureConstructionTests);
+DeclareFixture(TestFixtureConstructionTests)();
 
 class TestFixtureGivenWhenThenTest : public ut11::TestFixture
 {
@@ -240,5 +240,5 @@ public:
     	});
 	}
 };
-DeclareFixture(TestFixtureRunTests);
+DeclareFixture(TestFixtureRunTests)();
 

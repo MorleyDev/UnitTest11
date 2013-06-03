@@ -124,4 +124,4 @@ public:
 		});
 	}
 };
-DeclareFixture(MinefieldGeneratorTests);
+DeclareFixture(MinefieldGeneratorTests)();

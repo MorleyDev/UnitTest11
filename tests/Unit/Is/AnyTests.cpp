@@ -59,7 +59,7 @@ public:
         });
     }
 };
-DeclareFixture(IsAnyTests);
+DeclareFixture(IsAnyTests)();
 
 class IsNotAnyTests : public ut11::TestFixture
 {
@@ -114,4 +114,4 @@ public:
         });
     }
 };
-DeclareFixture(IsNotAnyTests);
+DeclareFixture(IsNotAnyTests)();

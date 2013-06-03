@@ -25,7 +25,7 @@ public:
         });
     }
 };
-DeclareFixture(IsInfinityTests);
+DeclareFixture(IsInfinityTests)();
 
 class IsNotInfinityTests : public ut11::TestFixture
 {
@@ -51,7 +51,7 @@ public:
 
     }
 };
-DeclareFixture(IsNotInfinityTests);
+DeclareFixture(IsNotInfinityTests)();
 
 class IsPositiveInfinityTests : public ut11::TestFixture
 {
@@ -78,7 +78,7 @@ public:
         });
     }
 };
-DeclareFixture(IsPositiveInfinityTests);
+DeclareFixture(IsPositiveInfinityTests)();
 
 class IsNotPositiveInfinityTests : public ut11::TestFixture
 {
@@ -105,7 +105,7 @@ public:
         });
     }
 };
-DeclareFixture(IsNotPositiveInfinityTests);
+DeclareFixture(IsNotPositiveInfinityTests)();
 
 
 class IsNegativeInfinityTests : public ut11::TestFixture
@@ -133,7 +133,7 @@ public:
         });
     }
 };
-DeclareFixture(IsNegativeInfinityTests);
+DeclareFixture(IsNegativeInfinityTests)();
 
 class IsNotNegativeInfinityTests : public ut11::TestFixture
 {
@@ -160,4 +160,4 @@ public:
         });
     }
 };
-DeclareFixture(IsNotNegativeInfinityTests);
+DeclareFixture(IsNotNegativeInfinityTests)();

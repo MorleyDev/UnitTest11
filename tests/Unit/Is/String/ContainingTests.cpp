@@ -22,7 +22,7 @@ public:
         });
 	}
 };
-DeclareFixture(IsStringContainingSubstringTests);
+DeclareFixture(IsStringContainingSubstringTests)();
 
 
 class IsNotStringContainingSubstringTests : public ut11::TestFixture
@@ -47,7 +47,7 @@ public:
         });
 	}
 };
-DeclareFixture(IsNotStringContainingSubstringTests);
+DeclareFixture(IsNotStringContainingSubstringTests)();
 
 class IsStringContainingCharacterTests : public ut11::TestFixture
 {
@@ -71,7 +71,7 @@ public:
         });
 	}
 };
-DeclareFixture(IsStringContainingCharacterTests);
+DeclareFixture(IsStringContainingCharacterTests)();
 
 
 class IsNotStringContainingCharacterTests : public ut11::TestFixture
@@ -96,4 +96,4 @@ public:
         });
 	}
 };
-DeclareFixture(IsNotStringContainingCharacterTests);
+DeclareFixture(IsNotStringContainingCharacterTests)();

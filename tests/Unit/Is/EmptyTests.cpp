@@ -37,7 +37,7 @@ public:
         });
 	}
 };
-DeclareFixture(IsEmptyTests);
+DeclareFixture(IsEmptyTests)();
 
 class IsNotEmptyTests : public ut11::TestFixture
 {
@@ -69,4 +69,4 @@ public:
         });
 	}
 };
-DeclareFixture(IsNotEmptyTests);
+DeclareFixture(IsNotEmptyTests)();

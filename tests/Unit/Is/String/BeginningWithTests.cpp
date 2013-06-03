@@ -37,7 +37,7 @@ public:
         });
 	}
 };
-DeclareFixture(IsStringBeginningWithTests);
+DeclareFixture(IsStringBeginningWithTests)();
 
 
 class IsNotStringBeginningWithTests : public ut11::TestFixture
@@ -66,4 +66,4 @@ public:
         });
 	}
 };
-DeclareFixture(IsNotStringBeginningWithTests);
+DeclareFixture(IsNotStringBeginningWithTests)();

@@ -5,16 +5,21 @@
 #include "Assert/That.hpp"
 #include "Mock.hpp"
 
+#define UT11_VA_NARGS_IMPL(_1, _2, _3, _4, _5, _6, _7, _8, _9, _10, _11, N, args...) N
+#define UT11_VA_NARGS(args...) UT11_VA_NARGS_IMPL(args, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1)
+
+#define UT11_MACRO_CONCAT(func, suffix) func##suffix
+
 // There is probably some way to auto-generate these via recursive macros.
-#define UT11_DECLARE_FIXTURE_2(line, Fixture) namespace { ut11::DeclareFixtureObj<Fixture> ut11Fixture##line (#Fixture); }
-#define UT11_DECLARE_FIXTURE_3(line, Fixture, Arguments...) namespace { ut11::DeclareFixtureObj<Fixture> ut11Fixture##line (#Fixture, Arguments); }
-#define UT11_DECLARE_FIXTURE_4(line, Fixture, Arguments...) namespace { ut11::DeclareFixtureObj<Fixture> ut11Fixture##line (#Fixture, Arguments); }
-#define UT11_DECLARE_FIXTURE_5(line, Fixture, Arguments...) namespace { ut11::DeclareFixtureObj<Fixture> ut11Fixture##line (#Fixture, Arguments); }
-#define UT11_DECLARE_FIXTURE_6(line, Fixture, Arguments...) namespace { ut11::DeclareFixtureObj<Fixture> ut11Fixture##line (#Fixture, Arguments); }
-#define UT11_DECLARE_FIXTURE_7(line, Fixture, Arguments...) namespace { ut11::DeclareFixtureObj<Fixture> ut11Fixture##line (#Fixture, Arguments); }
-#define UT11_DECLARE_FIXTURE_8(line, Fixture, Arguments...) namespace { ut11::DeclareFixtureObj<Fixture> ut11Fixture##line (#Fixture, Arguments); }
-#define UT11_DECLARE_FIXTURE_9(line, Fixture, Arguments...) namespace { ut11::DeclareFixtureObj<Fixture> ut11Fixture##line (#Fixture, Arguments); }
-#define UT11_DECLARE_FIXTURE_10(line, Fixture, Arguments...) namespace { ut11::DeclareFixtureObj<Fixture> ut11Fixture##line (#Fixture, Arguments); }
+#define UT11_DECLARE_FIXTURE_2(line, Arguments...)  static auto ut11Fixture##line = ut11::DeclareFixtureObj<Arguments>(#Arguments)
+#define UT11_DECLARE_FIXTURE_3(line, Arguments...)  static auto ut11Fixture##line = ut11::DeclareFixtureObj<Arguments>(#Arguments)
+#define UT11_DECLARE_FIXTURE_4(line, Arguments...)  static auto ut11Fixture##line = ut11::DeclareFixtureObj<Arguments(#Arguments)
+#define UT11_DECLARE_FIXTURE_5(line, Arguments...)  static auto ut11Fixture##line = ut11::DeclareFixtureObj<Arguments>(#Arguments)
+#define UT11_DECLARE_FIXTURE_6(line, Arguments...)  static auto ut11Fixture##line = ut11::DeclareFixtureObj<Arguments>(#Arguments)
+#define UT11_DECLARE_FIXTURE_7(line, Arguments...)  static auto ut11Fixture##line = ut11::DeclareFixtureObj<Arguments>(#Arguments)
+#define UT11_DECLARE_FIXTURE_8(line, Arguments...)  static auto ut11Fixture##line = ut11::DeclareFixtureObj<Arguments>(#Arguments)
+#define UT11_DECLARE_FIXTURE_9(line, Arguments...)  static auto ut11Fixture##line = ut11::DeclareFixtureObj<Arguments>(#Arguments)
+#define UT11_DECLARE_FIXTURE_10(line, Arguments...) static auto ut11Fixture##line = ut11::DeclareFixtureObj<Arguments>(#Arguments)
 
 #define UT11_MOCK_ACTION_1(Name) mutable ut11::Mock<void (void)> mock##Name; virtual void Name() { mock##Name(); }
 #define UT11_MOCK_ACTION_2(Name, Arg1) mutable ut11::Mock<void (Arg1)> mock##Name; virtual void Name(Arg1 a1) { mock##Name(a1); }
@@ -82,8 +87,6 @@
 #define UT11_MOCK_VERIFYTIMES_10(mock, count, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8) (mock).VerifyTimes(__LINE__, __FILE__, count, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8)
 #define UT11_MOCK_VERIFYTIMES_11(mock, count, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8, Arg9) (mock).VerifyTimes(__LINE__, __FILE__, count, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8, Arg9)
 
-#define UT11_MACRO_CONCAT(func, suffix) func##suffix
-
 #define UT11_DECLARE_FIXTURE_N(N, args...) UT11_MACRO_CONCAT(UT11_DECLARE_FIXTURE_, N)(args)
 
 #define UT11_MOCK_ACTION_N(N, args...) UT11_MACRO_CONCAT(UT11_MOCK_ACTION_, N)(args)
@@ -93,9 +96,6 @@
 
 #define UT11_MOCK_ACTION_CONST_N(N, args...) UT11_MACRO_CONCAT(UT11_MOCK_ACTION_CONST_, N)(args)
 #define UT11_MOCK_FUNCTION_CONST_N(N, args...) UT11_MACRO_CONCAT(UT11_MOCK_FUNCTION_CONST_, N)(args)
-
-#define UT11_VA_NARGS_IMPL(_1, _2, _3, _4, _5, _6, _7, _8, _9, _10, _11, N, args...) N
-#define UT11_VA_NARGS(args...) UT11_VA_NARGS_IMPL(args, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1)
 
 /*! \brief A mock action with no return values (Name, Arguments...) */
 #define MockAction(args...) UT11_MOCK_ACTION_N(UT11_VA_NARGS(args), args)

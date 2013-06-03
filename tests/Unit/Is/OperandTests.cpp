@@ -20,4 +20,4 @@ public:
         });
     }
 };
-DeclareFixture(IsOperandTests);
+DeclareFixture(IsOperandTests)();

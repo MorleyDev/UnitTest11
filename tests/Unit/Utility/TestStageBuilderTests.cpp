@@ -84,4 +84,4 @@ public:
         });
     }
 };
-DeclareFixture(TestStageBuilderTests);
+DeclareFixture(TestStageBuilderTests)();

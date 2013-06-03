@@ -4,6 +4,8 @@
 #include "TestFixture.hpp"
 #include "Output.hpp"
 
+#include "Utility/ToString.hpp"
+
 namespace ut11
 {
 	/*! \brief Runs all test fixtures with the default std::cout output
@@ -23,12 +25,35 @@ namespace ut11
     template<typename T>
     struct DeclareFixtureObj
     {
+    private:
+    	std::string m_name;
+
+    public:
+    	 explicit DeclareFixtureObj(std::string name)
+    	 	 : m_name(name)
+    	 {
+    	 }
+
         template<typename... ARGS>
-        explicit DeclareFixtureObj(std::string name, ARGS&&... args)
+        int operator()(ARGS&&... args)
         {
             std::unique_ptr<T> fixture( new T(std::forward<ARGS>(args)...) );
-            fixture->SetName(name);
+            fixture->SetName(m_name + "(" + GetString(args...));
             PushFixture(std::move(fixture));
+
+            return 0;
+        }
+
+    private:
+        static std::string GetString()
+        {
+        	return ")";
+        }
+
+        template<typename V, typename... ARGS>
+        static std::string GetString(const V& value, const ARGS&... args)
+        {
+        	return Utility::ToString(value) + ", " + GetString(args...);
         }
     };
 }

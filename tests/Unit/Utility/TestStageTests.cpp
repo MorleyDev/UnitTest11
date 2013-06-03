@@ -238,4 +238,4 @@ public:
         });
     }
 };
-DeclareFixture(TestStageTests);
+DeclareFixture(TestStageTests)();

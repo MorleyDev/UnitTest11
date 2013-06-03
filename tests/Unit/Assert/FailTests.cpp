@@ -39,4 +39,4 @@ public:
         });
     }
 };
-DeclareFixture(AssertFailTests);
+DeclareFixture(AssertFailTests)();

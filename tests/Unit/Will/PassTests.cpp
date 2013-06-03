@@ -46,4 +46,4 @@ public:
         });
     }
 };
-DeclareFixture(WillPassTests);
+DeclareFixture(WillPassTests)();

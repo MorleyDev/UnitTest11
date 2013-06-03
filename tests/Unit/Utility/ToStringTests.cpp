@@ -52,4 +52,4 @@ public:
 		});
 	}
 };
-DeclareFixture(ToStringTests);
+DeclareFixture(ToStringTests)();

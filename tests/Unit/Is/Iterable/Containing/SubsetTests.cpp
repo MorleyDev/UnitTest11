@@ -37,7 +37,7 @@ public:
         });
 	}
 };
-DeclareFixture(IsIterableContainingSubsetTests);
+DeclareFixture(IsIterableContainingSubsetTests)();
 
 class IsIterableNotContainingSubsetTests : public ut11::TestFixture
 {
@@ -69,4 +69,4 @@ public:
         });
 	}
 };
-DeclareFixture(IsIterableNotContainingSubsetTests);
+DeclareFixture(IsIterableNotContainingSubsetTests)();

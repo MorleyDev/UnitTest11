@@ -22,7 +22,7 @@ public:
         });
     }
 };
-DeclareFixture(IsEqualToTests);
+DeclareFixture(IsEqualToTests)();
 
 class IsNotEqualToTests : public ut11::TestFixture
 {
@@ -46,4 +46,4 @@ public:
         });
     }
 };
-DeclareFixture(IsNotEqualToTests);
+DeclareFixture(IsNotEqualToTests)();
