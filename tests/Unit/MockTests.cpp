@@ -77,7 +77,7 @@ public:
         });
     }
 };
-DeclareFixture(MockTest);
+DeclareFixture(MockTest)();
 
 class MockVoidTest : public ut11::TestFixture
 {
@@ -106,4 +106,4 @@ public:
         });
     }
 };
-DeclareFixture(MockVoidTest);
+DeclareFixture(MockVoidTest)();

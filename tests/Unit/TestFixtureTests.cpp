@@ -166,7 +166,7 @@ public:
         });
     }
 };
-DeclareFixture(TestFixtureGivenWhenThenTest);
+DeclareFixture(TestFixtureGivenWhenThenTest)();
 
 class TestFixtureRunTests : public ut11::TestFixture
 {

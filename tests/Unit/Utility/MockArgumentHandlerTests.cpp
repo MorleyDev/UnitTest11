@@ -42,4 +42,4 @@ public:
         });
     }
 };
-DeclareFixture(MockArgumentHandlerTest);
+DeclareFixture(MockArgumentHandlerTest)();

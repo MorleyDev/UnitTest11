@@ -117,4 +117,4 @@ public:
         });
     }
 };
-DeclareFixture(MockReturnHandlerTest);
+DeclareFixture(MockReturnHandlerTest)();
