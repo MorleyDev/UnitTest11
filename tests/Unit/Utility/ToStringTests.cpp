@@ -50,6 +50,15 @@ public:
 
 			AssertThat(ut11::Utility::ToString(std::static_pointer_cast<void>(ptr)), ut11::Is::EqualTo(std::string("shared_ptr<void>:") + ptrString.str()));
 		});
+		Then("ToString a non-stream-writable object returns the name of that object's class", []() {
+
+			struct NotStreamWritable { };
+
+			std::stringstream className;
+			className << "[" << typeid(NotStreamWritable).name() << "]";
+
+			AssertThat(ut11::Utility::ToString(NotStreamWritable()), ut11::Is::EqualTo(className.str()));
+		});
 	}
 };
 DeclareFixture(ToStringTests)();

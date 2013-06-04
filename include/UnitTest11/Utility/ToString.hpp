@@ -12,12 +12,36 @@ namespace ut11
 {
     namespace Utility
     {
+		template<typename T, typename = decltype(std::declval<std::ostream&>() << std::declval<T const&>())>
+		std::true_type IsStreamWritable(const T&)
+		{
+			return std::true_type();
+		}
+
+		template<typename T, typename... Ignored>
+		std::false_type IsStreamWritable(const T&, Ignored const&..., ...)
+		{
+			return std::false_type();
+		}
+
         template<typename V> struct ParseNonIterableToString
         {
             inline std::string operator()(const V& value) const
             {
+                return ToString(value, IsStreamWritable<V>(value));
+            }
+
+            inline std::string ToString(const V& value, std::true_type) const
+            {
                 std::stringstream stream;
                 stream << value;
+                return stream.str();
+            }
+
+            inline std::string ToString(const V& value, std::false_type) const
+            {
+                std::stringstream stream;
+                stream << "[" << typeid(V).name() << "]";
                 return stream.str();
             }
         };

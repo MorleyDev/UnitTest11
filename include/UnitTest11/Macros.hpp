@@ -5,6 +5,12 @@
 #include "Assert/That.hpp"
 #include "Mock.hpp"
 
+#ifdef __COUNTER__
+#define UT11_UNIQUE_NUMBER __COUNTER__
+#else
+#define UT11_UNIQUE_NUMBER __LINE__
+#endif
+
 #define UT11_VA_NARGS_IMPL(_1, _2, _3, _4, _5, _6, _7, _8, _9, _10, _11, N, args...) N
 #define UT11_VA_NARGS(args...) UT11_VA_NARGS_IMPL(args, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1)
 
@@ -13,7 +19,7 @@
 // There is probably some way to auto-generate these via recursive macros.
 #define UT11_DECLARE_FIXTURE_2(line, Arguments...)  static const int ut11Fixture##line = ut11::DeclareFixtureObj<Arguments>(#Arguments)
 #define UT11_DECLARE_FIXTURE_3(line, Arguments...)  static const int ut11Fixture##line = ut11::DeclareFixtureObj<Arguments>(#Arguments)
-#define UT11_DECLARE_FIXTURE_4(line, Arguments...)  static const int ut11Fixture##line = ut11::DeclareFixtureObj<Arguments(#Arguments)
+#define UT11_DECLARE_FIXTURE_4(line, Arguments...)  static const int ut11Fixture##line = ut11::DeclareFixtureObj<Arguments>(#Arguments)
 #define UT11_DECLARE_FIXTURE_5(line, Arguments...)  static const int ut11Fixture##line = ut11::DeclareFixtureObj<Arguments>(#Arguments)
 #define UT11_DECLARE_FIXTURE_6(line, Arguments...)  static const int ut11Fixture##line = ut11::DeclareFixtureObj<Arguments>(#Arguments)
 #define UT11_DECLARE_FIXTURE_7(line, Arguments...)  static const int ut11Fixture##line = ut11::DeclareFixtureObj<Arguments>(#Arguments)
@@ -124,7 +130,7 @@
  * Passes any arguments given on the right of the fixture name to that fixture's constructor.
  * Can not add the same fixture multiple times (compilation error).
  */
-#define DeclareFixture(args...) UT11_DECLARE_FIXTURE_N(UT11_VA_NARGS(__LINE__, args), __LINE__, args)
+#define DeclareFixture(args...) UT11_DECLARE_FIXTURE_N(UT11_VA_NARGS(UT11_UNIQUE_NUMBER, args), UT11_UNIQUE_NUMBER, args)
 
 /*! \brief Assert that for the given Actual, the Expectation is true */
 #define AssertThat(Actual, Expectation) ut11::Assert::That(__LINE__, __FILE__, Actual, Expectation)
