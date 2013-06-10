@@ -28,7 +28,7 @@ namespace ut11
 
     namespace Is
     {
-		/*! \brief Operand returns true if Actual is greater than Expected, otherwise false */
+        /*! \brief Operand returns true if Actual is greater than Expected, otherwise false */
         template<typename U> inline Operands::IsGreaterThan<U> GreaterThan(const U& low)
         {
             return Operands::IsGreaterThan<U>(low);
@@ -36,7 +36,7 @@ namespace ut11
 
         namespace Not
         {
-    		/*! \brief Operand returns true if Actual is not greater than Expected, otherwise false */
+            /*! \brief Operand returns true if Actual is not greater than Expected, otherwise false */
             template<typename U> inline Utility::NotOperand< Operands::IsGreaterThan<U> > GreaterThan(const U& low)
             {
                 return Utility::NotOperand< Operands::IsGreaterThan<U> >(low);

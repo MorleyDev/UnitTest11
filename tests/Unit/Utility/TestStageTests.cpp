@@ -2,38 +2,38 @@
 
 namespace
 {
-	class FakeOutput : public ut11::Output
-	{
-	public:
-		virtual ~FakeOutput() { }
+    class FakeOutput : public ut11::Output
+    {
+    public:
+        virtual ~FakeOutput() { }
 
-		MockAction(Begin)
-		MockAction(Finish, std::size_t, std::size_t)
+        MockAction(Begin)
+        MockAction(Finish, std::size_t, std::size_t)
 
-		MockAction(BeginFixture, std::string)
-		MockAction(EndFixture, std::string)
+        MockAction(BeginFixture, std::string)
+        MockAction(EndFixture, std::string)
 
-		MockAction(BeginTest)
-		MockAction(EndTest)
+        MockAction(BeginTest)
+        MockAction(EndTest)
 
-		MockAction(BeginGiven, std::string)
-		MockAction(EndGiven, std::string)
+        MockAction(BeginGiven, std::string)
+        MockAction(EndGiven, std::string)
 
-		MockAction(BeginWhen, std::string)
-		MockAction(EndWhen, std::string)
+        MockAction(BeginWhen, std::string)
+        MockAction(EndWhen, std::string)
 
-		MockAction(BeginThen, std::string)
-		MockAction(EndThen, std::string)
+        MockAction(BeginThen, std::string)
+        MockAction(EndThen, std::string)
 
-		MockAction(BeginFinally, std::string)
-		MockAction(EndFinally, std::string)
+        MockAction(BeginFinally, std::string)
+        MockAction(EndFinally, std::string)
 
-		MockAction(OnError, std::size_t, std::string, std::string)
-		MockAction(OnUnknownError)
+        MockAction(OnError, std::size_t, std::string, std::string)
+        MockAction(OnUnknownError)
 
-		ut11::Mock<void (std::exception)> mockOnError1;
-		virtual void OnError(const std::exception& ex) { mockOnError1(ex); }
-	};
+        ut11::Mock<void (std::exception)> mockOnError1;
+        virtual void OnError(const std::exception& ex) { mockOnError1(ex); }
+    };
 }
 
 class TestStageTests : public ut11::TestFixture
@@ -96,34 +96,34 @@ public:
             AssertThat(result, ut11::Is::True);
         });
         Then("the begin test occurred as expected", [&]() {
-        	MockVerify(output->mockBeginTest);
+            MockVerify(output->mockBeginTest);
         });
         Then("the given occurred as expected", [&]() {
 
-        	MockVerify(output->mockBeginGiven, givenDescription);
-        	MockVerify(mockGiven);
+            MockVerify(output->mockBeginGiven, givenDescription);
+            MockVerify(mockGiven);
             MockVerify(output->mockEndGiven, givenDescription);
         });
         Then("the when occurred as expected", [&]() {
 
-        	MockVerify(output->mockBeginWhen, whenDescription);
-        	MockVerify(mockWhen);
+            MockVerify(output->mockBeginWhen, whenDescription);
+            MockVerify(mockWhen);
             MockVerify(output->mockEndWhen, whenDescription);
         });
         Then("the then occurred as expected", [&]() {
 
-        	MockVerify(output->mockBeginThen, thenDescription);
-        	MockVerify(mockThen);
+            MockVerify(output->mockBeginThen, thenDescription);
+            MockVerify(mockThen);
             MockVerify(output->mockEndThen, thenDescription);
         });
         Then("the finally occurred as expected", [&]() {
 
-        	MockVerify(output->mockBeginFinally, finallyDescription);
-        	MockVerify(mockFinally);
+            MockVerify(output->mockBeginFinally, finallyDescription);
+            MockVerify(mockFinally);
             MockVerify(output->mockEndFinally, finallyDescription);
         });
         Then("the end test occurred as expected", [&]() {
-        	MockVerify(output->mockEndTest);
+            MockVerify(output->mockEndTest);
         });
 
         When("running a Stage that throws a Test Exception", [&]() {
@@ -135,15 +135,15 @@ public:
         });
         Then("the finally occurred as expected", [&]() {
 
-        	MockVerify(output->mockBeginFinally, finallyDescription);
-        	MockVerify(mockFinally);
+            MockVerify(output->mockBeginFinally, finallyDescription);
+            MockVerify(mockFinally);
             MockVerify(output->mockEndFinally, finallyDescription);
         });
         Then("the result is false", [&]() {
             AssertThat(result, ut11::Is::False);
         });
         Then("Output.OnError was called as expected", [&]() {
-        	MockVerify(output->mockOnError, testException.GetLine(), testException.GetFile(), testException.GetMessage());
+            MockVerify(output->mockOnError, testException.GetLine(), testException.GetFile(), testException.GetMessage());
         });
 
         When("running a Stage that throws a std::exception", [&]() {
@@ -154,15 +154,15 @@ public:
         });
         Then("the finally occurred as expected", [&]() {
 
-        	MockVerify(output->mockBeginFinally, finallyDescription);
-        	MockVerify(mockFinally);
+            MockVerify(output->mockBeginFinally, finallyDescription);
+            MockVerify(mockFinally);
             MockVerify(output->mockEndFinally, finallyDescription);
         });
         Then("the result is false", [&]() {
             AssertThat(result, ut11::Is::False);
         });
         Then("Output.OnError was called as expected", [&]() {
-        	MockVerify(output->mockOnError1, ut11::Is::Any<std::exception>());
+            MockVerify(output->mockOnError1, ut11::Is::Any<std::exception>());
         });
 
         When("running a Stage that throws an unknown exception", [&]() {
@@ -173,15 +173,15 @@ public:
         });
         Then("the finally occurred as expected", [&]() {
 
-        	MockVerify(output->mockBeginFinally, finallyDescription);
-        	MockVerify(mockFinally);
+            MockVerify(output->mockBeginFinally, finallyDescription);
+            MockVerify(mockFinally);
             MockVerify(output->mockEndFinally, finallyDescription);
         });
         Then("the result is false", [&]() {
             AssertThat(result, ut11::Is::False);
         });
         Then("Output.OnError was called as expected", [&]() {
-        	MockVerify(output->mockOnUnknownError);
+            MockVerify(output->mockOnUnknownError);
         });
 
         When("running a Stage that where the then and finally both fail and the finally fails with a test exception", [&]() {
@@ -196,7 +196,7 @@ public:
             AssertThat(result, ut11::Is::False);
         });
         Then("Output.OnError was called as expected", [&]() {
-        	MockVerify(output->mockOnError, testException.GetLine(), testException.GetFile(), testException.GetMessage());
+            MockVerify(output->mockOnError, testException.GetLine(), testException.GetFile(), testException.GetMessage());
         });
 
         When("running a Stage that where the then and finally both fail and the finally fails with standard exception", [&]() {
@@ -210,7 +210,7 @@ public:
             AssertThat(result, ut11::Is::False);
         });
         Then("Output.OnError was called as expected", [&]() {
-        	MockVerify(output->mockOnError1, ut11::Is::Any<std::exception>());
+            MockVerify(output->mockOnError1, ut11::Is::Any<std::exception>());
         });
 
         When("running a Stage that where the then and finally both fail and the finally fails with unknown exceptions", [&]() {
@@ -224,7 +224,7 @@ public:
             AssertThat(result, ut11::Is::False);
         });
         Then("Output.OnError was called twice as expected", [&]() {
-        	MockVerify(output->mockOnUnknownError);
+            MockVerify(output->mockOnUnknownError);
         });
 
         When("calling run with all Stages as invalid functions", [&]() {
@@ -238,4 +238,4 @@ public:
         });
     }
 };
-DeclareFixture(TestStageTests)();
+DeclareFixture(TestStageTests)(ut11::Category("unit"));

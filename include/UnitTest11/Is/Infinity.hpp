@@ -30,7 +30,7 @@ namespace ut11
         {
             template<typename U> bool operator()(const U& value) const
             {
-				return IsInfinity().operator()<U>(value) && value >= 0;
+                return IsInfinity().operator()<U>(value) && value >= 0;
             }
 
             template<typename U> inline std::string GetErrorMessage(const U& actual) const
@@ -45,7 +45,7 @@ namespace ut11
         {
             template<typename U> bool operator()(const U& value) const
             {
-				return IsInfinity().operator()<U>(value) && value <= 0;
+                return IsInfinity().operator()<U>(value) && value <= 0;
             }
 
             template<typename U> inline std::string GetErrorMessage(const U& actual) const
@@ -59,24 +59,24 @@ namespace ut11
 
     namespace Is
     {
-		/*! \brief Operand returns true if Actual is Positive or Negative Infinity, otherwise false */
+        /*! \brief Operand returns true if Actual is Positive or Negative Infinity, otherwise false */
         extern Operands::IsInfinity Infinity;
 
-		/*! \brief Operand returns true if Actual is Positive Infinity, otherwise false */
+        /*! \brief Operand returns true if Actual is Positive Infinity, otherwise false */
         extern Operands::IsPositiveInfinity PositiveInfinity;
 
-		/*! \brief Operand returns true if Actual is Negative Infinity, otherwise false */
+        /*! \brief Operand returns true if Actual is Negative Infinity, otherwise false */
         extern Operands::IsNegativeInfinity NegativeInfinity;
 
         namespace Not
         {
-    		/*! \brief Operand returns false if Actual is Positive or Negative Infinity, otherwise true */
+            /*! \brief Operand returns false if Actual is Positive or Negative Infinity, otherwise true */
             extern Utility::NotOperand<Operands::IsInfinity> Infinity;
 
-    		/*! \brief Operand returns false if Actual is Positive Infinity, otherwise true */
+            /*! \brief Operand returns false if Actual is Positive Infinity, otherwise true */
             extern Utility::NotOperand<Operands::IsPositiveInfinity> PositiveInfinity;
 
-    		/*! \brief Operand returns false if Actual is Negative Infinity, otherwise true */
+            /*! \brief Operand returns false if Actual is Negative Infinity, otherwise true */
             extern Utility::NotOperand<Operands::IsNegativeInfinity> NegativeInfinity;
         }
     }

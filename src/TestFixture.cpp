@@ -6,24 +6,37 @@ ut11::TestFixtureAbstract::~TestFixtureAbstract()
 
 ut11::TestFixture::TestFixture()
     : m_name(),
-      m_StageBuilder(new ut11::Utility::TestStageBuilderImpl)
+      m_StageBuilder(new ut11::Utility::TestStageBuilderImpl),
+      m_categories()
 {
 }
 
 ut11::TestFixture::TestFixture(std::string name)
     : m_name(name),
-      m_StageBuilder(new ut11::Utility::TestStageBuilderImpl)
+      m_StageBuilder(new ut11::Utility::TestStageBuilderImpl),
+      m_categories()
 {
 }
 
 ut11::TestFixture::TestFixture(std::string name, std::unique_ptr<ut11::Utility::TestStageBuilder> builder)
     : m_name(name),
-      m_StageBuilder(std::move(builder))
+      m_StageBuilder(std::move(builder)),
+      m_categories()
 {
 }
 
 ut11::TestFixture::~TestFixture()
 {
+}
+
+void ut11::TestFixture::AddCategory(ut11::Category category)
+{
+	m_categories.insert(category);
+}
+
+std::set<ut11::Category> ut11::TestFixture::GetCategories() const
+{
+	return m_categories;
 }
 
 void ut11::TestFixture::Given(std::string description, std::function<void(void)> logic)

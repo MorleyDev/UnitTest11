@@ -30,7 +30,7 @@ namespace ut11
 
     namespace Is
     {
-		/*! \brief Operand returns true if Actual is greater than or equal to low, and Actual is less than or equal to high, otherwise false */
+        /*! \brief Operand returns true if Actual is greater than or equal to low, and Actual is less than or equal to high, otherwise false */
         template<typename U, typename V> inline Operands::IsBetween<U,V> Between(const U& low, const V& high)
         {
             return Operands::IsBetween<U,V>(low, high);
@@ -38,7 +38,7 @@ namespace ut11
 
         namespace Not
         {
-    		/*! \brief Operand returns true if Actual is less than low, or Actual is greater than high, otherwise false */
+            /*! \brief Operand returns true if Actual is less than low, or Actual is greater than high, otherwise false */
             template<typename U, typename V> inline Utility::NotOperand< Operands::IsBetween<U,V> > Between(const U& low, const V& high)
             {
                 return Utility::NotOperand< Operands::IsBetween<U,V> >(low, high);

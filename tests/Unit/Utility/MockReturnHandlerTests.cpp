@@ -117,4 +117,4 @@ public:
         });
     }
 };
-DeclareFixture(MockReturnHandlerTest)();
+DeclareFixture(MockReturnHandlerTest)(ut11::Category("unit"));

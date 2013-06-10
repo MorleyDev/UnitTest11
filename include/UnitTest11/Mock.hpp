@@ -13,16 +13,16 @@ namespace ut11
     template<typename R, typename... ARGS> class Mock<R (ARGS...)>
     {
     public:
-    	Mock()
-    		: m_callbackHandler(),
-    		  m_argumentHandler(),
-    		  m_returnHandler()
-		{
-		}
+        Mock()
+            : m_callbackHandler(),
+              m_argumentHandler(),
+              m_returnHandler()
+        {
+        }
 
-    	~Mock()
-    	{
-    	}
+        ~Mock()
+        {
+        }
 
         R operator()(ARGS... args)
         {
@@ -54,7 +54,7 @@ namespace ut11
 
         template<typename... Expectations> void VerifyTimes(std::size_t line, std::string file, std::size_t count, const Expectations&... expectations) const
         {
-        	auto actual = m_argumentHandler.CountCalls(expectations...);
+            auto actual = m_argumentHandler.CountCalls(expectations...);
             if ( actual != count )
                 Assert::Fail(line, file, GetVerifyFailTimesMessage(count, actual));
         }
@@ -67,9 +67,9 @@ namespace ut11
 
         std::string GetVerifyFailTimesMessage(std::size_t expected, std::size_t actual) const
         {
-        	std::stringstream output;
-        	output << "Expected function to be called " << expected << " times was actually called " << actual << " times";
-        	return output.str();
+            std::stringstream output;
+            output << "Expected function to be called " << expected << " times was actually called " << actual << " times";
+            return output.str();
         }
 
         std::function<void (const ARGS&...)> m_callbackHandler;

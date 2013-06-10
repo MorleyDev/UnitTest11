@@ -12,8 +12,8 @@ public:
         });
 
         Then("Is::Infinity(Infinity) is True", []() {
-			AssertThat(ut11::Is::Infinity(std::numeric_limits<float>::infinity()), ut11::Is::True);
-			AssertThat(ut11::Is::Infinity(-std::numeric_limits<float>::infinity()), ut11::Is::True);
+            AssertThat(ut11::Is::Infinity(std::numeric_limits<float>::infinity()), ut11::Is::True);
+            AssertThat(ut11::Is::Infinity(-std::numeric_limits<float>::infinity()), ut11::Is::True);
         });
 
         Then("Is::Infinity is Operand", []() {
@@ -25,7 +25,7 @@ public:
         });
     }
 };
-DeclareFixture(IsInfinityTests)();
+DeclareFixture(IsInfinityTests)(ut11::Category("unit"));
 
 class IsNotInfinityTests : public ut11::TestFixture
 {
@@ -51,7 +51,7 @@ public:
 
     }
 };
-DeclareFixture(IsNotInfinityTests)();
+DeclareFixture(IsNotInfinityTests)(ut11::Category("unit"));
 
 class IsPositiveInfinityTests : public ut11::TestFixture
 {
@@ -78,7 +78,7 @@ public:
         });
     }
 };
-DeclareFixture(IsPositiveInfinityTests)();
+DeclareFixture(IsPositiveInfinityTests)(ut11::Category("unit"));
 
 class IsNotPositiveInfinityTests : public ut11::TestFixture
 {
@@ -105,7 +105,7 @@ public:
         });
     }
 };
-DeclareFixture(IsNotPositiveInfinityTests)();
+DeclareFixture(IsNotPositiveInfinityTests)(ut11::Category("unit"));
 
 
 class IsNegativeInfinityTests : public ut11::TestFixture
@@ -133,7 +133,7 @@ public:
         });
     }
 };
-DeclareFixture(IsNegativeInfinityTests)();
+DeclareFixture(IsNegativeInfinityTests)(ut11::Category("unit"));
 
 class IsNotNegativeInfinityTests : public ut11::TestFixture
 {
@@ -160,4 +160,4 @@ public:
         });
     }
 };
-DeclareFixture(IsNotNegativeInfinityTests)();
+DeclareFixture(IsNotNegativeInfinityTests)(ut11::Category("unit"));

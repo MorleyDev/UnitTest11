@@ -26,13 +26,13 @@ namespace ut11
 
     namespace Is
     {
-		/*! \brief Operand returns true if Actual is true, otherwise false */
+        /*! \brief Operand returns true if Actual is true, otherwise false */
         extern Operands::TrueOperand True;
 
         namespace Not
         {
-    		/*! \brief Operand returns true if Actual is false, otherwise false */
-        	extern Utility::NotOperand<Operands::TrueOperand> True;
+            /*! \brief Operand returns true if Actual is false, otherwise false */
+            extern Utility::NotOperand<Operands::TrueOperand> True;
         }
     }
 }

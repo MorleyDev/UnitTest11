@@ -11,7 +11,7 @@ private:
 public:
     virtual void Run()
     {
-		m_expected = 10;
+        m_expected = 10;
 
         Then("Will::Pass returns an Operand", []() {
             AssertThat(ut11::Utility::IsOperand< decltype(ut11::Will::Pass(std::function<bool(int)>())) >::value, ut11::Is::True);
@@ -46,4 +46,4 @@ public:
         });
     }
 };
-DeclareFixture(WillPassTests)();
+DeclareFixture(WillPassTests)(ut11::Category("unit"));

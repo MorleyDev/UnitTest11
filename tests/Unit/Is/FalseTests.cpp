@@ -38,4 +38,4 @@ public:
         });
     }
 };
-DeclareFixture(IsFalseTests)();
+DeclareFixture(IsFalseTests)(ut11::Category("unit"));

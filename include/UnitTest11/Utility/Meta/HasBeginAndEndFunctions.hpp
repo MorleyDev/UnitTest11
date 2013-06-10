@@ -12,23 +12,31 @@
 
 namespace ut11
 {
-	namespace Utility
-	{
-    	namespace Meta
-    	{
-			template<typename> struct VoidType { typedef void type; };
-			template<typename T, typename Sfinae = void> struct HasBeginFunction : std::false_type {};
-			template<typename T, typename Sfinae = void> struct HasEndFunction : std::false_type {};
+    namespace Utility
+    {
+        namespace Meta
+        {
+            template<typename> struct VoidType { typedef void type; };
+            template<typename T, typename Sfinae = void> struct HasBeginFunction : std::false_type {};
+            template<typename T, typename Sfinae = void> struct HasEndFunction : std::false_type {};
 
-			template<typename T> struct HasBeginFunction<T, typename VoidType< decltype( std::declval<const T&>().begin() ) >::type> : std::true_type {};
-			template<typename T> struct HasEndFunction<T, typename VoidType< decltype( std::declval<const T&>().end() ) >::type> : std::true_type {};
+            template<typename T> struct HasBeginFunction<T, typename VoidType< decltype( std::declval<const T&>().begin() ) >::type> : std::true_type {};
+            template<typename T> struct HasEndFunction<T, typename VoidType< decltype( std::declval<const T&>().end() ) >::type> : std::true_type {};
 
-			template<typename T> struct HasBeginAndEndFunctions
-			{
-				constexpr static bool value = std::is_base_of<std::true_type, HasBeginFunction<T> >::value && std::is_base_of<std::true_type, HasEndFunction<T> >::value;
-			};
-    	}
-	}
+            template<typename T, bool V = std::is_base_of<std::true_type, HasBeginFunction<T> >::value && std::is_base_of<std::true_type, HasEndFunction<T> >::value>
+            struct HasBeginAndEndFunctions
+            {
+                constexpr static bool value = true;
+                typedef std::true_type bool_type;
+            };
+
+            template<typename T> struct HasBeginAndEndFunctions<T,false>
+            {
+                constexpr static bool value = false;
+                typedef std::false_type bool_type;
+            };
+        }
+    }
 }
 
 

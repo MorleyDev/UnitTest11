@@ -34,7 +34,7 @@ namespace ut11
 
     namespace Is
     {
-		/*! \brief Operand returns true if Actual is of type U, or is a base of or convertible to type U, otherwise false */
+        /*! \brief Operand returns true if Actual is of type U, or is a base of or convertible to type U, otherwise false */
         template<typename U> inline Operands::IsAny<U> Any()
         {
             return Operands::IsAny<U>();
@@ -42,7 +42,7 @@ namespace ut11
 
         namespace Not
         {
-    		/*! \brief Operand returns true if Actual is not of type U and it is not a base of or convertible to type U, otherwise false */
+            /*! \brief Operand returns true if Actual is not of type U and it is not a base of or convertible to type U, otherwise false */
             template<typename U> inline Utility::NotOperand< Operands::IsAny<U> > Any()
             {
                 return Utility::NotOperand< Operands::IsAny<U> >();

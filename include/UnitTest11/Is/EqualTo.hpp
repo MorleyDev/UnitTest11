@@ -36,12 +36,12 @@ namespace ut11
 
     namespace Is
     {
-		/*! \brief Operand returns true if Actual == Expected, otherwise false */
+        /*! \brief Operand returns true if Actual == Expected, otherwise false */
         template<typename U> inline Operands::EqualTo<U> EqualTo(const U& expected) { return Operands::EqualTo<U>(expected); }
 
         namespace Not
         {
-			/*! \brief Operand returns true if Actual != Expected, otherwise false */
+            /*! \brief Operand returns true if Actual != Expected, otherwise false */
             template<typename U> inline Utility::NotOperand< Operands::EqualTo<U> > EqualTo(const U& expected) { return Utility::NotOperand< Operands::EqualTo<U> >(expected); }
         }
     }

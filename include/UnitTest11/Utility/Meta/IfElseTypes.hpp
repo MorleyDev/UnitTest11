@@ -10,14 +10,14 @@
 
 namespace ut11
 {
-	namespace Utility
-	{
-		namespace Meta
-		{
-			template<bool First, typename A, typename B> struct IfElseTypes { typedef A type; };
-			template<typename A, typename B> struct IfElseTypes<false,A,B> { typedef B type; };
-		}
-	}
+    namespace Utility
+    {
+        namespace Meta
+        {
+            template<bool First, typename A, typename B> struct IfElseTypes { typedef A type; };
+            template<typename A, typename B> struct IfElseTypes<false,A,B> { typedef B type; };
+        }
+    }
 }
 
 #endif /* UT11_UTILITY_IFELSETYPES_HPP_INCLUDED */

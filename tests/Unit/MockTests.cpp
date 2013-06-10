@@ -32,7 +32,7 @@ public:
         });
 
         Then("the Mock verifies with the expected parameters as expected", [&]() {
-        	MockVerifyAny(m_mock);
+            MockVerifyAny(m_mock);
             MockVerify(m_mock, m_expectedParameter);
             MockVerifyTimes(m_mock, 1, m_expectedParameter);
         });
@@ -77,7 +77,7 @@ public:
         });
     }
 };
-DeclareFixture(MockTest)();
+DeclareFixture(MockTest)(ut11::Category("unit"));
 
 class MockVoidTest : public ut11::TestFixture
 {
@@ -106,4 +106,4 @@ public:
         });
     }
 };
-DeclareFixture(MockVoidTest)();
+DeclareFixture(MockVoidTest)(ut11::Category("unit"));

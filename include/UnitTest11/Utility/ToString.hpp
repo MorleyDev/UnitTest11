@@ -12,17 +12,19 @@ namespace ut11
 {
     namespace Utility
     {
-		template<typename T, typename = decltype(std::declval<std::ostream&>() << std::declval<T const&>())>
-		std::true_type IsStreamWritable(const T&)
-		{
-			return std::true_type();
-		}
+    	template<typename V> inline std::string ToString(const V& value);
 
-		template<typename T, typename... Ignored>
-		std::false_type IsStreamWritable(const T&, Ignored const&..., ...)
-		{
-			return std::false_type();
-		}
+        template<typename T, typename = decltype(std::declval<std::ostream&>() << std::declval<T const&>())>
+        std::true_type IsStreamWritable(const T&)
+        {
+            return std::true_type();
+        }
+
+        template<typename T, typename... Ignored>
+        std::false_type IsStreamWritable(const T&, Ignored const&..., ...)
+        {
+            return std::false_type();
+        }
 
         template<typename V> struct ParseNonIterableToString
         {
@@ -53,7 +55,7 @@ namespace ut11
                 std::stringstream stream;
                 stream << "{ ";
                 for(const auto& arg : value)
-                	stream << arg << " ";
+                    stream << ToString(arg) << " ";
                 stream << "}";
                 return stream.str();
             }
@@ -61,10 +63,10 @@ namespace ut11
 
         template<typename V> struct ParseToString
         {
-        	inline std::string operator()(const V& value) const
-        	{
-            	return typename Meta::IfElseTypes< Meta::HasBeginAndEndFunctions<V>::value, ParseIterableToString<V>, ParseNonIterableToString<V> >::type()(value);
-        	}
+            inline std::string operator()(const V& value) const
+            {
+                return typename Meta::IfElseTypes< Meta::HasBeginAndEndFunctions<V>::value, ParseIterableToString<V>, ParseNonIterableToString<V> >::type()(value);
+            }
         };
 
         template<> struct ParseToString<std::string>
@@ -80,14 +82,14 @@ namespace ut11
         {
             inline std::string operator()(void* value) const
             {
-            	return value ? std::string("void_pointer:") + ParseNonIterableToString<void*>()(value) : "nullptr";
+                return value ? std::string("void_pointer:") + ParseNonIterableToString<void*>()(value) : "nullptr";
             }
         };
         template<typename T> struct ParseToString< T* >
         {
             inline std::string operator()(T* value) const
             {
-            	return value ? std::string("pointer:") + ParseToString<T>()(*value) : "nullptr";
+                return value ? std::string("pointer:") + ParseToString<T>()(*value) : "nullptr";
             }
         };
 
@@ -95,7 +97,7 @@ namespace ut11
         {
             inline std::string operator()(const std::unique_ptr<T,U>& value) const
             {
-            	return value ? std::string("unique_ptr:") + ParseToString<T>()(*value) : "nullptr";
+                return value ? std::string("unique_ptr:") + ParseToString<T>()(*value) : "nullptr";
             }
         };
 
@@ -103,20 +105,20 @@ namespace ut11
         {
             inline std::string operator()(const std::shared_ptr<void>& value) const
             {
-            	return value ? std::string("shared_ptr<void>:") + ParseNonIterableToString<void*>()(value.get()) : "nullptr";
+                return value ? std::string("shared_ptr<void>:") + ParseNonIterableToString<void*>()(value.get()) : "nullptr";
             }
         };
         template<typename T> struct ParseToString< std::shared_ptr<T> >
         {
             inline std::string operator()(const std::shared_ptr<T>& value) const
             {
-            	return value ? std::string("shared_ptr:") + ParseToString<T>()(*value) : "nullptr";
+                return value ? std::string("shared_ptr:") + ParseToString<T>()(*value) : "nullptr";
             }
         };
 
         template<typename V> inline std::string ToString(const V& value)
         {
-        	return ParseToString<V>()(value);
+            return ParseToString<V>()(value);
         }
     }
 }

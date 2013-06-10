@@ -23,52 +23,52 @@ ut11::Utility::TestStageImpl::~TestStageImpl()
 
 bool ut11::Utility::TestStageImpl::Run(Output& output)
 {
-	auto runInsideTryCatch = [&](std::function<void(void)> func) -> bool {
+    auto runInsideTryCatch = [&](std::function<void(void)> func) -> bool {
 
-	    try
-	    {
-	    	func();
-	    }
-	    catch(const ut11::TestFailedException& ex)
-	    {
-	        output.OnError(ex.GetLine(), ex.GetFile(), ex.GetMessage());
-	        return false;
-	    }
-	    catch(const std::exception& ex)
-	    {
-	        output.OnError(ex);
-	        return false;
-	    }
-	    catch(...)
-	    {
-	        output.OnUnknownError();
-	        return false;
-	    }
-	    return true;
-	};
+        try
+        {
+            func();
+        }
+        catch(const ut11::TestFailedException& ex)
+        {
+            output.OnError(ex.GetLine(), ex.GetFile(), ex.GetMessage());
+            return false;
+        }
+        catch(const std::exception& ex)
+        {
+            output.OnError(ex);
+            return false;
+        }
+        catch(...)
+        {
+            output.OnUnknownError();
+            return false;
+        }
+        return true;
+    };
 
-	auto theFinallyFunction = [&]() -> void {
-		output.EndTest();
+    auto theFinallyFunction = [&]() -> void {
+        output.EndTest();
 
-		Finally(output);
-	};
-	auto theGivenWhenThenFinallyFunctions = [&]() -> void
-	{
-		output.BeginTest();
+        Finally(output);
+    };
+    auto theGivenWhenThenFinallyFunctions = [&]() -> void
+    {
+        output.BeginTest();
 
-		Given(output);
-    	When(output);
-    	Then(output);
-    	theFinallyFunction();
-	};
+        Given(output);
+        When(output);
+        Then(output);
+        theFinallyFunction();
+    };
 
-	if (!runInsideTryCatch(theGivenWhenThenFinallyFunctions))
-	{
-		runInsideTryCatch(theFinallyFunction);
+    if (!runInsideTryCatch(theGivenWhenThenFinallyFunctions))
+    {
+        runInsideTryCatch(theFinallyFunction);
 
-		return false;
-	}
-	return true;
+        return false;
+    }
+    return true;
 
 }
 

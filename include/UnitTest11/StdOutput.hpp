@@ -9,9 +9,9 @@ namespace ut11
     class StdOutput : public Output
     {
     public:
-    	virtual ~StdOutput();
+        virtual ~StdOutput();
 
-    	virtual void Begin();
+        virtual void Begin();
         virtual void Finish(std::size_t ran, std::size_t succeeded);
 
         virtual void BeginFixture(std::string name);

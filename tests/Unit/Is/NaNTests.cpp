@@ -2,7 +2,7 @@
 #include <cmath>
 
 #ifndef NAN
-	static const uint32_t __nan[2] = {0xffffffff, 0x7fffffff};
+    static const uint32_t __nan[2] = {0xffffffff, 0x7fffffff};
     #define NAN (*(const float *) __nan)
 #endif
 
@@ -21,7 +21,7 @@ public:
 
         Then("Is::NaN(struct) is True", []() {
 
-        	struct NotANumber { const char* v; } notNumber;
+            struct NotANumber { const char* v; } notNumber;
 
             AssertThat(ut11::Is::NaN(notNumber), ut11::Is::True);
         });
@@ -40,7 +40,7 @@ public:
         });
     }
 };
-DeclareFixture(IsNaNTests)();
+DeclareFixture(IsNaNTests)(ut11::Category("unit"));
 
 class IsNotNaNTests : public ut11::TestFixture
 {
@@ -61,7 +61,7 @@ public:
 
         Then("Is::Not::NaN(struct) is Not::True", []() {
 
-        	struct NotANumber { const char* v; } notNumber;
+            struct NotANumber { const char* v; } notNumber;
 
             AssertThat(ut11::Is::Not::NaN(notNumber), ut11::Is::Not::True);
         });
@@ -77,4 +77,4 @@ public:
 
     }
 };
-DeclareFixture(IsNotNaNTests)();
+DeclareFixture(IsNotNaNTests)(ut11::Category("unit"));

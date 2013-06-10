@@ -27,12 +27,12 @@ namespace ut11
 
     namespace Is
     {
-		/*! \brief Operand returns true if Actual == 0, otherwise false */
+        /*! \brief Operand returns true if Actual == 0, otherwise false */
         extern Operands::IsZero Zero;
 
         namespace Not
         {
-			/*! \brief Operand returns true if Actual != 0, otherwise false */
+            /*! \brief Operand returns true if Actual != 0, otherwise false */
             extern Utility::NotOperand<Operands::IsZero> Zero;
         }
     }

@@ -30,7 +30,7 @@ public:
         });
     }
 };
-DeclareFixture(IsGreaterThanTests)();
+DeclareFixture(IsGreaterThanTests)(ut11::Category("unit"));
 
 class IsNotGreaterThanTests : public ut11::TestFixture
 {
@@ -62,4 +62,4 @@ public:
         });
     }
 };
-DeclareFixture(IsNotGreaterThanTests)();
+DeclareFixture(IsNotGreaterThanTests)(ut11::Category("unit"));

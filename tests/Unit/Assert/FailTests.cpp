@@ -16,9 +16,9 @@ public:
     {
         When("calling Assert Fail", [&]()
         {
-			line = 132;
-			file = "some file";
-			message = "some message";
+            line = 132;
+            file = "some file";
+            message = "some message";
 
             try
             {
@@ -39,4 +39,4 @@ public:
         });
     }
 };
-DeclareFixture(AssertFailTests)();
+DeclareFixture(AssertFailTests)(ut11::Category("unit"));

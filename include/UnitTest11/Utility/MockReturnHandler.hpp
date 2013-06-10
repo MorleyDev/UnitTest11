@@ -13,20 +13,20 @@ namespace ut11
         public:
             MockReturnHandler()
                 : m_isReturnCallbackMode(false),
-				  m_returnCallback(),
+                  m_returnCallback(),
                   m_returnValue(DefaultValue<T>()())
             {
             }
 
             void SetReturn(std::function<T (const ARGS&...)> callback)
             {
-				m_isReturnCallbackMode = true;
+                m_isReturnCallbackMode = true;
                 m_returnCallback = callback;
             }
 
             void SetReturn(T value)
             {
-				m_isReturnCallbackMode = false;
+                m_isReturnCallbackMode = false;
                 m_returnValue = value;
             }
 
@@ -37,8 +37,8 @@ namespace ut11
                         : m_returnValue;
             }
 
-		private:
-			bool m_isReturnCallbackMode;
+        private:
+            bool m_isReturnCallbackMode;
             std::function<T (const ARGS&...)> m_returnCallback;
             T m_returnValue;
         };

@@ -8,26 +8,26 @@
 
 namespace ut11
 {
-	namespace Utility
-	{
-    	template<typename T, bool IsFloating = std:: is_floating_point<T>::value || std::is_integral<T>::value>
-    	struct NanHelper
-    	{
-    		inline bool operator()(const T& value)
-    		{
-    			return value != value;
-    		}
-    	};
+    namespace Utility
+    {
+        template<typename T, bool IsFloating = std:: is_floating_point<T>::value || std::is_integral<T>::value>
+        struct NanHelper
+        {
+            inline bool operator()(const T& value)
+            {
+                return value != value;
+            }
+        };
 
-    	template<typename T>
-    	struct NanHelper<T,false>
-    	{
-    		inline bool operator()(const T&)
-    		{
-    			return true;
-    		}
-    	};
-	}
+        template<typename T>
+        struct NanHelper<T,false>
+        {
+            inline bool operator()(const T&)
+            {
+                return true;
+            }
+        };
+    }
 
     namespace Operands
     {
@@ -50,12 +50,12 @@ namespace ut11
 
     namespace Is
     {
-		/*! \brief Operand returns true if Actual has a value that is Not A Number, otherwise false */
+        /*! \brief Operand returns true if Actual has a value that is Not A Number, otherwise false */
         extern Operands::IsNaN NaN;
 
         namespace Not
         {
-    		/*! \brief Operand returns true if Actual has a value that is a number, otherwise false */
+            /*! \brief Operand returns true if Actual has a value that is a number, otherwise false */
             extern Utility::NotOperand<Operands::IsNaN> NaN;
         }
     }

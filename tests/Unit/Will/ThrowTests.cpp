@@ -83,5 +83,5 @@ public:
         });
     }
 };
-DeclareFixture(WillThrowTests)();
+DeclareFixture(WillThrowTests)(ut11::Category("unit"));
 

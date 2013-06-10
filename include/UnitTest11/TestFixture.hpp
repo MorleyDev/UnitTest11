@@ -1,11 +1,13 @@
 #ifndef UNITTEST11_TESTFIXTURE_HPP
 #define UNITTEST11_TESTFIXTURE_HPP
 
+#include "Category.hpp"
 #include "Output.hpp"
 #include "Utility/TestStageBuilderImpl.hpp"
 
 #include <string>
 #include <functional>
+#include <set>
 
 namespace ut11
 {
@@ -22,6 +24,9 @@ namespace ut11
     public:
         virtual ~TestFixtureAbstract();
 
+        virtual void AddCategory(ut11::Category) = 0;
+        virtual std::set<ut11::Category> GetCategories() const = 0;
+
         virtual void Given(std::string, std::function<void(void)>) = 0;
         virtual void When(std::string, std::function<void(void)>) = 0;
         virtual void Then(std::string, std::function<void(void)>) = 0;
@@ -35,19 +40,21 @@ namespace ut11
     class TestFixture : public TestFixtureAbstract
     {
     public:
-        void SetName(std::string name) { m_name = name; }
-        virtual std::string GetName() { return m_name; }
-
         TestFixture();
         explicit TestFixture(std::string name);
-
         TestFixture(std::string name, std::unique_ptr<ut11::Utility::TestStageBuilder> builder);
-
         virtual ~TestFixture();
+
+        virtual void AddCategory(ut11::Category);
+        virtual std::set<ut11::Category> GetCategories() const;
+
         virtual void Given(std::string description, std::function<void(void)> logic);
         virtual void When(std::string description, std::function<void(void)> logic);
         virtual void Then(std::string description, std::function<void(void)> logic);
         virtual void Finally(std::string description, std::function<void(void)> logic);
+
+        void SetName(std::string name) { m_name = name; }
+        virtual std::string GetName() { return m_name; }
 
         virtual TestFixtureResults Run(Output& output);
         virtual void Run();
@@ -55,6 +62,7 @@ namespace ut11
     private:
         std::string m_name;
         std::unique_ptr<ut11::Utility::TestStageBuilder> m_StageBuilder;
+        std::set<ut11::Category> m_categories;
     };
 }
 

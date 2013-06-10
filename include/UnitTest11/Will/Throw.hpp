@@ -89,7 +89,7 @@ namespace ut11
 
     namespace Will
     {
-    	/*! \brief Operand will return true if the passed predicate throws an exception of type Exception (or a child of type Exception), otherwise returns false */
+        /*! \brief Operand will return true if the passed predicate throws an exception of type Exception (or a child of type Exception), otherwise returns false */
         template<typename Exception> inline Operands::WillThrow<Exception> Throw()
         {
             return Operands::WillThrow<Exception>();

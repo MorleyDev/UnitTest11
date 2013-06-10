@@ -12,18 +12,18 @@ public:
     virtual void Run()
     {
         Given("TestSteps and a TestStageBuilder", [&](){
-			m_steps.clear();
-			m_steps.push_back(ut11::Utility::TestStep("0", [](){}));
-			m_steps.push_back(ut11::Utility::TestStep("1", [](){}));
-			m_steps.push_back(ut11::Utility::TestStep("2", [](){}));
-			m_steps.push_back(ut11::Utility::TestStep("3", [](){}));
-			m_steps.push_back(ut11::Utility::TestStep("4", [](){}));
-			m_steps.push_back(ut11::Utility::TestStep("5", [](){}));
-			m_steps.push_back(ut11::Utility::TestStep("6", [](){}));
-			m_steps.push_back(ut11::Utility::TestStep("7", [](){}));
-			m_steps.push_back(ut11::Utility::TestStep("8", [](){}));
-			m_steps.push_back(ut11::Utility::TestStep("9", [](){}));
-			m_steps.push_back(ut11::Utility::TestStep("10", [](){}));
+            m_steps.clear();
+            m_steps.push_back(ut11::Utility::TestStep("0", [](){}));
+            m_steps.push_back(ut11::Utility::TestStep("1", [](){}));
+            m_steps.push_back(ut11::Utility::TestStep("2", [](){}));
+            m_steps.push_back(ut11::Utility::TestStep("3", [](){}));
+            m_steps.push_back(ut11::Utility::TestStep("4", [](){}));
+            m_steps.push_back(ut11::Utility::TestStep("5", [](){}));
+            m_steps.push_back(ut11::Utility::TestStep("6", [](){}));
+            m_steps.push_back(ut11::Utility::TestStep("7", [](){}));
+            m_steps.push_back(ut11::Utility::TestStep("8", [](){}));
+            m_steps.push_back(ut11::Utility::TestStep("9", [](){}));
+            m_steps.push_back(ut11::Utility::TestStep("10", [](){}));
 
             m_builder = ut11::Utility::TestStageBuilderImpl();
 
@@ -84,4 +84,4 @@ public:
         });
     }
 };
-DeclareFixture(TestStageBuilderTests)();
+DeclareFixture(TestStageBuilderTests)(ut11::Category("unit"));

@@ -20,12 +20,12 @@ namespace ut11
     {
         struct IsEmpty : public ut11::Utility::BaseOperand
         {
-        	inline bool operator()(const char* actual) const { return std::string(actual).length() == 0; }
+            inline bool operator()(const char* actual) const { return std::string(actual).length() == 0; }
 
             template<typename T> inline bool operator()(const T& actual) const
             {
-            	for(const auto& i : actual)
-            		return false;
+                for(const auto& i : actual)
+                    return false;
                 return true;
             }
 
@@ -38,17 +38,17 @@ namespace ut11
         };
     }
 
-	namespace Is
-	{
-		/*! \brief Passes if the given iterable is empty */
-		extern Operands::IsEmpty Empty;
+    namespace Is
+    {
+        /*! \brief Passes if the given iterable is empty */
+        extern Operands::IsEmpty Empty;
 
-		namespace Not
-		{
-			/*! \brief Passes if the given iterable is not empty */
-			extern Utility::NotOperand<Operands::IsEmpty> Empty;
-		}
-	}
+        namespace Not
+        {
+            /*! \brief Passes if the given iterable is not empty */
+            extern Utility::NotOperand<Operands::IsEmpty> Empty;
+        }
+    }
 }
 
 

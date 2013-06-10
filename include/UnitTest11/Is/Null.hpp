@@ -33,12 +33,12 @@ namespace ut11
 
     namespace Is
     {
-		/*! \brief Operand returns true if Actual is null, otherwise false */
+        /*! \brief Operand returns true if Actual is null, otherwise false */
         extern Operands::IsNull Null;
 
         namespace Not
         {
-    		/*! \brief Operand returns true if Actual is not null, otherwise false */
+            /*! \brief Operand returns true if Actual is not null, otherwise false */
             extern Utility::NotOperand<Operands::IsNull> Null;
         }
     }
