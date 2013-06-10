@@ -9,4 +9,4 @@ Geared towards Unit Testing in a Given-When-Then (Arrange-Act-Assert) format.
 
 Wiki Documentation: https://github.com/MorleyDev/UnitTest11/wiki
 
-Issue Tracker: http://morleydev.co.uk/dev/issues/unittest11
+Issue Tracker: https://github.com/MorleyDev/UnitTest11/issues?state=open
