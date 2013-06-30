@@ -71,28 +71,6 @@
 #define UT11_MOCK_FUNCTION_CONST_10(Return, Name, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8) mutable ut11::Mock<Return (Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8)> mock##Name##Const; virtual Return Name(Arg1 a1, Arg2 a2, Arg3 a3, Arg4 a4, Arg5 a5, Arg6 a6, Arg7 a7, Arg8 a8) const { return mock##Name##Const(a1, a2, a3, a4, a5, a6, a7, a8, a9); }
 #define UT11_MOCK_FUNCTION_CONST_11(Return, Name, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8, Arg9) mutable ut11::Mock<Return (Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8, Arg9)> mock##Name##Const; virtual Return Name(Arg1 a1, Arg2 a2, Arg3 a3, Arg4 a4, Arg5 a5, Arg6 a6, Arg7 a7, Arg8 a8, Arg9 a9) const { return mock##Name##Const(a1, a2, a3, a4, a5, a6, a7, a8, a9); }
 
-#define UT11_MOCK_VERIFY_1(mock) (mock).Verify(__LINE__, __FILE__)
-#define UT11_MOCK_VERIFY_2(mock, Arg1) (mock).Verify(__LINE__, __FILE__, Arg1)
-#define UT11_MOCK_VERIFY_3(mock, Arg1, Arg2) (mock).Verify(__LINE__, __FILE__, Arg1, Arg2)
-#define UT11_MOCK_VERIFY_4(mock, Arg1, Arg2, Arg3) (mock).Verify(__LINE__, __FILE__, Arg1, Arg2, Arg3)
-#define UT11_MOCK_VERIFY_5(mock, Arg1, Arg2, Arg3, Arg4) (mock).Verify(__LINE__, __FILE__, Arg1, Arg2, Arg3, Arg4)
-#define UT11_MOCK_VERIFY_6(mock, Arg1, Arg2, Arg3, Arg4, Arg5) (mock).Verify(__LINE__, __FILE__, Arg1, Arg2, Arg3, Arg4, Arg5)
-#define UT11_MOCK_VERIFY_7(mock, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6) (mock).Verify(__LINE__, __FILE__, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6)
-#define UT11_MOCK_VERIFY_8(mock, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7) (mock).Verify(__LINE__, __FILE__, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7)
-#define UT11_MOCK_VERIFY_9(mock, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8) (mock).Verify(__LINE__, __FILE__, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8)
-#define UT11_MOCK_VERIFY_10(mock, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8, Arg9) (mock).Verify(__LINE__, __FILE__, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8, Arg9)
-
-#define UT11_MOCK_VERIFYTIMES_2(mock, count) (mock).VerifyTimes(__LINE__, __FILE__, count)
-#define UT11_MOCK_VERIFYTIMES_3(mock, count, Arg1) (mock).VerifyTimes(__LINE__, __FILE__, count, Arg1)
-#define UT11_MOCK_VERIFYTIMES_4(mock, count, Arg1, Arg2) (mock).VerifyTimes(__LINE__, __FILE__, count, Arg1, Arg2)
-#define UT11_MOCK_VERIFYTIMES_5(mock, count, Arg1, Arg2, Arg3) (mock).VerifyTimes(__LINE__, __FILE__, count, Arg1, Arg2, Arg3)
-#define UT11_MOCK_VERIFYTIMES_6(mock, count, Arg1, Arg2, Arg3, Arg4) (mock).VerifyTimes(__LINE__, __FILE__, count, Arg1, Arg2, Arg3, Arg4)
-#define UT11_MOCK_VERIFYTIMES_7(mock, count, Arg1, Arg2, Arg3, Arg4, Arg5) (mock).VerifyTimes(__LINE__, __FILE__, count, Arg1, Arg2, Arg3, Arg4, Arg5)
-#define UT11_MOCK_VERIFYTIMES_8(mock, count, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6) (mock).VerifyTimes(__LINE__, __FILE__, count, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6)
-#define UT11_MOCK_VERIFYTIMES_9(mock, count, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7) (mock).VerifyTimes(__LINE__, __FILE__, count, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7)
-#define UT11_MOCK_VERIFYTIMES_10(mock, count, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8) (mock).VerifyTimes(__LINE__, __FILE__, count, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8)
-#define UT11_MOCK_VERIFYTIMES_11(mock, count, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8, Arg9) (mock).VerifyTimes(__LINE__, __FILE__, count, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8, Arg9)
-
 #define UT11_DECLARE_FIXTURE_N(N, args...) UT11_MACRO_CONCAT(UT11_DECLARE_FIXTURE_, N)(args)
 
 #define UT11_MOCK_ACTION_N(N, args...) UT11_MACRO_CONCAT(UT11_MOCK_ACTION_, N)(args)
@@ -109,20 +87,17 @@
 /*! \brief A mock function with a return value (Return, Name, Arguments...) */
 #define MockFunction(args...) UT11_MOCK_FUNCTION_N(UT11_VA_NARGS(args), args)
 
-/*! \brief Verify a mock function was called with the passed predicates (mock, arguments) */
-#define MockVerify(args...) UT11_MOCK_VERIFY_N(UT11_VA_NARGS(args), args)
-
-/*! \brief Verify a mock function was called with the passed predicates the specified number of times (mock, count, arguments)  */
-#define MockVerifyTimes(args...) UT11_MOCK_VERIFYTIMES_N(UT11_VA_NARGS(args), args)
-
-/*! \brief Verify a mock was called more than once with any arguments */
-#define MockVerifyAny(mock) (mock).VerifyAny(__LINE__, __FILE__)
-
 /*! \brief A mock const action with no return values (Name, Arguments...) */
 #define MockActionConst(args...) UT11_MOCK_ACTION_CONST_N(UT11_VA_NARGS(args), args)
 
 /*! \brief A mock const function with a return value (Return, Name, Arguments...) */
 #define MockFunctionConst(args...) UT11_MOCK_FUNCTION_CONST_N(UT11_VA_NARGS(args), args)
+
+/*! \brief Verify a mock function was called with the passed predicates (mock, arguments) */
+#define MockVerify(args...) ::ut11::MockVerifyer<decltype(args)>(args, __LINE__, __FILE__)
+
+/*! \brief Verify a mock function was called with the passed predicates the specified number of times (mock, count, arguments)  */
+#define MockVerifyTimes(times, args...) ::ut11::MockTimesVerifyer<decltype(args)>(args, times, __LINE__, __FILE__)
 
 /*! \brief Declare a Test Fixture, adding it to the runner
  *

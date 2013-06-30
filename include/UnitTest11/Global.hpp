@@ -94,6 +94,50 @@ namespace ut11
             return Utility::ToString(value) + ", " + GetString(args...);
         }
     };
+
+    template<typename T> struct MockVerifyer
+    {
+    private:
+    	T& mockObj;
+    	std::size_t line;
+    	std::string file;
+
+    public:
+    	MockVerifyer(T& mock, std::size_t line, std::string file)
+    		: mockObj(mock),
+    		  line(line),
+    		  file(file)
+    	{
+    	}
+
+    	template<typename... ARGS> void operator()(const ARGS&... args)
+    	{
+    		mockObj.Verify(line, file, args...);
+    	}
+    };
+
+    template<typename T> struct MockTimesVerifyer
+    {
+    private:
+    	T& mockObj;
+    	std::size_t times;
+    	std::size_t line;
+    	std::string file;
+
+    public:
+    	MockTimesVerifyer(T& mock, std::size_t times, std::size_t line, std::string file)
+    		: mockObj(mock),
+    		  times(times),
+    		  line(line),
+    		  file(file)
+    	{
+    	}
+
+    	template<typename... ARGS> void operator()(const ARGS&... args)
+    	{
+    		mockObj.VerifyTimes(line, file, times, args...);
+    	}
+    };
 }
 
 #endif // UNITTEST11_GLOBAL_HPP

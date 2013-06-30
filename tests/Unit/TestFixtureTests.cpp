@@ -129,7 +129,7 @@ public:
         });
         Then("the expected call is made", [&]() {
 
-            MockVerify(m_mockBuilder->mockPushGiven, ut11::Will::Pass([&](ut11::Utility::TestStep step) { return ( step.description == m_expectedDescription ); }));
+            MockVerify(m_mockBuilder->mockPushGiven)(ut11::Will::Pass([&](ut11::Utility::TestStep step) { return ( step.description == m_expectedDescription ); }));
         });
 
         When("calling the When", [&]() {
@@ -140,7 +140,7 @@ public:
         });
         Then("the expected call is made", [&]() {
 
-            MockVerify(m_mockBuilder->mockPushWhen, ut11::Will::Pass([&](ut11::Utility::TestStep step) { return ( step.description == m_expectedDescription ); }));
+            MockVerify(m_mockBuilder->mockPushWhen)(ut11::Will::Pass([&](ut11::Utility::TestStep step) { return ( step.description == m_expectedDescription ); }));
         });
 
         When("calling the Then", [&]() {
@@ -151,7 +151,7 @@ public:
         });
         Then("the expected call is made", [&]() {
 
-            MockVerify(m_mockBuilder->mockPushThen, ut11::Will::Pass([&](ut11::Utility::TestStep step) { return ( step.description == m_expectedDescription ); }));
+            MockVerify(m_mockBuilder->mockPushThen)(ut11::Will::Pass([&](ut11::Utility::TestStep step) { return ( step.description == m_expectedDescription ); }));
         });
 
         When("calling the Finally", [&]() {
@@ -162,7 +162,7 @@ public:
         });
         Then("the expected call is made", [&]() {
 
-            MockVerify(m_mockBuilder->mockPushFinally, ut11::Will::Pass([&](ut11::Utility::TestStep step) { return ( step.description == m_expectedDescription ); }));
+            MockVerify(m_mockBuilder->mockPushFinally)(ut11::Will::Pass([&](ut11::Utility::TestStep step) { return ( step.description == m_expectedDescription ); }));
         });
     }
 };
@@ -204,7 +204,7 @@ public:
             m_fixtureResults = m_fixture->Run(m_mockOutput);
         });
         Then("the output is told the fixture has begun", [&]() {
-            MockVerify(m_mockOutput.mockBeginFixture, m_fixtureName);
+            MockVerify(m_mockOutput.mockBeginFixture)(m_fixtureName);
         });
         Then("the test stage was ran", [&]() {
             AssertThat(m_mockTestStage->WasTestStageRun, ut11::Is::True);
@@ -216,7 +216,7 @@ public:
             AssertThat(m_fixtureResults.succeeded, ut11::Is::EqualTo(4u));
         });
         Then("the output is told the fixture has ended", [&]() {
-            MockVerify(m_mockOutput.mockEndFixture, m_fixtureName);
+            MockVerify(m_mockOutput.mockEndFixture)(m_fixtureName);
         });
 
         When("running the test fixture with a failing stage", [&]() {

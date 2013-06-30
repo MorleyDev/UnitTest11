@@ -20,7 +20,7 @@ public:
         });
 
         Then("VerifyAny fails as expected", [&]() {
-            AssertThat([&]() { m_mock.VerifyAny(__LINE__, __FILE__); }, ut11::Will::Throw<ut11::TestFailedException>());
+            AssertThat([&]() { MockVerify(m_mock)(ut11::Is::Any<char>()); }, ut11::Will::Throw<ut11::TestFailedException>());
         });
 
         When("calling the Mock", [&]() {
@@ -32,19 +32,19 @@ public:
         });
 
         Then("the Mock verifies with the expected parameters as expected", [&]() {
-            MockVerifyAny(m_mock);
-            MockVerify(m_mock, m_expectedParameter);
-            MockVerifyTimes(m_mock, 1, m_expectedParameter);
+            MockVerify(m_mock)(ut11::Is::Any<char>());
+            MockVerify(m_mock)(m_expectedParameter);
+            MockVerifyTimes(1, m_mock)(m_expectedParameter);
         });
 
         Then("the Mock verifies fails as expected when with the wrong parameters", [&]() {
 
-            AssertThat([&]() { MockVerify(m_mock, '\n'); }, ut11::Will::Throw<ut11::TestFailedException>());
+            AssertThat([&]() { MockVerify(m_mock)('\n'); }, ut11::Will::Throw<ut11::TestFailedException>());
         });
 
         Then("the Mock verifies fails as expected when with the wrong VerifyTimes", [&]() {
 
-            AssertThat([&]() { MockVerifyTimes(m_mock, 2, m_expectedParameter); }, ut11::Will::Throw<ut11::TestFailedException>());
+            AssertThat([&]() { MockVerifyTimes(2, m_mock)(m_expectedParameter); }, ut11::Will::Throw<ut11::TestFailedException>());
         });
 
         When("setting a callback calling the Mock", [&]() {
@@ -96,13 +96,12 @@ public:
         });
 
         Then("the mock verifies as expected", [&]() {
-            MockVerifyAny(m_mock);
-            MockVerify(m_mock);
-            MockVerifyTimes(m_mock, 1);
+            MockVerify(m_mock)();
+            MockVerifyTimes(1, m_mock)();
         });
 
         Then("verifying the wrong number of times causes a failure", [&]() {
-            AssertThat([&]() { MockVerifyTimes(m_mock, 2); }, ut11::Will::Throw<ut11::TestFailedException>());
+            AssertThat([&]() { MockVerifyTimes(2, m_mock)(); }, ut11::Will::Throw<ut11::TestFailedException>());
         });
     }
 };
