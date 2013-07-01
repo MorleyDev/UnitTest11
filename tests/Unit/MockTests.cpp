@@ -36,6 +36,17 @@ public:
             MockVerify(m_mock)(m_expectedParameter);
             MockVerifyTimes(1, m_mock)(m_expectedParameter);
         });
+        Then("the Mock verifies passes as expected when with an operand", [&]() {
+
+        	std::size_t v = 0;
+        	auto lambda = [&](std::size_t t)
+    	    				{
+    	    					v = t;
+    	    					return true;
+    	    				};
+            MockVerifyTimes(ut11::Will::Pass(lambda), m_mock)(m_expectedParameter);
+            AssertThat(v, ut11::Is::EqualTo(1));
+        });
 
         Then("the Mock verifies fails as expected when with the wrong parameters", [&]() {
 
@@ -45,6 +56,17 @@ public:
         Then("the Mock verifies fails as expected when with the wrong VerifyTimes", [&]() {
 
             AssertThat([&]() { MockVerifyTimes(2, m_mock)(m_expectedParameter); }, ut11::Will::Throw<ut11::TestFailedException>());
+        });
+        Then("the Mock verifies fails as expected when with an operand", [&]() {
+
+        	std::size_t v = 0;
+        	auto lambda = [&](std::size_t t)
+						{
+							AssertThat(v, ut11::Is::EqualTo(1));
+							return false;
+						};
+
+            AssertThat([&]() { MockVerifyTimes(ut11::Will::Pass(lambda), m_mock)(m_expectedParameter); }, ut11::Will::Throw<ut11::TestFailedException>());
         });
 
         When("setting a callback calling the Mock", [&]() {

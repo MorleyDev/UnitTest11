@@ -116,16 +116,16 @@ namespace ut11
     	}
     };
 
-    template<typename T> struct MockTimesVerifyer
+    template<typename Op, typename T> struct MockTimesVerifyer
     {
     private:
     	T& mockObj;
-    	std::size_t times;
+    	const Op& times;
     	std::size_t line;
     	std::string file;
 
     public:
-    	MockTimesVerifyer(T& mock, std::size_t times, std::size_t line, std::string file)
+    	MockTimesVerifyer(T& mock, const Op& times, std::size_t line, std::string file)
     		: mockObj(mock),
     		  times(times),
     		  line(line),

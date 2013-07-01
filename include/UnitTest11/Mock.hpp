@@ -52,23 +52,42 @@ namespace ut11
                 Assert::Fail(line, file, GetVerifyFailMessage());
         }
 
-        template<typename... Expectations> void VerifyTimes(std::size_t line, std::string file, std::size_t count, const Expectations&... expectations) const
+        template<typename Operand, typename... Expectations> void VerifyTimes(std::size_t line, std::string file, const Operand& count, const Expectations&... expectations) const
         {
-            auto actual = m_argumentHandler.CountCalls(expectations...);
-            if ( actual != count )
-                Assert::Fail(line, file, GetVerifyFailTimesMessage(count, actual));
+        	VerifyTimes(typename std::is_integral<Operand>::type(), line, file, count, expectations...);
         }
 
     private:
+        template<typename Operand, typename... Expectations> void VerifyTimes(std::false_type isNotOperand, std::size_t line, std::string file, const Operand& operand, const Expectations&... expectations) const
+        {
+            auto actual = m_argumentHandler.CountCalls(expectations...);
+            if ( !operand(actual) )
+                Assert::Fail(line, file, GetVerifyFailTimesMessageForOperand(operand, actual));
+        }
+
+        template<typename Count, typename... Expectations> void VerifyTimes(std::true_type isOperand, std::size_t line, std::string file, const Count& count, const Expectations&... expectations) const
+        {
+            auto actual = m_argumentHandler.CountCalls(expectations...);
+            if ( actual != count )
+                Assert::Fail(line, file, GetVerifyFailTimesMessageForCount(count, actual));
+        }
+
         std::string GetVerifyFailMessage() const
         {
             return "Expected function call was not found";
         }
 
-        std::string GetVerifyFailTimesMessage(std::size_t expected, std::size_t actual) const
+        std::string GetVerifyFailTimesMessageForCount(std::size_t expected, std::size_t actual) const
         {
             std::stringstream output;
             output << "Expected function to be called " << expected << " times was actually called " << actual << " times";
+            return output.str();
+        }
+
+        template<typename Operand> std::string GetVerifyFailTimesMessageForOperand(Operand& operand, std::size_t actual) const
+        {
+            std::stringstream output;
+            output << "Expected function call count was not found." << operand.GetErrorMessage(actual) << "\nWas actually called " << actual << " times";
             return output.str();
         }
 

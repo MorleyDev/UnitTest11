@@ -97,7 +97,7 @@
 #define MockVerify(args...) ::ut11::MockVerifyer<decltype(args)>(args, __LINE__, __FILE__)
 
 /*! \brief Verify a mock function was called with the passed predicates the specified number of times (mock, count, arguments)  */
-#define MockVerifyTimes(times, args...) ::ut11::MockTimesVerifyer<decltype(args)>(args, times, __LINE__, __FILE__)
+#define MockVerifyTimes(times, args...) ::ut11::MockTimesVerifyer<decltype(times), decltype(args)>(args, times, __LINE__, __FILE__)
 
 /*! \brief Declare a Test Fixture, adding it to the runner
  *
