@@ -70,9 +70,9 @@ int ut11::Run(Output& output)
     return g_runner->Run(output);
 }
 
-int ut11::RunCategories(Output& output, std::vector<std::string> regex)
+int ut11::RunCategories(Output& output, std::vector<std::string> fixtures)
 {
     InitialiseRunner();
 
-    return g_runner->RunCategories(output, regex);
+    return g_runner->RunCategories(output, fixtures);
 }

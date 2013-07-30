@@ -32,11 +32,11 @@ namespace ut11
      */
     int Run(Output&, const int argumentCount, const char** arguments);
 
-    /*! \brief Runs all test fixtures that have a category that matches one of the given regular expressions
+    /*! \brief Runs all test fixtures that have a category that matches one of the given names
      *
      * \return The number of fixtures that failed
      */
-    int RunCategories(Output&, std::vector<std::string> regex);
+    int RunCategories(Output&, std::vector<std::string> fixtures);
 
     void PushFixture(std::shared_ptr<TestFixtureAbstract>);
 
