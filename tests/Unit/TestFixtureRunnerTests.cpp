@@ -144,8 +144,8 @@ public:
             m_fixtureOne = new FakeTestFixture(ut11::TestFixtureResults());
             m_fixtureTwo = new FakeTestFixture(ut11::TestFixtureResults());
 
-            m_fixtureOne->mockGetName.SetReturn("name");
-            m_fixtureTwo->mockGetName.SetReturn("name");
+            m_fixtureOne->mockGetName.SetReturn(std::string("name"));
+            m_fixtureTwo->mockGetName.SetReturn(std::string("name"));
 
             m_runner.AddFixture(std::unique_ptr<ut11::TestFixtureAbstract>(m_fixtureOne));
             m_runner.AddFixture(std::unique_ptr<ut11::TestFixtureAbstract>(m_fixtureTwo));
