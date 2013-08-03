@@ -32,7 +32,7 @@ namespace ut11
         virtual void Then(std::string, std::function<void(void)>) = 0;
         virtual void Finally(std::string, std::function<void(void)>) = 0;
 
-        virtual std::string GetName() = 0;
+        virtual std::string GetName() const = 0;
 
         virtual TestFixtureResults Run(Output&) = 0;
     };
@@ -54,7 +54,7 @@ namespace ut11
         virtual void Finally(std::string description, std::function<void(void)> logic);
 
         void SetName(std::string name) { m_name = name; }
-        virtual std::string GetName() { return m_name; }
+        virtual std::string GetName() const { return m_name; }
 
         virtual TestFixtureResults Run(Output& output);
         virtual void Run();

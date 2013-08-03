@@ -73,7 +73,7 @@ namespace
         MockAction(Then, std::string, std::function<void(void)>);
         MockAction(Finally, std::string, std::function<void(void)>);
 
-        MockFunction(std::string, GetName);
+        MockFunctionConst(std::string, GetName);
 
         virtual ut11::TestFixtureResults Run(ut11::Output& output)
         {
@@ -105,13 +105,13 @@ public:
             fixtureResults.succeeded = 3;
 
             FakeTestFixture* fixtureOne = new FakeTestFixture(fixtureResults);
-            fixtureOne->mockGetName.SetReturn(std::string("nameOne"));
+            fixtureOne->mockGetNameConst.SetReturn(std::string("nameOne"));
 
             fixtureResults.ran = 4;
             fixtureResults.succeeded = 4;
 
             FakeTestFixture* fixtureTwo = new FakeTestFixture(fixtureResults);
-            fixtureTwo->mockGetName.SetReturn(std::string("nameTwo"));
+            fixtureTwo->mockGetNameConst.SetReturn(std::string("nameTwo"));
 
             m_runner.AddFixture(std::unique_ptr<ut11::TestFixtureAbstract>(fixtureOne));
             m_runner.AddFixture(std::unique_ptr<ut11::TestFixtureAbstract>(fixtureTwo));
@@ -131,8 +131,8 @@ class TestFixtureRunnerMultipleFixturesWithSameNameTests : public ut11::TestFixt
 private:
     ut11::TestFixtureRunner m_runner;
     FakeOutput m_output;
-    FakeTestFixture* m_fixtureOne;
-    FakeTestFixture* m_fixtureTwo;
+    std::shared_ptr<FakeTestFixture> m_fixtureOne;
+    std::shared_ptr<FakeTestFixture> m_fixtureTwo;
 
 public:
     virtual void Run()
@@ -141,14 +141,15 @@ public:
             m_runner = ut11::TestFixtureRunner();
             m_output = FakeOutput();
 
-            m_fixtureOne = new FakeTestFixture(ut11::TestFixtureResults());
-            m_fixtureTwo = new FakeTestFixture(ut11::TestFixtureResults());
+            m_fixtureOne = std::make_shared<FakeTestFixture>(ut11::TestFixtureResults());
+            m_fixtureTwo = std::make_shared<FakeTestFixture>(ut11::TestFixtureResults());
 
-            m_fixtureOne->mockGetName.SetReturn(std::string("name"));
-            m_fixtureTwo->mockGetName.SetReturn(std::string("name"));
+            std::string fixtureName("name");
+			m_fixtureOne->mockGetNameConst.SetReturn(fixtureName);
+            m_fixtureTwo->mockGetNameConst.SetReturn(fixtureName);
 
-            m_runner.AddFixture(std::unique_ptr<ut11::TestFixtureAbstract>(m_fixtureOne));
-            m_runner.AddFixture(std::unique_ptr<ut11::TestFixtureAbstract>(m_fixtureTwo));
+            m_runner.AddFixture(std::shared_ptr<ut11::TestFixtureAbstract>(m_fixtureOne));
+            m_runner.AddFixture(std::shared_ptr<ut11::TestFixtureAbstract>(m_fixtureTwo));
         });
         When("Running the test fixture runner", [&]() {
             m_runner.Run(m_output);
@@ -184,21 +185,21 @@ public:
             fixtureResults.succeeded = 4;
 
             FakeTestFixture* fixtureOne = new FakeTestFixture(fixtureResults);
-            fixtureOne->mockGetName.SetReturn(std::string("nameOne"));
+            fixtureOne->mockGetNameConst.SetReturn(std::string("nameOne"));
             fixtureOne->mockGetCategoriesConst.SetReturn(std::set<ut11::Category>({ ut11::Category("category") }));
 
             fixtureResults.ran = 4;
             fixtureResults.succeeded = 1;
 
             FakeTestFixture* fixtureTwo = new FakeTestFixture(fixtureResults);
-            fixtureTwo->mockGetName.SetReturn(std::string("nameTwo"));
+            fixtureTwo->mockGetNameConst.SetReturn(std::string("nameTwo"));
             fixtureTwo->mockGetCategoriesConst.SetReturn(std::set<ut11::Category>({ ut11::Category("unrancategory") }));
 
             fixtureResults.ran = 7;
             fixtureResults.succeeded = 6;
 
             FakeTestFixture* fixtureThree = new FakeTestFixture(fixtureResults);
-            fixtureThree->mockGetName.SetReturn(std::string("nameThree"));
+            fixtureThree->mockGetNameConst.SetReturn(std::string("nameThree"));
             fixtureThree->mockGetCategoriesConst.SetReturn(std::set<ut11::Category>({ ut11::Category("category") }));
 
             m_runner.AddFixture(std::unique_ptr<ut11::TestFixtureAbstract>(fixtureOne));
