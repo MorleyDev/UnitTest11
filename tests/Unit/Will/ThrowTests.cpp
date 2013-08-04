@@ -84,4 +84,3 @@ public:
     }
 };
 DeclareFixture(WillThrowTests)(ut11::Category("unit"));
-

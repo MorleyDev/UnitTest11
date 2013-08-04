@@ -7,6 +7,7 @@
 
 // A solution to the Kata: http://codingdojo.org/cgi-bin/wiki.pl?KataMinesweeper
 
+#include <cstdint>
 #include <string>
 
 namespace minesweeper
@@ -14,9 +15,9 @@ namespace minesweeper
     class InvalidInputException : public std::exception
     {
     public:
-        virtual ~InvalidInputException() noexcept { }
+        virtual ~InvalidInputException() throw() { }
 
-        virtual const char* what() const noexcept
+		virtual const char* what() const throw()
         {
             return "An invalid input was specified";
         }
@@ -25,10 +26,10 @@ namespace minesweeper
     class MinefieldGenerator
     {
     private:
-        uint8_t m_width, m_height;
+        std::uint8_t m_width, m_height;
 
     public:
-        MinefieldGenerator(uint8_t width, uint8_t height)
+		MinefieldGenerator(std::uint8_t width, std::uint8_t height)
             : m_width(width), m_height(height)
         {
         }
@@ -40,8 +41,8 @@ namespace minesweeper
 
             CreateEmptyGridPopulatedWithMines(data);
 
-            for(uint16_t j = 0; j < m_height; ++j)
-                for(uint16_t i = 0; i < m_width; ++i)
+			for (auto j = 0; j < m_height; ++j)
+				for (auto i = 0; i < m_width; ++i)
                     UpdateCell(i,j,data);
 
             return data;
@@ -55,19 +56,19 @@ namespace minesweeper
                     c = '0';
         }
 
-        void UpdateCell(uint16_t i, uint16_t j, std::string& data) const
+		void UpdateCell(std::uint16_t i, std::uint16_t j, std::string& data) const
         {
             if ( data[i + j * m_width] == '*' )
-                for(int16_t b = j-1; b <= j+1; ++b)
-                    for(int16_t a = i-1; a <= i+1; ++a)
+				for (auto b = j - 1; b <= j + 1; ++b)
+					for (auto a = i - 1; a <= i + 1; ++a)
                         TryIncrement(a, b, data);
         }
 
-        void TryIncrement(int8_t i, int8_t j, std::string& data) const
+		void TryIncrement(std::int8_t i, std::int8_t j, std::string& data) const
         {
             if ( i >= 0 && i < m_width && j < m_height && j >= 0 )
             {
-                const uint8_t position = static_cast<uint8_t>(i) + static_cast<uint8_t>(j) * m_width;
+				auto position = static_cast<std::uint8_t>(i) + static_cast<std::uint8_t>(j) * m_width;
                 if ( data[position] != '*' )
                     data[position] += 1;
             }

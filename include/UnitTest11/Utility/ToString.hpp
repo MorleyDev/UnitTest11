@@ -1,8 +1,8 @@
 #ifndef UNITTEST11_UTILITY_TOSTRING_HPP
 #define UNITTEST11_UTILITY_TOSTRING_HPP
 
+#include "Meta/IsIterableContainer.hpp"
 #include "Meta/IfElseTypes.hpp"
-#include "Meta/HasBeginAndEndFunctions.hpp"
 
 #include <memory>
 #include <string>
@@ -65,7 +65,7 @@ namespace ut11
         {
             inline std::string operator()(const V& value) const
             {
-                return typename Meta::IfElseTypes< Meta::HasBeginAndEndFunctions<V>::value, ParseIterableToString<V>, ParseNonIterableToString<V> >::type()(value);
+				return typename Meta::IfElseTypes< Meta::IsIterableContainer<V>::value, ParseIterableToString<V>, ParseNonIterableToString<V> >::type()(value);
             }
         };
 

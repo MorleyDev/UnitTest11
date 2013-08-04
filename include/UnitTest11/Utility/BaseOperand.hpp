@@ -12,7 +12,7 @@ namespace ut11
 
         template<typename Operand> struct IsOperand
         {
-            enum { value = std::is_base_of< BaseOperand, Operand >::value };
+            enum : bool { value = std::is_base_of< BaseOperand, Operand >::value };
         };
 
         template<typename Operand> struct NotOperand : public BaseOperand

@@ -8,7 +8,7 @@
 #ifndef UT11_UTILITY_META_ISITERABLEOFTYPE_HPP_INCLUDED
 #define UT11_UTILITY_META_ISITERABLEOFTYPE_HPP_INCLUDED
 
-#include "HasBeginAndEndFunctions.hpp"
+#include "IsIterableContainer.hpp"
 #include <iterator>
 
 namespace ut11
@@ -17,15 +17,15 @@ namespace ut11
     {
         namespace Meta
         {
-            template<typename Iterable, typename Type, bool IsIterable = HasBeginAndEndFunctions<Iterable>::value > struct IsIterableOfType
+            template<typename Iterable, typename Type, bool IsIterable = IsIterableContainer<Iterable>::value > struct IsIterableOfType
             {
                 typedef typename std::iterator_traits< decltype(std::declval<const Iterable&>().begin()) >::value_type Iterator;
-                constexpr static bool value = std::is_same<Type, Iterator>::value || std::is_base_of<Type, Iterator>::value;
+				enum { value = std::is_same<Type, Iterator>::value || std::is_base_of<Type, Iterator>::value };
             };
 
             template<typename A, typename B> struct IsIterableOfType<A,B,false>
             {
-                constexpr static bool value = false;
+				enum { value = false };
             };
         }
     }

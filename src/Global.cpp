@@ -4,20 +4,19 @@
 
 namespace
 {
-    std::unique_ptr<ut11::TestFixtureRunner> g_runner;
-}
+	inline std::unique_ptr<ut11::TestFixtureRunner>& GetRunner()
+	{
+		static std::unique_ptr<ut11::TestFixtureRunner> g_TestFixtureRunner;
+		if (!g_TestFixtureRunner)
+			g_TestFixtureRunner = std::unique_ptr<ut11::TestFixtureRunner>(new ut11::TestFixtureRunner());
 
-inline void InitialiseRunner()
-{
-    if ( !g_runner )
-        g_runner = std::move(std::unique_ptr<ut11::TestFixtureRunner>(new ut11::TestFixtureRunner()));
+		return g_TestFixtureRunner;
+	}
 }
 
 void ut11::PushFixture(std::shared_ptr<TestFixtureAbstract> fixture)
 {
-    InitialiseRunner();
-
-    g_runner->AddFixture(std::move(fixture));
+	GetRunner()->AddFixture(std::move(fixture));
 }
 
 int ut11::Run()
@@ -65,14 +64,10 @@ int ut11::Run(Output& output, const int argumentCount, const char** arguments)
 
 int ut11::Run(Output& output)
 {
-    InitialiseRunner();
-
-    return g_runner->Run(output);
+	return GetRunner()->Run(output);
 }
 
 int ut11::RunCategories(Output& output, std::vector<std::string> fixtures)
 {
-    InitialiseRunner();
-
-    return g_runner->RunCategories(output, fixtures);
+	return GetRunner()->RunCategories(output, fixtures);
 }

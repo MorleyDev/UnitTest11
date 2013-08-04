@@ -12,7 +12,7 @@ namespace ut11
     namespace Operands
     {
         struct TrueOperand : public Utility::BaseOperand
-        {
+		{
             template<typename T> bool operator()(const T& value) const { return static_cast<bool>(value); }
 
             template<typename T> inline std::string GetErrorMessage(const T& actual) const

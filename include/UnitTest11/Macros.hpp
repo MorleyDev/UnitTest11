@@ -11,21 +11,20 @@
 #define UT11_UNIQUE_NUMBER __LINE__
 #endif
 
-#define UT11_VA_NARGS_IMPL(_1, _2, _3, _4, _5, _6, _7, _8, _9, _10, _11, N, args...) N
-#define UT11_VA_NARGS(args...) UT11_VA_NARGS_IMPL(args, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1)
+#ifdef _MSC_VER
+#define UT11_VA_NUM_ARGS_HELPER(_1, _2, _3, _4, _5, _6, _7, _8, _9, _10, N, ...)    N
+#define UT11_VA_NUM_ARGS_REVERSE_SEQUENCE 10, 9, 8, 7, 6, 5, 4, 3, 2, 1
+#define UT11_LEFT_PARENTHESIS (
+#define UT11_RIGHT_PARENTHESIS )
+#define UT11_VA_NARGS(...)                        UT11_VA_NUM_ARGS_HELPER UT11_LEFT_PARENTHESIS __VA_ARGS__, UT11_VA_NUM_ARGS_REVERSE_SEQUENCE UT11_RIGHT_PARENTHESIS
 
-#define UT11_MACRO_CONCAT(func, suffix) func##suffix
+#else
+#define UT11_VA_NARGS_IMPL(_1, _2, _3, _4, _5, _6, _7, _8, _9, _10, _11, N, ...) N
+#define UT11_VA_NARGS(...) UT11_VA_NARGS_IMPL(__VA_ARGS__, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1)
+#endif
 
-// There is probably some way to auto-generate these via recursive macros.
-#define UT11_DECLARE_FIXTURE_2(line, Arguments...)  static const int ut11Fixture##line = ut11::DeclareFixtureObj<Arguments>(#Arguments)
-#define UT11_DECLARE_FIXTURE_3(line, Arguments...)  static const int ut11Fixture##line = ut11::DeclareFixtureObj<Arguments>(#Arguments)
-#define UT11_DECLARE_FIXTURE_4(line, Arguments...)  static const int ut11Fixture##line = ut11::DeclareFixtureObj<Arguments>(#Arguments)
-#define UT11_DECLARE_FIXTURE_5(line, Arguments...)  static const int ut11Fixture##line = ut11::DeclareFixtureObj<Arguments>(#Arguments)
-#define UT11_DECLARE_FIXTURE_6(line, Arguments...)  static const int ut11Fixture##line = ut11::DeclareFixtureObj<Arguments>(#Arguments)
-#define UT11_DECLARE_FIXTURE_7(line, Arguments...)  static const int ut11Fixture##line = ut11::DeclareFixtureObj<Arguments>(#Arguments)
-#define UT11_DECLARE_FIXTURE_8(line, Arguments...)  static const int ut11Fixture##line = ut11::DeclareFixtureObj<Arguments>(#Arguments)
-#define UT11_DECLARE_FIXTURE_9(line, Arguments...)  static const int ut11Fixture##line = ut11::DeclareFixtureObj<Arguments>(#Arguments)
-#define UT11_DECLARE_FIXTURE_10(line, Arguments...) static const int ut11Fixture##line = ut11::DeclareFixtureObj<Arguments>(#Arguments)
+#define UT11_MACRO_CONCAT_IMPL(func, suffix) func##suffix
+#define UT11_MACRO_CONCAT(func, suffix) UT11_MACRO_CONCAT_IMPL(func, suffix)
 
 #define UT11_MOCK_ACTION_1(Name) mutable ut11::Mock<void (void)> mock##Name; virtual void Name() { mock##Name(); }
 #define UT11_MOCK_ACTION_2(Name, Arg1) mutable ut11::Mock<void (Arg1)> mock##Name; virtual void Name(Arg1 a1) { mock##Name(a1); }
@@ -71,41 +70,46 @@
 #define UT11_MOCK_FUNCTION_CONST_10(Return, Name, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8) mutable ut11::Mock<Return (Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8)> mock##Name##Const; virtual Return Name(Arg1 a1, Arg2 a2, Arg3 a3, Arg4 a4, Arg5 a5, Arg6 a6, Arg7 a7, Arg8 a8) const { return mock##Name##Const(a1, a2, a3, a4, a5, a6, a7, a8, a9); }
 #define UT11_MOCK_FUNCTION_CONST_11(Return, Name, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8, Arg9) mutable ut11::Mock<Return (Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8, Arg9)> mock##Name##Const; virtual Return Name(Arg1 a1, Arg2 a2, Arg3 a3, Arg4 a4, Arg5 a5, Arg6 a6, Arg7 a7, Arg8 a8, Arg9 a9) const { return mock##Name##Const(a1, a2, a3, a4, a5, a6, a7, a8, a9); }
 
-#define UT11_DECLARE_FIXTURE_N(N, args...) UT11_MACRO_CONCAT(UT11_DECLARE_FIXTURE_, N)(args)
+#ifdef _MSC_VER
+#define UT11_MOCK_ACTION_N(N, ...) UT11_MACRO_CONCAT(UT11_MOCK_ACTION_, N) UT11_LEFT_PARENTHESIS __VA_ARGS__ UT11_RIGHT_PARENTHESIS
+#define UT11_MOCK_FUNCTION_N(N, ...) UT11_MACRO_CONCAT(UT11_MOCK_FUNCTION_, N) UT11_LEFT_PARENTHESIS __VA_ARGS__ UT11_RIGHT_PARENTHESIS
 
-#define UT11_MOCK_ACTION_N(N, args...) UT11_MACRO_CONCAT(UT11_MOCK_ACTION_, N)(args)
-#define UT11_MOCK_FUNCTION_N(N, args...) UT11_MACRO_CONCAT(UT11_MOCK_FUNCTION_, N)(args)
-#define UT11_MOCK_VERIFY_N(N, args...) UT11_MACRO_CONCAT(UT11_MOCK_VERIFY_, N)(args)
-#define UT11_MOCK_VERIFYTIMES_N(N, args...) UT11_MACRO_CONCAT(UT11_MOCK_VERIFYTIMES_, N)(args)
+#define UT11_MOCK_ACTION_CONST_N(N, ...) UT11_MACRO_CONCAT(UT11_MOCK_ACTION_CONST_, N) UT11_LEFT_PARENTHESIS __VA_ARGS__ UT11_RIGHT_PARENTHESIS
+#define UT11_MOCK_FUNCTION_CONST_N(N, ...) UT11_MACRO_CONCAT(UT11_MOCK_FUNCTION_CONST_, N) UT11_LEFT_PARENTHESIS __VA_ARGS__ UT11_RIGHT_PARENTHESIS
 
-#define UT11_MOCK_ACTION_CONST_N(N, args...) UT11_MACRO_CONCAT(UT11_MOCK_ACTION_CONST_, N)(args)
-#define UT11_MOCK_FUNCTION_CONST_N(N, args...) UT11_MACRO_CONCAT(UT11_MOCK_FUNCTION_CONST_, N)(args)
+#else
+#define UT11_MOCK_ACTION_N(N, ...) UT11_MACRO_CONCAT(UT11_MOCK_ACTION_, N)(__VA_ARGS__)
+#define UT11_MOCK_FUNCTION_N(N, ...) UT11_MACRO_CONCAT(UT11_MOCK_FUNCTION_, N)(__VA_ARGS__)
+
+#define UT11_MOCK_ACTION_CONST_N(N, ...) UT11_MACRO_CONCAT(UT11_MOCK_ACTION_CONST_, N)(__VA_ARGS__)
+#define UT11_MOCK_FUNCTION_CONST_N(N, ...) UT11_MACRO_CONCAT(UT11_MOCK_FUNCTION_CONST_, N)(__VA_ARGS__)
+#endif
 
 /*! \brief A mock action with no return values (Name, Arguments...) */
-#define MockAction(args...) UT11_MOCK_ACTION_N(UT11_VA_NARGS(args), args)
+#define MockAction(...) UT11_MOCK_ACTION_N(UT11_VA_NARGS(__VA_ARGS__), __VA_ARGS__)
 
 /*! \brief A mock function with a return value (Return, Name, Arguments...) */
-#define MockFunction(args...) UT11_MOCK_FUNCTION_N(UT11_VA_NARGS(args), args)
+#define MockFunction(...) UT11_MOCK_FUNCTION_N(UT11_VA_NARGS(__VA_ARGS__), __VA_ARGS__)
 
 /*! \brief A mock const action with no return values (Name, Arguments...) */
-#define MockActionConst(args...) UT11_MOCK_ACTION_CONST_N(UT11_VA_NARGS(args), args)
+#define MockActionConst(...) UT11_MOCK_ACTION_CONST_N(UT11_VA_NARGS(__VA_ARGS__), __VA_ARGS__)
 
 /*! \brief A mock const function with a return value (Return, Name, Arguments...) */
-#define MockFunctionConst(args...) UT11_MOCK_FUNCTION_CONST_N(UT11_VA_NARGS(args), args)
+#define MockFunctionConst(...) UT11_MOCK_FUNCTION_CONST_N(UT11_VA_NARGS(__VA_ARGS__), __VA_ARGS__)
 
 /*! \brief Verify a mock function was called with the passed predicates (mock, arguments) */
-#define MockVerify(args...) ::ut11::MockVerifyer<decltype(args)>(args, __LINE__, __FILE__)
+#define MockVerify(...) ::ut11::MockVerifyer<decltype(__VA_ARGS__)>(__VA_ARGS__, __LINE__, __FILE__)
 
 /*! \brief Verify a mock function was called with the passed predicates the specified number of times (mock, count, arguments)  */
-#define MockVerifyTimes(times, args...) ::ut11::MockTimesVerifyer<decltype(times), decltype(args)>(args, times, __LINE__, __FILE__)
+#define MockVerifyTimes(times, ...) ::ut11::MockTimesVerifyer<decltype(times), decltype(__VA_ARGS__)>(__VA_ARGS__, times, __LINE__, __FILE__)
 
 /*! \brief Declare a Test Fixture, adding it to the runner
- *
- * Adds a test fixture of type T to the runner.
- * Passes any arguments given on the right of the fixture name to that fixture's constructor.
- * Can not add the same fixture multiple times (compilation error).
- */
-#define DeclareFixture(args...) UT11_DECLARE_FIXTURE_N(UT11_VA_NARGS(UT11_UNIQUE_NUMBER, args), UT11_UNIQUE_NUMBER, args)
+*
+* Adds a test fixture of type T to the runner.
+* Passes any arguments given on the right of the fixture name to that fixture's constructor.
+* Can not add the same fixture multiple times (compilation error).
+*/
+#define DeclareFixture(...) static const int UT11_MACRO_CONCAT(ut11Fixture, UT11_UNIQUE_NUMBER) = ut11::DeclareFixtureObj<__VA_ARGS__>(#__VA_ARGS__)
 
 /*! \brief Assert that for the given Actual, the Expectation is true */
 #define AssertThat(Actual, Expectation) ut11::Assert::That(__LINE__, __FILE__, Actual, Expectation)

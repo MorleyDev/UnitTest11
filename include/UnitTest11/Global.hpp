@@ -4,6 +4,7 @@
 #include "TestFixture.hpp"
 #include "Output.hpp"
 #include "Category.hpp"
+#include "TestFixtureRunner.hpp"
 #include "Utility/ToString.hpp"
 
 namespace ut11

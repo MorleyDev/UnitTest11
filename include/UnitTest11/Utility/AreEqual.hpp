@@ -1,7 +1,7 @@
 #ifndef UNITTEST11_UTILITY_AREEQUAL_HPP
 #define UNITTEST11_UTILITY_AREEQUAL_HPP
 
-#include "Meta/HasBeginAndEndFunctions.hpp"
+#include "Meta/IsIterableContainer.hpp"
 
 namespace ut11
 {
@@ -10,8 +10,8 @@ namespace ut11
     	template<typename A, typename B> inline bool AreEqual(const A& a, const B& b);
 
     	template<typename A, typename B,
-    			 bool IsAIterable = Meta::HasBeginAndEndFunctions<A>::value,
-    			 bool IsBIterable = Meta::HasBeginAndEndFunctions<B>::value>
+    			 bool IsAIterable = Meta::IsIterableContainer<A>::value,
+				 bool IsBIterable = Meta::IsIterableContainer<B>::value >
     	struct Comparison
     	{
             inline bool operator()(const A& a, const B& b) const
@@ -34,7 +34,15 @@ namespace ut11
             	}
                 return i == a.end() && j == b.end();
             }
-    	};
+		};
+
+		template<> struct Comparison<std::string, std::string, true, true>
+		{
+			inline bool operator()(const std::string& a, const std::string& b) const
+			{
+				return a == b;
+			}
+		};
 
         template<typename A, typename B> inline bool AreEqual(const A& a, const B& b)
         {

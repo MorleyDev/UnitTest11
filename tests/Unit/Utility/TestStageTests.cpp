@@ -8,7 +8,7 @@ namespace
         virtual ~FakeOutput() { }
 
         MockAction(Begin)
-        MockAction(Finish, std::size_t, std::size_t)
+		MockAction(Finish, std::size_t, std::size_t)
 
         MockAction(BeginFixture, std::string)
         MockAction(EndFixture, std::string)
