@@ -186,21 +186,21 @@ public:
 
             FakeTestFixture* fixtureOne = new FakeTestFixture(fixtureResults);
             fixtureOne->mockGetNameConst.SetReturn(std::string("nameOne"));
-            fixtureOne->mockGetCategoriesConst.SetReturn(std::set<ut11::Category>({ ut11::Category("category") }));
+			fixtureOne->mockGetCategoriesConst.SetReturn(std::set<ut11::Category>({ ut11::Category("category") }));
 
             fixtureResults.ran = 4;
             fixtureResults.succeeded = 1;
 
             FakeTestFixture* fixtureTwo = new FakeTestFixture(fixtureResults);
             fixtureTwo->mockGetNameConst.SetReturn(std::string("nameTwo"));
-            fixtureTwo->mockGetCategoriesConst.SetReturn(std::set<ut11::Category>({ ut11::Category("unrancategory") }));
+			fixtureTwo->mockGetCategoriesConst.SetReturn(std::set<ut11::Category>({ ut11::Category("notcategory") }));
 
             fixtureResults.ran = 7;
             fixtureResults.succeeded = 6;
 
             FakeTestFixture* fixtureThree = new FakeTestFixture(fixtureResults);
             fixtureThree->mockGetNameConst.SetReturn(std::string("nameThree"));
-            fixtureThree->mockGetCategoriesConst.SetReturn(std::set<ut11::Category>({ ut11::Category("category") }));
+			fixtureThree->mockGetCategoriesConst.SetReturn(std::set<ut11::Category>({ ut11::Category("category") }));
 
             m_runner.AddFixture(std::unique_ptr<ut11::TestFixtureAbstract>(fixtureOne));
             m_runner.AddFixture(std::unique_ptr<ut11::TestFixtureAbstract>(fixtureTwo));

@@ -268,7 +268,8 @@ public:
         	m_categories = m_fixture->GetCategories();
         });
         Then("the expected categories were returned", [&]() {
-        	AssertThat(m_categories, ut11::Is::Iterable::EquivalentTo(std::vector<ut11::Category>({ ut11::Category("unit"), ut11::Category("integration"), ut11::Category("piano") })));
+
+			AssertThat(m_categories, ut11::Is::Iterable::EquivalentTo(std::vector<ut11::Category>({ ut11::Category("unit"), ut11::Category("integration"), ut11::Category("piano") })));
         });
     }
 };

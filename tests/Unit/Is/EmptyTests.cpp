@@ -24,7 +24,7 @@ public:
             AssertThat(ut11::Is::Empty("String With Content"), ut11::Is::False);
             AssertThat(ut11::Is::Empty(std::string("String With Content")), ut11::Is::False);
         });
-        Then("an empty vector is empty", []() {
+        Then("a vector with content is not empty", []() {
             AssertThat(ut11::Is::Empty(std::vector<int>({1,2,3})), ut11::Is::False);
         });
 
@@ -56,7 +56,7 @@ public:
             AssertThat(ut11::Is::Not::Empty("String With Content"), ut11::Is::True);
             AssertThat(ut11::Is::Not::Empty(std::string("String With Content")), ut11::Is::True);
         });
-        Then("an empty vector is empty", []() {
+        Then("a vector with content is not empty", []() {
             AssertThat(ut11::Is::Not::Empty(std::vector<int>({1,2,3})), ut11::Is::True);
         });
 
