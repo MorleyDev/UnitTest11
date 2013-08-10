@@ -1,6 +1,6 @@
 #include <UnitTest11/Global.hpp>
 #include <UnitTest11/TestFixtureRunner.hpp>
-#include <UnitTest11/StdOutput.hpp>
+#include <UnitTest11/out/StdOutput.hpp>
 
 namespace
 {
@@ -21,7 +21,7 @@ void ut11::PushFixture(std::shared_ptr<TestFixtureAbstract> fixture)
 
 int ut11::Run()
 {
-    ut11::StdOutput stdOutput;
+	ut11::out::StdOutput stdOutput;
 
     return Run(stdOutput);
 }
@@ -44,12 +44,12 @@ inline std::vector<std::string> ExtractCategoriesFromArguments(std::vector<std::
 
 int ut11::Run(const int argumentCount, const char** arguments)
 {
-    ut11::StdOutput stdOutput;
+	ut11::out::StdOutput stdOutput;
 
     return Run(stdOutput, argumentCount, arguments);
 }
 
-int ut11::Run(Output& output, const int argumentCount, const char** arguments)
+int ut11::Run(out::Output& output, const int argumentCount, const char** arguments)
 {
 	std::vector<std::string> argumentVector;
 	for(auto i = 1; i < argumentCount; ++i)
@@ -62,12 +62,12 @@ int ut11::Run(Output& output, const int argumentCount, const char** arguments)
     return Run(output);
 }
 
-int ut11::Run(Output& output)
+int ut11::Run(out::Output& output)
 {
 	return GetRunner()->Run(output);
 }
 
-int ut11::RunCategories(Output& output, std::vector<std::string> fixtures)
+int ut11::RunCategories(out::Output& output, std::vector<std::string> fixtures)
 {
 	return GetRunner()->RunCategories(output, fixtures);
 }

@@ -6,7 +6,7 @@ void ut11::TestFixtureRunner::AddFixture(std::shared_ptr<TestFixtureAbstract> fi
     m_fixtures.insert(std::make_pair(fixture->GetName(), std::move(fixture)));
 }
 
-int ut11::TestFixtureRunner::Run(Output& output)
+int ut11::TestFixtureRunner::Run(out::Output& output)
 {
     output.Begin();
 
@@ -17,7 +17,7 @@ int ut11::TestFixtureRunner::Run(Output& output)
     return results.ran - results.succeeded;
 }
 
-int ut11::TestFixtureRunner::RunCategories(Output& output, std::vector<std::string> desiredCategories)
+int ut11::TestFixtureRunner::RunCategories(out::Output& output, std::vector<std::string> desiredCategories)
 {
     output.Begin();
 
@@ -61,7 +61,7 @@ bool ut11::TestFixtureRunner::DoesFixtureMatchCategories(std::shared_ptr<ut11::T
     return false;
 }
 
-ut11::TestFixtureResults ut11::TestFixtureRunner::RunTestFixtures(std::vector<std::shared_ptr<ut11::TestFixtureAbstract>> fixtures, ut11::Output& output)
+ut11::TestFixtureResults ut11::TestFixtureRunner::RunTestFixtures(std::vector < std::shared_ptr < ut11::TestFixtureAbstract >> fixtures, out::Output& output)
 {
 	ut11::TestFixtureResults results;
     for(auto& fixture : fixtures)

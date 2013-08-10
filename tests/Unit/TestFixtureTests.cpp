@@ -15,7 +15,7 @@ namespace
         MockFunction(std::vector< std::shared_ptr<ut11::Utility::TestStage> >, Stage)
     };
 
-    class FakeOutput : public ut11::Output
+	class FakeOutput : public ut11::out::Output
     {
     public:
         virtual ~FakeOutput() { }
@@ -64,7 +64,7 @@ namespace
         virtual ~FakeTestStage() { }
 
 
-        virtual bool Run(ut11::Output&)
+		virtual bool Run(ut11::out::Output&)
         {
             WasTestStageRun = true;
             return m_result;

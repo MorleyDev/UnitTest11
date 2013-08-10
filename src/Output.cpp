@@ -5,8 +5,8 @@
  *      Author: Jason
  */
 
-#include <UnitTest11/Output.hpp>
+#include <UnitTest11/out/Output.hpp>
 
-ut11::Output::~Output()
+ut11::out::Output::~Output()
 {
 }

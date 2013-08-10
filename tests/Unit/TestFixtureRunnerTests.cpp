@@ -1,25 +1,9 @@
 #include <UnitTest11.hpp>
 #include <UnitTest11/TestFixtureRunner.hpp>
 
-namespace ut11
-{
-    namespace Utility
-    {
-        template<> struct ParseToString<ut11::Output*>
-        {
-            inline std::string operator()(ut11::Output* value) const
-            {
-                std::stringstream stream;
-                stream << value;
-                return stream.str();
-            }
-        };
-    }
-}
-
 namespace
 {
-    class FakeOutput : public ut11::Output
+	class FakeOutput : public ut11::out::Output
     {
     public:
         virtual ~FakeOutput() { }
@@ -58,7 +42,7 @@ namespace
         ut11::TestFixtureResults m_runResults;
 
     public:
-        ut11::Output* RunOutputUsed;
+		ut11::out::Output* RunOutputUsed;
 
         FakeTestFixture(ut11::TestFixtureResults runResults)
             : m_runResults(runResults), RunOutputUsed(nullptr)
@@ -75,7 +59,7 @@ namespace
 
         MockFunctionConst(std::string, GetName);
 
-        virtual ut11::TestFixtureResults Run(ut11::Output& output)
+		virtual ut11::TestFixtureResults Run(ut11::out::Output& output)
         {
             RunOutputUsed = &output;
             return m_runResults;

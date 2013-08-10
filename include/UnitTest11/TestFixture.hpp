@@ -2,7 +2,7 @@
 #define UNITTEST11_TESTFIXTURE_HPP
 
 #include "Category.hpp"
-#include "Output.hpp"
+#include "out/Output.hpp"
 #include "Utility/TestStageBuilderImpl.hpp"
 
 #include <string>
@@ -34,7 +34,7 @@ namespace ut11
 
         virtual std::string GetName() const = 0;
 
-        virtual TestFixtureResults Run(Output&) = 0;
+		virtual TestFixtureResults Run(out::Output&) = 0;
     };
 
     class TestFixture : public TestFixtureAbstract
@@ -56,7 +56,7 @@ namespace ut11
         void SetName(std::string name) { m_name = name; }
         virtual std::string GetName() const { return m_name; }
 
-        virtual TestFixtureResults Run(Output& output);
+		virtual TestFixtureResults Run(out::Output& output);
         virtual void Run();
 
     private:

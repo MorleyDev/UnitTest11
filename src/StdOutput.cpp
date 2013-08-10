@@ -5,18 +5,18 @@
  *      Author: Jason
  */
 
-#include <UnitTest11/StdOutput.hpp>
+#include <UnitTest11/out/StdOutput.hpp>
 #include <iostream>
 
-ut11::StdOutput::~StdOutput()
+ut11::out::StdOutput::~StdOutput()
 {
 }
 
-void ut11::StdOutput::Begin()
+void ut11::out::StdOutput::Begin()
 {
 }
 
-void ut11::StdOutput::BeginFixture(std::string name)
+void ut11::out::StdOutput::BeginFixture(std::string name)
 {
     std::cout << "Fixture: " << name << std::endl;
     m_given = "";
@@ -24,25 +24,25 @@ void ut11::StdOutput::BeginFixture(std::string name)
     m_finally = "";
 }
 
-void ut11::StdOutput::EndFixture(std::string)
+void ut11::out::StdOutput::EndFixture(std::string)
 {
     if ( m_finally != "" )
         std::cout << "    Finally: " << m_finally << std::endl;
 }
 
 
-void ut11::StdOutput::BeginTest()
+void ut11::out::StdOutput::BeginTest()
 {
     m_testStartTime = std::chrono::system_clock::now();
     m_testRunTime = std::chrono::system_clock::duration(0);
 }
 
-void ut11::StdOutput::EndTest()
+void ut11::out::StdOutput::EndTest()
 {
     std::cout << " [" << std::chrono::duration_cast<std::chrono::duration<float>>(m_testRunTime).count() << "s]" << std::endl;
 }
 
-void ut11::StdOutput::BeginGiven(std::string given)
+void ut11::out::StdOutput::BeginGiven(std::string given)
 {
     m_testStartTime = std::chrono::system_clock::now();
 
@@ -59,12 +59,12 @@ void ut11::StdOutput::BeginGiven(std::string given)
     m_testStartTime = std::chrono::system_clock::now();
 }
 
-void ut11::StdOutput::EndGiven(std::string)
+void ut11::out::StdOutput::EndGiven(std::string)
 {
     m_testRunTime +=  std::chrono::system_clock::now() - m_testStartTime;
 }
 
-void ut11::StdOutput::BeginWhen(std::string when)
+void ut11::out::StdOutput::BeginWhen(std::string when)
 {
     m_testStartTime = std::chrono::system_clock::now();
 
@@ -77,55 +77,55 @@ void ut11::StdOutput::BeginWhen(std::string when)
     m_testStartTime = std::chrono::system_clock::now();
 }
 
-void ut11::StdOutput::EndWhen(std::string)
+void ut11::out::StdOutput::EndWhen(std::string)
 {
     m_testRunTime +=  std::chrono::system_clock::now() - m_testStartTime;
 }
 
-void ut11::StdOutput::BeginThen(std::string then)
+void ut11::out::StdOutput::BeginThen(std::string then)
 {
     std::cout << "            Then: " << then;
 
     m_testStartTime = std::chrono::system_clock::now();
 }
 
-void ut11::StdOutput::EndThen(std::string)
+void ut11::out::StdOutput::EndThen(std::string)
 {
     m_testRunTime +=  std::chrono::system_clock::now() - m_testStartTime;
 }
 
-void ut11::StdOutput::BeginFinally(std::string finally)
+void ut11::out::StdOutput::BeginFinally(std::string finally)
 {
     m_finally = finally;
 
     m_testStartTime = std::chrono::system_clock::now();
 }
 
-void ut11::StdOutput::EndFinally(std::string)
+void ut11::out::StdOutput::EndFinally(std::string)
 {
     m_testRunTime +=  std::chrono::system_clock::now() - m_testStartTime;
 }
 
-void ut11::StdOutput::Finish(std::size_t ran, std::size_t succeeded)
+void ut11::out::StdOutput::Finish(std::size_t ran, std::size_t succeeded)
 {
     std::cout << "Finished!\nRan: " << ran
             << "\nSucceeded: " << succeeded
             << std::endl;
 }
 
-void ut11::StdOutput::OnError(const std::exception& exception)
+void ut11::out::StdOutput::OnError(const std::exception& exception)
 {
     std::cout << "    Failed: std::exception was thrown [what(): "
             << exception.what() << "]" << std::endl;
 }
 
-void ut11::StdOutput::OnError(std::size_t line, std::string file, std::string message)
+void ut11::out::StdOutput::OnError(std::size_t line, std::string file, std::string message)
 {
     std::cout << "    Failed: [" << line << ":" << file << "] " << message
               << std::endl;
 }
 
-void ut11::StdOutput::OnUnknownError()
+void ut11::out::StdOutput::OnUnknownError()
 {
     std::cout << "    Failed: Unknown Error" << std::endl;
 }

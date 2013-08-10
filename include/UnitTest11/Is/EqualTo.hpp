@@ -30,7 +30,7 @@ namespace ut11
                 std::stringstream errorMessage;
                 errorMessage << "Expected " << Utility::ToString(m_expected) << " but was " << Utility::ToString(actual);
                 return errorMessage.str();
-            }
+			}
         };
     }
 

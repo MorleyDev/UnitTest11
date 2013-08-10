@@ -2,7 +2,7 @@
 #define UNITTEST11_GLOBAL_HPP
 
 #include "TestFixture.hpp"
-#include "Output.hpp"
+#include "out/Output.hpp"
 #include "Category.hpp"
 #include "TestFixtureRunner.hpp"
 #include "Utility/ToString.hpp"
@@ -25,19 +25,19 @@ namespace ut11
      *
      * \return The number of fixtures that failed
      */
-    int Run(Output&);
+	int Run(out::Output&);
 
     /*! \brief Runs test fixtures with the given output, using the passes arguments to deduce the fixtures to run
      *
      * \return The number of fixtures that failed
      */
-    int Run(Output&, const int argumentCount, const char** arguments);
+	int Run(out::Output&, const int argumentCount, const char** arguments);
 
     /*! \brief Runs all test fixtures that have a category that matches one of the given names
      *
      * \return The number of fixtures that failed
      */
-    int RunCategories(Output&, std::vector<std::string> fixtures);
+	int RunCategories(out::Output&, std::vector<std::string> fixtures);
 
     void PushFixture(std::shared_ptr<TestFixtureAbstract>);
 

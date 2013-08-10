@@ -21,12 +21,12 @@ namespace ut11
             TestStageImpl(TestStep given, TestStep when, TestStep then, TestStep finally);
             virtual ~TestStageImpl();
 
-            virtual bool Run(Output& output);
+            virtual bool Run(out::Output& output);
 
-            virtual void Given(Output& output);
-            virtual void When(Output& output);
-            virtual void Then(Output& output);
-            virtual void Finally(Output& output);
+			virtual void Given(out::Output& output);
+			virtual void When(out::Output& output);
+			virtual void Then(out::Output& output);
+			virtual void Finally(out::Output& output);
         };
     }
 }

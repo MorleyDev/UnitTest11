@@ -21,7 +21,7 @@ ut11::Utility::TestStageImpl::~TestStageImpl()
 }
 
 
-bool ut11::Utility::TestStageImpl::Run(Output& output)
+bool ut11::Utility::TestStageImpl::Run(out::Output& output)
 {
     auto runInsideTryCatch = [&](std::function<void(void)> func) -> bool {
 
@@ -72,7 +72,7 @@ bool ut11::Utility::TestStageImpl::Run(Output& output)
 
 }
 
-void ut11::Utility::TestStageImpl::Given(Output& output)
+void ut11::Utility::TestStageImpl::Given(out::Output& output)
 {
     if ( !m_given.logic )
         return;
@@ -82,7 +82,7 @@ void ut11::Utility::TestStageImpl::Given(Output& output)
     output.EndGiven(m_given.description);
 }
 
-void ut11::Utility::TestStageImpl::When(Output& output)
+void ut11::Utility::TestStageImpl::When(out::Output& output)
 {
     if ( !m_when.logic )
         return;
@@ -92,7 +92,7 @@ void ut11::Utility::TestStageImpl::When(Output& output)
     output.EndWhen(m_when.description);
 }
 
-void ut11::Utility::TestStageImpl::Then(Output& output)
+void ut11::Utility::TestStageImpl::Then(out::Output& output)
 {
     if ( !m_then.logic )
         return;
@@ -102,7 +102,7 @@ void ut11::Utility::TestStageImpl::Then(Output& output)
     output.EndThen(m_then.description);
 }
 
-void ut11::Utility::TestStageImpl::Finally(Output& output)
+void ut11::Utility::TestStageImpl::Finally(out::Output& output)
 {
     if ( !m_finally.logic )
         return;

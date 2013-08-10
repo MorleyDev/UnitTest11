@@ -26,7 +26,7 @@ namespace ut11
             inline bool operator()(const A& a, const B& b) const
             {
             	auto i = a.begin();
-            	auto j = a.begin();
+            	auto j = b.begin();
 
             	for(;  i != a.end() && j != b.end(); ++i, ++j)
             	{

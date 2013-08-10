@@ -2,7 +2,7 @@
 
 namespace
 {
-    class FakeOutput : public ut11::Output
+	class FakeOutput : public ut11::out::Output
     {
     public:
         virtual ~FakeOutput() { }

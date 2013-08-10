@@ -59,7 +59,7 @@ void ut11::TestFixture::Finally(std::string description, std::function<void(void
     m_StageBuilder->PushFinally(Utility::TestStep(description, logic));
 }
 
-ut11::TestFixtureResults ut11::TestFixture::Run(Output& output)
+ut11::TestFixtureResults ut11::TestFixture::Run(out::Output& output)
 {
     output.BeginFixture(m_name);
     Run();

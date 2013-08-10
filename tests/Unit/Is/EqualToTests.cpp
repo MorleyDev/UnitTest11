@@ -47,3 +47,51 @@ public:
     }
 };
 DeclareFixture(IsNotEqualToTests)(ut11::Category("unit"));
+
+class IsEqualToIterableTests : public ut11::TestFixture
+{
+public:
+	virtual void Run()
+	{
+		Then("Is::EqualTo equal iterables succeeds", []() {
+			AssertThat(ut11::Is::EqualTo(std::vector<int>({ 1, 2, 3 }))(std::vector<int>({ 1, 2, 3 })), ut11::Is::True);
+		});
+
+		Then("Is::EqualTo not equal iterable fails", []() {
+			AssertThat(ut11::Is::EqualTo(std::vector<int>({ 1, 2, 7 }))(std::vector<int>({ 12, 2, 15 })), ut11::Is::Not::True);
+		});
+
+		Then("Is::EqualTo iterable is an operand", []() {
+			AssertThat(ut11::Utility::IsOperand< decltype(ut11::Is::EqualTo(std::vector<int>({ 1, 2, 3 }))) >::value, ut11::Is::True);
+		});
+
+		Then("Is::EqualTo not equal iterable has an error message", []() {
+			AssertThat(ut11::Is::EqualTo(std::vector<int>({ 1, 2, 3 })).GetErrorMessage(std::vector<int>({ 3, 2, 1 })), ut11::Is::Not::EqualTo(""));
+		});
+	}
+};
+DeclareFixture(IsEqualToIterableTests)(ut11::Category("unit"));
+
+class IsNotEqualToIterableTests : public ut11::TestFixture
+{
+public:
+	virtual void Run()
+	{
+		Then("Is::Not::EqualTo equal iterables fails", []() {
+			AssertThat(ut11::Is::Not::EqualTo(std::vector<int>({ 1, 2, 3 }))(std::vector<int>({ 1, 2, 3 })), ut11::Is::Not::True);
+		});
+
+		Then("Is::Not::EqualTo not equal iterable succeeds", []() {
+			AssertThat(ut11::Is::Not::EqualTo(std::vector<int>({ 1, 2, 7 }))(std::vector<int>({ 12, 2, 15 })), ut11::Is::True);
+		});
+
+		Then("Is::Not::EqualTo iterable is an operand", []() {
+			AssertThat(ut11::Utility::IsOperand< decltype(ut11::Is::Not::EqualTo(std::vector<int>({ 1, 2, 3 }))) >::value, ut11::Is::True);
+		});
+
+		Then("Is::Not::EqualTo not equal iterable has an error message", []() {
+			AssertThat(ut11::Is::Not::EqualTo(std::vector<int>({ 1, 2, 3 })).GetErrorMessage(std::vector<int>({ 3, 2, 1 })), ut11::Is::Not::EqualTo(""));
+		});
+	}
+};
+DeclareFixture(IsNotEqualToIterableTests)(ut11::Category("unit"));
