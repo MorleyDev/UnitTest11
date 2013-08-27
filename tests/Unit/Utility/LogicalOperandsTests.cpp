@@ -183,7 +183,7 @@ private:
 public:
 	virtual void Run()
 	{
-		Then("AndOperand is an Operand", [&]()
+		Then("NotOperand is an Operand", [&]()
 		{
 			AssertThat(ut11::Utility::IsOperand < ut11::Utility::NotOperand < MockOperand<int> >> ::value, ut11::Is::True);
 		});
