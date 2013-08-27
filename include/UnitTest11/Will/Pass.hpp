@@ -9,7 +9,7 @@ namespace ut11
     namespace Operands
     {
         template<typename CALLBACK>
-        class WillPass : public Utility::BaseOperand
+		class WillPass : public Utility::BaseOperand<WillPass<CALLBACK>>
         {
         private:
             CALLBACK m_predicate;
@@ -43,7 +43,7 @@ namespace ut11
             /*! \brief Operand will return true if the passed predicate returns false when called with the Actual value, otherwise returns false */
             template<typename CALLBACK> Utility::NotOperand< Operands::WillPass<CALLBACK> > Pass(CALLBACK predicate)
             {
-                return Utility::NotOperand< Operands::WillPass<CALLBACK> >(predicate);
+                return !Operands::WillPass<CALLBACK>(predicate);
             }
         }
     }

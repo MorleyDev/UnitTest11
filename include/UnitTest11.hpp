@@ -3,6 +3,9 @@
 
 #include "UnitTest11/TestFailedException.hpp"
 
+#include "UnitTest11/Utility/AndOperand.hpp"
+#include "UnitTest11/Utility/OrOperand.hpp"
+
 #include "UnitTest11/Is/EqualTo.hpp"
 #include "UnitTest11/Is/Empty.hpp"
 #include "UnitTest11/Is/Any.hpp"

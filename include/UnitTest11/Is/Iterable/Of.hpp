@@ -19,7 +19,7 @@ namespace ut11
     namespace Operands
     {
         template<typename T>
-        struct IsIteratorOf : public ut11::Utility::BaseOperand
+		struct IsIteratorOf : public ut11::Utility::BaseOperand<IsIteratorOf<T>>
         {
             template<typename U> inline bool operator()(const U& actual) const
             {
@@ -50,7 +50,7 @@ namespace ut11
                 /*! \brief Passes if the actual is not an iterable (has begin and end functions) whose items are of type T, or descended from type T */
                 template<typename T> inline Utility::NotOperand< Operands::IsIteratorOf<T> > Of()
                 {
-                    return Utility::NotOperand<Operands::IsIteratorOf<T>>();
+                    return !Operands::IsIteratorOf<T>();
                 }
             }
         }

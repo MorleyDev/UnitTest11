@@ -15,7 +15,7 @@ namespace ut11
 {
     namespace Operands
     {
-        template<typename T> struct IsIterableContainingItem : public Utility::BaseOperand
+		template<typename T> struct IsIterableContainingItem : public Utility::BaseOperand<IsIterableContainingItem<T>>
         {
             const T& m_expected;
 
@@ -61,7 +61,7 @@ namespace ut11
                     /*! \brief Passes if the given iterable does not contain at least one of the given item */
                     template<typename T> inline Utility::NotOperand< Operands::IsIterableContainingItem<T> > Item(const T& expected)
                     {
-                        return Utility::NotOperand< Operands::IsIterableContainingItem<T> >(expected);
+                        return !Operands::IsIterableContainingItem<T>(expected);
                     }
                 }
             }

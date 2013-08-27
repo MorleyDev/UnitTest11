@@ -11,7 +11,7 @@ namespace ut11
     namespace Operands
     {
         template<typename T>
-        struct IsAny : public ut11::Utility::BaseOperand
+		struct IsAny : public ut11::Utility::BaseOperand<IsAny<T>>
         {
             bool operator()(const T&) const
             {
@@ -45,7 +45,7 @@ namespace ut11
             /*! \brief Operand returns true if Actual is not of type U and it is not a base of or convertible to type U, otherwise false */
             template<typename U> inline Utility::NotOperand< Operands::IsAny<U> > Any()
             {
-                return Utility::NotOperand< Operands::IsAny<U> >();
+                return !Operands::IsAny<U>();
             }
         }
     }

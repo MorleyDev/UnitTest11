@@ -12,7 +12,7 @@ namespace ut11
 {
     namespace Operands
     {
-        template<typename U> struct EqualTo : public Utility::BaseOperand
+		template<typename U> struct EqualTo : public Utility::BaseOperand<EqualTo<U>>
         {
         private:
             const U& m_expected;
@@ -37,12 +37,18 @@ namespace ut11
     namespace Is
     {
         /*! \brief Operand returns true if Actual == Expected, otherwise false */
-        template<typename U> inline Operands::EqualTo<U> EqualTo(const U& expected) { return Operands::EqualTo<U>(expected); }
+        template<typename U> inline Operands::EqualTo<U> EqualTo(const U& expected)
+		{
+			return Operands::EqualTo<U>(expected);
+		}
 
         namespace Not
         {
             /*! \brief Operand returns true if Actual != Expected, otherwise false */
-            template<typename U> inline Utility::NotOperand< Operands::EqualTo<U> > EqualTo(const U& expected) { return Utility::NotOperand< Operands::EqualTo<U> >(expected); }
+            template<typename U> inline Utility::NotOperand< Operands::EqualTo<U> > EqualTo(const U& expected) 
+			{
+				return !Operands::EqualTo<U>(expected); 
+			}
         }
     }
 }

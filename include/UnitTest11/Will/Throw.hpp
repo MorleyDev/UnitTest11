@@ -12,7 +12,7 @@ namespace ut11
 {
     namespace Operands
     {
-        template<typename Exception> struct WillThrow : public Utility::BaseOperand
+		template<typename Exception> struct WillThrow : public Utility::BaseOperand < WillThrow<Exception> >
         {
             inline explicit WillThrow(std::string exceptionName = typeid(Exception).name())
                 : m_exceptionName(exceptionName),
@@ -52,7 +52,7 @@ namespace ut11
             mutable std::string m_errorMessage;
         };
 
-        template<> struct WillThrow<std::exception> : public Utility::BaseOperand
+			template<> struct WillThrow<std::exception> : public Utility::BaseOperand<WillThrow<std::exception>>
         {
             inline explicit WillThrow()
                 : m_exceptionName("std::exception"),

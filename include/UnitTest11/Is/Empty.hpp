@@ -18,7 +18,7 @@ namespace ut11
 {
     namespace Operands
     {
-        struct IsEmpty : public ut11::Utility::BaseOperand
+		struct IsEmpty : public ut11::Utility::BaseOperand<IsEmpty>
         {
             inline bool operator()(const char* actual) const { return std::string(actual).length() == 0; }
 

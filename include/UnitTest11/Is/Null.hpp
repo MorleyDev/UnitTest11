@@ -10,7 +10,7 @@ namespace ut11
 {
     namespace Operands
     {
-        struct IsNull : public Utility::BaseOperand
+        struct IsNull : public Utility::BaseOperand<IsNull>
         {
             template<typename U> bool operator()(std::weak_ptr<U> value) const
             {

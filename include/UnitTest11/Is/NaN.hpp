@@ -32,7 +32,7 @@ namespace ut11
     namespace Operands
     {
 
-        struct IsNaN : public Utility::BaseOperand
+        struct IsNaN : public Utility::BaseOperand<IsNaN>
         {
             template<typename U> bool operator()(const U& value) const
             {

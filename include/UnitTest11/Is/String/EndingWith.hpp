@@ -15,7 +15,7 @@ namespace ut11
 {
     namespace Operands
     {
-        struct IsStringEndingWith : public ut11::Utility::BaseOperand
+		struct IsStringEndingWith : public ut11::Utility::BaseOperand<IsStringEndingWith>
         {
             std::string m_expected;
 
@@ -53,7 +53,7 @@ namespace ut11
                 /*! \brief Operand returns false if string ends with expected string, otherwise returns true */
                 inline Utility::NotOperand<Operands::IsStringEndingWith> EndingWith(std::string expected)
                 {
-                    return Utility::NotOperand<Operands::IsStringEndingWith>(expected);
+                    return !Operands::IsStringEndingWith(expected);
                 }
             }
         }

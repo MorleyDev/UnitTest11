@@ -112,6 +112,6 @@
 #define DeclareFixture(...) static const int UT11_MACRO_CONCAT(ut11Fixture, UT11_UNIQUE_NUMBER) = ut11::DeclareFixtureObj<__VA_ARGS__>(#__VA_ARGS__)
 
 /*! \brief Assert that for the given Actual, the Expectation is true */
-#define AssertThat(Actual, Expectation) ut11::Assert::That(__LINE__, __FILE__, Actual, Expectation)
+#define AssertThat(...) ut11::Assert::That(__LINE__, __FILE__, __VA_ARGS__)
 
 #endif // UNITTEST11_MACROS_HPP

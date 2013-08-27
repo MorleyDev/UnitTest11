@@ -2,7 +2,7 @@
 #include <string>
 
 template<bool Succeeds, typename U>
-struct TestOperand : public ut11::Utility::BaseOperand
+struct TestOperand : public ut11::Utility::BaseOperand<TestOperand<Succeeds,U>>
 {
 private:
     std::string m_expectedErrorMessage;
@@ -50,7 +50,6 @@ public:
             message = "some message";
             expectedValue = 5;
         });
-
         When("calling assert that against the test operand that returns false", [&]()
         {
             try
@@ -62,47 +61,22 @@ public:
                 caughtException = ex;
             }
         });
-
         Then("the expected test failed exception was thrown with the expected line", [&]()
         {
             AssertThat(caughtException.GetLine(), ut11::Is::EqualTo(line));
         });
-
         Then("the expected test failed exception was thrown with the expected file", [&]()
         {
             AssertThat(caughtException.GetFile(), ut11::Is::EqualTo(file));
         });
-
         Then("the expected test failed exception was thrown with the expected message", [&]()
         {
             AssertThat(caughtException.GetMessage(), ut11::Is::EqualTo(message));
         });
-
-        Given("a line, file, message and expected value", [&]()
-        {
-            caughtException = ut11::TestFailedException();
-
-            line = 132;
-            file = "some file";
-            message = "some message";
-            expectedValue = 5;
-        });
-
         Then("calling assert that against the test operand that returns true does nothing", [&]()
         {
             ut11::Assert::That(line, file, expectedValue, TestOperand<true, int>(message, expectedValue));
         });
-
-        Given("a line, file, message and expected value", [&]()
-        {
-            caughtException = ut11::TestFailedException();
-
-            line = 132;
-            file = "some file";
-            message = "some message";
-            expectedValue = 5;
-        });
-
         When("calling assert with a custom message that against the test operand that returns false", [&]()
         {
             try
@@ -114,32 +88,18 @@ public:
                 caughtException = ex;
             }
         });
-
         Then("the expected test failed exception was thrown with the expected line", [&]()
         {
             AssertThat(caughtException.GetLine(), ut11::Is::EqualTo(line));
         });
-
         Then("the expected test failed exception was thrown with the expected file", [&]()
         {
             AssertThat(caughtException.GetFile(), ut11::Is::EqualTo(file));
         });
-
         Then("the expected test failed exception was thrown with the expected message", [&]()
         {
             AssertThat(caughtException.GetMessage(), ut11::Is::EqualTo(message));
         });
-
-        Given("a line, file, message and expected value", [&]()
-        {
-            caughtException = ut11::TestFailedException();
-
-            line = 132;
-            file = "some file";
-            message = "some message";
-            expectedValue = 5;
-        });
-
         Then("calling assert that against the test operand that returns true with a custom message does nothing", [&]()
         {
             ut11::Assert::That(line, file, expectedValue, TestOperand<true, int>("other not message", expectedValue));

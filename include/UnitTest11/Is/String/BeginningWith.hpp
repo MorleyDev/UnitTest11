@@ -8,7 +8,7 @@ namespace ut11
 {
     namespace Operands
     {
-        struct IsStringBeginningWith : public ut11::Utility::BaseOperand
+		struct IsStringBeginningWith : public ut11::Utility::BaseOperand<IsStringBeginningWith>
         {
             std::string m_expected;
 
@@ -46,7 +46,7 @@ namespace ut11
                 /*! \brief Operand returns false if string begins with expected string, otherwise returns true */
                 inline Utility::NotOperand<Operands::IsStringBeginningWith> BeginningWith(std::string expected)
                 {
-                    return Utility::NotOperand<Operands::IsStringBeginningWith>(expected);
+                    return !Operands::IsStringBeginningWith(expected);
                 }
             }
         }

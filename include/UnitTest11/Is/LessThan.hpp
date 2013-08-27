@@ -9,7 +9,7 @@ namespace ut11
     namespace Operands
     {
         template<typename U>
-        struct IsLessThan : public Utility::BaseOperand
+		struct IsLessThan : public Utility::BaseOperand<IsLessThan<U>>
         {
             const U& high;
 
@@ -39,7 +39,7 @@ namespace ut11
             /*! \brief Operand returns false if Actual is not less than the Expected, otherwise false */
             template<typename U> inline Utility::NotOperand< Operands::IsLessThan<U> > LessThan(const U& high)
             {
-                return Utility::NotOperand< Operands::IsLessThan<U> >(high);
+                return !Operands::IsLessThan<U>(high);
             }
         }
     }

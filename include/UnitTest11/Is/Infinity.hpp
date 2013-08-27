@@ -11,7 +11,7 @@ namespace ut11
 {
     namespace Operands
     {
-        struct IsInfinity : public Utility::BaseOperand
+		struct IsInfinity : public Utility::BaseOperand<IsInfinity>
         {
             template<typename U> bool operator()(const U& value) const
             {
@@ -26,7 +26,7 @@ namespace ut11
             }
         };
 
-        struct IsPositiveInfinity : public Utility::BaseOperand
+		struct IsPositiveInfinity : public Utility::BaseOperand<IsPositiveInfinity>
         {
             template<typename U> bool operator()(const U& value) const
             {
@@ -41,7 +41,7 @@ namespace ut11
             }
         };
 
-        struct IsNegativeInfinity : public Utility::BaseOperand
+		struct IsNegativeInfinity : public Utility::BaseOperand<IsNegativeInfinity>
         {
             template<typename U> bool operator()(const U& value) const
             {

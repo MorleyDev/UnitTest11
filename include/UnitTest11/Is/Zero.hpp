@@ -9,7 +9,7 @@ namespace ut11
 {
     namespace Operands
     {
-        struct IsZero : public Utility::BaseOperand
+        struct IsZero : public Utility::BaseOperand<IsZero>
         {
             template<typename U> bool operator()(const U& value) const
             {

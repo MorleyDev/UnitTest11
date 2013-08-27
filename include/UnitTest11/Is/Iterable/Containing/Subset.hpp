@@ -15,7 +15,7 @@ namespace ut11
 {
     namespace Operands
     {
-        template<typename T> struct IsIterableContainingSubset : public Utility::BaseOperand
+        template<typename T> struct IsIterableContainingSubset : public Utility::BaseOperand<IsIterableContainingSubset<T>>
         {
             const T& m_expected;
 
@@ -91,7 +91,7 @@ namespace ut11
                     /*! \brief Passes if the given iterable does not contain the given subset of items */
                     template<typename T> inline Utility::NotOperand< Operands::IsIterableContainingSubset<T> > Subset(const T& expected)
                     {
-                        return Utility::NotOperand< Operands::IsIterableContainingSubset<T> >(expected);
+                        return !Operands::IsIterableContainingSubset<T>(expected);
                     }
                 }
             }

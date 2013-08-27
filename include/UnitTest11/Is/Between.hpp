@@ -10,7 +10,7 @@ namespace ut11
     namespace Operands
     {
         template<typename U, typename V>
-        struct IsBetween : public Utility::BaseOperand
+		struct IsBetween : public Utility::BaseOperand<IsBetween<U,V>>
         {
             const U& low;
             const V& high;
@@ -41,7 +41,7 @@ namespace ut11
             /*! \brief Operand returns true if Actual is less than low, or Actual is greater than high, otherwise false */
             template<typename U, typename V> inline Utility::NotOperand< Operands::IsBetween<U,V> > Between(const U& low, const V& high)
             {
-                return Utility::NotOperand< Operands::IsBetween<U,V> >(low, high);
+                return !Operands::IsBetween<U,V>(low, high);
             }
         }
     }

@@ -20,7 +20,7 @@ namespace ut11
     namespace Operands
     {
         template<typename T>
-        struct IsIterableEquivalentTo : public Utility::BaseOperand
+		struct IsIterableEquivalentTo : public Utility::BaseOperand<IsIterableEquivalentTo<T>>
         {
             const T& m_expected;
 
@@ -91,7 +91,7 @@ namespace ut11
                 /*! \brief Takes an expected and actual iterable (has ::begin and ::end functions) and returns true if the contents of those iterables are not the same, ignoring order */
                 template<typename T> Utility::NotOperand< Operands::IsIterableEquivalentTo<T> > EquivalentTo(const T& expected)
                 {
-                    return Utility::NotOperand< Operands::IsIterableEquivalentTo<T> >(expected);
+                    return !Operands::IsIterableEquivalentTo<T>(expected);
                 }
             }
         }
