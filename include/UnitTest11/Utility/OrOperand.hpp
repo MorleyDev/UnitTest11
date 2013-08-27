@@ -22,10 +22,7 @@ namespace ut11
 
 			template<typename T> bool operator()(const T& actual) const
 			{
-				auto result1 = operand1(actual);
-				auto result2 = operand2(actual);
-
-				return result1 || result2;
+				return operand1(actual) || operand2(actual);
 			}
 
 			template<typename T> inline std::string GetErrorMessage(const T& actual) const

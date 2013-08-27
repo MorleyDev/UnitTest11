@@ -54,9 +54,13 @@ private:
 		{
 			MockVerify(m_mockOperandA)(m_input);
 		});
-		Then("the second operand was called with the expected input", [&]()
+		if ( first ) Then("the second operand was called with the expected input", [&]()
 		{
 			MockVerify(m_mockOperandB)(m_input);
+		});
+		else Then("the second operand was not called", [&]()
+		{
+			MockVerifyTimes(0, m_mockOperandB)(ut11::Is::Any<int>());
 		});
 		Then(std::string("the result is ") + (expectedResult ? "true" : "false"), [&, expectedResult]()
 		{
@@ -114,9 +118,13 @@ private:
 		{
 			MockVerify(m_mockOperandA)(m_input);
 		});
-		Then("the second operand was called with the expected input", [&]()
+		if ( !first ) Then("the second operand was called with the expected input", [&]()
 		{
 			MockVerify(m_mockOperandB)(m_input);
+		});
+		else Then("the second operand was not called", [&]()
+		{
+			MockVerifyTimes(0, m_mockOperandB)(ut11::Is::Any<int>());
 		});
 		Then(std::string("the result is ") + (expectedResult ? "true" : "false"), [&, expectedResult]()
 		{
