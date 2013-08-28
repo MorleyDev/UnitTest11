@@ -3,6 +3,7 @@
 
 #include "../Utility/BaseOperand.hpp"
 #include "../Utility/ToString.hpp"
+
 #include <cmath>
 #include <sstream>
 #include <limits>

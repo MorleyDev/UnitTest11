@@ -2,6 +2,9 @@
 #define UNITTEST11_IS_LESSTHAN_HPP
 
 #include "../Utility/BaseOperand.hpp"
+#include "../Utility/ToString.hpp"
+
+#include <string>
 #include <sstream>
 
 namespace ut11

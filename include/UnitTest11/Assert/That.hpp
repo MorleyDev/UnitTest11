@@ -1,7 +1,6 @@
 #ifndef UNITTEST11_ASSERT_THAT_HPP
 #define UNITTEST11_ASSERT_THAT_HPP
 
-#include "../Utility/BaseOperand.hpp"
 #include "Fail.hpp"
 #include <string>
 

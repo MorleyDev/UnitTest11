@@ -10,6 +10,9 @@
 
 #include "../../../Utility/BaseOperand.hpp"
 #include "../../../Utility/AreEqual.hpp"
+#include "../../../Utility/ToString.hpp"
+#include <string>
+#include <list>
 
 namespace ut11
 {

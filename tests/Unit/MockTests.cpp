@@ -1,4 +1,10 @@
-#include <UnitTest11.hpp>
+#include <UnitTest11/Core.hpp>
+#include <UnitTest11/TestFailedException.hpp>
+#include <UnitTest11/Is/Any.hpp>
+#include <UnitTest11/Is/EqualTo.hpp>
+#include <UnitTest11/Will/Throw.hpp>
+#include <UnitTest11/Will/Pass.hpp>
+#include <UnitTest11/Mock.hpp>
 
 class MockTest : public ut11::TestFixture
 {

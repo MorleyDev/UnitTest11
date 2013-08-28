@@ -8,6 +8,8 @@
 #ifndef UT11_IS_STRING_ENDINGWITH_HPP_INCLUDED
 #define UT11_IS_STRING_ENDINGWITH_HPP_INCLUDED
 
+#include "../../Utility/BaseOperand.hpp"
+
 #include <string>
 #include <sstream>
 

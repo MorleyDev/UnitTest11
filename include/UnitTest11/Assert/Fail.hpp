@@ -1,7 +1,6 @@
 #ifndef UNITTEST11_ASSERT_FAIL_HPP
 #define UNITTEST11_ASSERT_FAIL_HPP
 
-#include "../TestFailedException.hpp"
 #include <string>
 
 namespace ut11

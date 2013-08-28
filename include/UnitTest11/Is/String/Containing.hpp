@@ -1,6 +1,7 @@
 #ifndef UNITTEST11_IS_STRING_CONTAINING_HPP
 #define UNITTEST11_IS_STRING_CONTAINING_HPP
 
+#include "../../Utility/BaseOperand.hpp"
 #include <string>
 #include <sstream>
 

@@ -23,9 +23,9 @@ namespace ut11
         {
         }
 
-        std::size_t GetLine() const { return m_line; }
-        std::string GetFile() const { return m_file; }
-        std::string GetMessage() const { return m_message; }
+        inline std::size_t GetLine() const { return m_line; }
+        inline std::string GetFile() const { return m_file; }
+        inline std::string GetMessage() const { return m_message; }
 
     private:
         std::size_t m_line;

@@ -1,4 +1,6 @@
-#include <UnitTest11.hpp>
+#include <UnitTest11/Core.hpp>
+#include <UnitTest11/Utility/MockArgumentHandler.hpp>
+#include <UnitTest11/Is/EqualTo.hpp>
 
 class MockArgumentHandlerTest : public ut11::TestFixture
 {
@@ -23,7 +25,6 @@ public:
 
         Then("the TotalCount() is as expected", [&]()
         {
-
             AssertThat(m_argumentHandler.TotalCount(), ut11::Is::EqualTo(4u));
         });
 
@@ -31,7 +32,7 @@ public:
         {
             AssertThat(m_argumentHandler.CountCalls(m_expectedCalls[0]), ut11::Is::EqualTo(3u));
             AssertThat(m_argumentHandler.CountCalls(m_expectedCalls[1]), ut11::Is::EqualTo(1u));
-            AssertThat(m_argumentHandler.CountCalls(12), ut11::Is::EqualTo((std::size_t)0));
+            AssertThat(m_argumentHandler.CountCalls(12), ut11::Is::EqualTo(0u));
         });
 
         Then("the expected calls are as expected for operand argument comparisons", [&]()

@@ -3,10 +3,6 @@
 
 #include "TestStage.hpp"
 #include "TestStep.hpp"
-#include "../TestFailedException.hpp"
-
-#include <string>
-#include <functional>
 
 namespace ut11
 {

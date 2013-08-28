@@ -1,4 +1,7 @@
-#include <UnitTest11.hpp>
+#include <UnitTest11/Core.hpp>
+#include <UnitTest11/Mock.hpp>
+#include <UnitTest11/Is/EqualTo.hpp>
+#include <UnitTest11/Is/Null.hpp>
 #include <UnitTest11/TestFixtureRunner.hpp>
 
 namespace

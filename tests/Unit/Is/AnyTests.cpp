@@ -1,10 +1,17 @@
-#include <UnitTest11.hpp>
+#include <UnitTest11/Core.hpp>
+#include <UnitTest11/Is/True.hpp>
+#include <UnitTest11/Is/False.hpp>
+#include <UnitTest11/Is/EqualTo.hpp>
+#include <UnitTest11/Is/Any.hpp>
 
-class Class { };
-class DifferentClass { };
+namespace
+{
+	class Class { };
+	class DifferentClass { };
 
-class Base { };
-class Derived : public Base { };
+	class Base { };
+	class Derived : public Base { };
+}
 
 class IsAnyTests : public ut11::TestFixture
 {

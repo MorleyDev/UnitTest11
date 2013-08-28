@@ -4,6 +4,7 @@
 #include "BaseOperand.hpp"
 #include "AreEqual.hpp"
 
+#include <type_traits>
 #include <tuple>
 #include <list>
 

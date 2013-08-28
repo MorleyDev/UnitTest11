@@ -1,4 +1,8 @@
- #include <UnitTest11.hpp>
+#include <UnitTest11/Core.hpp>
+#include <UnitTest11/Is/True.hpp>
+#include <UnitTest11/Is/False.hpp>
+#include <UnitTest11/Is/EqualTo.hpp>
+#include <UnitTest11/Will/Throw.hpp>
 
 class WillThrowTests : public ut11::TestFixture
 {

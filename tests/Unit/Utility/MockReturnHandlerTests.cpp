@@ -1,4 +1,6 @@
-#include <UnitTest11.hpp>
+#include <UnitTest11/Core.hpp>
+#include <UnitTest11/Is/EqualTo.hpp>
+#include <UnitTest11/Utility/MockReturnHandler.hpp>
 
 namespace ut11 { namespace Utility { template<> struct DefaultValue<int> { inline int operator()() const { return 8; } }; } }
 

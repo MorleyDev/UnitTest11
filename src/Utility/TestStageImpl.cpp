@@ -1,4 +1,5 @@
 #include <UnitTest11/Utility/TestStageImpl.hpp>
+#include <UnitTest11/TestFailedException.hpp>
 
 ut11::Utility::TestStageImpl::TestStageImpl()
     : m_given(),

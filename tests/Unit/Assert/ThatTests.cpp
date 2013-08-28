@@ -1,32 +1,36 @@
-#include <UnitTest11.hpp>
-#include <string>
+#include <UnitTest11/Core.hpp>
+#include <UnitTest11/Is/EqualTo.hpp>
+#include <UnitTest11/TestFailedException.hpp>
 
-template<bool Succeeds, typename U>
-struct TestOperand : public ut11::Utility::BaseOperand<TestOperand<Succeeds,U>>
+namespace
 {
-private:
-    std::string m_expectedErrorMessage;
-    U m_expectedValue;
+	template<bool Succeeds, typename U>
+	struct TestOperand : public ut11::Utility::BaseOperand<TestOperand<Succeeds, U>>
+	{
+	private:
+		std::string m_expectedErrorMessage;
+		U m_expectedValue;
 
-public:
-    TestOperand(std::string expectedErrorCode, U expectedValue)
-        : m_expectedErrorMessage(expectedErrorCode),
-          m_expectedValue(expectedValue)
-    {
-    }
+	public:
+		TestOperand(std::string expectedErrorCode, U expectedValue)
+			: m_expectedErrorMessage(expectedErrorCode),
+			m_expectedValue(expectedValue)
+		{
+		}
 
-    template<typename T> inline bool operator()(const T& actual) const
-    {
-        AssertThat(actual, ut11::Is::EqualTo(m_expectedValue));
-        return Succeeds;
-    }
+		template<typename T> inline bool operator()(const T& actual) const
+		{
+			AssertThat(actual, ut11::Is::EqualTo(m_expectedValue));
+			return Succeeds;
+		}
 
-    template<typename T> inline std::string GetErrorMessage(const T& actual) const
-    {
-        AssertThat(actual, ut11::Is::EqualTo(m_expectedValue));
-        return m_expectedErrorMessage;
-    }
-};
+		template<typename T> inline std::string GetErrorMessage(const T& actual) const
+		{
+			AssertThat(actual, ut11::Is::EqualTo(m_expectedValue));
+			return m_expectedErrorMessage;
+		}
+	};
+}
 
 class AssertThatTests : public ut11::TestFixture
 {

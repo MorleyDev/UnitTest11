@@ -1,42 +1,13 @@
 #ifndef UNITTEST11_TESTFIXTURE_HPP
 #define UNITTEST11_TESTFIXTURE_HPP
 
-#include "Category.hpp"
-#include "out/Output.hpp"
+#include "TestFixtureAbstract.hpp"
 #include "Utility/TestStageBuilderImpl.hpp"
 
-#include <string>
-#include <functional>
-#include <set>
+#include <memory>
 
 namespace ut11
 {
-    struct TestFixtureResults
-    {
-        TestFixtureResults() : ran(0), succeeded(0) { }
-
-        std::size_t ran;
-        std::size_t succeeded;
-    };
-
-    class TestFixtureAbstract
-    {
-    public:
-        virtual ~TestFixtureAbstract();
-
-        virtual void AddCategory(ut11::Category) = 0;
-        virtual std::set<ut11::Category> GetCategories() const = 0;
-
-        virtual void Given(std::string, std::function<void(void)>) = 0;
-        virtual void When(std::string, std::function<void(void)>) = 0;
-        virtual void Then(std::string, std::function<void(void)>) = 0;
-        virtual void Finally(std::string, std::function<void(void)>) = 0;
-
-        virtual std::string GetName() const = 0;
-
-		virtual TestFixtureResults Run(out::Output&) = 0;
-    };
-
     class TestFixture : public TestFixtureAbstract
     {
     public:
@@ -53,7 +24,7 @@ namespace ut11
         virtual void Then(std::string description, std::function<void(void)> logic);
         virtual void Finally(std::string description, std::function<void(void)> logic);
 
-        void SetName(std::string name) { m_name = name; }
+        inline void SetName(std::string name) { m_name = name; }
         virtual std::string GetName() const { return m_name; }
 
 		virtual TestFixtureResults Run(out::Output& output);

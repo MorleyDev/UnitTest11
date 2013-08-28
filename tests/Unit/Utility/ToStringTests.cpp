@@ -5,7 +5,9 @@
  *      Author: Jason
  */
 
-#include <UnitTest11.hpp>
+#include <UnitTest11/Core.hpp>
+#include <UnitTest11/Is/EqualTo.hpp>
+#include <UnitTest11/Utility/ToString.hpp>
 
 class ToStringTests : public ut11::TestFixture
 {

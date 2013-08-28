@@ -1,4 +1,6 @@
-#include <UnitTest11.hpp>
+#include <UnitTest11/Core.hpp>
+#include <UnitTest11/Is/True.hpp>
+#include <UnitTest11/Is/EqualTo.hpp>
 
 class IsEqualToTests : public ut11::TestFixture
 {

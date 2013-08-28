@@ -1,11 +1,8 @@
-/*
- * ItemTests.cpp
- *
- *  Created on: 28 Apr 2013
- *      Author: Jason
- */
-
-#include <UnitTest11.hpp>
+#include <UnitTest11/Core.hpp>
+#include <UnitTest11/Is/True.hpp>
+#include <UnitTest11/Is/False.hpp>
+#include <UnitTest11/Is/EqualTo.hpp>
+#include <UnitTest11/Is/Iterable/Containing/Item.hpp>
 
 class IsIterableContainingItemTests : public ut11::TestFixture
 {

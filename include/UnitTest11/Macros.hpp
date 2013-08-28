@@ -1,10 +1,6 @@
 #ifndef UNITTEST11_MACROS_HPP
 #define UNITTEST11_MACROS_HPP
 
-#include "Global.hpp"
-#include "Assert/That.hpp"
-#include "Mock.hpp"
-
 #ifdef __COUNTER__
 #define UT11_UNIQUE_NUMBER __COUNTER__
 #else

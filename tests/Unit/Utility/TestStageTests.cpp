@@ -1,4 +1,10 @@
-#include <UnitTest11.hpp>
+#include <UnitTest11/Core.hpp>
+#include <UnitTest11/Mock.hpp>
+#include <UnitTest11/Is/True.hpp>
+#include <UnitTest11/Is/False.hpp>
+#include <UnitTest11/Is/Any.hpp>
+
+#include <UnitTest11/TestFailedException.hpp>
 
 namespace
 {

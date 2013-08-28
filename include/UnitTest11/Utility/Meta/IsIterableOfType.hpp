@@ -9,6 +9,7 @@
 #define UT11_UTILITY_META_ISITERABLEOFTYPE_HPP_INCLUDED
 
 #include "IsIterableContainer.hpp"
+#include <type_traits>
 #include <iterator>
 
 namespace ut11

@@ -5,7 +5,8 @@
 #include "Utility/MockReturnHandler.hpp"
 #include "Assert/Fail.hpp"
 
-#include <memory>
+#include <sstream>
+#include <functional>
 
 namespace ut11
 {

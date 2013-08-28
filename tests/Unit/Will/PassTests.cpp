@@ -1,4 +1,8 @@
-#include <UnitTest11.hpp>
+#include <UnitTest11/Core.hpp>
+#include <UnitTest11/Is/EqualTo.hpp>
+#include <UnitTest11/Is/True.hpp>
+#include <UnitTest11/Is/False.hpp>
+#include <UnitTest11/Will/Pass.hpp>
 #include <functional>
 
 class WillPassTests : public ut11::TestFixture
