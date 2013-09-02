@@ -6,6 +6,20 @@
 #include <UnitTest11/Is/Iterable/EquivalentTo.hpp>
 #include <vector>
 
+namespace ut11
+{
+	namespace Utility
+	{
+		template<> struct ParseToString<Category>
+		{
+			inline std::string operator()(const Category& value) const
+			{
+				return std::string("Category: [") + value.GetName() + std::string("]");
+			}
+		};
+	}
+}
+
 namespace
 {
     class FakeTestStageBuilder : public ut11::Utility::TestStageBuilder
