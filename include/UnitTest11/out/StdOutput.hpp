@@ -3,6 +3,7 @@
 
 #include "Output.hpp"
 #include <chrono>
+#include <ostream>
 
 namespace ut11
 {
@@ -11,6 +12,8 @@ namespace ut11
 		class StdOutput : public Output
 		{
 		public:
+			StdOutput();
+			StdOutput(std::ostream&);
 			virtual ~StdOutput();
 
 			virtual void Begin();
@@ -36,6 +39,7 @@ namespace ut11
 			virtual void OnUnknownError();
 
 		private:
+			std::ostream& m_out;
 			std::string m_given, m_when, m_finally;
 			std::chrono::system_clock::duration m_testRunTime;
 			std::chrono::system_clock::time_point m_testStartTime;
