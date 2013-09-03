@@ -1,2 +1,5 @@
-cmake . -G"Unix Makefiles"
-
+if [ "$(expr substr $(uname -s) 1 10)" == "MINGW32_NT" ]; then
+	cmake . -DCMAKE_MAKE_PROGRAM=make -G"MinGW Makefiles"
+else 
+	cmake . -G"Unix Makefiles"
+fi
