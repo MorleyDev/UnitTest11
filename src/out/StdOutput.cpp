@@ -144,5 +144,3 @@ void ut11::out::StdOutput::OnUnknownError()
 {
 	m_out << "\n\tFailed: Unknown Error";
 }
-
-

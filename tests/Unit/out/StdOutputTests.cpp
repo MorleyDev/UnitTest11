@@ -1,6 +1,7 @@
 #include <UnitTest11/Core.hpp>
 #include <UnitTest11/out/StdOutput.hpp>
 #include <UnitTest11/Is/EqualTo.hpp>
+#include <stdexcept>
 
 class StdOutputTests : public ut11::TestFixture
 {
