@@ -61,6 +61,7 @@ namespace ut11
             }
         };
 
+		/*! \brief Can be partially specialised to parse non-streamables to strings without making the type streamable */
         template<typename V> struct ParseToString
         {
             inline std::string operator()(const V& value) const

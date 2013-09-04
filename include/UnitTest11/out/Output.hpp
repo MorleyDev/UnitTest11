@@ -8,6 +8,7 @@ namespace ut11
 {
 	namespace out
 	{
+		/*! \brief An Output used to log out successful and failed Tests and Test Fixtures */
 		class Output
 		{
 		public:

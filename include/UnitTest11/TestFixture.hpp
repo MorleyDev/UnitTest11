@@ -8,6 +8,7 @@
 
 namespace ut11
 {
+	/*! \brief The test fixture class all tests must inherit from */
     class TestFixture : public TestFixtureAbstract
     {
     public:

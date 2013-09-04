@@ -10,6 +10,7 @@
 
 namespace ut11
 {
+	/*! \brief A Mock functor object that can be used to mock out injected an std::function or to build up a Mock class */
     template<typename T> class Mock;
     template<typename R, typename... ARGS> class Mock<R (ARGS...)>
     {

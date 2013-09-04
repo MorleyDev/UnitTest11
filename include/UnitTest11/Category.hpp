@@ -12,6 +12,11 @@
 
 namespace ut11
 {
+	/*! \brief A category used when declaring a fixture to record what categories that fixture belongs to
+	 *
+	 * DeclareFixture(TestFixtureName)(Category("the_category"));
+	 * DeclareFixture(TestFixtureName)({ Category("the_category"), Category("the_other_category") });
+	 */
 	struct Category
 	{
 	public:

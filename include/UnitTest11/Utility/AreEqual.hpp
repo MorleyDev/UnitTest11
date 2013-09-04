@@ -9,6 +9,13 @@ namespace ut11
     {
     	template<typename A, typename B> inline bool AreEqual(const A& a, const B& b);
 
+		/*! \brief Can be partially specialised to allow for comparing two types without providing an equality operator 
+		 *
+		 * \tparam A The left operand of the comparison
+		 * \tparam B The right operand of the comparison
+		 * \tparam IsAIterable True if A is determined by metaprogramming to be an iterable type
+		 * \tparam IsBIterable True if B is determined by metaprogramming to be an iterable type
+		 */
     	template<typename A, typename B,
     			 bool IsAIterable = Meta::IsIterableContainer<A>::value,
 				 bool IsBIterable = Meta::IsIterableContainer<B>::value >
