@@ -6,4 +6,4 @@ before_script:
 script:
   - make -j4
 after_success:
-  - .bin/unittest11_tests
+  - ./bin/unittest11_tests
