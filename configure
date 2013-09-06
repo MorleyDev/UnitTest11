@@ -1,5 +1,13 @@
 if [ "$(expr substr $(uname -s) 1 10)" == "MINGW32_NT" ]; then
-	cmake . -DCMAKE_MAKE_PROGRAM=make -G"MinGW Makefiles"
+	if [ $# -gt 0 ]; then
+		cmake . -DCMAKE_MAKE_PROGRAM=make -G"MinGW Makefiles" -DCMAKE_BUILD_TYPE=$0
+	else
+		cmake . -DCMAKE_MAKE_PROGRAM=make -G"MinGW Makefiles"
+	fi
 else 
-	cmake . -G"Unix Makefiles"
+	if [ $# -gt 0 ]; then
+		cmake . -G"Unix Makefiles" -DCMAKE_BUILD_TYPE=$0
+	else
+		cmake . -G"Unix Makefiles"
+	fi
 fi
