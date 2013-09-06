@@ -14,4 +14,4 @@ Useful Links
 Build Status
 ------------
 
-* **Linux (GNU G++ 4.6, Clang++ 3.1)** [![Build Status](https://api.travis-ci.org/MorleyDev/UnitTest11.png)](https://api.travis-ci.org/MorleyDev/UnitTest11)
+* [![Build Status](https://api.travis-ci.org/MorleyDev/UnitTest11.png)](https://api.travis-ci.org/MorleyDev/UnitTest11) on **GNU G++ 4.6, Clang++ 3.1 (Linux)** 
