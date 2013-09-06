@@ -9,20 +9,20 @@
 
 namespace ut11
 {
-    namespace Utility
-    {
-        class TestStageBuilder
-        {
-        public:
-            virtual ~TestStageBuilder();
+	namespace Utility
+	{
+		class TestStageBuilder
+		{
+		public:
+			virtual ~TestStageBuilder();
 
-            virtual void PushGiven(TestStep given) = 0;
-            virtual void PushWhen(TestStep when) = 0;
-            virtual void PushThen(TestStep then) = 0;
-            virtual void PushFinally(TestStep finally) = 0;
-            virtual std::vector< std::shared_ptr<TestStage> > Stage() = 0;
-        };
-    }
+			virtual void PushGiven(TestStep given) = 0;
+			virtual void PushWhen(TestStep when) = 0;
+			virtual void PushThen(TestStep then) = 0;
+			virtual void PushFinally(TestStep finally) = 0;
+			virtual std::vector< std::shared_ptr<TestStage> > Stage() = 0;
+		};
+	}
 }
 
 

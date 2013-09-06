@@ -10,9 +10,9 @@
 
 namespace ut11
 {
-    namespace Utility
-    {
-        template<typename T> struct BaseOperand 
+	namespace Utility
+	{
+		template<typename T> struct BaseOperand 
 		{
 			typedef T self;
 
@@ -35,11 +35,11 @@ namespace ut11
 			}
 		};
 
-        template<typename Operand> struct IsOperand
-        {
+		template<typename Operand> struct IsOperand
+		{
 			enum : bool { value = std::is_base_of< BaseOperand<Operand>, Operand >::value };
-        };
-    }
+		};
+	}
 }
 
 #endif // UNITTEST11_UTILITY_BASEOPERAND_HPP

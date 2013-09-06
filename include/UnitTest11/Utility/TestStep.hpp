@@ -6,17 +6,17 @@
 
 namespace ut11
 {
-    namespace Utility
-    {
-        struct TestStep
-        {
-            TestStep() : description(), logic() { }
-            TestStep(std::string d, std::function<void(void)> l) : description(d), logic(l) { }
+	namespace Utility
+	{
+		struct TestStep
+		{
+			TestStep() : description(), logic() { }
+			TestStep(std::string d, std::function<void(void)> l) : description(d), logic(l) { }
 
-            std::string description;
-            std::function<void(void)> logic;
-        };
-    }
+			std::string description;
+			std::function<void(void)> logic;
+		};
+	}
 }
 
 #endif // UNITTEST11_UTILITY_TESTSTEP_HPP

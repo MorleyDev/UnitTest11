@@ -10,47 +10,47 @@
 
 namespace ut11
 {
-    namespace Operands
-    {
+	namespace Operands
+	{
 		template<typename U> struct EqualTo : public Utility::BaseOperand<EqualTo<U>>
-        {
-        private:
-            const U& m_expected;
+		{
+		private:
+			const U& m_expected;
 
-        public:
-            inline explicit EqualTo(const U& expected) : m_expected(expected) { }
+		public:
+			inline explicit EqualTo(const U& expected) : m_expected(expected) { }
 
-            template<typename T> inline bool operator()(const T& actual) const
-            {
-                return Utility::AreEqual(m_expected, actual);
-            }
-
-            template<typename T> inline std::string GetErrorMessage(const T& actual) const
-            {
-                std::stringstream errorMessage;
-                errorMessage << "Expected " << Utility::ToString(m_expected) << " but was " << Utility::ToString(actual);
-                return errorMessage.str();
+			template<typename T> inline bool operator()(const T& actual) const
+			{
+				return Utility::AreEqual(m_expected, actual);
 			}
-        };
-    }
 
-    namespace Is
-    {
-        /*! \brief Operand returns true if Actual == Expected, otherwise false */
-        template<typename U> inline Operands::EqualTo<U> EqualTo(const U& expected)
+			template<typename T> inline std::string GetErrorMessage(const T& actual) const
+			{
+				std::stringstream errorMessage;
+				errorMessage << "Expected " << Utility::ToString(m_expected) << " but was " << Utility::ToString(actual);
+				return errorMessage.str();
+			}
+		};
+	}
+
+	namespace Is
+	{
+		/*! \brief Operand returns true if Actual == Expected, otherwise false */
+		template<typename U> inline Operands::EqualTo<U> EqualTo(const U& expected)
 		{
 			return Operands::EqualTo<U>(expected);
 		}
 
-        namespace Not
-        {
-            /*! \brief Operand returns true if Actual != Expected, otherwise false */
-            template<typename U> inline Utility::NotOperand< Operands::EqualTo<U> > EqualTo(const U& expected) 
+		namespace Not
+		{
+			/*! \brief Operand returns true if Actual != Expected, otherwise false */
+			template<typename U> inline Utility::NotOperand< Operands::EqualTo<U> > EqualTo(const U& expected) 
 			{
 				return !Operands::EqualTo<U>(expected); 
 			}
-        }
-    }
+		}
+	}
 }
 
 

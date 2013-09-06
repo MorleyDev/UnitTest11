@@ -2,7 +2,7 @@
  * Output.cpp
  *
  *  Created on: 22 May 2013
- *      Author: Jason
+ *	  Author: Jason
  */
 
 #include <UnitTest11/out/Output.hpp>
