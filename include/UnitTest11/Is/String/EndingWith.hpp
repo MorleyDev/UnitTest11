@@ -21,7 +21,7 @@ namespace ut11
 		{
 			std::string m_expected;
 
-			IsStringEndingWith(const std::string& expected)
+			explicit IsStringEndingWith(const std::string& expected)
 				: m_expected(expected)
 			{
 			}

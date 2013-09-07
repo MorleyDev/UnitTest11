@@ -14,59 +14,62 @@ namespace ut11
 	{
 		template<typename V> inline std::string ToString(const V& value);
 
-		template<typename T, typename = decltype(std::declval<std::ostream&>() << std::declval<T const&>())>
-		std::true_type IsStreamWritable(const T&)
+		namespace detail
 		{
-			return std::true_type();
+			template<typename T, typename = decltype(std::declval<std::ostream&>() << std::declval<T const&>())>
+			std::true_type IsStreamWritable(const T&)
+			{
+				return std::true_type();
+			}
+
+			template<typename T, typename... Ignored>
+			std::false_type IsStreamWritable(const T&, Ignored const&..., ...)
+			{
+				return std::false_type();
+			}
+
+			template<typename V> struct ParseNonIterableToString
+			{
+				inline std::string operator()(const V& value) const
+				{
+					return ToString(value, IsStreamWritable<V>(value));
+				}
+
+				inline std::string ToString(const V& value, std::true_type) const
+				{
+					std::stringstream stream;
+					stream << value;
+					return stream.str();
+				}
+
+				inline std::string ToString(const V& value, std::false_type) const
+				{
+					std::stringstream stream;
+					stream << "[" << typeid(V).name() << "]";
+					return stream.str();
+				}
+			};
+
+			template<typename V> struct ParseIterableToString
+			{
+				inline std::string operator()(const V& value) const
+				{
+					std::stringstream stream;
+					stream << "{ ";
+					for (const auto& arg : value)
+						stream << ToString(arg) << " ";
+					stream << "}";
+					return stream.str();
+				}
+			};
 		}
-
-		template<typename T, typename... Ignored>
-		std::false_type IsStreamWritable(const T&, Ignored const&..., ...)
-		{
-			return std::false_type();
-		}
-
-		template<typename V> struct ParseNonIterableToString
-		{
-			inline std::string operator()(const V& value) const
-			{
-				return ToString(value, IsStreamWritable<V>(value));
-			}
-
-			inline std::string ToString(const V& value, std::true_type) const
-			{
-				std::stringstream stream;
-				stream << value;
-				return stream.str();
-			}
-
-			inline std::string ToString(const V& value, std::false_type) const
-			{
-				std::stringstream stream;
-				stream << "[" << typeid(V).name() << "]";
-				return stream.str();
-			}
-		};
-
-		template<typename V> struct ParseIterableToString
-		{
-			inline std::string operator()(const V& value) const
-			{
-				std::stringstream stream;
-				stream << "{ ";
-				for(const auto& arg : value)
-					stream << ToString(arg) << " ";
-				stream << "}";
-				return stream.str();
-			}
-		};
 
 		/*! \brief Can be partially specialised to parse non-streamables to strings without making the type streamable */
 		template<typename V> struct ParseToString
 		{
 			inline std::string operator()(const V& value) const
 			{
-				return typename Meta::IfElseTypes< Meta::IsIterableContainer<V>::value, ParseIterableToString<V>, ParseNonIterableToString<V> >::type()(value);
+				return typename Meta::IfElseTypes< Meta::IsIterableContainer<V>::value, detail::ParseIterableToString<V>, detail::ParseNonIterableToString<V> >::type()(value);
 			}
 		};
 
@@ -83,7 +86,7 @@ namespace ut11
 		{
 			inline std::string operator()(void* value) const
 			{
-				return value ? std::string("void_pointer:") + ParseNonIterableToString<void*>()(value) : "nullptr";
+				return value ? std::string("void_pointer:") + detail::ParseNonIterableToString<void*>()(value) : "nullptr";
 			}
 		};
 		template<typename T> struct ParseToString< T* >
@@ -106,7 +109,7 @@ namespace ut11
 		{
 			inline std::string operator()(const std::shared_ptr<void>& value) const
 			{
-				return value ? std::string("shared_ptr<void>:") + ParseNonIterableToString<void*>()(value.get()) : "nullptr";
+				return value ? std::string("shared_ptr<void>:") + detail::ParseNonIterableToString<void*>()(value.get()) : "nullptr";
 			}
 		};
 		template<typename T> struct ParseToString< std::shared_ptr<T> >

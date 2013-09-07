@@ -6,26 +6,51 @@
 
 #include <sstream>
 #include <type_traits>
+#include <cmath>
 
 namespace ut11
 {
 	namespace Utility
 	{
-		template<typename T, bool IsFloating = std:: is_floating_point<T>::value || std::is_integral<T>::value>
-		struct NanHelper
+		namespace detail
 		{
-			inline bool operator()(const T& value)
+			template<typename T, bool IsFloating = std::is_floating_point<T>::value, bool IsIntegral = std::is_integral<T>::value>
+			struct NanHelper
 			{
-				return value != value;
-			}
-		};
+				inline bool operator()(const T& value)
+				{
+					return value != value;
+				}
+			};
 
-		template<typename T>
-		struct NanHelper<T,false>
-		{
-			inline bool operator()(const T&)
+			template<typename T>
+			struct NanHelper<T, false, true> // Not Float but Integer so Is Number
 			{
-				return true;
+				inline bool operator()(const T&)
+				{
+					return false;
+				}
+			};
+
+			template<typename T>
+			struct NanHelper<T,false,false> // Not Float or Integer so Not Number
+			{
+				inline bool operator()(const T&)
+				{
+					return true;
+				}
+			};
+		}
+
+		/*! \brief Can be partially specialised to handle custom cases when comparing for NaN
+		 *
+		 * \tparam T The type being checked for NaN
+		 */
+		template<typename T> struct IsNotANumber
+		{
+			bool operator()(const T& value) const
+			{
+				return detail::NanHelper<T>()(value);
 			}
 		};
 	}
@@ -37,7 +62,7 @@ namespace ut11
 		{
 			template<typename U> bool operator()(const U& value) const
 			{
-				return Utility::NanHelper<U>()(value);
+				return Utility::IsNotANumber<U>()(value);
 			}
 
 			template<typename U> inline std::string GetErrorMessage(const U& actual) const

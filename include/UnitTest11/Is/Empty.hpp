@@ -20,7 +20,10 @@ namespace ut11
 	{
 		struct IsEmpty : public ut11::Utility::BaseOperand<IsEmpty>
 		{
-			inline bool operator()(const char* actual) const { return std::string(actual).length() == 0; }
+			inline bool operator()(const char* actual) const 
+			{ 
+				return std::string(actual).length() == 0; 
+			}
 
 			template<typename T> inline bool operator()(const T& actual) const
 			{

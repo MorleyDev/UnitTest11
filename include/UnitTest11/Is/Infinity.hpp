@@ -16,7 +16,7 @@ namespace ut11
 		{
 			template<typename U> bool operator()(const U& value) const
 			{
-				return  std::numeric_limits<U>::has_infinity && (std::numeric_limits<U>::infinity() == value || -std::numeric_limits<U>::infinity() == value);
+				return std::numeric_limits<U>::has_infinity && (std::numeric_limits<U>::infinity() == value || -std::numeric_limits<U>::infinity() == value);
 			}
 
 			template<typename U> inline std::string GetErrorMessage(const U& actual) const

@@ -14,7 +14,7 @@ namespace ut11
 		{
 			std::string m_expected;
 
-			IsStringBeginningWith(const std::string& expected)
+			explicit IsStringBeginningWith(const std::string& expected)
 				: m_expected(expected)
 			{
 			}

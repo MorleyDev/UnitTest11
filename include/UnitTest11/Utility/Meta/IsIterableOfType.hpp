@@ -21,6 +21,7 @@ namespace ut11
 			template<typename Iterable, typename Type, bool IsIterable = IsIterableContainer<Iterable>::value > struct IsIterableOfType
 			{
 				typedef typename std::iterator_traits< decltype(std::declval<const Iterable&>().begin()) >::value_type Iterator;
+
 				enum { value = std::is_same<Type, Iterator>::value || std::is_base_of<Type, Iterator>::value };
 			};
 

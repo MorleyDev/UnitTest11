@@ -22,7 +22,7 @@ namespace ut11
 		{
 			const T& m_expected;
 
-			IsIterableContainingSubset(const T& expected)
+			explicit IsIterableContainingSubset(const T& expected)
 				: m_expected(expected)
 			{
 			}
@@ -69,6 +69,7 @@ namespace ut11
 				std::list< decltype(std::declval<const U&>().begin()) > iterators;
 				for(auto i = input.begin(); i != input.end(); ++i)
 					iterators.push_back(i);
+
 				return iterators;
 			}
 		};

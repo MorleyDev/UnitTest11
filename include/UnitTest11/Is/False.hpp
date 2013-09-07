@@ -13,7 +13,10 @@ namespace ut11
 	{
 		struct FalseOperand : public Utility::BaseOperand<FalseOperand>
 		{
-			template<typename T> bool operator()(const T& value) const { return !static_cast<bool>(value); }
+			template<typename T> bool operator()(const T& value) const 
+			{
+				return !static_cast<bool>(value); 
+			}
 
 			template<typename T> inline std::string GetErrorMessage(const T& actual) const
 			{

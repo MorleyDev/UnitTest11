@@ -16,7 +16,7 @@ namespace ut11
 
 			AndOperand(const Op1& op1, const Op2& op2)
 				: operand1(op1),
-				operand2(op2)
+			      operand2(op2)
 			{
 			}
 

@@ -16,9 +16,15 @@ namespace ut11
 		{
 			const U& high;
 
-			explicit IsLessThan(const U& high) : high(high) { }
+			explicit IsLessThan(const U& high) 
+				: high(high) 
+			{
+			}
 
-			template<typename T> inline bool operator()(const T& value) const { return value < high; }
+			template<typename T> inline bool operator()(const T& value) const 
+			{
+				return value < high; 
+			}
 
 			template<typename Q> inline std::string GetErrorMessage(const Q& actual) const
 			{

@@ -21,7 +21,7 @@ namespace ut11
 		{
 			const T& m_expected;
 
-			IsIterableContainingItem(const T& expected)
+			explicit IsIterableContainingItem(const T& expected)
 				: m_expected(expected)
 			{
 			}
@@ -31,6 +31,7 @@ namespace ut11
 				for(const auto& i : actual)
 					if ( Utility::AreEqual(m_expected, i) )
 						return true;
+
 				return false;
 			}
 

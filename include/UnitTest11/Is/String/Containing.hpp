@@ -35,7 +35,7 @@ namespace ut11
 		{
 			const char m_expected;
 
-			IsStringContainingCharacter(const char expected)
+			explicit IsStringContainingCharacter(const char expected)
 				: m_expected(expected)
 			{
 			}

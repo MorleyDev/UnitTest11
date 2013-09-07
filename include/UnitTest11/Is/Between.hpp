@@ -15,9 +15,16 @@ namespace ut11
 			const U& low;
 			const V& high;
 
-			IsBetween(const U& low, const V& high) : low(low), high(high) { }
+			IsBetween(const U& low, const V& high) 
+				: low(low),
+				  high(high) 
+			{
+			}
 
-			template<typename T> inline bool operator()(const T& value) const { return low < value && value <= high; }
+			template<typename T> inline bool operator()(const T& value) const 
+			{ 
+				return low < value && value <= high; 
+			}
 
 			template<typename Q> inline std::string GetErrorMessage(const Q& actual) const
 			{
