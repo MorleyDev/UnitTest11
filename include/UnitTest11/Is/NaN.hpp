@@ -19,7 +19,7 @@ namespace ut11
 			{
 				inline bool operator()(const T& value)
 				{
-					return value != value;
+					return std::isnan(value);
 				}
 			};
 

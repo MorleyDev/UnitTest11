@@ -4,11 +4,7 @@
 #include <UnitTest11/Is/EqualTo.hpp>
 #include <UnitTest11/Is/NaN.hpp>
 #include <cmath>
-
-#ifndef NAN
-	static const uint32_t __nan[2] = {0xffffffff, 0x7fffffff};
-	#define NAN (*(const float *) __nan)
-#endif
+#include <limits>
 
 class IsNaNTests : public ut11::TestFixture
 {
@@ -38,9 +34,9 @@ public:
 		ThenIsNanXIsFalse<int>(124);
 		ThenIsNanXIsFalse<char>('x');
 
-		ThenIsNanXIsTrue<float>(NAN);
-		ThenIsNanXIsTrue<double>(NAN);
-		ThenIsNanXIsTrue<long double>(NAN);
+		ThenIsNanXIsTrue<float>(std::numeric_limits<float>::quiet_NaN());
+		ThenIsNanXIsTrue<double>(std::numeric_limits<double>::quiet_NaN());
+		ThenIsNanXIsTrue<long double>(std::numeric_limits<long double>::quiet_NaN());
 
 		struct NotANumber { const char* v; } notNumber = { nullptr };
 		ThenIsNanXIsTrue<NotANumber>(notNumber);
@@ -80,9 +76,9 @@ public:
 		ThenIsNotNanXIsNotFalse<int>(124);
 		ThenIsNotNanXIsNotFalse<char>('x');
 
-		ThenIsNotNanXIsNotTrue<float>(NAN);
-		ThenIsNotNanXIsNotTrue<double>(NAN);
-		ThenIsNotNanXIsNotTrue<long double>(NAN);
+		ThenIsNotNanXIsNotTrue<float>(std::numeric_limits<float>::quiet_NaN());
+		ThenIsNotNanXIsNotTrue<double>(std::numeric_limits<double>::quiet_NaN());
+		ThenIsNotNanXIsNotTrue<long double>(std::numeric_limits<long double>::quiet_NaN());
 
 		struct NotANumber { const char* v; } notNumber = { nullptr };
 		ThenIsNotNanXIsNotTrue<NotANumber>(notNumber);
