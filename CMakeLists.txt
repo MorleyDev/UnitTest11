@@ -18,5 +18,14 @@ set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 
-add_subdirectory (src) 
-add_subdirectory (tests)
+include_directories(include)
+
+FILE(GLOB_RECURSE UNITTEST11_SRC src/*.cpp)
+add_library(unittest11 ${UNITTEST11_SRC})
+
+link_directories (${CMAKE_ARCHIVE_OUTPUT_DIRECTORY})
+
+FILE(GLOB_RECURSE UNITTEST11_TESTS_SRC tests/*.cpp)
+
+add_executable(unittest11_tests ${UNITTEST11_TESTS_SRC})
+target_link_libraries(unittest11_tests unittest11)
