@@ -42,8 +42,8 @@ public:
 		ThenIsNanXIsTrue<double>(NAN);
 		ThenIsNanXIsTrue<long double>(NAN);
 
-		struct NotANumber { const char* v; } notNumber;
-		ThenIsNanXIsTrue<NotANumber>(NotANumber());
+		struct NotANumber { const char* v; } notNumber = { nullptr };
+		ThenIsNanXIsTrue<NotANumber>(notNumber);
 
 		Then("Is::NaN has an error message", []() {
 			AssertThat(ut11::Is::NaN.GetErrorMessage(5), ut11::Is::Not::EqualTo(""));
@@ -84,8 +84,8 @@ public:
 		ThenIsNotNanXIsNotTrue<double>(NAN);
 		ThenIsNotNanXIsNotTrue<long double>(NAN);
 
-		struct NotANumber { const char* v; } notNumber;
-		ThenIsNotNanXIsNotTrue<NotANumber>(NotANumber());
+		struct NotANumber { const char* v; } notNumber = { nullptr };
+		ThenIsNotNanXIsNotTrue<NotANumber>(notNumber);
 
 		Then("Is::Not::NaN has an error message", []() {
 			AssertThat(ut11::Is::Not::NaN.GetErrorMessage(0), ut11::Is::Not::EqualTo(""));
