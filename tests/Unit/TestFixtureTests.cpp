@@ -31,7 +31,7 @@ namespace
 		MockAction(PushWhen, ut11::Utility::TestStep)
 		MockAction(PushThen, ut11::Utility::TestStep)
 		MockAction(PushFinally, ut11::Utility::TestStep)
-		MockFunction(std::vector< std::shared_ptr<ut11::Utility::TestStage> >, Stage)
+		MockFunction(std::vector< std::shared_ptr<ut11::Utility::TestStage> >, Build)
 	};
 
 	class FakeOutput : public ut11::out::Output
@@ -217,7 +217,7 @@ public:
 			Stages.push_back(std::make_shared<FakeTestStage>(true));
 			Stages.push_back(m_mockTestStage = std::make_shared<FakeTestStage>(true));
 			Stages.push_back(std::make_shared<FakeTestStage>(true));
-			m_mockBuilder->mockStage.SetReturn(Stages);
+			m_mockBuilder->mockBuild.SetReturn(Stages);
 
 			m_mockOutput = FakeOutput();
 			m_fixtureResults = m_fixture->Run(m_mockOutput);
@@ -246,7 +246,7 @@ public:
 			Stages.push_back(m_mockTestStage = std::make_shared<FakeTestStage>(false));
 			Stages.push_back(std::make_shared<FakeTestStage>(true));
 			Stages.push_back(std::make_shared<FakeTestStage>(false));
-			m_mockBuilder->mockStage.SetReturn(Stages);
+			m_mockBuilder->mockBuild.SetReturn(Stages);
 
 			m_mockOutput = FakeOutput();
 			m_fixtureResults = m_fixture->Run(m_mockOutput);

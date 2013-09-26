@@ -4,44 +4,77 @@ ut11::Utility::TestStageBuilderImpl::~TestStageBuilderImpl()
 {
 }
 
-
 void ut11::Utility::TestStageBuilderImpl::PushGiven(TestStep given)
 {
-	FlushToFinished();
-	m_given = given;
+	m_steps.push_back(std::make_pair(TestStepType::Given, given));
 }
 
 void ut11::Utility::TestStageBuilderImpl::PushWhen(TestStep when)
 {
-	m_when = when;
+	m_steps.push_back(std::make_pair(TestStepType::When, when));
 }
 
 void ut11::Utility::TestStageBuilderImpl::PushThen(TestStep then)
 {
-	m_finallylessStages.push_back(TestStageImpl(m_given, m_when, then, TestStep()));
+	m_steps.push_back(std::make_pair(TestStepType::Then, then));
 }
 
 void ut11::Utility::TestStageBuilderImpl::PushFinally(TestStep finally)
 {
-	for(auto& step : m_finallylessStages)
-		step.m_finally = finally;
-
-	FlushToFinished();
+	m_steps.push_back(std::make_pair(TestStepType::Finally, finally));
 }
 
-std::vector< std::shared_ptr<ut11::Utility::TestStage> > ut11::Utility::TestStageBuilderImpl::Stage()
+std::vector< std::shared_ptr<ut11::Utility::TestStage> > ut11::Utility::TestStageBuilderImpl::Build()
 {
-	FlushToFinished();
+	std::vector<ut11::Utility::TestStageImpl> finallylessStages, finishedStages;
 
-	return m_finishedStages;
+	ut11::Utility::TestStep given, when;
+	for (auto stepTypePair : m_steps)
+	{
+		switch (stepTypePair.first)
+		{
+		case TestStepType::Given:
+			given = stepTypePair.second;
+			when = TestStep();
+			break;
+
+		case TestStepType::When:
+			when = stepTypePair.second;
+			break;
+
+		case TestStepType::Then:
+			finallylessStages.push_back(TestStageImpl(given, when, stepTypePair.second, TestStep()));
+			break;
+
+		case TestStepType::Finally:
+			PopulateStagesWithFinally(finallylessStages, stepTypePair.second);
+			MoveStagesOntoFinishedStages(finishedStages, finallylessStages);
+
+			given = TestStep();
+			when = TestStep();
+			break;
+		}
+	}
+	m_steps.clear();
+
+	MoveStagesOntoFinishedStages(finishedStages, finallylessStages);
+
+	std::vector<std::shared_ptr<TestStage>> stages;
+	for (auto step : finishedStages)
+		stages.push_back(std::make_shared<TestStageImpl>(step));
+	return stages;
 }
 
-void ut11::Utility::TestStageBuilderImpl::FlushToFinished()
+void ut11::Utility::TestStageBuilderImpl::MoveStagesOntoFinishedStages(std::vector<TestStageImpl>& finishedStages, std::vector<TestStageImpl>& finallylessStages)
 {
-	m_given = TestStep();
-	m_when = TestStep();
+	for (auto stage : finallylessStages)
+		finishedStages.push_back(stage);
 
-	for(auto step : m_finallylessStages)
-		m_finishedStages.push_back(std::make_shared<TestStageImpl>(step));
-	m_finallylessStages.clear();
+	finallylessStages.clear();
+}
+
+void ut11::Utility::TestStageBuilderImpl::PopulateStagesWithFinally(std::vector<TestStageImpl>& finallylessStages, TestStep finally)
+{
+	for (auto& stage : finallylessStages)
+		stage.m_finally = finally;
 }

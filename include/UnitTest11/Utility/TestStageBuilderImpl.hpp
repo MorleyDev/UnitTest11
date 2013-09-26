@@ -14,7 +14,13 @@ namespace ut11
 		class TestStageBuilderImpl : public TestStageBuilder
 		{
 		private:
-			void FlushToFinished();
+			enum class TestStepType
+			{
+				Given,
+				When,
+				Then,
+				Finally
+			};
 
 		public:
 			virtual ~TestStageBuilderImpl();
@@ -23,13 +29,14 @@ namespace ut11
 			virtual void PushWhen(TestStep when);
 			virtual void PushThen(TestStep then);
 			virtual void PushFinally(TestStep finally);
-			virtual std::vector< std::shared_ptr<TestStage> > Stage();
+
+			virtual std::vector< std::shared_ptr<TestStage> > Build();
 
 		private:
-			TestStep m_given, m_when;
+			void PopulateStagesWithFinally(std::vector<TestStageImpl>& finallylessStages, TestStep finally);
+			void MoveStagesOntoFinishedStages(std::vector<ut11::Utility::TestStageImpl>&, std::vector<ut11::Utility::TestStageImpl>&);
 
-			std::vector<TestStageImpl> m_finallylessStages;
-			std::vector< std::shared_ptr<TestStage> > m_finishedStages;
+			std::vector<std::pair<TestStepType, TestStep>> m_steps;
 		};
 	}
 }

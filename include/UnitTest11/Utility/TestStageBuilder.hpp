@@ -20,7 +20,7 @@ namespace ut11
 			virtual void PushWhen(TestStep when) = 0;
 			virtual void PushThen(TestStep then) = 0;
 			virtual void PushFinally(TestStep finally) = 0;
-			virtual std::vector< std::shared_ptr<TestStage> > Stage() = 0;
+			virtual std::vector< std::shared_ptr<TestStage> > Build() = 0;
 		};
 	}
 }

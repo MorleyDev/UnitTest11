@@ -7,6 +7,8 @@
 #define UT11_UNIQUE_NUMBER __LINE__
 #endif
 
+
+// Work around for Visual Studio compiler bug where variadic macros are not correctly expanded
 #ifdef _MSC_VER
 #define UT11_VA_NUM_ARGS_HELPER(_1, _2, _3, _4, _5, _6, _7, _8, _9, _10, N, ...)	N
 #define UT11_VA_NUM_ARGS_REVERSE_SEQUENCE 10, 9, 8, 7, 6, 5, 4, 3, 2, 1
@@ -103,7 +105,6 @@
 *
 * Adds a test fixture of type T to the runner.
 * Passes any arguments given on the right of the fixture name to that fixture's constructor.
-* Can not add the same fixture multiple times (compilation error).
 */
 #define DeclareFixture(...) static const int UT11_MACRO_CONCAT(ut11Fixture, UT11_UNIQUE_NUMBER) = ut11::DeclareFixtureObj<__VA_ARGS__>(#__VA_ARGS__)
 

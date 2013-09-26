@@ -62,11 +62,11 @@ void ut11::TestFixture::Finally(std::string description, std::function<void(void
 ut11::TestFixtureResults ut11::TestFixture::Run(out::Output& output)
 {
 	output.BeginFixture(m_name);
+
 	Run();
 
 	ut11::TestFixtureResults counter;
-	auto stages = m_StageBuilder->Stage();
-	for(auto stage : stages)
+	for (auto stage : m_StageBuilder->Build())
 	{
 		++counter.ran;
 
