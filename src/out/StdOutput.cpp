@@ -41,7 +41,6 @@ void ut11::out::StdOutput::EndFixture(std::string)
 	m_out << std::endl;
 }
 
-
 void ut11::out::StdOutput::BeginTest()
 {
 	m_testStartTime = std::chrono::system_clock::now();
@@ -50,7 +49,7 @@ void ut11::out::StdOutput::BeginTest()
 
 void ut11::out::StdOutput::EndTest()
 {
-	m_out << " [" << std::chrono::duration_cast<std::chrono::duration<float>>(m_testRunTime).count() << "s]";
+	m_out << " [" << std::chrono::duration_cast<std::chrono::duration<long double>>(m_testRunTime).count() << "s]";
 }
 
 void ut11::out::StdOutput::BeginGiven(std::string given)
