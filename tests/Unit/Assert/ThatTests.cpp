@@ -5,7 +5,7 @@
 namespace
 {
 	template<bool Succeeds, typename U>
-	struct TestOperand : public ut11::Utility::BaseOperand<TestOperand<Succeeds, U>>
+	struct TestOperand : public ut11::utility::BaseOperand<TestOperand<Succeeds, U>>
 	{
 	private:
 		std::string m_expectedErrorMessage;
@@ -40,14 +40,14 @@ private:
 	std::string message;
 	int expectedValue;
 
-	ut11::TestFailedException caughtException;
+	ut11::detail::TestFailedException caughtException;
 
 public:
 	virtual void Run()
 	{
 		Given("a line, file, message and expected value", [&]()
 		{
-			caughtException = ut11::TestFailedException();
+			caughtException = ut11::detail::TestFailedException();
 
 			line = 132;
 			file = "some file";
@@ -60,7 +60,7 @@ public:
 			{
 				ut11::Assert::That(line, file, expectedValue, TestOperand<false, int>(message, expectedValue));
 			}
-			catch(const ut11::TestFailedException& ex)
+			catch (const ut11::detail::TestFailedException& ex)
 			{
 				caughtException = ex;
 			}
@@ -87,7 +87,7 @@ public:
 			{
 				ut11::Assert::That(line, file, message, expectedValue, TestOperand<false, int>("other message", expectedValue));
 			}
-			catch(const ut11::TestFailedException& ex)
+			catch (const ut11::detail::TestFailedException& ex)
 			{
 				caughtException = ex;
 			}

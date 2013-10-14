@@ -96,17 +96,17 @@
 #define MockFunctionConst(...) UT11_MOCK_FUNCTION_CONST_N(UT11_VA_NARGS(__VA_ARGS__), __VA_ARGS__)
 
 /*! \brief Verify a mock function was called with the passed predicates (mock, arguments) */
-#define MockVerify(...) ::ut11::MockVerifyer<decltype(__VA_ARGS__)>(__VA_ARGS__, __LINE__, __FILE__)
+#define MockVerify(...) ::ut11::detail::MockVerifyer<decltype(__VA_ARGS__)>(__VA_ARGS__, __LINE__, __FILE__)
 
 /*! \brief Verify a mock function was called with the passed predicates the specified number of times (mock, count, arguments)  */
-#define MockVerifyTimes(times, ...) ::ut11::MockTimesVerifyer<decltype(times), decltype(__VA_ARGS__)>(__VA_ARGS__, times, __LINE__, __FILE__)
+#define MockVerifyTimes(times, ...) ::ut11::detail::MockTimesVerifyer<decltype(times), decltype(__VA_ARGS__)>(__VA_ARGS__, times, __LINE__, __FILE__)
 
 /*! \brief Declare a Test Fixture, adding it to the runner
 *
 * Adds a test fixture of type T to the runner.
 * Passes any arguments given on the right of the fixture name to that fixture's constructor.
 */
-#define DeclareFixture(...) static const int UT11_MACRO_CONCAT(ut11Fixture, UT11_UNIQUE_NUMBER) = ut11::DeclareFixtureObj<__VA_ARGS__>(#__VA_ARGS__)
+#define DeclareFixture(...) static const int UT11_MACRO_CONCAT(ut11Fixture, UT11_UNIQUE_NUMBER) = ut11::detail::DeclareFixtureObj<__VA_ARGS__>(#__VA_ARGS__)
 
 /*! \brief Assert that for the given Actual, the Expectation is true */
 #define AssertThat(...) ut11::Assert::That(__LINE__, __FILE__, __VA_ARGS__)

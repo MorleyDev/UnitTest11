@@ -26,7 +26,7 @@ public:
 
 		Then("Is::Between is an operand", []()
 		{
-			AssertThat(ut11::Utility::IsOperand< decltype(ut11::Is::Between(5,10)) >::value, ut11::Is::True);
+			AssertThat(ut11::utility::IsOperand< decltype(ut11::Is::Between(5,10)) >::value, ut11::Is::True);
 		});
 
 		Then("Is::Between has an error message", []() {
@@ -58,7 +58,7 @@ public:
 
 		Then("Is::Not::Between is an operand", []()
 		{
-			AssertThat(ut11::Utility::IsOperand< decltype(ut11::Is::Not::Between(5,10)) >::value, ut11::Is::True);
+			AssertThat(ut11::utility::IsOperand< decltype(ut11::Is::Not::Between(5,10)) >::value, ut11::Is::True);
 		});
 
 		Then("Is::Not::Between has an error message", []() {

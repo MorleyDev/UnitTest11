@@ -46,7 +46,8 @@ namespace ed
 			if (mapIt == m_handlerMap.end())
 				mapIt = m_handlerMap.insert(std::make_pair(&typeid(TEvent), std::list<std::function<void (std::shared_ptr<void>)>>())).first;
 
-			return EventDispatcherHandlerIterator(mapIt, mapIt->second.insert(list.begin(), realHandler));
+			auto& list = mapIt->second;
+			return EventDispatcherHandlerIterator(mapIt, list.insert(list.begin(), realHandler));
 		}
 
 		template<typename TEvent> void dispatch(const TEvent& e) 

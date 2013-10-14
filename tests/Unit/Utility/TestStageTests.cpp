@@ -55,15 +55,15 @@ private:
 	ut11::Mock<void (void)> mockThen;
 	ut11::Mock<void (void)> mockFinally;
 
-	ut11::Utility::TestStep givenStep;
-	ut11::Utility::TestStep whenStep;
-	ut11::Utility::TestStep thenStep;
-	ut11::Utility::TestStep finallyStep;
+	ut11::utility::TestStep givenStep;
+	ut11::utility::TestStep whenStep;
+	ut11::utility::TestStep thenStep;
+	ut11::utility::TestStep finallyStep;
 
-	ut11::Utility::TestStageImpl Stage;
+	ut11::utility::TestStageImpl Stage;
 
 	std::unique_ptr<FakeOutput> output;
-	ut11::TestFailedException testException;
+	ut11::detail::TestFailedException testException;
 	std::bad_alloc stdException;
 
 	bool result;
@@ -83,12 +83,12 @@ public:
 			mockThen = ut11::Mock<void (void)>();
 			mockFinally = ut11::Mock<void (void)>();
 
-			givenStep = ut11::Utility::TestStep( givenDescription, [&]() { mockGiven(); } );
-			whenStep = ut11::Utility::TestStep( whenDescription, [&]() { mockWhen(); } );
-			thenStep = ut11::Utility::TestStep( thenDescription, [&]() { mockThen(); } );
-			finallyStep =ut11::Utility::TestStep( finallyDescription, [&]() { mockFinally(); } );
+			givenStep = ut11::utility::TestStep( givenDescription, [&]() { mockGiven(); } );
+			whenStep = ut11::utility::TestStep( whenDescription, [&]() { mockWhen(); } );
+			thenStep = ut11::utility::TestStep( thenDescription, [&]() { mockThen(); } );
+			finallyStep =ut11::utility::TestStep( finallyDescription, [&]() { mockFinally(); } );
 
-			Stage = ut11::Utility::TestStageImpl(givenStep, whenStep, thenStep, finallyStep);
+			Stage = ut11::utility::TestStageImpl(givenStep, whenStep, thenStep, finallyStep);
 
 			output = std::unique_ptr<FakeOutput>(new FakeOutput());
 			result = false;
@@ -134,7 +134,7 @@ public:
 
 		When("running a Stage that throws a Test Exception", [&]() {
 
-			testException = ut11::TestFailedException(__LINE__, __FILE__, "dsdsa");
+			testException = ut11::detail::TestFailedException(__LINE__, __FILE__, "dsdsa");
 			mockThen.SetCallback([&]() { throw testException; });
 
 			result = Stage.Run(*output);
@@ -192,7 +192,7 @@ public:
 
 		When("running a Stage that where the then and finally both fail and the finally fails with a test exception", [&]() {
 
-			testException = ut11::TestFailedException(__LINE__, __FILE__, "dsdsa");
+			testException = ut11::detail::TestFailedException(__LINE__, __FILE__, "dsdsa");
 			mockThen.SetCallback([&]() { throw "unknown exception"; });
 			mockFinally.SetCallback([&]() { throw testException; });
 
@@ -235,8 +235,8 @@ public:
 
 		When("calling run with all Stages as invalid functions", [&]() {
 
-			ut11::Utility::TestStep invalid;
-			Stage = ut11::Utility::TestStageImpl(invalid,invalid,invalid,invalid);
+			ut11::utility::TestStep invalid;
+			Stage = ut11::utility::TestStageImpl(invalid,invalid,invalid,invalid);
 			result = Stage.Run(*output);
 		});
 		Then("the result is true", [&]() {

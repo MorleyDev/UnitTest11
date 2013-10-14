@@ -1,11 +1,11 @@
-#ifndef UNITTEST11_UTILITY_AREEQUAL_HPP
-#define UNITTEST11_UTILITY_AREEQUAL_HPP
+#ifndef UNITTEST11_utility_AREEQUAL_HPP
+#define UNITTEST11_utility_AREEQUAL_HPP
 
 #include "Meta/IsIterableContainer.hpp"
 
 namespace ut11
 {
-	namespace Utility
+	namespace utility
 	{
 		template<typename A, typename B> inline bool AreEqual(const A& a, const B& b);
 

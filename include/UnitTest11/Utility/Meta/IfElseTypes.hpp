@@ -5,12 +5,12 @@
  *	  Author: Jason
  */
 
-#ifndef UT11_UTILITY_META_IFELSETYPES_HPP_INCLUDED
-#define UT11_UTILITY_META_IFELSETYPES_HPP_INCLUDED
+#ifndef UT11_utility_META_IFELSETYPES_HPP_INCLUDED
+#define UT11_utility_META_IFELSETYPES_HPP_INCLUDED
 
 namespace ut11
 {
-	namespace Utility
+	namespace utility
 	{
 		namespace Meta
 		{
@@ -20,4 +20,4 @@ namespace ut11
 	}
 }
 
-#endif /* UT11_UTILITY_IFELSETYPES_HPP_INCLUDED */
+#endif /* UT11_utility_IFELSETYPES_HPP_INCLUDED */

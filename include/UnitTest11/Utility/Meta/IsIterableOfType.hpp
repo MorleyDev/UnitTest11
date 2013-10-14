@@ -5,8 +5,8 @@
  *	  Author: Jason
  */
 
-#ifndef UT11_UTILITY_META_ISITERABLEOFTYPE_HPP_INCLUDED
-#define UT11_UTILITY_META_ISITERABLEOFTYPE_HPP_INCLUDED
+#ifndef UT11_utility_META_ISITERABLEOFTYPE_HPP_INCLUDED
+#define UT11_utility_META_ISITERABLEOFTYPE_HPP_INCLUDED
 
 #include "IsIterableContainer.hpp"
 #include <type_traits>
@@ -14,7 +14,7 @@
 
 namespace ut11
 {
-	namespace Utility
+	namespace utility
 	{
 		namespace Meta
 		{
@@ -34,4 +34,4 @@ namespace ut11
 }
 
 
-#endif /* UT11_UTILITY_META_ISITERABLEOFTYPE_HPP_INCLUDED */
+#endif /* UT11_utility_META_ISITERABLEOFTYPE_HPP_INCLUDED */

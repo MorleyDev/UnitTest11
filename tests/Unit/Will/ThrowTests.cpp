@@ -15,7 +15,7 @@ public:
 	{
 		Then("Will::Throw is an Operand", []() {
 
-			AssertThat(ut11::Utility::IsOperand<decltype(ut11::Will::Throw<int>())>::value, ut11::Is::True);
+			AssertThat(ut11::utility::IsOperand<decltype(ut11::Will::Throw<int>())>::value, ut11::Is::True);
 		});
 
 		Then("Will::Throw when throwing an int is true", []() {

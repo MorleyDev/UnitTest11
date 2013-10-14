@@ -11,23 +11,26 @@
 
 namespace ut11
 {
-	class TestFixtureAbstract
+	namespace detail
 	{
-	public:
-		virtual ~TestFixtureAbstract();
+		class TestFixtureAbstract
+		{
+		public:
+			virtual ~TestFixtureAbstract();
 
-		virtual void AddCategory(ut11::Category) = 0;
-		virtual std::set<ut11::Category> GetCategories() const = 0;
+			virtual void AddCategory(ut11::Category) = 0;
+			virtual std::set<ut11::Category> GetCategories() const = 0;
 
-		virtual void Given(std::string, std::function<void(void) >) = 0;
-		virtual void When(std::string, std::function<void(void) >) = 0;
-		virtual void Then(std::string, std::function<void(void) >) = 0;
-		virtual void Finally(std::string, std::function<void(void) >) = 0;
+			virtual void Given(std::string, std::function<void(void) >) = 0;
+			virtual void When(std::string, std::function<void(void) >) = 0;
+			virtual void Then(std::string, std::function<void(void) >) = 0;
+			virtual void Finally(std::string, std::function<void(void) >) = 0;
 
-		virtual std::string GetName() const = 0;
+			virtual std::string GetName() const = 0;
 
-		virtual TestFixtureResults Run(out::Output&) = 0;
-	};
+			virtual TestFixtureResults Run(out::Output&) = 0;
+		};
+	}
 }
 
 #endif // UT11_TESTFIXTUREABSTRACT_HPP_INCLUDED

@@ -1,5 +1,5 @@
-#ifndef UNITTEST11_UTILITY_TESTSTAGEBUILDER_HPP
-#define UNITTEST11_UTILITY_TESTSTAGEBUILDER_HPP
+#ifndef UNITTEST11_utility_TESTSTAGEBUILDER_HPP
+#define UNITTEST11_utility_TESTSTAGEBUILDER_HPP
 
 #include "TestStep.hpp"
 #include "TestStage.hpp"
@@ -9,7 +9,7 @@
 
 namespace ut11
 {
-	namespace Utility
+	namespace utility
 	{
 		class TestStageBuilder
 		{
@@ -26,4 +26,4 @@ namespace ut11
 }
 
 
-#endif // UNITTEST11_UTILITY_TESTSTAGEBUILDER_HPP
+#endif // UNITTEST11_utility_TESTSTAGEBUILDER_HPP

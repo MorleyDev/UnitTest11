@@ -18,7 +18,7 @@ public:
 		});
 
 		Then("Is::String::Containing is an operand", []() {
-			AssertThat(ut11::Utility::IsOperand< decltype(ut11::Is::String::Containing("world")) >::value, ut11::Is::True);
+			AssertThat(ut11::utility::IsOperand< decltype(ut11::Is::String::Containing("world")) >::value, ut11::Is::True);
 		});
 
 		Then("Is::String::Containing has an error message", []() {
@@ -43,7 +43,7 @@ public:
 		});
 
 		Then("Is::Not::String::Containing is an operand", []() {
-			AssertThat(ut11::Utility::IsOperand< decltype(ut11::Is::String::Not::Containing("world")) >::value, ut11::Is::True);
+			AssertThat(ut11::utility::IsOperand< decltype(ut11::Is::String::Not::Containing("world")) >::value, ut11::Is::True);
 		});
 
 		Then("Is::Not::String::Containing has an error message", []() {
@@ -67,7 +67,7 @@ public:
 		});
 
 		Then("Is::String::Containing is an operand", []() {
-			AssertThat(ut11::Utility::IsOperand< decltype(ut11::Is::String::Containing('A')) >::value, ut11::Is::True);
+			AssertThat(ut11::utility::IsOperand< decltype(ut11::Is::String::Containing('A')) >::value, ut11::Is::True);
 		});
 
 		Then("Is::String::Containing has an error message", []() {
@@ -92,7 +92,7 @@ public:
 		});
 
 		Then("Is::Not::String::Containing is an operand", []() {
-			AssertThat(ut11::Utility::IsOperand< decltype(ut11::Is::String::Not::Containing('W')) >::value, ut11::Is::True);
+			AssertThat(ut11::utility::IsOperand< decltype(ut11::Is::String::Not::Containing('W')) >::value, ut11::Is::True);
 		});
 
 		Then("Is::Not::String::Containing has an error message", []() {

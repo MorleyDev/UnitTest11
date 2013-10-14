@@ -50,10 +50,10 @@ int ut11::Run(out::Output& output, const int argumentCount, const char** argumen
 
 int ut11::Run(out::Output& output)
 {
-	return GetRunner()->Run(output);
+	return ut11::detail::GetRunner()->Run(output);
 }
 
 int ut11::RunCategories(out::Output& output, std::vector<std::string> fixtures)
 {
-	return GetRunner()->RunCategories(output, fixtures);
+	return ut11::detail::GetRunner()->RunCategories(output, fixtures);
 }

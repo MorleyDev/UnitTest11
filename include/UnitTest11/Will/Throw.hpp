@@ -1,7 +1,7 @@
 #ifndef UNITTEST11_WILL_THROW_HPP
 #define UNITTEST11_WILL_THROW_HPP
 
-#include "../Utility/BaseOperand.hpp"
+#include "../utility/BaseOperand.hpp"
 
 #include <exception>
 #include <string>
@@ -12,7 +12,7 @@ namespace ut11
 {
 	namespace Operands
 	{
-		template<typename Exception> struct WillThrow : public Utility::BaseOperand < WillThrow<Exception> >
+		template<typename Exception> struct WillThrow : public utility::BaseOperand < WillThrow<Exception> >
 		{
 			inline explicit WillThrow(std::string exceptionName = typeid(Exception).name())
 				: m_exceptionName(exceptionName),
@@ -52,7 +52,7 @@ namespace ut11
 			mutable std::string m_errorMessage;
 		};
 
-			template<> struct WillThrow<std::exception> : public Utility::BaseOperand<WillThrow<std::exception>>
+			template<> struct WillThrow<std::exception> : public utility::BaseOperand<WillThrow<std::exception>>
 		{
 			inline explicit WillThrow()
 				: m_exceptionName("std::exception"),

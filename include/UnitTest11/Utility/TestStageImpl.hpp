@@ -1,12 +1,12 @@
-#ifndef UNITTEST11_UTILITY_TESTSTAGEIMPL_HPP
-#define UNITTEST11_UTILITY_TESTSTAGEIMPL_HPP
+#ifndef UNITTEST11_utility_TESTSTAGEIMPL_HPP
+#define UNITTEST11_utility_TESTSTAGEIMPL_HPP
 
 #include "TestStage.hpp"
 #include "TestStep.hpp"
 
 namespace ut11
 {
-	namespace Utility
+	namespace utility
 	{
 		class TestStageImpl : public TestStage
 		{
@@ -27,4 +27,4 @@ namespace ut11
 	}
 }
 
-#endif // UNITTEST11_UTILITY_TESTSTAGEIMPL_HPP
+#endif // UNITTEST11_utility_TESTSTAGEIMPL_HPP

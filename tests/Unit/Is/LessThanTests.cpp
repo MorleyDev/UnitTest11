@@ -22,7 +22,7 @@ public:
 
 		Then("Is::LessThan is an operand", []()
 		{
-			AssertThat(ut11::Utility::IsOperand< decltype(ut11::Is::GreaterThan(5)) >::value, ut11::Is::True);
+			AssertThat(ut11::utility::IsOperand< decltype(ut11::Is::GreaterThan(5)) >::value, ut11::Is::True);
 		});
 
 		Then("Is::LessThan has an error message", []() {
@@ -54,7 +54,7 @@ public:
 
 		Then("Is::Not::LessThan is an operand", []()
 		{
-			AssertThat(ut11::Utility::IsOperand< decltype(ut11::Is::Not::GreaterThan(5)) >::value, ut11::Is::True);
+			AssertThat(ut11::utility::IsOperand< decltype(ut11::Is::Not::GreaterThan(5)) >::value, ut11::Is::True);
 		});
 
 		Then("Is::Not::LessThan has an error message", []() {

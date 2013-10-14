@@ -5,13 +5,16 @@
 
 namespace ut11
 {
-	struct TestFixtureResults
+	namespace detail
 	{
-		TestFixtureResults() : ran(0), succeeded(0) { }
+		struct TestFixtureResults
+		{
+			TestFixtureResults() : ran(0), succeeded(0) { }
 
-		std::size_t ran;
-		std::size_t succeeded;
-	};
+			std::size_t ran;
+			std::size_t succeeded;
+		};
+	}
 }
 
 #endif // UT11_TESTFIXTURERESULTS_HPP_INCLUDED

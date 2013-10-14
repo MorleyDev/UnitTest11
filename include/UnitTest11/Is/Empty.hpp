@@ -8,8 +8,8 @@
 #ifndef UT11_IS_EMPTY_HPP_INCLUDED
 #define UT11_IS_EMPTY_HPP_INCLUDED
 
-#include "../Utility/BaseOperand.hpp"
-#include "../Utility/ToString.hpp"
+#include "../utility/BaseOperand.hpp"
+#include "../utility/ToString.hpp"
 
 #include <string>
 #include <sstream>
@@ -18,7 +18,7 @@ namespace ut11
 {
 	namespace Operands
 	{
-		struct IsEmpty : public ut11::Utility::BaseOperand<IsEmpty>
+		struct IsEmpty : public ut11::utility::BaseOperand<IsEmpty>
 		{
 			inline bool operator()(const char* actual) const 
 			{ 
@@ -35,7 +35,7 @@ namespace ut11
 			template<typename U> inline std::string GetErrorMessage(const U& actual) const
 			{
 				std::stringstream errorMessage;
-				errorMessage << "Expected empty but was " << Utility::ToString(actual);
+				errorMessage << "Expected empty but was " << utility::ToString(actual);
 				return errorMessage.str();
 			}
 		};
@@ -49,7 +49,7 @@ namespace ut11
 		namespace Not
 		{
 			/*! \brief Passes if the given iterable is not empty */
-			extern Utility::NotOperand<Operands::IsEmpty> Empty;
+			extern utility::NotOperand<Operands::IsEmpty> Empty;
 		}
 	}
 }

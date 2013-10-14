@@ -1,5 +1,5 @@
-#include <UnitTest11/Utility/TestStage.hpp>
+#include <UnitTest11/utility/TestStage.hpp>
 
-ut11::Utility::TestStage::~TestStage()
+ut11::utility::TestStage::~TestStage()
 {
 }

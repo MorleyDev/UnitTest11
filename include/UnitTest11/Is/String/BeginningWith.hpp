@@ -1,7 +1,7 @@
 #ifndef UT11_IS_STRING_BEGINNINGWITH_HPP_INCLUDED
 #define UT11_IS_STRING_BEGINNINGWITH_HPP_INCLUDED
 
-#include "../../Utility/BaseOperand.hpp"
+#include "../../utility/BaseOperand.hpp"
 
 #include <string>
 #include <sstream>
@@ -10,7 +10,7 @@ namespace ut11
 {
 	namespace Operands
 	{
-		struct IsStringBeginningWith : public ut11::Utility::BaseOperand<IsStringBeginningWith>
+		struct IsStringBeginningWith : public ut11::utility::BaseOperand<IsStringBeginningWith>
 		{
 			std::string m_expected;
 
@@ -46,7 +46,7 @@ namespace ut11
 			namespace Not
 			{
 				/*! \brief Operand returns false if string begins with expected string, otherwise returns true */
-				inline Utility::NotOperand<Operands::IsStringBeginningWith> BeginningWith(std::string expected)
+				inline utility::NotOperand<Operands::IsStringBeginningWith> BeginningWith(std::string expected)
 				{
 					return !Operands::IsStringBeginningWith(expected);
 				}

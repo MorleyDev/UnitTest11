@@ -1,5 +1,5 @@
-#ifndef UNITTEST11_UTILITY_TOSTRING_HPP
-#define UNITTEST11_UTILITY_TOSTRING_HPP
+#ifndef UNITTEST11_utility_TOSTRING_HPP
+#define UNITTEST11_utility_TOSTRING_HPP
 
 #include "Meta/IsIterableContainer.hpp"
 #include "Meta/IfElseTypes.hpp"
@@ -10,7 +10,7 @@
 
 namespace ut11
 {
-	namespace Utility
+	namespace utility
 	{
 		template<typename V> inline std::string ToString(const V& value);
 
@@ -127,4 +127,4 @@ namespace ut11
 	}
 }
 
-#endif // UNITTEST11_UTILITY_TOSTRING_HPP
+#endif // UNITTEST11_utility_TOSTRING_HPP

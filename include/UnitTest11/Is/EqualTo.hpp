@@ -1,9 +1,9 @@
 #ifndef UNITTEST11_IS_EQUALTO_HPP
 #define UNITTEST11_IS_EQUALTO_HPP
 
-#include "../Utility/AreEqual.hpp"
-#include "../Utility/ToString.hpp"
-#include "../Utility/BaseOperand.hpp"
+#include "../utility/AreEqual.hpp"
+#include "../utility/ToString.hpp"
+#include "../utility/BaseOperand.hpp"
 
 #include <string>
 #include <sstream>
@@ -12,7 +12,7 @@ namespace ut11
 {
 	namespace Operands
 	{
-		template<typename U> struct EqualTo : public Utility::BaseOperand<EqualTo<U>>
+		template<typename U> struct EqualTo : public utility::BaseOperand<EqualTo<U>>
 		{
 		private:
 			const U& m_expected;
@@ -25,13 +25,13 @@ namespace ut11
 
 			template<typename T> inline bool operator()(const T& actual) const
 			{
-				return Utility::AreEqual(m_expected, actual);
+				return utility::AreEqual(m_expected, actual);
 			}
 
 			template<typename T> inline std::string GetErrorMessage(const T& actual) const
 			{
 				std::stringstream errorMessage;
-				errorMessage << "Expected " << Utility::ToString(m_expected) << " but was " << Utility::ToString(actual);
+				errorMessage << "Expected " << utility::ToString(m_expected) << " but was " << utility::ToString(actual);
 				return errorMessage.str();
 			}
 		};
@@ -48,7 +48,7 @@ namespace ut11
 		namespace Not
 		{
 			/*! \brief Operand returns true if Actual != Expected, otherwise false */
-			template<typename U> inline Utility::NotOperand< Operands::EqualTo<U> > EqualTo(const U& expected) 
+			template<typename U> inline utility::NotOperand< Operands::EqualTo<U> > EqualTo(const U& expected) 
 			{
 				return !Operands::EqualTo<U>(expected); 
 			}

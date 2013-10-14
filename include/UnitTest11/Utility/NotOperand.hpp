@@ -1,11 +1,11 @@
-#ifndef UT11_UTILITY_NOTOPERAND_HPP_INCLUDED
-#define UT11_UTILITY_NOTOPERAND_HPP_INCLUDED
+#ifndef UT11_utility_NOTOPERAND_HPP_INCLUDED
+#define UT11_utility_NOTOPERAND_HPP_INCLUDED
 
 #include <string>
 
 namespace ut11
 {
-	namespace Utility
+	namespace utility
 	{
 		template<typename T> struct BaseOperand;
 
@@ -33,4 +33,4 @@ namespace ut11
 	}
 }
 
-#endif // UT11_UTILITY_NOTOPERAND_HPP_INCLUDED
+#endif // UT11_utility_NOTOPERAND_HPP_INCLUDED

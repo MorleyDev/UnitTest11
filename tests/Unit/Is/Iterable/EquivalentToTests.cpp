@@ -37,7 +37,7 @@ public:
 		});
 
 		Then("Is::Iterable::EquivalentTo() is an operand", []() {
-			AssertThat(ut11::Utility::IsOperand< decltype(ut11::Is::Iterable::EquivalentTo(std::vector<int>())) >::value, ut11::Is::True);
+			AssertThat(ut11::utility::IsOperand< decltype(ut11::Is::Iterable::EquivalentTo(std::vector<int>())) >::value, ut11::Is::True);
 		});
 
 		Then("Is::EqualTo has an error message", []() {
@@ -74,7 +74,7 @@ public:
 		});
 
 		Then("Is::Iterable::EquivalentTo() is an operand", []() {
-			AssertThat(ut11::Utility::IsOperand< decltype(ut11::Is::Iterable::EquivalentTo(std::vector<int>())) >::value, ut11::Is::True);
+			AssertThat(ut11::utility::IsOperand< decltype(ut11::Is::Iterable::EquivalentTo(std::vector<int>())) >::value, ut11::Is::True);
 		});
 
 		Then("Is::EqualTo has an error message", []() {

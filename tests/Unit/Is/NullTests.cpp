@@ -55,7 +55,7 @@ public:
 		});
 
 		Then("Is::Null is Operand", []() {
-			AssertThat(ut11::Utility::IsOperand< decltype(ut11::Is::Null) >::value, ut11::Is::True);
+			AssertThat(ut11::utility::IsOperand< decltype(ut11::Is::Null) >::value, ut11::Is::True);
 		});
 
 		Then("Is::Null has an error message", []() {
@@ -117,7 +117,7 @@ public:
 		});
 
 		Then("Is::Not::Null is Operand", []() {
-			AssertThat(ut11::Utility::IsOperand< decltype(ut11::Is::Not::Null) >::value, ut11::Is::True);
+			AssertThat(ut11::utility::IsOperand< decltype(ut11::Is::Not::Null) >::value, ut11::Is::True);
 		});
 
 		Then("Is::Not::Null has an error message", []() {

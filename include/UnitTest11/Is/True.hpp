@@ -1,8 +1,8 @@
 #ifndef UNITTEST11_IS_TRUE_HPP
 #define UNITTEST11_IS_TRUE_HPP
 
-#include "../Utility/BaseOperand.hpp"
-#include "../Utility/ToString.hpp"
+#include "../utility/BaseOperand.hpp"
+#include "../utility/ToString.hpp"
 
 #include <string>
 #include <sstream>
@@ -11,7 +11,7 @@ namespace ut11
 {
 	namespace Operands
 	{
-		struct TrueOperand : public Utility::BaseOperand<TrueOperand>
+		struct TrueOperand : public utility::BaseOperand<TrueOperand>
 		{
 			template<typename T> bool operator()(const T& value) const 
 			{
@@ -21,7 +21,7 @@ namespace ut11
 			template<typename T> inline std::string GetErrorMessage(const T& actual) const
 			{
 				std::stringstream errorMessage;
-				errorMessage << "Expected true but was " << Utility::ToString(actual);
+				errorMessage << "Expected true but was " << utility::ToString(actual);
 				return errorMessage.str();
 			}
 		};
@@ -35,7 +35,7 @@ namespace ut11
 		namespace Not
 		{
 			/*! \brief Operand returns true if Actual is false, otherwise false */
-			extern Utility::NotOperand<Operands::TrueOperand> True;
+			extern utility::NotOperand<Operands::TrueOperand> True;
 		}
 	}
 }

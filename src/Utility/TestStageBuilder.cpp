@@ -1,5 +1,5 @@
-#include <UnitTest11/Utility/TestStageBuilder.hpp>
+#include <UnitTest11/utility/TestStageBuilder.hpp>
 
-ut11::Utility::TestStageBuilder::~TestStageBuilder()
+ut11::utility::TestStageBuilder::~TestStageBuilder()
 {
 }

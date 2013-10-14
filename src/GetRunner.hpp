@@ -6,7 +6,10 @@
 
 namespace ut11
 {
-	extern std::unique_ptr<ut11::TestFixtureRunner>& GetRunner();
+	namespace detail
+	{
+		extern std::unique_ptr<ut11::detail::TestFixtureRunner>& GetRunner();
+	}
 }
 
 #endif // UT11_SRC_GETRUNNER_HPP_INCLUDED

@@ -18,7 +18,7 @@ public:
 		});
 
 		Then("Is::Iterable::Containing::Item() is an operand", []() {
-			AssertThat(ut11::Utility::IsOperand< decltype(ut11::Is::Iterable::Containing::Item(5)) >::value, ut11::Is::True);
+			AssertThat(ut11::utility::IsOperand< decltype(ut11::Is::Iterable::Containing::Item(5)) >::value, ut11::Is::True);
 		});
 
 		Then("Is::Iterable::Containing::Item() has an error message", []() {
@@ -42,7 +42,7 @@ public:
 		});
 
 		Then("Is::Iterable::Containing::Item() is an operand", []() {
-			AssertThat(ut11::Utility::IsOperand< decltype(ut11::Is::Iterable::Not::Containing::Item(5)) >::value, ut11::Is::True);
+			AssertThat(ut11::utility::IsOperand< decltype(ut11::Is::Iterable::Not::Containing::Item(5)) >::value, ut11::Is::True);
 		});
 
 		Then("Is::Iterable::Containing::Item() has an error message", []() {

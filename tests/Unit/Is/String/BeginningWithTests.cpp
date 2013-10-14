@@ -33,7 +33,7 @@ public:
 		});
 
 		Then("Is::String::BeginningWith is an operand", []() {
-			AssertThat(ut11::Utility::IsOperand< decltype(ut11::Is::String::BeginningWith("world")) >::value, ut11::Is::True);
+			AssertThat(ut11::utility::IsOperand< decltype(ut11::Is::String::BeginningWith("world")) >::value, ut11::Is::True);
 		});
 
 		Then("Is::String::BeginningWith has an error message", []() {
@@ -62,7 +62,7 @@ public:
 		});
 
 		Then("Is::Not::String::BeginningWith is an operand", []() {
-			AssertThat(ut11::Utility::IsOperand< decltype(ut11::Is::String::Not::BeginningWith("world")) >::value, ut11::Is::True);
+			AssertThat(ut11::utility::IsOperand< decltype(ut11::Is::String::Not::BeginningWith("world")) >::value, ut11::Is::True);
 		});
 
 		Then("Is::Not::String::BeginningWith has an error message", []() {

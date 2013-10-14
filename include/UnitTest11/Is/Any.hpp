@@ -1,7 +1,7 @@
 #ifndef UNITTEST11_IS_ANY_HPP
 #define UNITTEST11_IS_ANY_HPP
 
-#include "../Utility/BaseOperand.hpp"
+#include "../utility/BaseOperand.hpp"
 #include <type_traits>
 #include <typeinfo>
 #include <sstream>
@@ -11,7 +11,7 @@ namespace ut11
 	namespace Operands
 	{
 		template<typename T>
-		struct IsAny : public ut11::Utility::BaseOperand<IsAny<T>>
+		struct IsAny : public ut11::utility::BaseOperand<IsAny<T>>
 		{
 			bool operator()(const T&) const
 			{
@@ -43,7 +43,7 @@ namespace ut11
 		namespace Not
 		{
 			/*! \brief Operand returns true if Actual is not of type U and it is not a base of or convertible to type U, otherwise false */
-			template<typename U> inline Utility::NotOperand< Operands::IsAny<U> > Any()
+			template<typename U> inline utility::NotOperand< Operands::IsAny<U> > Any()
 			{
 				return !Operands::IsAny<U>();
 			}

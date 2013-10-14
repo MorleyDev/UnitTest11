@@ -1,5 +1,5 @@
-#ifndef UNITTEST11_UTILITY_TESTSTAGEBUILDERIMPL_HPP
-#define UNITTEST11_UTILITY_TESTSTAGEBUILDERIMPL_HPP
+#ifndef UNITTEST11_utility_TESTSTAGEBUILDERIMPL_HPP
+#define UNITTEST11_utility_TESTSTAGEBUILDERIMPL_HPP
 
 #include "TestStageImpl.hpp"
 #include "TestStageBuilder.hpp"
@@ -9,7 +9,7 @@
 
 namespace ut11
 {
-	namespace Utility
+	namespace utility
 	{
 		class TestStageBuilderImpl : public TestStageBuilder
 		{
@@ -34,11 +34,11 @@ namespace ut11
 
 		private:
 			void PopulateStagesWithFinally(std::vector<TestStageImpl>& finallylessStages, TestStep finally);
-			void MoveStagesOntoFinishedStages(std::vector<ut11::Utility::TestStageImpl>&, std::vector<ut11::Utility::TestStageImpl>&);
+			void MoveStagesOntoFinishedStages(std::vector<ut11::utility::TestStageImpl>&, std::vector<ut11::utility::TestStageImpl>&);
 
 			std::vector<std::pair<TestStepType, TestStep>> m_steps;
 		};
 	}
 }
 
-#endif // UNITTEST11_UTILITY_TESTSTAGEBUILDERIMPL_HPP
+#endif // UNITTEST11_utility_TESTSTAGEBUILDERIMPL_HPP

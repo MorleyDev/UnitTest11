@@ -1,8 +1,8 @@
 #ifndef UNITTEST11_IS_NAN_HPP
 #define UNITTEST11_IS_NAN_HPP
 
-#include "../Utility/BaseOperand.hpp"
-#include "../Utility/ToString.hpp"
+#include "../utility/BaseOperand.hpp"
+#include "../utility/ToString.hpp"
 
 #include <sstream>
 #include <type_traits>
@@ -10,7 +10,7 @@
 
 namespace ut11
 {
-	namespace Utility
+	namespace utility
 	{
 		namespace detail
 		{
@@ -58,17 +58,17 @@ namespace ut11
 	namespace Operands
 	{
 
-		struct IsNaN : public Utility::BaseOperand<IsNaN>
+		struct IsNaN : public utility::BaseOperand<IsNaN>
 		{
 			template<typename U> bool operator()(const U& value) const
 			{
-				return Utility::IsNotANumber<U>()(value);
+				return utility::IsNotANumber<U>()(value);
 			}
 
 			template<typename U> inline std::string GetErrorMessage(const U& actual) const
 			{
 				std::stringstream errorMessage;
-				errorMessage << "Expected NaN but was " << ut11::Utility::ToString(actual);
+				errorMessage << "Expected NaN but was " << ut11::utility::ToString(actual);
 				return errorMessage.str();
 			}
 		};
@@ -82,7 +82,7 @@ namespace ut11
 		namespace Not
 		{
 			/*! \brief Operand returns true if Actual has a value that is a number, otherwise false */
-			extern Utility::NotOperand<Operands::IsNaN> NaN;
+			extern utility::NotOperand<Operands::IsNaN> NaN;
 		}
 	}
 }

@@ -1,7 +1,7 @@
 #ifndef UNITTEST11_IS_STRING_CONTAINING_HPP
 #define UNITTEST11_IS_STRING_CONTAINING_HPP
 
-#include "../../Utility/BaseOperand.hpp"
+#include "../../utility/BaseOperand.hpp"
 #include <string>
 #include <sstream>
 
@@ -9,7 +9,7 @@ namespace ut11
 {
 	namespace Operands
 	{
-		struct IsStringContainingSubstring : public ut11::Utility::BaseOperand<IsStringContainingSubstring>
+		struct IsStringContainingSubstring : public ut11::utility::BaseOperand<IsStringContainingSubstring>
 		{
 			std::string m_expected;
 
@@ -31,7 +31,7 @@ namespace ut11
 			}
 		};
 
-		struct IsStringContainingCharacter : public ut11::Utility::BaseOperand<IsStringContainingCharacter>
+		struct IsStringContainingCharacter : public ut11::utility::BaseOperand<IsStringContainingCharacter>
 		{
 			const char m_expected;
 
@@ -73,13 +73,13 @@ namespace ut11
 			namespace Not
 			{
 				/*! \brief Operand returns false if string contains expected string, otherwise returns true */
-				inline Utility::NotOperand<Operands::IsStringContainingSubstring> Containing(std::string expected)
+				inline utility::NotOperand<Operands::IsStringContainingSubstring> Containing(std::string expected)
 				{
 					return !Operands::IsStringContainingSubstring(expected);
 				}
 
 				/*! \brief Operand returns false if string contains expected character, otherwise returns true */
-				inline Utility::NotOperand<Operands::IsStringContainingCharacter> Containing(const char expected)
+				inline utility::NotOperand<Operands::IsStringContainingCharacter> Containing(const char expected)
 				{
 					return !Operands::IsStringContainingCharacter(expected);
 				}

@@ -26,7 +26,7 @@ public:
 		});
 
 		Then("VerifyAny fails as expected", [&]() {
-			AssertThat([&]() { MockVerify(m_mock)(ut11::Is::Any<char>()); }, ut11::Will::Throw<ut11::TestFailedException>());
+			AssertThat([&]() { MockVerify(m_mock)(ut11::Is::Any<char>()); }, ut11::Will::Throw<ut11::detail::TestFailedException>());
 		});
 
 		When("calling the Mock", [&]() {
@@ -56,12 +56,12 @@ public:
 
 		Then("the Mock verifies fails as expected when with the wrong parameters", [&]() {
 
-			AssertThat([&]() { MockVerify(m_mock)('\n'); }, ut11::Will::Throw<ut11::TestFailedException>());
+			AssertThat([&]() { MockVerify(m_mock)('\n'); }, ut11::Will::Throw<ut11::detail::TestFailedException>());
 		});
 
 		Then("the Mock verifies fails as expected when with the wrong VerifyTimes", [&]() {
 
-			AssertThat([&]() { MockVerifyTimes(2, m_mock)(m_expectedParameter); }, ut11::Will::Throw<ut11::TestFailedException>());
+			AssertThat([&]() { MockVerifyTimes(2, m_mock)(m_expectedParameter); }, ut11::Will::Throw<ut11::detail::TestFailedException>());
 		});
 		Then("the Mock verifies fails as expected when with an operand", [&]() {
 
@@ -72,7 +72,7 @@ public:
 							return false;
 						};
 
-			AssertThat([&]() { MockVerifyTimes(ut11::Will::Pass(lambda), m_mock)(m_expectedParameter); }, ut11::Will::Throw<ut11::TestFailedException>());
+			AssertThat([&]() { MockVerifyTimes(ut11::Will::Pass(lambda), m_mock)(m_expectedParameter); }, ut11::Will::Throw<ut11::detail::TestFailedException>());
 		});
 
 		When("setting a callback calling the Mock", [&]() {
@@ -129,7 +129,7 @@ public:
 		});
 
 		Then("verifying the wrong number of times causes a failure", [&]() {
-			AssertThat([&]() { MockVerifyTimes(2, m_mock)(); }, ut11::Will::Throw<ut11::TestFailedException>());
+			AssertThat([&]() { MockVerifyTimes(2, m_mock)(); }, ut11::Will::Throw<ut11::detail::TestFailedException>());
 		});
 	}
 };

@@ -8,9 +8,9 @@
 #ifndef UT11_IS_ITERABLE_EQUIVALENTTO_HPP_INCLUDED
 #define UT11_IS_ITERABLE_EQUIVALENTTO_HPP_INCLUDED
 
-#include "../../Utility/BaseOperand.hpp"
-#include "../../Utility/ToString.hpp"
-#include "../../Utility/AreEqual.hpp"
+#include "../../utility/BaseOperand.hpp"
+#include "../../utility/ToString.hpp"
+#include "../../utility/AreEqual.hpp"
 
 #include <sstream>
 #include <list>
@@ -20,7 +20,7 @@ namespace ut11
 	namespace Operands
 	{
 		template<typename T>
-		struct IsIterableEquivalentTo : public Utility::BaseOperand<IsIterableEquivalentTo<T>>
+		struct IsIterableEquivalentTo : public utility::BaseOperand<IsIterableEquivalentTo<T>>
 		{
 			const T& m_expected;
 
@@ -47,7 +47,7 @@ namespace ut11
 			template<typename U> inline std::string GetErrorMessage(const U& actual) const
 			{
 				std::stringstream errorMessage;
-				errorMessage << "Expected equivalent of " << Utility::ToString(m_expected) << " but was " << Utility::ToString(actual);
+				errorMessage << "Expected equivalent of " << utility::ToString(m_expected) << " but was " << utility::ToString(actual);
 				return errorMessage.str();
 			}
 
@@ -56,7 +56,7 @@ namespace ut11
 			{
 				for(auto i = a.begin(); i != a.end(); ++i)
 					for(auto j = b.begin(); j != b.end(); ++j)
-						if ( Utility::AreEqual(**i, **j) )
+						if ( utility::AreEqual(**i, **j) )
 						{
 							a.erase(i);
 							b.erase(j);
@@ -90,7 +90,7 @@ namespace ut11
 			namespace Not
 			{
 				/*! \brief Takes an expected and actual iterable (has ::begin and ::end functions) and returns true if the contents of those iterables are not the same, ignoring order */
-				template<typename T> Utility::NotOperand< Operands::IsIterableEquivalentTo<T> > EquivalentTo(const T& expected)
+				template<typename T> utility::NotOperand< Operands::IsIterableEquivalentTo<T> > EquivalentTo(const T& expected)
 				{
 					return !Operands::IsIterableEquivalentTo<T>(expected);
 				}

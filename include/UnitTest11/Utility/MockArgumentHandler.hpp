@@ -1,5 +1,5 @@
-#ifndef UNITTEST11_UTILITY_MOCKARGUMENTHANDLER_HPP
-#define UNITTEST11_UTILITY_MOCKARGUMENTHANDLER_HPP
+#ifndef UNITTEST11_utility_MOCKARGUMENTHANDLER_HPP
+#define UNITTEST11_utility_MOCKARGUMENTHANDLER_HPP
 
 #include "BaseOperand.hpp"
 #include "AreEqual.hpp"
@@ -10,7 +10,7 @@
 
 namespace ut11
 {
-	namespace Utility
+	namespace utility
 	{
 		template<typename T, typename U>
 		static inline typename std::enable_if< IsOperand<U>::value, bool >::type CompareWithOperandOrEquality(const T& arg, const U& expectation)
@@ -68,4 +68,4 @@ namespace ut11
 	}
 }
 
-#endif // UNITTEST11_UTILITY_MOCKARGUMENTHANDLER_HPP
+#endif // UNITTEST11_utility_MOCKARGUMENTHANDLER_HPP

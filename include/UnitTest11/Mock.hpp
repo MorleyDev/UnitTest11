@@ -1,8 +1,8 @@
 #ifndef UNITTEST11_MOCK_HPP
 #define UNITTEST11_MOCK_HPP
 
-#include "Utility/MockArgumentHandler.hpp"
-#include "Utility/MockReturnHandler.hpp"
+#include "utility/MockArgumentHandler.hpp"
+#include "utility/MockReturnHandler.hpp"
 #include "Assert/Fail.hpp"
 
 #include <sstream>
@@ -94,8 +94,8 @@ namespace ut11
 		}
 
 		std::function<void (const ARGS&...)> m_callbackHandler;
-		Utility::MockArgumentHandler<ARGS...> m_argumentHandler;
-		Utility::MockReturnHandler<R, ARGS...> m_returnHandler;
+		utility::MockArgumentHandler<ARGS...> m_argumentHandler;
+		utility::MockReturnHandler<R, ARGS...> m_returnHandler;
 	};
 }
 

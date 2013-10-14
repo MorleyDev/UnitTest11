@@ -1,13 +1,13 @@
 #include <UnitTest11/Core.hpp>
 #include <UnitTest11/Is/EqualTo.hpp>
-#include <UnitTest11/Utility/MockReturnHandler.hpp>
+#include <UnitTest11/utility/MockReturnHandler.hpp>
 
-namespace ut11 { namespace Utility { template<> struct DefaultValue<int> { inline int operator()() const { return 8; } }; } }
+namespace ut11 { namespace utility { template<> struct DefaultValue<int> { inline int operator()() const { return 8; } }; } }
 
 class MockReturnHandlerTest : public ut11::TestFixture
 {
 private:
-	ut11::Utility::MockReturnHandler<int, char> m_returner;
+	ut11::utility::MockReturnHandler<int, char> m_returner;
 	int m_expectedReturnValue;
 	int m_expectedArgument;
 
@@ -19,12 +19,12 @@ public:
 
 		Given("a MockReturnHandler", [&]() {
 
-			m_returner = ut11::Utility::MockReturnHandler<int, char>();
+			m_returner = ut11::utility::MockReturnHandler<int, char>();
 		});
 
 		When("calling the MockReturnHandler", [&]() {
 
-			m_expectedReturnValue = ut11::Utility::DefaultValue<int>()();
+			m_expectedReturnValue = ut11::utility::DefaultValue<int>()();
 
 			m_returnedValue = m_returner.operator ()('A');
 		});

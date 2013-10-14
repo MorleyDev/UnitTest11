@@ -1,12 +1,12 @@
-#ifndef UNITTEST11_UTILITY_MOCKRETURNER_HPP
-#define UNITTEST11_UTILITY_MOCKRETURNER_HPP
+#ifndef UNITTEST11_utility_MOCKRETURNER_HPP
+#define UNITTEST11_utility_MOCKRETURNER_HPP
 
 #include "DefaultValue.hpp"
 #include <functional>
 
 namespace ut11
 {
-	namespace Utility
+	namespace utility
 	{
 		template<typename T, typename... ARGS> class MockReturnHandler
 		{
@@ -58,4 +58,4 @@ namespace ut11
 	}
 }
 
-#endif // UNITTEST11_UTILITY_MOCKRETURNER_HPP
+#endif // UNITTEST11_utility_MOCKRETURNER_HPP

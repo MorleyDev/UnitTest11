@@ -10,7 +10,7 @@
 
 namespace ut11
 {
-	namespace Utility
+	namespace utility
 	{
 		template<typename T> struct BaseOperand 
 		{

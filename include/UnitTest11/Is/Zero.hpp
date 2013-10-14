@@ -1,15 +1,15 @@
 #ifndef UNITTEST11_IS_ZERO_HPP
 #define UNITTEST11_IS_ZERO_HPP
 
-#include "../Utility/BaseOperand.hpp"
-#include "../Utility/ToString.hpp"
+#include "../utility/BaseOperand.hpp"
+#include "../utility/ToString.hpp"
 #include <sstream>
 
 namespace ut11
 {
 	namespace Operands
 	{
-		struct IsZero : public Utility::BaseOperand<IsZero>
+		struct IsZero : public utility::BaseOperand<IsZero>
 		{
 			template<typename U> bool operator()(const U& value) const
 			{
@@ -19,7 +19,7 @@ namespace ut11
 			template<typename U> inline std::string GetErrorMessage(const U& actual) const
 			{
 				std::stringstream errorMessage;
-				errorMessage << "Expected zero but was " << ut11::Utility::ToString(actual);
+				errorMessage << "Expected zero but was " << ut11::utility::ToString(actual);
 				return errorMessage.str();
 			}
 		};
@@ -33,7 +33,7 @@ namespace ut11
 		namespace Not
 		{
 			/*! \brief Operand returns true if Actual != 0, otherwise false */
-			extern Utility::NotOperand<Operands::IsZero> Zero;
+			extern utility::NotOperand<Operands::IsZero> Zero;
 		}
 	}
 }

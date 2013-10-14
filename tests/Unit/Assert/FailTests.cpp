@@ -5,7 +5,7 @@
 class AssertFailTests : public ut11::TestFixture
 {
 private:
-	ut11::TestFailedException m_exception;
+	ut11::detail::TestFailedException m_exception;
 
 	std::size_t line;
 	std::string file;
@@ -24,7 +24,7 @@ public:
 			{
 				ut11::Assert::Fail(line, file, message);
 			}
-			catch(const ut11::TestFailedException& ex)
+			catch (const ut11::detail::TestFailedException& ex)
 			{
 				m_exception = ex;
 				return;
