@@ -5,8 +5,8 @@
 #include "Assert/That.hpp"
 #include "Macros.hpp"
 
-#include "DeclareFixture.hpp"
-#include "MockTimesVerify.hpp"
-#include "MockVerify.hpp"
+#include "detail/DeclareFixture.hpp"
+#include "detail/MockTimesVerify.hpp"
+#include "detail/MockVerify.hpp"
 
 #endif // UT11_CORE_HPP_INCLUDED

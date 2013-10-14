@@ -4,7 +4,7 @@
 #include <UnitTest11/Is/False.hpp>
 #include <UnitTest11/Is/Any.hpp>
 
-#include <UnitTest11/TestFailedException.hpp>
+#include <UnitTest11/detail/TestFailedException.hpp>
 
 namespace
 {

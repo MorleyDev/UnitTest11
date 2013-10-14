@@ -1,9 +1,9 @@
 #ifndef UT11_DECLAREFIXTURE_HPP_INCLUDED
 #define UT11_DECLAREFIXTURE_HPP_INCLUDED
 
-#include "Category.hpp"
 #include "TestFixtureAbstract.hpp"
-#include "utility/ToString.hpp"
+#include "../Category.hpp"
+#include "../utility/ToString.hpp"
 #include <memory>
 
 namespace ut11

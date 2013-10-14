@@ -2,8 +2,8 @@
 #define UT11_TESTFIXTUREABSTRACT_HPP_INCLUDED
 
 #include "TestFixtureResults.hpp"
-#include "Category.hpp"
-#include "out/Output.hpp"
+#include "../Category.hpp"
+#include "../out/Output.hpp"
 
 #include <string>
 #include <functional>

@@ -1,7 +1,7 @@
 #ifndef UNITTEST11_TESTFIXTURE_HPP
 #define UNITTEST11_TESTFIXTURE_HPP
 
-#include "TestFixtureAbstract.hpp"
+#include "detail/TestFixtureAbstract.hpp"
 #include "utility/TestStageBuilderImpl.hpp"
 
 #include <memory>

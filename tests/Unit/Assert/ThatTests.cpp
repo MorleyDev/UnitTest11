@@ -1,6 +1,6 @@
 #include <UnitTest11/Core.hpp>
 #include <UnitTest11/Is/EqualTo.hpp>
-#include <UnitTest11/TestFailedException.hpp>
+#include <UnitTest11/detail/TestFailedException.hpp>
 
 namespace
 {

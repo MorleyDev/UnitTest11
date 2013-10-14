@@ -1,8 +1,8 @@
 #ifndef UNITTEST11_TESTFIXTURERUNNER_HPP
 #define UNITTEST11_TESTFIXTURERUNNER_HPP
 
-#include "out/Output.hpp"
-#include "TestFixture.hpp"
+#include "../out/Output.hpp"
+#include "../TestFixture.hpp"
 #include <map>
 #include <memory>
 

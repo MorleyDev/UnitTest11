@@ -2,7 +2,7 @@
 #include <UnitTest11/Mock.hpp>
 #include <UnitTest11/Is/EqualTo.hpp>
 #include <UnitTest11/Is/Null.hpp>
-#include <UnitTest11/TestFixtureRunner.hpp>
+#include <UnitTest11/detail/TestFixtureRunner.hpp>
 
 namespace
 {

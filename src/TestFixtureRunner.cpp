@@ -1,4 +1,4 @@
-#include <UnitTest11/TestFixtureRunner.hpp>
+#include <UnitTest11/detail/TestFixtureRunner.hpp>
 #include <iostream>
 
 void ut11::detail::TestFixtureRunner::AddFixture(std::shared_ptr<TestFixtureAbstract> fixture)
