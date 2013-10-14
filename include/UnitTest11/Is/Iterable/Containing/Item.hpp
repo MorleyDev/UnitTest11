@@ -8,7 +8,7 @@
 #ifndef UT11_IS_ITERABLE_CONTAINING_ITEM_HPP_INCLUDED
 #define UT11_IS_ITERABLE_CONTAINING_ITEM_HPP_INCLUDED
 
-#include "../../../utility/BaseOperand.hpp"
+#include "../../../detail/BaseOperand.hpp"
 #include "../../../utility/AreEqual.hpp"
 #include "../../../utility/ToString.hpp"
 #include <string>
@@ -17,7 +17,7 @@ namespace ut11
 {
 	namespace Operands
 	{
-		template<typename T> struct IsIterableContainingItem : public utility::BaseOperand<IsIterableContainingItem<T>>
+		template<typename T> struct IsIterableContainingItem : public detail::BaseOperand<IsIterableContainingItem<T>>
 		{
 			const T& m_expected;
 
@@ -62,7 +62,7 @@ namespace ut11
 				namespace Containing
 				{
 					/*! \brief Passes if the given iterable does not contain at least one of the given item */
-					template<typename T> inline utility::NotOperand< Operands::IsIterableContainingItem<T> > Item(const T& expected)
+					template<typename T> inline detail::NotOperand< Operands::IsIterableContainingItem<T> > Item(const T& expected)
 					{
 						return !Operands::IsIterableContainingItem<T>(expected);
 					}

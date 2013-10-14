@@ -1,7 +1,7 @@
 #ifndef UNITTEST11_IS_LESSTHAN_HPP
 #define UNITTEST11_IS_LESSTHAN_HPP
 
-#include "../utility/BaseOperand.hpp"
+#include "../detail/BaseOperand.hpp"
 #include "../utility/ToString.hpp"
 
 #include <string>
@@ -12,7 +12,7 @@ namespace ut11
 	namespace Operands
 	{
 		template<typename U>
-		struct IsLessThan : public utility::BaseOperand<IsLessThan<U>>
+		struct IsLessThan : public detail::BaseOperand<IsLessThan<U>>
 		{
 			const U& high;
 
@@ -46,7 +46,7 @@ namespace ut11
 		namespace Not
 		{
 			/*! \brief Operand returns false if Actual is not less than the Expected, otherwise false */
-			template<typename U> inline utility::NotOperand< Operands::IsLessThan<U> > LessThan(const U& high)
+			template<typename U> inline detail::NotOperand< Operands::IsLessThan<U> > LessThan(const U& high)
 			{
 				return !Operands::IsLessThan<U>(high);
 			}

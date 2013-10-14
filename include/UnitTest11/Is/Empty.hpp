@@ -8,7 +8,7 @@
 #ifndef UT11_IS_EMPTY_HPP_INCLUDED
 #define UT11_IS_EMPTY_HPP_INCLUDED
 
-#include "../utility/BaseOperand.hpp"
+#include "../detail/BaseOperand.hpp"
 #include "../utility/ToString.hpp"
 
 #include <string>
@@ -18,7 +18,7 @@ namespace ut11
 {
 	namespace Operands
 	{
-		struct IsEmpty : public ut11::utility::BaseOperand<IsEmpty>
+		struct IsEmpty : public ut11::detail::BaseOperand<IsEmpty>
 		{
 			inline bool operator()(const char* actual) const 
 			{ 
@@ -49,7 +49,7 @@ namespace ut11
 		namespace Not
 		{
 			/*! \brief Passes if the given iterable is not empty */
-			extern utility::NotOperand<Operands::IsEmpty> Empty;
+			extern detail::NotOperand<Operands::IsEmpty> Empty;
 		}
 	}
 }

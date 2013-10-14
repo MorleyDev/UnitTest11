@@ -1,11 +1,11 @@
 #include <UnitTest11/Core.hpp>
-#include <UnitTest11/utility/MockArgumentHandler.hpp>
+#include <UnitTest11/detail/MockArgumentHandler.hpp>
 #include <UnitTest11/Is/EqualTo.hpp>
 
 class MockArgumentHandlerTest : public ut11::TestFixture
 {
 private:
-	ut11::utility::MockArgumentHandler<int> m_argumentHandler;
+	ut11::detail::MockArgumentHandler<int> m_argumentHandler;
 	int m_expectedCalls[2];
 
 public:
@@ -16,7 +16,7 @@ public:
 			m_expectedCalls[0] = 5;
 			m_expectedCalls[1] = 7;
 
-			m_argumentHandler = ut11::utility::MockArgumentHandler<int>();
+			m_argumentHandler = ut11::detail::MockArgumentHandler<int>();
 			m_argumentHandler.AddCall(m_expectedCalls[0]);
 			m_argumentHandler.AddCall(m_expectedCalls[0]);
 			m_argumentHandler.AddCall(m_expectedCalls[0]);

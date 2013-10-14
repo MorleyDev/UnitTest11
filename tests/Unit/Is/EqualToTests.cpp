@@ -16,7 +16,7 @@ public:
 		});
 
 		Then("Is::EqualTo is an operand", []() {
-			AssertThat(ut11::utility::IsOperand< decltype(ut11::Is::EqualTo(7)) >::value, ut11::Is::True);
+			AssertThat(ut11::detail::IsOperand< decltype(ut11::Is::EqualTo(7)) >::value, ut11::Is::True);
 		});
 
 		Then("Is::EqualTo has an error message", []() {
@@ -40,7 +40,7 @@ public:
 		});
 
 		Then("Is::Not::EqualTo is an operand", []() {
-			AssertThat(ut11::utility::IsOperand< decltype(ut11::Is::Not::EqualTo(7)) >::value, ut11::Is::True);
+			AssertThat(ut11::detail::IsOperand< decltype(ut11::Is::Not::EqualTo(7)) >::value, ut11::Is::True);
 		});
 
 		Then("Is::Not::EqualTo has an error message", []() {
@@ -64,7 +64,7 @@ public:
 		});
 
 		Then("Is::EqualTo iterable is an operand", []() {
-			AssertThat(ut11::utility::IsOperand< decltype(ut11::Is::EqualTo(std::vector<int>({ 1, 2, 3 }))) >::value, ut11::Is::True);
+			AssertThat(ut11::detail::IsOperand< decltype(ut11::Is::EqualTo(std::vector<int>({ 1, 2, 3 }))) >::value, ut11::Is::True);
 		});
 
 		Then("Is::EqualTo not equal iterable has an error message", []() {
@@ -88,7 +88,7 @@ public:
 		});
 
 		Then("Is::Not::EqualTo iterable is an operand", []() {
-			AssertThat(ut11::utility::IsOperand< decltype(ut11::Is::Not::EqualTo(std::vector<int>({ 1, 2, 3 }))) >::value, ut11::Is::True);
+			AssertThat(ut11::detail::IsOperand< decltype(ut11::Is::Not::EqualTo(std::vector<int>({ 1, 2, 3 }))) >::value, ut11::Is::True);
 		});
 
 		Then("Is::Not::EqualTo not equal iterable has an error message", []() {

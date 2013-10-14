@@ -8,7 +8,7 @@
 #ifndef UT11_IS_ITERABLE_EQUIVALENTTO_HPP_INCLUDED
 #define UT11_IS_ITERABLE_EQUIVALENTTO_HPP_INCLUDED
 
-#include "../../utility/BaseOperand.hpp"
+#include "../../detail/BaseOperand.hpp"
 #include "../../utility/ToString.hpp"
 #include "../../utility/AreEqual.hpp"
 
@@ -20,7 +20,7 @@ namespace ut11
 	namespace Operands
 	{
 		template<typename T>
-		struct IsIterableEquivalentTo : public utility::BaseOperand<IsIterableEquivalentTo<T>>
+		struct IsIterableEquivalentTo : public detail::BaseOperand<IsIterableEquivalentTo<T>>
 		{
 			const T& m_expected;
 
@@ -90,7 +90,7 @@ namespace ut11
 			namespace Not
 			{
 				/*! \brief Takes an expected and actual iterable (has ::begin and ::end functions) and returns true if the contents of those iterables are not the same, ignoring order */
-				template<typename T> utility::NotOperand< Operands::IsIterableEquivalentTo<T> > EquivalentTo(const T& expected)
+				template<typename T> detail::NotOperand< Operands::IsIterableEquivalentTo<T> > EquivalentTo(const T& expected)
 				{
 					return !Operands::IsIterableEquivalentTo<T>(expected);
 				}

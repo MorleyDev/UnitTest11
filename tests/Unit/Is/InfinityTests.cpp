@@ -21,7 +21,7 @@ public:
 		});
 
 		Then("Is::Infinity is Operand", []() {
-			AssertThat(ut11::utility::IsOperand< decltype(ut11::Is::Infinity) >::value, ut11::Is::True);
+			AssertThat(ut11::detail::IsOperand< decltype(ut11::Is::Infinity) >::value, ut11::Is::True);
 		});
 
 		Then("Is::Infinity has an error message", []() {
@@ -46,7 +46,7 @@ public:
 		});
 
 		Then("Is::Not::Infinity is Operand", []() {
-			AssertThat(ut11::utility::IsOperand< decltype(ut11::Is::Not::Infinity) >::value, ut11::Is::True);
+			AssertThat(ut11::detail::IsOperand< decltype(ut11::Is::Not::Infinity) >::value, ut11::Is::True);
 		});
 
 		Then("Is::Not::Infinity has an error message", []() {
@@ -74,7 +74,7 @@ public:
 		});
 
 		Then("Is::PositiveInfinity is Operand", []() {
-			AssertThat(ut11::utility::IsOperand< decltype(ut11::Is::PositiveInfinity) >::value, ut11::Is::True);
+			AssertThat(ut11::detail::IsOperand< decltype(ut11::Is::PositiveInfinity) >::value, ut11::Is::True);
 		});
 
 		Then("Is::PositiveInfinity has an error message", []() {
@@ -101,7 +101,7 @@ public:
 		});
 
 		Then("Is::Not::PositiveInfinity is Operand", []() {
-			AssertThat(ut11::utility::IsOperand< decltype(ut11::Is::Not::PositiveInfinity) >::value, ut11::Is::True);
+			AssertThat(ut11::detail::IsOperand< decltype(ut11::Is::Not::PositiveInfinity) >::value, ut11::Is::True);
 		});
 
 		Then("Is::Not::PositiveInfinity has an error message", []() {
@@ -129,7 +129,7 @@ public:
 		});
 
 		Then("Is::NegativeInfinity is Operand", []() {
-			AssertThat(ut11::utility::IsOperand< decltype(ut11::Is::NegativeInfinity) >::value, ut11::Is::True);
+			AssertThat(ut11::detail::IsOperand< decltype(ut11::Is::NegativeInfinity) >::value, ut11::Is::True);
 		});
 
 		Then("Is::NegativeInfinity has an error message", []() {
@@ -156,7 +156,7 @@ public:
 		});
 
 		Then("Is::Not::NegativeInfinity is Operand", []() {
-			AssertThat(ut11::utility::IsOperand< decltype(ut11::Is::Not::NegativeInfinity) >::value, ut11::Is::True);
+			AssertThat(ut11::detail::IsOperand< decltype(ut11::Is::Not::NegativeInfinity) >::value, ut11::Is::True);
 		});
 
 		Then("Is::Not::NegativeInfinity has an error message", []() {

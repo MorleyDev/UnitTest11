@@ -1,12 +1,12 @@
-#ifndef UNITTEST11_utility_MOCKRETURNER_HPP
-#define UNITTEST11_utility_MOCKRETURNER_HPP
+#ifndef UNITTEST11_DETAIL_MOCKRETURNER_HPP
+#define UNITTEST11_DETAIL_MOCKRETURNER_HPP
 
-#include "DefaultValue.hpp"
+#include "../utility/DefaultValue.hpp"
 #include <functional>
 
 namespace ut11
 {
-	namespace utility
+	namespace detail
 	{
 		template<typename T, typename... ARGS> class MockReturnHandler
 		{
@@ -14,7 +14,7 @@ namespace ut11
 			MockReturnHandler()
 				: m_isReturnCallbackMode(false),
 				  m_returnCallback(),
-				  m_returnValue(DefaultValue<T>()())
+				  m_returnValue(utility::DefaultValue<T>()())
 			{
 			}
 
@@ -58,4 +58,4 @@ namespace ut11
 	}
 }
 
-#endif // UNITTEST11_utility_MOCKRETURNER_HPP
+#endif // UNITTEST11_DETAIL_MOCKRETURNER_HPP

@@ -22,16 +22,16 @@ namespace ut11
 
 namespace
 {
-	class FakeTestStageBuilder : public ut11::utility::TestStageBuilder
+	class FakeTestStageBuilder : public ut11::detail::TestStageBuilder
 	{
 	public:
 		virtual ~FakeTestStageBuilder() { }
 
-		MockAction(PushGiven, ut11::utility::TestStep)
-		MockAction(PushWhen, ut11::utility::TestStep)
-		MockAction(PushThen, ut11::utility::TestStep)
-		MockAction(PushFinally, ut11::utility::TestStep)
-		MockFunction(std::vector< std::shared_ptr<ut11::utility::TestStage> >, Build)
+		MockAction(PushGiven, ut11::detail::TestStep)
+		MockAction(PushWhen, ut11::detail::TestStep)
+		MockAction(PushThen, ut11::detail::TestStep)
+		MockAction(PushFinally, ut11::detail::TestStep)
+		MockFunction(std::vector< std::shared_ptr<ut11::detail::TestStage> >, Build)
 	};
 
 	class FakeOutput : public ut11::out::Output
@@ -67,7 +67,7 @@ namespace
 		virtual void OnError(const std::exception& ex) { mockOnError1(ex); }
 	};
 
-	class FakeTestStage : public ut11::utility::TestStage
+	class FakeTestStage : public ut11::detail::TestStage
 	{
 	private:
 		bool m_result;
@@ -148,7 +148,7 @@ public:
 		});
 		Then("the expected call is made", [&]() {
 
-			MockVerify(m_mockBuilder->mockPushGiven)(ut11::Will::Pass([&](ut11::utility::TestStep step) { return ( step.description == m_expectedDescription ); }));
+			MockVerify(m_mockBuilder->mockPushGiven)(ut11::Will::Pass([&](ut11::detail::TestStep step) { return ( step.description == m_expectedDescription ); }));
 		});
 
 		When("calling the When", [&]() {
@@ -159,7 +159,7 @@ public:
 		});
 		Then("the expected call is made", [&]() {
 
-			MockVerify(m_mockBuilder->mockPushWhen)(ut11::Will::Pass([&](ut11::utility::TestStep step) { return ( step.description == m_expectedDescription ); }));
+			MockVerify(m_mockBuilder->mockPushWhen)(ut11::Will::Pass([&](ut11::detail::TestStep step) { return ( step.description == m_expectedDescription ); }));
 		});
 
 		When("calling the Then", [&]() {
@@ -170,7 +170,7 @@ public:
 		});
 		Then("the expected call is made", [&]() {
 
-			MockVerify(m_mockBuilder->mockPushThen)(ut11::Will::Pass([&](ut11::utility::TestStep step) { return ( step.description == m_expectedDescription ); }));
+			MockVerify(m_mockBuilder->mockPushThen)(ut11::Will::Pass([&](ut11::detail::TestStep step) { return ( step.description == m_expectedDescription ); }));
 		});
 
 		When("calling the Finally", [&]() {
@@ -181,7 +181,7 @@ public:
 		});
 		Then("the expected call is made", [&]() {
 
-			MockVerify(m_mockBuilder->mockPushFinally)(ut11::Will::Pass([&](ut11::utility::TestStep step) { return ( step.description == m_expectedDescription ); }));
+			MockVerify(m_mockBuilder->mockPushFinally)(ut11::Will::Pass([&](ut11::detail::TestStep step) { return ( step.description == m_expectedDescription ); }));
 		});
 	}
 };
@@ -212,7 +212,7 @@ public:
 
 		When("running the test fixture with successful stages", [&]() {
 
-			std::vector< std::shared_ptr<ut11::utility::TestStage> > Stages;
+			std::vector< std::shared_ptr<ut11::detail::TestStage> > Stages;
 			Stages.push_back(std::make_shared<FakeTestStage>(true));
 			Stages.push_back(std::make_shared<FakeTestStage>(true));
 			Stages.push_back(m_mockTestStage = std::make_shared<FakeTestStage>(true));
@@ -240,7 +240,7 @@ public:
 
 		When("running the test fixture with a failing stage", [&]() {
 
-			std::vector< std::shared_ptr<ut11::utility::TestStage> > Stages;
+			std::vector< std::shared_ptr<ut11::detail::TestStage> > Stages;
 			Stages.push_back(std::make_shared<FakeTestStage>(true));
 			Stages.push_back(std::make_shared<FakeTestStage>(true));
 			Stages.push_back(m_mockTestStage = std::make_shared<FakeTestStage>(false));

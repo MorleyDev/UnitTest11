@@ -1,6 +1,6 @@
 #include <UnitTest11/Run.hpp>
 #include <UnitTest11/out/StdOutput.hpp>
-#include "GetRunner.hpp"
+#include "detail/GetRunner.hpp"
 
 namespace
 {

@@ -1,5 +1,5 @@
-#ifndef UNITTEST11_utility_AREEQUAL_HPP
-#define UNITTEST11_utility_AREEQUAL_HPP
+#ifndef UNITTEST11_UTILITY_AREEQUAL_HPP
+#define UNITTEST11_UTILITY_AREEQUAL_HPP
 
 #include "Meta/IsIterableContainer.hpp"
 

@@ -1,7 +1,7 @@
-#include <UnitTest11/utility/TestStageImpl.hpp>
+#include <UnitTest11/detail/TestStageImpl.hpp>
 #include <UnitTest11/detail/TestFailedException.hpp>
 
-ut11::utility::TestStageImpl::TestStageImpl()
+ut11::detail::TestStageImpl::TestStageImpl()
 	: m_given(),
 	  m_when(),
 	  m_then(),
@@ -9,7 +9,7 @@ ut11::utility::TestStageImpl::TestStageImpl()
 {
 }
 
-ut11::utility::TestStageImpl::TestStageImpl(TestStep given, TestStep when, TestStep then, TestStep finally)
+ut11::detail::TestStageImpl::TestStageImpl(TestStep given, TestStep when, TestStep then, TestStep finally)
 	: m_given(given),
 	  m_when(when),
 	  m_then(then),
@@ -17,12 +17,12 @@ ut11::utility::TestStageImpl::TestStageImpl(TestStep given, TestStep when, TestS
 {
 }
 
-ut11::utility::TestStageImpl::~TestStageImpl()
+ut11::detail::TestStageImpl::~TestStageImpl()
 {
 }
 
 
-bool ut11::utility::TestStageImpl::Run(out::Output& output)
+bool ut11::detail::TestStageImpl::Run(out::Output& output)
 {
 	auto runInsideTryCatch = [&](std::function<void(void)> func) -> bool {
 
@@ -73,7 +73,7 @@ bool ut11::utility::TestStageImpl::Run(out::Output& output)
 
 }
 
-void ut11::utility::TestStageImpl::Given(out::Output& output)
+void ut11::detail::TestStageImpl::Given(out::Output& output)
 {
 	if ( !m_given.logic )
 		return;
@@ -83,7 +83,7 @@ void ut11::utility::TestStageImpl::Given(out::Output& output)
 	output.EndGiven(m_given.description);
 }
 
-void ut11::utility::TestStageImpl::When(out::Output& output)
+void ut11::detail::TestStageImpl::When(out::Output& output)
 {
 	if ( !m_when.logic )
 		return;
@@ -93,7 +93,7 @@ void ut11::utility::TestStageImpl::When(out::Output& output)
 	output.EndWhen(m_when.description);
 }
 
-void ut11::utility::TestStageImpl::Then(out::Output& output)
+void ut11::detail::TestStageImpl::Then(out::Output& output)
 {
 	if ( !m_then.logic )
 		return;
@@ -103,7 +103,7 @@ void ut11::utility::TestStageImpl::Then(out::Output& output)
 	output.EndThen(m_then.description);
 }
 
-void ut11::utility::TestStageImpl::Finally(out::Output& output)
+void ut11::detail::TestStageImpl::Finally(out::Output& output)
 {
 	if ( !m_finally.logic )
 		return;

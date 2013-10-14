@@ -40,7 +40,7 @@ public:
 		});
 
 		Then("Is::Iterable::Of<T>() is an operand", []() {
-			AssertThat(ut11::utility::IsOperand< decltype(ut11::Is::Iterable::Of<int>()) >::value, ut11::Is::True);
+			AssertThat(ut11::detail::IsOperand< decltype(ut11::Is::Iterable::Of<int>()) >::value, ut11::Is::True);
 		});
 
 		Then("Is::EqualTo has an error message", []() {
@@ -73,7 +73,7 @@ public:
 		});
 
 		Then("Is::Iterable::Of<T>() is an operand", []() {
-			AssertThat(ut11::utility::IsOperand< decltype(ut11::Is::Iterable::Not::Of<int>()) >::value, ut11::Is::True);
+			AssertThat(ut11::detail::IsOperand< decltype(ut11::Is::Iterable::Not::Of<int>()) >::value, ut11::Is::True);
 		});
 
 		Then("Is::EqualTo has an error message", []() {

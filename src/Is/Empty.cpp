@@ -8,4 +8,4 @@
 #include <UnitTest11/Is/Empty.hpp>
 
 ut11::Operands::IsEmpty ut11::Is::Empty;
-ut11::utility::NotOperand<ut11::Operands::IsEmpty> ut11::Is::Not::Empty = !ut11::Is::Empty;
+ut11::detail::NotOperand<ut11::Operands::IsEmpty> ut11::Is::Not::Empty = !ut11::Is::Empty;

@@ -8,7 +8,7 @@
 #ifndef UT11_IS_STRING_ENDINGWITH_HPP_INCLUDED
 #define UT11_IS_STRING_ENDINGWITH_HPP_INCLUDED
 
-#include "../../utility/BaseOperand.hpp"
+#include "../../detail/BaseOperand.hpp"
 
 #include <string>
 #include <sstream>
@@ -17,7 +17,7 @@ namespace ut11
 {
 	namespace Operands
 	{
-		struct IsStringEndingWith : public ut11::utility::BaseOperand<IsStringEndingWith>
+		struct IsStringEndingWith : public ut11::detail::BaseOperand<IsStringEndingWith>
 		{
 			std::string m_expected;
 
@@ -53,7 +53,7 @@ namespace ut11
 			namespace Not
 			{
 				/*! \brief Operand returns false if string ends with expected string, otherwise returns true */
-				inline utility::NotOperand<Operands::IsStringEndingWith> EndingWith(std::string expected)
+				inline detail::NotOperand<Operands::IsStringEndingWith> EndingWith(std::string expected)
 				{
 					return !Operands::IsStringEndingWith(expected);
 				}

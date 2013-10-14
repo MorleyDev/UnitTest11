@@ -29,11 +29,11 @@ public:
 		});
 
 		Then("Is::False returns an Operand", []() {
-			AssertThat( ut11::utility::IsOperand<decltype(ut11::Is::False)>::value, ut11::Is::True );
+			AssertThat( ut11::detail::IsOperand<decltype(ut11::Is::False)>::value, ut11::Is::True );
 		});
 
 		Then("Is::Not::False returns an Operand", []() {
-			AssertThat( ut11::utility::IsOperand<decltype(ut11::Is::Not::False)>::value, ut11::Is::True );
+			AssertThat( ut11::detail::IsOperand<decltype(ut11::Is::Not::False)>::value, ut11::Is::True );
 		});
 
 		Then("Is::Not::False has an error message", []() {

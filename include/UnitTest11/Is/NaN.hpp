@@ -1,7 +1,7 @@
 #ifndef UNITTEST11_IS_NAN_HPP
 #define UNITTEST11_IS_NAN_HPP
 
-#include "../utility/BaseOperand.hpp"
+#include "../detail/BaseOperand.hpp"
 #include "../utility/ToString.hpp"
 
 #include <sstream>
@@ -58,7 +58,7 @@ namespace ut11
 	namespace Operands
 	{
 
-		struct IsNaN : public utility::BaseOperand<IsNaN>
+		struct IsNaN : public detail::BaseOperand<IsNaN>
 		{
 			template<typename U> bool operator()(const U& value) const
 			{
@@ -82,7 +82,7 @@ namespace ut11
 		namespace Not
 		{
 			/*! \brief Operand returns true if Actual has a value that is a number, otherwise false */
-			extern utility::NotOperand<Operands::IsNaN> NaN;
+			extern detail::NotOperand<Operands::IsNaN> NaN;
 		}
 	}
 }

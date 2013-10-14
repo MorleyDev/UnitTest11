@@ -1,7 +1,7 @@
 #ifndef UNITTEST11_IS_TRUE_HPP
 #define UNITTEST11_IS_TRUE_HPP
 
-#include "../utility/BaseOperand.hpp"
+#include "../detail/BaseOperand.hpp"
 #include "../utility/ToString.hpp"
 
 #include <string>
@@ -11,7 +11,7 @@ namespace ut11
 {
 	namespace Operands
 	{
-		struct TrueOperand : public utility::BaseOperand<TrueOperand>
+		struct TrueOperand : public detail::BaseOperand<TrueOperand>
 		{
 			template<typename T> bool operator()(const T& value) const 
 			{
@@ -35,7 +35,7 @@ namespace ut11
 		namespace Not
 		{
 			/*! \brief Operand returns true if Actual is false, otherwise false */
-			extern utility::NotOperand<Operands::TrueOperand> True;
+			extern detail::NotOperand<Operands::TrueOperand> True;
 		}
 	}
 }

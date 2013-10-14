@@ -1,7 +1,7 @@
 #ifndef UT11_SRC_GETRUNNER_HPP_INCLUDED
 #define UT11_SRC_GETRUNNER_HPP_INCLUDED
 
-#include "UnitTest11/detail/TestFixtureRunner.hpp"
+#include <UnitTest11/detail/TestFixtureRunner.hpp>
 #include <memory>
 
 namespace ut11

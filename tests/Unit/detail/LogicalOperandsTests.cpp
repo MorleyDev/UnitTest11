@@ -7,7 +7,7 @@
 
 namespace
 {
-	template<typename T> struct MockOperand : public ut11::utility::BaseOperand<MockOperand<T>>
+	template<typename T> struct MockOperand : public ut11::detail::BaseOperand<MockOperand<T>>
 	{
 	private:
 		mutable ut11::Mock< bool (T) >* m_mock;
@@ -53,7 +53,7 @@ private:
 		When("calculating the result using an AndOperand", [&]()
 		{
 			m_input = 1234;
-			m_result = ut11::utility::AndOperand < MockOperand<int>, MockOperand<int> >(MockOperand<int>(m_mockOperandA), MockOperand<int>(m_mockOperandB))(m_input);
+			m_result = ut11::detail::AndOperand < MockOperand<int>, MockOperand<int> >(MockOperand<int>(m_mockOperandA), MockOperand<int>(m_mockOperandB))(m_input);
 		});
 		Then("the first operand was called with the expected input", [&]()
 		{
@@ -73,7 +73,7 @@ private:
 		});
 		Then("there is an error message", [&]() 
 		{
-			AssertThat(ut11::utility::AndOperand < MockOperand<int>, MockOperand<int> >(MockOperand<int>(m_mockOperandA), MockOperand<int>(m_mockOperandB)).GetErrorMessage(m_input),
+			AssertThat(ut11::detail::AndOperand < MockOperand<int>, MockOperand<int> >(MockOperand<int>(m_mockOperandA), MockOperand<int>(m_mockOperandB)).GetErrorMessage(m_input),
 					   ut11::Is::Not::Empty);
 		});
 	}
@@ -83,7 +83,7 @@ public:
 	{
 		Then("AndOperand is an Operand", [&]()
 		{
-			AssertThat(ut11::utility::IsOperand < ut11::utility::AndOperand < MockOperand<int>, MockOperand<int> >> ::value, ut11::Is::True);
+			AssertThat(ut11::detail::IsOperand < ut11::detail::AndOperand < MockOperand<int>, MockOperand<int> >> ::value, ut11::Is::True);
 		});
 
 		GivenTwoOperandsWhenResultOfFirstIsXAndResultOfSecondIsYThenResultIsZ(true, true, true);
@@ -117,7 +117,7 @@ private:
 		When("calculating the result using an OrOperand", [&]()
 		{
 			m_input = 1234;
-			m_result = ut11::utility::OrOperand < MockOperand<int>, MockOperand<int> >(MockOperand<int>(m_mockOperandA), MockOperand<int>(m_mockOperandB))(m_input);
+			m_result = ut11::detail::OrOperand < MockOperand<int>, MockOperand<int> >(MockOperand<int>(m_mockOperandA), MockOperand<int>(m_mockOperandB))(m_input);
 		});
 		Then("the first operand was called with the expected input", [&]()
 		{
@@ -137,7 +137,7 @@ private:
 		});
 		Then("there is an error message", [&]() 
 		{
-			AssertThat(ut11::utility::OrOperand < MockOperand<int>, MockOperand<int> >(MockOperand<int>(m_mockOperandA), MockOperand<int>(m_mockOperandB)).GetErrorMessage(m_input),
+			AssertThat(ut11::detail::OrOperand < MockOperand<int>, MockOperand<int> >(MockOperand<int>(m_mockOperandA), MockOperand<int>(m_mockOperandB)).GetErrorMessage(m_input),
 					   ut11::Is::Not::Empty);
 		});
 	}
@@ -147,7 +147,7 @@ public:
 	{
 		Then("OrOperand is an Operand", [&]()
 		{
-			AssertThat(ut11::utility::IsOperand < ut11::utility::OrOperand < MockOperand<int>, MockOperand<int> >>::value, ut11::Is::True);
+			AssertThat(ut11::detail::IsOperand < ut11::detail::OrOperand < MockOperand<int>, MockOperand<int> >>::value, ut11::Is::True);
 		});
 
 		GivenTwoOperandsWhenResultOfFirstIsXAndResultOfSecondIsYThenResultIsZ(true, true, true);
@@ -177,7 +177,7 @@ private:
 		{
 			m_input = 1234;
 
-			m_result = ut11::utility::NotOperand < MockOperand<int> >(MockOperand<int>(m_mockOperandA))(m_input);
+			m_result = ut11::detail::NotOperand < MockOperand<int> >(MockOperand<int>(m_mockOperandA))(m_input);
 		});
 		Then("the operand was called with the expected input", [&]()
 		{
@@ -189,7 +189,7 @@ private:
 		});
 		Then("there is an error message", [&]()
 		{
-			AssertThat(ut11::utility::NotOperand < MockOperand<int> >(MockOperand<int>(m_mockOperandA)).GetErrorMessage(m_input), ut11::Is::Not::Empty);
+			AssertThat(ut11::detail::NotOperand < MockOperand<int> >(MockOperand<int>(m_mockOperandA)).GetErrorMessage(m_input), ut11::Is::Not::Empty);
 		});
 	}
 
@@ -198,7 +198,7 @@ public:
 	{
 		Then("NotOperand is an Operand", [&]()
 		{
-			AssertThat(ut11::utility::IsOperand < ut11::utility::NotOperand < MockOperand<int> >> ::value, ut11::Is::True);
+			AssertThat(ut11::detail::IsOperand < ut11::detail::NotOperand < MockOperand<int> >> ::value, ut11::Is::True);
 		});
 
 		GivenOperandWhenResultOfOperandIsXThenResultIsZ(true, false);

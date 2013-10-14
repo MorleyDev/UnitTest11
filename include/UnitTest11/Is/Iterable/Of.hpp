@@ -8,7 +8,7 @@
 #ifndef UT11_IS_ITERABLE_OF_HPP_INCLUDED
 #define UT11_IS_ITERABLE_OF_HPP_INCLUDED
 
-#include "../../utility/BaseOperand.hpp"
+#include "../../detail/BaseOperand.hpp"
 #include "../../utility/Meta/IsIterableOfType.hpp"
 
 #include <string>
@@ -19,7 +19,7 @@ namespace ut11
 	namespace Operands
 	{
 		template<typename T>
-		struct IsIteratorOf : public ut11::utility::BaseOperand<IsIteratorOf<T>>
+		struct IsIteratorOf : public ut11::detail::BaseOperand<IsIteratorOf<T>>
 		{
 			template<typename U> inline bool operator()(const U& actual) const
 			{
@@ -48,7 +48,7 @@ namespace ut11
 			namespace Not
 			{
 				/*! \brief Passes if the actual is not an iterable (has begin and end functions) whose items are of type T, or descended from type T */
-				template<typename T> inline utility::NotOperand< Operands::IsIteratorOf<T> > Of()
+				template<typename T> inline detail::NotOperand< Operands::IsIteratorOf<T> > Of()
 				{
 					return !Operands::IsIteratorOf<T>();
 				}

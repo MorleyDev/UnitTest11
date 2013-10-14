@@ -1,7 +1,7 @@
 #ifndef UNITTEST11_IS_INFINITY_HPP
 #define UNITTEST11_IS_INFINITY_HPP
 
-#include "../utility/BaseOperand.hpp"
+#include "../detail/BaseOperand.hpp"
 #include "../utility/ToString.hpp"
 
 #include <cmath>
@@ -12,7 +12,7 @@ namespace ut11
 {
 	namespace Operands
 	{
-		struct IsInfinity : public utility::BaseOperand<IsInfinity>
+		struct IsInfinity : public detail::BaseOperand<IsInfinity>
 		{
 			template<typename U> bool operator()(const U& value) const
 			{
@@ -27,7 +27,7 @@ namespace ut11
 			}
 		};
 
-		struct IsPositiveInfinity : public utility::BaseOperand<IsPositiveInfinity>
+		struct IsPositiveInfinity : public detail::BaseOperand<IsPositiveInfinity>
 		{
 			template<typename U> bool operator()(const U& value) const
 			{
@@ -42,7 +42,7 @@ namespace ut11
 			}
 		};
 
-		struct IsNegativeInfinity : public utility::BaseOperand<IsNegativeInfinity>
+		struct IsNegativeInfinity : public detail::BaseOperand<IsNegativeInfinity>
 		{
 			template<typename U> bool operator()(const U& value) const
 			{
@@ -72,13 +72,13 @@ namespace ut11
 		namespace Not
 		{
 			/*! \brief Operand returns false if Actual is Positive or Negative Infinity, otherwise true */
-			extern utility::NotOperand<Operands::IsInfinity> Infinity;
+			extern detail::NotOperand<Operands::IsInfinity> Infinity;
 
 			/*! \brief Operand returns false if Actual is Positive Infinity, otherwise true */
-			extern utility::NotOperand<Operands::IsPositiveInfinity> PositiveInfinity;
+			extern detail::NotOperand<Operands::IsPositiveInfinity> PositiveInfinity;
 
 			/*! \brief Operand returns false if Actual is Negative Infinity, otherwise true */
-			extern utility::NotOperand<Operands::IsNegativeInfinity> NegativeInfinity;
+			extern detail::NotOperand<Operands::IsNegativeInfinity> NegativeInfinity;
 		}
 	}
 }

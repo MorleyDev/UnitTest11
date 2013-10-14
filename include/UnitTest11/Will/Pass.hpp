@@ -1,7 +1,7 @@
 #ifndef UNITTEST11_WILL_PASS_HPP
 #define UNITTEST11_WILL_PASS_HPP
 
-#include "../utility/BaseOperand.hpp"
+#include "../detail/BaseOperand.hpp"
 #include <string>
 
 namespace ut11
@@ -9,7 +9,7 @@ namespace ut11
 	namespace Operands
 	{
 		template<typename CALLBACK>
-		class WillPass : public utility::BaseOperand<WillPass<CALLBACK>>
+		class WillPass : public detail::BaseOperand<WillPass<CALLBACK>>
 		{
 		private:
 			CALLBACK m_predicate;
@@ -41,7 +41,7 @@ namespace ut11
 		namespace Not
 		{
 			/*! \brief Operand will return true if the passed predicate returns false when called with the Actual value, otherwise returns false */
-			template<typename CALLBACK> utility::NotOperand< Operands::WillPass<CALLBACK> > Pass(CALLBACK predicate)
+			template<typename CALLBACK> detail::NotOperand< Operands::WillPass<CALLBACK> > Pass(CALLBACK predicate)
 			{
 				return !Operands::WillPass<CALLBACK>(predicate);
 			}

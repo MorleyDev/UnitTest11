@@ -5,7 +5,7 @@
 namespace
 {
 	template<bool Succeeds, typename U>
-	struct TestOperand : public ut11::utility::BaseOperand<TestOperand<Succeeds, U>>
+	struct TestOperand : public ut11::detail::BaseOperand<TestOperand<Succeeds, U>>
 	{
 	private:
 		std::string m_expectedErrorMessage;

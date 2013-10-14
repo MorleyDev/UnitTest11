@@ -18,11 +18,11 @@ public:
 		m_expected = 10;
 
 		Then("Will::Pass returns an Operand", []() {
-			AssertThat(ut11::utility::IsOperand< decltype(ut11::Will::Pass(std::function<bool(int)>())) >::value, ut11::Is::True);
+			AssertThat(ut11::detail::IsOperand< decltype(ut11::Will::Pass(std::function<bool(int)>())) >::value, ut11::Is::True);
 		});
 
 		Then("Will::Not::Pass returns an Operand", []() {
-			AssertThat(ut11::utility::IsOperand< decltype(ut11::Will::Not::Pass(std::function<bool(int)>())) >::value, ut11::Is::True);
+			AssertThat(ut11::detail::IsOperand< decltype(ut11::Will::Not::Pass(std::function<bool(int)>())) >::value, ut11::Is::True);
 		});
 
 		When("calling Will::Pass with a predicate that passes", [&]() {

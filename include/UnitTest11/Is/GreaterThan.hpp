@@ -1,7 +1,7 @@
 #ifndef UNITTEST11_IS_GREATERTHAN_HPP
 #define UNITTEST11_IS_GREATERTHAN_HPP
 
-#include "../utility/BaseOperand.hpp"
+#include "../detail/BaseOperand.hpp"
 #include <sstream>
 
 namespace ut11
@@ -9,7 +9,7 @@ namespace ut11
 	namespace Operands
 	{
 		template<typename U>
-		struct IsGreaterThan : public utility::BaseOperand<IsGreaterThan<U>>
+		struct IsGreaterThan : public detail::BaseOperand<IsGreaterThan<U>>
 		{
 			const U& low;
 
@@ -43,7 +43,7 @@ namespace ut11
 		namespace Not
 		{
 			/*! \brief Operand returns true if Actual is not greater than Expected, otherwise false */
-			template<typename U> inline utility::NotOperand< Operands::IsGreaterThan<U> > GreaterThan(const U& low)
+			template<typename U> inline detail::NotOperand< Operands::IsGreaterThan<U> > GreaterThan(const U& low)
 			{
 				return !Operands::IsGreaterThan<U>(low);
 			}

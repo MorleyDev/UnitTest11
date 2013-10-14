@@ -1,8 +1,8 @@
-#ifndef UNITTEST11_utility_MOCKARGUMENTHANDLER_HPP
-#define UNITTEST11_utility_MOCKARGUMENTHANDLER_HPP
+#ifndef UNITTEST11_DETAIL_MOCKARGUMENTHANDLER_HPP
+#define UNITTEST11_DETAIL_MOCKARGUMENTHANDLER_HPP
 
 #include "BaseOperand.hpp"
-#include "AreEqual.hpp"
+#include "../utility/AreEqual.hpp"
 
 #include <type_traits>
 #include <tuple>
@@ -10,7 +10,7 @@
 
 namespace ut11
 {
-	namespace utility
+	namespace detail
 	{
 		template<typename T, typename U>
 		static inline typename std::enable_if< IsOperand<U>::value, bool >::type CompareWithOperandOrEquality(const T& arg, const U& expectation)
@@ -21,7 +21,7 @@ namespace ut11
 		template<typename T, typename U>
 		static inline typename std::enable_if< !(IsOperand<U>::value), bool >::type CompareWithOperandOrEquality(const T& arg, const U& expectation)
 		{
-			return AreEqual(expectation, arg);
+			return utility::AreEqual(expectation, arg);
 		}
 
 		template<typename... ARGS> class MockArgumentHandler
@@ -68,4 +68,4 @@ namespace ut11
 	}
 }
 
-#endif // UNITTEST11_utility_MOCKARGUMENTHANDLER_HPP
+#endif // UNITTEST11_DETAIL_MOCKARGUMENTHANDLER_HPP

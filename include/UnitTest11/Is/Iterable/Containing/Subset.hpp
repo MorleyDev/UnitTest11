@@ -8,7 +8,7 @@
 #ifndef UT11_IS_ITERABLE_CONTAINING_SUBSET_HPP_INCLUDED
 #define UT11_IS_ITERABLE_CONTAINING_SUBSET_HPP_INCLUDED
 
-#include "../../../utility/BaseOperand.hpp"
+#include "../../../detail/BaseOperand.hpp"
 #include "../../../utility/AreEqual.hpp"
 #include "../../../utility/ToString.hpp"
 #include <string>
@@ -18,7 +18,7 @@ namespace ut11
 {
 	namespace Operands
 	{
-		template<typename T> struct IsIterableContainingSubset : public utility::BaseOperand<IsIterableContainingSubset<T>>
+		template<typename T> struct IsIterableContainingSubset : public detail::BaseOperand<IsIterableContainingSubset<T>>
 		{
 			const T& m_expected;
 
@@ -93,7 +93,7 @@ namespace ut11
 				namespace Containing
 				{
 					/*! \brief Passes if the given iterable does not contain the given subset of items */
-					template<typename T> inline utility::NotOperand< Operands::IsIterableContainingSubset<T> > Subset(const T& expected)
+					template<typename T> inline detail::NotOperand< Operands::IsIterableContainingSubset<T> > Subset(const T& expected)
 					{
 						return !Operands::IsIterableContainingSubset<T>(expected);
 					}

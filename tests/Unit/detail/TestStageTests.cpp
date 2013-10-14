@@ -55,12 +55,12 @@ private:
 	ut11::Mock<void (void)> mockThen;
 	ut11::Mock<void (void)> mockFinally;
 
-	ut11::utility::TestStep givenStep;
-	ut11::utility::TestStep whenStep;
-	ut11::utility::TestStep thenStep;
-	ut11::utility::TestStep finallyStep;
+	ut11::detail::TestStep givenStep;
+	ut11::detail::TestStep whenStep;
+	ut11::detail::TestStep thenStep;
+	ut11::detail::TestStep finallyStep;
 
-	ut11::utility::TestStageImpl Stage;
+	ut11::detail::TestStageImpl Stage;
 
 	std::unique_ptr<FakeOutput> output;
 	ut11::detail::TestFailedException testException;
@@ -83,12 +83,12 @@ public:
 			mockThen = ut11::Mock<void (void)>();
 			mockFinally = ut11::Mock<void (void)>();
 
-			givenStep = ut11::utility::TestStep( givenDescription, [&]() { mockGiven(); } );
-			whenStep = ut11::utility::TestStep( whenDescription, [&]() { mockWhen(); } );
-			thenStep = ut11::utility::TestStep( thenDescription, [&]() { mockThen(); } );
-			finallyStep =ut11::utility::TestStep( finallyDescription, [&]() { mockFinally(); } );
+			givenStep = ut11::detail::TestStep( givenDescription, [&]() { mockGiven(); } );
+			whenStep = ut11::detail::TestStep( whenDescription, [&]() { mockWhen(); } );
+			thenStep = ut11::detail::TestStep( thenDescription, [&]() { mockThen(); } );
+			finallyStep =ut11::detail::TestStep( finallyDescription, [&]() { mockFinally(); } );
 
-			Stage = ut11::utility::TestStageImpl(givenStep, whenStep, thenStep, finallyStep);
+			Stage = ut11::detail::TestStageImpl(givenStep, whenStep, thenStep, finallyStep);
 
 			output = std::unique_ptr<FakeOutput>(new FakeOutput());
 			result = false;
@@ -235,8 +235,8 @@ public:
 
 		When("calling run with all Stages as invalid functions", [&]() {
 
-			ut11::utility::TestStep invalid;
-			Stage = ut11::utility::TestStageImpl(invalid,invalid,invalid,invalid);
+			ut11::detail::TestStep invalid;
+			Stage = ut11::detail::TestStageImpl(invalid,invalid,invalid,invalid);
 			result = Stage.Run(*output);
 		});
 		Then("the result is true", [&]() {

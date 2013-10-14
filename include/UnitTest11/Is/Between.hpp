@@ -1,7 +1,7 @@
 #ifndef UNITTEST11_IS_BETWEEN_HPP
 #define UNITTEST11_IS_BETWEEN_HPP
 
-#include "../utility/BaseOperand.hpp"
+#include "../detail/BaseOperand.hpp"
 #include "../utility/ToString.hpp"
 #include <sstream>
 
@@ -10,7 +10,7 @@ namespace ut11
 	namespace Operands
 	{
 		template<typename U, typename V>
-		struct IsBetween : public utility::BaseOperand<IsBetween<U,V>>
+		struct IsBetween : public detail::BaseOperand<IsBetween<U,V>>
 		{
 			const U& low;
 			const V& high;
@@ -46,7 +46,7 @@ namespace ut11
 		namespace Not
 		{
 			/*! \brief Operand returns true if Actual is less than low, or Actual is greater than high, otherwise false */
-			template<typename U, typename V> inline utility::NotOperand< Operands::IsBetween<U,V> > Between(const U& low, const V& high)
+			template<typename U, typename V> inline detail::NotOperand< Operands::IsBetween<U,V> > Between(const U& low, const V& high)
 			{
 				return !Operands::IsBetween<U,V>(low, high);
 			}

@@ -6,19 +6,19 @@ ut11::detail::TestFixtureAbstract::~TestFixtureAbstract()
 
 ut11::TestFixture::TestFixture()
 	: m_name(),
-	  m_StageBuilder(new ut11::utility::TestStageBuilderImpl),
+	  m_StageBuilder(new ut11::detail::TestStageBuilderImpl),
 	  m_categories()
 {
 }
 
 ut11::TestFixture::TestFixture(std::string name)
 	: m_name(name),
-	  m_StageBuilder(new ut11::utility::TestStageBuilderImpl),
+	  m_StageBuilder(new ut11::detail::TestStageBuilderImpl),
 	  m_categories()
 {
 }
 
-ut11::TestFixture::TestFixture(std::string name, std::unique_ptr<ut11::utility::TestStageBuilder> builder)
+ut11::TestFixture::TestFixture(std::string name, std::unique_ptr<ut11::detail::TestStageBuilder> builder)
 	: m_name(name),
 	  m_StageBuilder(std::move(builder)),
 	  m_categories()
@@ -41,22 +41,22 @@ std::set<ut11::Category> ut11::TestFixture::GetCategories() const
 
 void ut11::TestFixture::Given(std::string description, std::function<void(void)> logic)
 {
-	m_StageBuilder->PushGiven(utility::TestStep(description, logic));
+	m_StageBuilder->PushGiven(detail::TestStep(description, logic));
 }
 
 void ut11::TestFixture::When(std::string description, std::function<void(void)> logic)
 {
-	m_StageBuilder->PushWhen(utility::TestStep(description, logic));
+	m_StageBuilder->PushWhen(detail::TestStep(description, logic));
 }
 
 void ut11::TestFixture::Then(std::string description, std::function<void(void)> logic)
 {
-	m_StageBuilder->PushThen(utility::TestStep(description, logic));
+	m_StageBuilder->PushThen(detail::TestStep(description, logic));
 }
 
 void ut11::TestFixture::Finally(std::string description, std::function<void(void)> logic)
 {
-	m_StageBuilder->PushFinally(utility::TestStep(description, logic));
+	m_StageBuilder->PushFinally(detail::TestStep(description, logic));
 }
 
 ut11::detail::TestFixtureResults ut11::TestFixture::Run(out::Output& output)

@@ -1,5 +1,5 @@
-#ifndef UNITTEST11_UTILITY_BASEOPERAND_HPP
-#define UNITTEST11_UTILITY_BASEOPERAND_HPP
+#ifndef UNITTEST11_DETAIL_BASEOPERAND_HPP
+#define UNITTEST11_DETAIL_BASEOPERAND_HPP
 
 #include "AndOperand.hpp"
 #include "OrOperand.hpp"
@@ -10,7 +10,7 @@
 
 namespace ut11
 {
-	namespace utility
+	namespace detail
 	{
 		template<typename T> struct BaseOperand 
 		{
@@ -42,4 +42,4 @@ namespace ut11
 	}
 }
 
-#endif // UNITTEST11_UTILITY_BASEOPERAND_HPP
+#endif // UNITTEST11_DETAIL_BASEOPERAND_HPP

@@ -27,7 +27,7 @@ public:
 	virtual void Run()
 	{
 		Then("Is::NaN is Operand", []() {
-			AssertThat(ut11::utility::IsOperand< decltype(ut11::Is::NaN) >::value, ut11::Is::True);
+			AssertThat(ut11::detail::IsOperand< decltype(ut11::Is::NaN) >::value, ut11::Is::True);
 		});
 
 		ThenIsNanXIsFalse<float>(0.0f);
@@ -69,7 +69,7 @@ public:
 	virtual void Run()
 	{
 		Then("Is::Not::NaN is Operand", []() {
-			AssertThat(ut11::utility::IsOperand< decltype(ut11::Is::Not::NaN) >::value, ut11::Is::True);
+			AssertThat(ut11::detail::IsOperand< decltype(ut11::Is::Not::NaN) >::value, ut11::Is::True);
 		});
 
 		ThenIsNotNanXIsNotFalse<float>(0.0f);

@@ -1,7 +1,7 @@
 #ifndef UNITTEST11_IS_NULL_HPP
 #define UNITTEST11_IS_NULL_HPP
 
-#include "../utility/BaseOperand.hpp"
+#include "../detail/BaseOperand.hpp"
 #include "../utility/ToString.hpp"
 
 #include <memory>
@@ -11,7 +11,7 @@ namespace ut11
 {
 	namespace Operands
 	{
-		struct IsNull : public utility::BaseOperand<IsNull>
+		struct IsNull : public detail::BaseOperand<IsNull>
 		{
 			template<typename U> bool operator()(std::weak_ptr<U> value) const
 			{
@@ -40,7 +40,7 @@ namespace ut11
 		namespace Not
 		{
 			/*! \brief Operand returns true if Actual is not null, otherwise false */
-			extern utility::NotOperand<Operands::IsNull> Null;
+			extern detail::NotOperand<Operands::IsNull> Null;
 		}
 	}
 }

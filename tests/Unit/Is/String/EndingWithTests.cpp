@@ -37,7 +37,7 @@ public:
 		});
 
 		Then("Is::String::EndingWith is an operand", []() {
-			AssertThat(ut11::utility::IsOperand< decltype(ut11::Is::String::EndingWith("world")) >::value, ut11::Is::True);
+			AssertThat(ut11::detail::IsOperand< decltype(ut11::Is::String::EndingWith("world")) >::value, ut11::Is::True);
 		});
 
 		Then("Is::String::EndingWith has an error message", []() {
@@ -66,7 +66,7 @@ public:
 		});
 
 		Then("Is::Not::String::EndingWith is an operand", []() {
-			AssertThat(ut11::utility::IsOperand< decltype(ut11::Is::String::Not::EndingWith("world")) >::value, ut11::Is::True);
+			AssertThat(ut11::detail::IsOperand< decltype(ut11::Is::String::Not::EndingWith("world")) >::value, ut11::Is::True);
 		});
 
 		Then("Is::Not::String::EndingWith has an error message", []() {

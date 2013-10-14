@@ -34,7 +34,7 @@ public:
 		});
 
 		Then("Is::Iterable::Containing::Subset() is an operand", []() {
-			AssertThat(ut11::utility::IsOperand< decltype(ut11::Is::Iterable::Containing::Subset(5)) >::value, ut11::Is::True);
+			AssertThat(ut11::detail::IsOperand< decltype(ut11::Is::Iterable::Containing::Subset(5)) >::value, ut11::Is::True);
 		});
 
 		Then("Is::Iterable::Containing::Subset() has an error message", []() {
@@ -66,7 +66,7 @@ public:
 		});
 
 		Then("Is::Iterable::Containing::Subset() is an operand", []() {
-			AssertThat(ut11::utility::IsOperand< decltype(ut11::Is::Iterable::Not::Containing::Subset(5)) >::value, ut11::Is::True);
+			AssertThat(ut11::detail::IsOperand< decltype(ut11::Is::Iterable::Not::Containing::Subset(5)) >::value, ut11::Is::True);
 		});
 
 		Then("Is::Iterable::Containing::Subset() has an error message", []() {

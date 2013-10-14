@@ -1,11 +1,11 @@
-#ifndef UNITTEST11_utility_TESTSTAGE_HPP
-#define UNITTEST11_utility_TESTSTAGE_HPP
+#ifndef UNITTEST11_DETAIL_TESTSTAGE_HPP
+#define UNITTEST11_DETAIL_TESTSTAGE_HPP
 
 #include "../out/Output.hpp"
 
 namespace ut11
 {
-	namespace utility
+	namespace detail
 	{
 		class TestStage
 		{
@@ -17,4 +17,4 @@ namespace ut11
 	}
 }
 
-#endif // UNITTEST11_utility_TESTSTAGE_HPP
+#endif // UNITTEST11_DETAIL_TESTSTAGE_HPP

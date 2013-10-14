@@ -1,12 +1,12 @@
-#ifndef UNITTEST11_utility_TESTSTEP_HPP
-#define UNITTEST11_utility_TESTSTEP_HPP
+#ifndef UNITTEST11_DETAIL_TESTSTEP_HPP
+#define UNITTEST11_DETAIL_TESTSTEP_HPP
 
 #include <string>
 #include <functional>
 
 namespace ut11
 {
-	namespace utility
+	namespace detail
 	{
 		struct TestStep
 		{
@@ -19,4 +19,4 @@ namespace ut11
 	}
 }
 
-#endif // UNITTEST11_utility_TESTSTEP_HPP
+#endif // UNITTEST11_DETAIL_TESTSTEP_HPP

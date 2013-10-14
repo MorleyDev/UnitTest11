@@ -3,7 +3,7 @@
 
 #include "../utility/AreEqual.hpp"
 #include "../utility/ToString.hpp"
-#include "../utility/BaseOperand.hpp"
+#include "../detail/BaseOperand.hpp"
 
 #include <string>
 #include <sstream>
@@ -12,7 +12,7 @@ namespace ut11
 {
 	namespace Operands
 	{
-		template<typename U> struct EqualTo : public utility::BaseOperand<EqualTo<U>>
+		template<typename U> struct EqualTo : public detail::BaseOperand<EqualTo<U>>
 		{
 		private:
 			const U& m_expected;
@@ -48,7 +48,7 @@ namespace ut11
 		namespace Not
 		{
 			/*! \brief Operand returns true if Actual != Expected, otherwise false */
-			template<typename U> inline utility::NotOperand< Operands::EqualTo<U> > EqualTo(const U& expected) 
+			template<typename U> inline detail::NotOperand< Operands::EqualTo<U> > EqualTo(const U& expected) 
 			{
 				return !Operands::EqualTo<U>(expected); 
 			}

@@ -56,7 +56,7 @@ public:
 
 		Then("Is::Any<Class>() is operand", []() {
 
-			AssertThat(ut11::utility::IsOperand< decltype(ut11::Is::Any<Class>()) >::value, ut11::Is::True);
+			AssertThat(ut11::detail::IsOperand< decltype(ut11::Is::Any<Class>()) >::value, ut11::Is::True);
 		});
 
 		Then("Is::Any<Class> has an error message", []() {
@@ -111,7 +111,7 @@ public:
 
 		Then("Is::Not::Any<Class>() is operand", []() {
 
-			AssertThat(ut11::utility::IsOperand< decltype(ut11::Is::Not::Any<Class>()) >::value, ut11::Is::True);
+			AssertThat(ut11::detail::IsOperand< decltype(ut11::Is::Not::Any<Class>()) >::value, ut11::Is::True);
 		});
 
 		Then("Is::Not::Any<Class> has an error message", []() {
