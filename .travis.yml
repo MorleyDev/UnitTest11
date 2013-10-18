@@ -3,6 +3,6 @@ compiler:
   - clang
   - gcc
 before_script:
-  - cmake .
+  - cmake . -DCMAKE_BUILD_TYPE=Release
 script:
   - make -j4 && ./bin/unittest11_tests
