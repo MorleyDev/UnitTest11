@@ -5,4 +5,4 @@ compiler:
 before_script:
   - cmake . -DCMAKE_BUILD_TYPE=Release
 script:
-  - make -j4 && ./bin/unittest11_tests
+  - make -j4 && make test

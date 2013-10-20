@@ -1,5 +1,5 @@
 cmake_minimum_required (VERSION 2.6) 
-project (UnitTest11) 
+project(UNITTEST11 CXX) 
 
 if (MSVC)
 		set(CMAKE_CXX_FLAGS "/MP ${CMAKE_CXX_FLAGS}")
@@ -18,17 +18,7 @@ elseif ("${CMAKE_CXX_COMPILER} ${CMAKE_CXX_COMPILER_ARG1}" MATCHES ".*clang")
 	set(CMAKE_CXX_FLAGS "-std=c++11 ${CMAKE_CXX_FLAGS}")
 endif()
 
-set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
-set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
-set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
+add_subdirectory(src)
 
-include_directories(include)
-file(GLOB_RECURSE UNITTEST11_SRC src/*.cpp)
-add_library(unittest11 ${UNITTEST11_SRC})
-set_target_properties(unittest11 PROPERTIES DEBUG_POSTFIX "-d")
-
-link_directories (${CMAKE_ARCHIVE_OUTPUT_DIRECTORY})
-file(GLOB_RECURSE UNITTEST11_TESTS_SRC tests/*.cpp)
-add_executable(unittest11_tests ${UNITTEST11_TESTS_SRC})
-target_link_libraries(unittest11_tests unittest11)
-set_target_properties(unittest11_tests PROPERTIES DEBUG_POSTFIX "-d")
+enable_testing()
+add_subdirectory(tests)

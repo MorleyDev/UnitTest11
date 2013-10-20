@@ -136,4 +136,4 @@ public:
 		});
 	}
 };
-DeclareFixture(EventDispatcherTests)();
+DeclareFixture(EventDispatcherTests)(ut11::Category("example"));
