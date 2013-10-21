@@ -8,6 +8,34 @@
 
 namespace ecs
 {
+	struct EntityNotFoundException : public std::exception
+	{
+		EntityNotFoundException(std::string description) throw() : description(description) { }
+		~EntityNotFoundException() throw () { }
+		
+		virtual const char* what() const 
+		{
+			return description.c_str();
+		}
+		
+	private:
+		std::string description;
+	};
+	
+	struct ComponentNotFoundException : public std::exception
+	{
+		ComponentNotFoundException(std::string description) throw() : description(description) { }
+		~ComponentNotFoundException() throw () { }
+		
+		virtual const char* what() const 
+		{
+			return description.c_str();
+		}
+		
+	private:
+		std::string description;
+	};
+
 	template<typename TEntityId> class EntityComponentStore
 	{
 	private:
@@ -26,7 +54,11 @@ namespace ecs
 		}
 
 	public:
-		inline void addEntity(TEntityId id) { entities.push_back(id); }
+		inline void addEntity(TEntityId id) 
+		{ 
+			entities.push_back(id);
+			entityComponentMap.insert(std::make_pair(id, std::map<TypeInfo, std::shared_ptr<void>>()));
+		}
 
 		inline std::vector<TEntityId> getAllEntities() const { return entities; }
 
@@ -54,12 +86,12 @@ namespace ecs
 		{
 			auto componentsOfEntity = entityComponentMap.find(entityId);
 			if (componentsOfEntity == entityComponentMap.end())
-				throw std::runtime_error(CreateString(entityId, " does not exist in store"));
+				throw EntityNotFoundException(CreateString(entityId, " does not exist in store"));
 
 			auto componentName = GetNameOfComponent<TComponent>();
 			auto componentIt = componentsOfEntity->second.find(componentName);
 			if (componentIt == componentsOfEntity->second.end())
-				throw std::runtime_error(CreateString(componentName, " does not exist on ", entityId));
+				throw ComponentNotFoundException(CreateString(componentName, " does not exist on ", entityId));
 
 			return *std::static_pointer_cast<TComponent>(componentIt->second);
 		}
@@ -134,27 +166,11 @@ public:
 		});
 		Then("getting a component of an entity that does not exist throws the expected exception", [&]()
 		{
-			try
-			{
-				m_entityComponentStore.getComponentOfEntity<std::string>(100);
-			}
-			catch (const std::runtime_error&)
-			{
-				return;
-			}
-			AssertThat(true, ut11::Is::False);
+			AssertThat([&]() { m_entityComponentStore.getComponentOfEntity<std::string>(100); }, ut11::Will::Throw<ecs::EntityNotFoundException>());
 		});
 		Then("getting a component of an entity that does not have that component throws the expected exception", [&]()
 		{
-			try
-			{
-				m_entityComponentStore.getComponentOfEntity<std::string>(m_entities[4]);
-			}
-			catch (const std::runtime_error&)
-			{
-				return;
-			}
-			AssertThat(true, ut11::Is::False);
+			AssertThat([&]() { m_entityComponentStore.getComponentOfEntity<std::string>(m_entities[4]); }, ut11::Will::Throw<ecs::ComponentNotFoundException>());
 		});
 		When("getting all entities", [&]() 
 		{
