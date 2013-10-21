@@ -13,7 +13,7 @@ namespace ecs
 		EntityNotFoundException(std::string description) throw() : description(description) { }
 		~EntityNotFoundException() throw () { }
 		
-		virtual const char* what() const 
+		virtual const char* what() const throw()
 		{
 			return description.c_str();
 		}
@@ -27,7 +27,7 @@ namespace ecs
 		ComponentNotFoundException(std::string description) throw() : description(description) { }
 		~ComponentNotFoundException() throw () { }
 		
-		virtual const char* what() const 
+		virtual const char* what() const throw()
 		{
 			return description.c_str();
 		}
