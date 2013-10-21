@@ -1,4 +1,5 @@
 SET(UNITTEST11_TESTS_SRC_FILES main.cpp
+                               Examples/EntityComponentStore.cpp
                                Examples/EventDispatcher.cpp
                                Examples/Minesweeper.cpp
                                Unit/MockTests.cpp

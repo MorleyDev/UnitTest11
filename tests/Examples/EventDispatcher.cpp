@@ -5,65 +5,113 @@
 
 namespace ed
 {
-	struct EventDispatcherHandlerIterator
+	class EventDispatcher;
+
+	namespace detail
 	{
-	public:
-		typedef std::map < const std::type_info*, std::list < std::function < void(std::shared_ptr<void>) >> >::iterator MapIterator;
-		typedef std::list<std::function<void(std::shared_ptr<void>)>>::iterator ListIterator;
-
-		EventDispatcherHandlerIterator()
-			: m_mapIterator(), m_listIterator()
+		struct EventDispatcherHandlerIterator
 		{
-		}
+		public:
+			typedef std::map < const std::type_info*, std::list < std::function < void(std::shared_ptr<void>) >> >::iterator MapIterator;
+			typedef std::list<std::function<void(std::shared_ptr<void>)>>::iterator ListIterator;
 
-		EventDispatcherHandlerIterator(MapIterator mapIt, ListIterator listIt)
-			: m_mapIterator(mapIt), m_listIterator(listIt)
-		{
-		}
+			EventDispatcherHandlerIterator()
+				: m_mapIterator(), m_listIterator()
+			{
+			}
 
-		ListIterator getListIterator() const { return m_listIterator; }
-		MapIterator getMapIterator() const { return m_mapIterator; }
+			EventDispatcherHandlerIterator(MapIterator mapIt, ListIterator listIt)
+				: m_mapIterator(mapIt), m_listIterator(listIt)
+			{
+			}
 
+			ListIterator getListIterator() const { return m_listIterator; }
+			MapIterator getMapIterator() const { return m_mapIterator; }
+
+		private:
+			ListIterator m_listIterator;
+			MapIterator m_mapIterator;
+		};
+	}
+
+	struct EventDispatcherHandler
+	{
 	private:
-		ListIterator m_listIterator;
-		MapIterator m_mapIterator;
+		EventDispatcher* dispatcher;
+		detail::EventDispatcherHandlerIterator iterator;
+
+		inline EventDispatcherHandler(const EventDispatcherHandler&);
+		inline EventDispatcherHandler& operator=(const EventDispatcherHandler&);
+
+		void removeFromDispatcher();
+
+	public:
+		inline EventDispatcherHandler() : dispatcher(nullptr), iterator() { }
+		inline EventDispatcherHandler(EventDispatcher* disp, detail::EventDispatcherHandlerIterator it) : dispatcher(disp), iterator(it) { }
+		inline ~EventDispatcherHandler() { removeFromDispatcher();  }
+
+
+		inline EventDispatcherHandler(EventDispatcherHandler&& orig)
+			: dispatcher(orig.dispatcher),
+			iterator(std::move(orig.iterator))
+		{
+			orig.dispatcher = nullptr;
+		}
+
+		inline EventDispatcherHandler& operator=(EventDispatcherHandler&& orig)
+		{
+			removeFromDispatcher();
+
+			dispatcher = orig.dispatcher;
+			orig.dispatcher = nullptr;
+			iterator = std::move(orig.iterator);
+			return *this;
+		}
+
+		inline detail::EventDispatcherHandlerIterator getIterator() const { return iterator; }
+
+		bool isValid() const { return dispatcher != nullptr; }
 	};
 
 	class EventDispatcher
 	{
 	public:
-		EventDispatcher() = default;
-		~EventDispatcher() = default;
-
-		template<typename TEvent> EventDispatcherHandlerIterator addHandler(std::function<void(TEvent)> handler)
+		template<typename TEvent> EventDispatcherHandler addHandler(std::function<void(TEvent)> handler)
 		{
-			std::function<void (std::shared_ptr<void>)> realHandler([handler](std::shared_ptr<void> eventPtr)
+			std::function<void(std::shared_ptr<void>)> realHandler([handler](std::shared_ptr<void> eventPtr)
 			{
 				handler(*std::static_pointer_cast<TEvent>(eventPtr));
 			});
 
 			auto mapIt = m_handlerMap.find(&typeid(TEvent));
 			if (mapIt == m_handlerMap.end())
-				mapIt = m_handlerMap.insert(std::make_pair(&typeid(TEvent), std::list<std::function<void (std::shared_ptr<void>)>>())).first;
+				mapIt = m_handlerMap.insert(std::make_pair(&typeid(TEvent), std::list<std::function<void(std::shared_ptr<void>)>>())).first;
 
 			auto& list = mapIt->second;
-			return EventDispatcherHandlerIterator(mapIt, list.insert(list.begin(), realHandler));
+			return EventDispatcherHandler(this, detail::EventDispatcherHandlerIterator(mapIt, list.insert(list.begin(), realHandler)));
 		}
 
-		template<typename TEvent> void dispatch(const TEvent& e) 
+		template<typename TEvent> void dispatch(const TEvent& e)
 		{
 			for (auto handler : m_handlerMap[&typeid(e)])
 				handler(std::make_shared<TEvent>(e));
 		}
 
-		void removeHandler(const EventDispatcherHandlerIterator& handlerIterator)
+		void _removeHandler(const detail::EventDispatcherHandlerIterator& iterator)
 		{
-			handlerIterator.getMapIterator()->second.erase(handlerIterator.getListIterator());
+			iterator.getMapIterator()->second.erase(iterator.getListIterator());
 		}
 
 	private:
 		std::map<const std::type_info*, std::list<std::function<void(std::shared_ptr<void>)>>> m_handlerMap;
 	};
+
+
+	void EventDispatcherHandler::removeFromDispatcher()
+	{
+		if (dispatcher != nullptr)
+			dispatcher->_removeHandler(iterator);
+	}
 }
 
 #include <UnitTest11/Core.hpp>
@@ -86,7 +134,7 @@ private:
 	std::unique_ptr<ed::EventDispatcher> m_eventDispatcher;
 
 	ut11::Mock<void(TestEvent<1>)> m_mockTestEvent1Handler[2];
-	ed::EventDispatcherHandlerIterator m_eventHandler[2];
+	ed::EventDispatcherHandler m_eventHandler[2];
 
 	int m_expectedValue;
 
@@ -95,8 +143,8 @@ public:
 	{
 		Given("event dispatcher with attached handlers", [&]()
 		{
-			m_eventHandler[0] = ed::EventDispatcherHandlerIterator();
-			m_eventHandler[1] = ed::EventDispatcherHandlerIterator();
+			m_eventHandler[0] = ed::EventDispatcherHandler();
+			m_eventHandler[1] = ed::EventDispatcherHandler();
 
 			m_mockTestEvent1Handler[0] = ut11::Mock<void(TestEvent<1>)>();
 			m_mockTestEvent1Handler[1] = ut11::Mock<void(TestEvent<1>)>();
@@ -123,13 +171,27 @@ public:
 		});
 		When("removing and handler and dispatching an event that had that related handlers", [&]()
 		{
-			m_eventDispatcher->removeHandler(m_eventHandler[0]);
+			m_eventHandler[0] = ed::EventDispatcherHandler();
 
 			m_expectedValue = 5;
 
 			m_eventDispatcher->dispatch(TestEvent<1>(m_expectedValue));
 		});
 		Then("the removed handler was not called", [&]()
+		{
+			MockVerifyTimes(0, m_mockTestEvent1Handler[0])(ut11::Is::Any<TestEvent<1>>());
+			MockVerifyTimes(1, m_mockTestEvent1Handler[1])(TestEvent<1>(m_expectedValue));
+		});
+		When("adding a handler where the handler deconstructs before the event is dispatched", [&]()
+		{
+			m_eventHandler[0] = ed::EventDispatcherHandler();
+			{ auto otherHandler = m_eventDispatcher->addHandler(std::function<void(TestEvent<1>)>(std::ref(m_mockTestEvent1Handler[0]))); }
+
+			m_expectedValue = 5;
+
+			m_eventDispatcher->dispatch(TestEvent<1>(m_expectedValue));
+		});
+		Then("the handler was not called", [&]()
 		{
 			MockVerifyTimes(0, m_mockTestEvent1Handler[0])(ut11::Is::Any<TestEvent<1>>());
 			MockVerifyTimes(1, m_mockTestEvent1Handler[1])(TestEvent<1>(m_expectedValue));
