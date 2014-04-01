@@ -15,3 +15,4 @@ Build Status
 ------------
 
 * [![Build Status](https://api.travis-ci.org/MorleyDev/UnitTest11.png)](https://api.travis-ci.org/MorleyDev/UnitTest11) on **GNU G++ 4.6, Clang++ 3.1 (Linux)** 
+* [![Build Status](https://drone.io/github.com/MorleyDev/UnitTest11/status.png)](https://drone.io/github.com/MorleyDev/UnitTest11/latest) on **GNU G++ 4.8 (Linux)**
