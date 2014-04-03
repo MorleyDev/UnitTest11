@@ -12,4 +12,4 @@ script:
   - mkdir gcov
   - find -name "*.gc*" -exec mv {} gcov/ \;
   - gcov -d -o gcov/*.gcda
-  - coveralls --exclude tests --exclude-pattern '.*CMake[^/]+\.c(?:pp)?' --exclude-pattern 'CheckTypeSize/[^/]+\.c(?:pp)
+  - coveralls --exclude tests --exclude-pattern '.*CMake[^/]+\.c(?:pp)?' --exclude-pattern 'CheckTypeSize/[^/]+\.c(?:pp)'
