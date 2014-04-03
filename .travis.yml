@@ -2,7 +2,15 @@ language: cpp
 compiler:
   - clang
   - gcc
+
 before_script:
-  - cmake . -DCMAKE_BUILD_TYPE=Release
+  - sudo pip install cpp-coveralls
+  - if [ "$CXX" = "g++" ]; then cmake . -DCMAKE_BUILD_TYPE=Debug -DENABLE_GCOV=ON; fi
+  - if [ "$CXX" = "g++" ]; then cmake . -DCMAKE_BUILD_TYPE=Release; fi
 script:
-  - make -j4 && make test
+  - cmake --build .
+  - ctest
+  - if [ "$CXX" = "g++" ]; then mkdir gcov; fi
+  - if [ "$CXX" = "g++" ]; then find -name "*.gc*" -exec mv {} gcov/ \; ; fi
+  - if [ "$CXX" = "g++" ]; then gcov -d -o gcov/*.gcda; fi
+  - if [ "$CXX" = "g++" ]; then coveralls --exclude tests --exclude-pattern '.*CMake[^/]+\.c(?:pp)?' --exclude-pattern 'CheckTypeSize/[^/]+\.c(?:pp); fi
