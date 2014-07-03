@@ -1,6 +1,6 @@
 #include <UnitTest11/Run.hpp>
 
-int main(const int argumentCount, const char** arguments)
+int main(int argumentCount, char** arguments)
 {
 	return ut11::Run(argumentCount, arguments);
 }

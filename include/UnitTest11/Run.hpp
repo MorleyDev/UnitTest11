@@ -17,7 +17,7 @@ namespace ut11
 	*
 	* \return The number of fixtures that failed
 	*/
-	int Run(const int argumentCount, const char** arguments);
+	int Run(const int argumentCount, const char* const* arguments);
 
 	/*! \brief Runs all test fixtures using the passed output to report tests being ran, success and failures.
 	*
@@ -29,7 +29,7 @@ namespace ut11
 	*
 	* \return The number of fixtures that failed
 	*/
-	int Run(out::Output&, const int argumentCount, const char** arguments);
+	int Run(out::Output&, const int argumentCount, const char* const* arguments);
 
 	/*! \brief Runs all test fixtures that have a category that matches one of the given names
 	*
