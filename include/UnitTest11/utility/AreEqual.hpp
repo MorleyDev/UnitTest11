@@ -37,7 +37,8 @@ namespace ut11
 
 				for(;  i != a.end() && j != b.end(); ++i, ++j)
 				{
-					return AreEqual(*i, *j);
+					if (!AreEqual(*i, *j))
+						return false;
 				}
 				return i == a.end() && j == b.end();
 			}

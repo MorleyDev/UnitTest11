@@ -60,7 +60,7 @@ public:
 		});
 
 		Then("Is::EqualTo not equal iterable fails", []() {
-			AssertThat(ut11::Is::EqualTo(std::vector<int>({ 1, 2, 7 }))(std::vector<int>({ 12, 2, 15 })), ut11::Is::Not::True);
+			AssertThat(ut11::Is::EqualTo(std::vector<int>({ 1, 2, 7 }))(std::vector<int>({ 1, 3, 15 })), ut11::Is::Not::True);
 		});
 
 		Then("Is::EqualTo iterable is an operand", []() {
@@ -84,7 +84,7 @@ public:
 		});
 
 		Then("Is::Not::EqualTo not equal iterable succeeds", []() {
-			AssertThat(ut11::Is::Not::EqualTo(std::vector<int>({ 1, 2, 7 }))(std::vector<int>({ 12, 2, 15 })), ut11::Is::True);
+			AssertThat(ut11::Is::Not::EqualTo(std::vector<int>({ 1, 2, 7 }))(std::vector<int>({ 1, 2, 15 })), ut11::Is::True);
 		});
 
 		Then("Is::Not::EqualTo iterable is an operand", []() {
