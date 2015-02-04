@@ -1,7 +1,12 @@
-cmake_minimum_required (VERSION 2.6) 
-project(UNITTEST11 CXX) 
+cmake_minimum_required (VERSION 2.6)
+project(UNITTEST11 CXX)
 
 option(ENABLE_GCOV "Adds the --coverage flag to compilation" OFF)
+
+if (BIICODE)
+	include(${CMAKE_HOME_DIRECTORY}/biicode.cmake)
+	init_biicode_block()
+endif()
 
 if (ENABLE_GCOV)
 	set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fprofile-arcs -ftest-coverage")
@@ -27,9 +32,11 @@ elseif ("${CMAKE_CXX_COMPILER} ${CMAKE_CXX_COMPILER_ARG1}" MATCHES ".*clang")
 	set(CMAKE_CXX_FLAGS "-std=c++11 ${CMAKE_CXX_FLAGS}")
 endif()
 
-
-
 add_subdirectory(src)
 
-enable_testing()
-add_subdirectory(tests)
+if (BIICODE)
+	add_biicode_targets()
+else()
+	enable_testing()
+	add_subdirectory(tests)
+endif()
