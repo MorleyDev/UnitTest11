@@ -1,4 +1,4 @@
-include_directories(${UNITTEST11_SOURCE_DIR}/include)
+include_directories(${UNITTEST11_SOURCE_DIR})
 
 include(files.cmake)
 
