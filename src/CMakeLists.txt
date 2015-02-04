@@ -1,4 +1,4 @@
-include_directories(${UNITTEST11_SOURCE_DIR}/include)
+include_directories(${UNITTEST11_SOURCE_DIR})
 
 include(files.cmake)
 
@@ -8,7 +8,7 @@ set_target_properties(unittest11 PROPERTIES DEBUG_POSTFIX "-d")
 install (TARGETS unittest11 DESTINATION lib)
 
 foreach(HEADER ${UNITTEST11_INCLUDE_FILES})
-string(REPLACE "${UNITTEST11_SOURCE_DIR}/include" "" DIR ${HEADER})
-string(REGEX MATCH "(.*)[/\\]" DIR2 ${DIR})
-install(FILES ${HEADER} DESTINATION include/${DIR2})
+	string(REPLACE "${UNITTEST11_SOURCE_DIR}/include" "" DIR ${HEADER})
+	string(REGEX MATCH "(.*)[/\\]" DIR2 ${DIR})
+	install(FILES ${HEADER} DESTINATION include/${DIR2})
 endforeach(HEADER)
