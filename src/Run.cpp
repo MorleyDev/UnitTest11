@@ -28,14 +28,14 @@ int ut11::Run()
 	return Run(stdOutput);
 }
 
-int ut11::Run(const int argumentCount, const char* const* arguments)
+int ut11::Run(const int argumentCount, char** arguments)
 {
 	ut11::out::StdOutput stdOutput;
 
 	return Run(stdOutput, argumentCount, arguments);
 }
 
-int ut11::Run(out::Output& output, const int argumentCount, const char* const* arguments)
+int ut11::Run(out::Output& output, const int argumentCount, char** arguments)
 {
 	std::vector<std::string> argumentVector;
 	for (auto i = 1; i < argumentCount; ++i)
