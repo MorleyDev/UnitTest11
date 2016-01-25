@@ -16,23 +16,23 @@ namespace ut11
 
 		namespace detail
 		{
-			template<typename T, typename = decltype(std::declval<std::ostream&>() << std::declval<T const&>())>
-			std::true_type IsStreamWritable(const T&)
+			template<typename S, typename T>
+			class IsStreamWritable
 			{
-				return std::true_type();
-			}
+				template<typename SS, typename TT>
+				static auto test(int) -> decltype(std::declval<SS&>() << std::declval<TT>(), std::true_type());
 
-			template<typename T, typename... Ignored>
-			std::false_type IsStreamWritable(const T&, Ignored const&..., ...)
-			{
-				return std::false_type();
-			}
+				template<typename, typename> static auto test(...) -> std::false_type;
+
+			public:
+				typedef decltype(test<S, T>(0)) Result;
+			};
 
 			template<typename V> struct ParseNonIterableToString
 			{
 				inline std::string operator()(const V& value) const
 				{
-					return ToString(value, IsStreamWritable<V>(value));
+					return ToString(value, IsStreamWritable<std::stringstream, V>::Result());
 				}
 
 				inline std::string ToString(const V& value, std::true_type) const
