@@ -32,7 +32,7 @@ namespace ut11
 			{
 				inline std::string operator()(const V& value) const
 				{
-					return ToString(value, IsStreamWritable<std::stringstream, V>::Result());
+					return ToString(value, typename IsStreamWritable<std::stringstream, V>::Result());
 				}
 
 				inline std::string ToString(const V& value, std::true_type) const
